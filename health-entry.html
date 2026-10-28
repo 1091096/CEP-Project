@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Health Entry | SwasthyaMitra AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="health-entry.css">
+</head>
+
+<body>
+
+    <div class="health-entry-page">
+
+        <div class="health-entry-container">
+
+            <!-- HEADER -->
+
+            <div class="health-entry-header">
+
+                <a href="dashboard.html" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+
+                <div class="entry-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+
+                <h1>Add Health Reading</h1>
+
+                <p>
+                    Enter your latest health measurements.
+                    Your information will be securely saved.
+                </p>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form id="healthEntryForm" class="health-entry-form">
+
+                <!-- HEART RATE -->
+
+                <div class="health-input-card">
+
+                    <div class="health-input-icon heart">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+
+                    <div class="health-input-content">
+
+                        <label for="heartRate">
+                            Heart Rate
+                        </label>
+
+                        <p>Resting heart rate</p>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="heartRate"
+                                placeholder="72"
+                                min="20"
+                                max="250"
+                            >
+
+                            <span>BPM</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BLOOD PRESSURE -->
+
+                <div class="health-input-card">
+
+                    <div class="health-input-icon pressure">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+
+                    <div class="health-input-content">
+
+                        <label>
+                            Blood Pressure
+                        </label>
+
+                        <p>Systolic / Diastolic</p>
+
+                        <div class="bp-inputs">
+
+                            <div class="input-with-unit">
+
+                                <input
+                                    type="number"
+                                    id="systolic"
+                                    placeholder="120"
+                                    min="50"
+                                    max="250"
+                                >
+
+                                <span>mmHg</span>
+
+                            </div>
+
+                            <strong>/</strong>
+
+                            <div class="input-with-unit">
+
+                                <input
+                                    type="number"
+                                    id="diastolic"
+                                    placeholder="80"
+                                    min="30"
+                                    max="150"
+                                >
+
+                                <span>mmHg</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SLEEP -->
+
+                <div class="health-input-card">
+
+                    <div class="health-input-icon sleep">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+
+                    <div class="health-input-content">
+
+                        <label for="sleepHours">
+                            Sleep
+                        </label>
+
+                        <p>Total sleep last night</p>
+
+                        <div class="sleep-inputs">
+
+                            <div class="input-with-unit">
+
+                                <input
+                                    type="number"
+                                    id="sleepHours"
+                                    placeholder="7"
+                                    min="0"
+                                    max="24"
+                                >
+
+                                <span>hours</span>
+
+                            </div>
+
+                            <div class="input-with-unit">
+
+                                <input
+                                    type="number"
+                                    id="sleepMinutes"
+                                    placeholder="30"
+                                    min="0"
+                                    max="59"
+                                >
+
+                                <span>min</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STEPS -->
+
+                <div class="health-input-card">
+
+                    <div class="health-input-icon steps">
+                        <i class="fa-solid fa-person-walking"></i>
+                    </div>
+
+                    <div class="health-input-content">
+
+                        <label for="steps">
+                            Steps
+                        </label>
+
+                        <p>Steps completed today</p>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="steps"
+                                placeholder="5000"
+                                min="0"
+                                max="100000"
+                            >
+
+                            <span>steps</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SPO2 -->
+
+                <div class="health-input-card">
+
+                    <div class="health-input-icon oxygen">
+                        <i class="fa-solid fa-lungs"></i>
+                    </div>
+
+                    <div class="health-input-content">
+
+                        <label for="spo2">
+                            Oxygen Saturation
+                        </label>
+
+                        <p>Blood oxygen level</p>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="spo2"
+                                placeholder="98"
+                                min="50"
+                                max="100"
+                            >
+
+                            <span>%</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WEIGHT -->
+
+                <div class="health-input-card">
+
+                    <div class="health-input-icon weight">
+                        <i class="fa-solid fa-weight-scale"></i>
+                    </div>
+
+                    <div class="health-input-content">
+
+                        <label for="weight">
+                            Weight
+                        </label>
+
+                        <p>Current body weight</p>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="weight"
+                                placeholder="65"
+                                min="1"
+                                max="500"
+                                step="0.1"
+                            >
+
+                            <span>kg</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HEIGHT -->
+
+                <div class="health-input-card">
+
+                    <div class="health-input-icon height">
+                        <i class="fa-solid fa-ruler-vertical"></i>
+                    </div>
+
+                    <div class="health-input-content">
+
+                        <label for="height">
+                            Height
+                        </label>
+
+                        <p>Current height</p>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="height"
+                                placeholder="170"
+                                min="50"
+                                max="250"
+                                step="0.1"
+                            >
+
+                            <span>cm</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BMI -->
+
+                <div class="health-input-card">
+
+                    <div class="health-input-icon bmi">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+
+                    <div class="health-input-content">
+
+                        <label for="bmi">
+                            BMI
+                        </label>
+
+                        <p>Calculated from your weight and height</p>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="bmi"
+                                placeholder="22.5"
+                                step="0.1"
+                                readonly
+                            >
+
+                            <span>kg/m²</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TEMPERATURE -->
+
+                <div class="health-input-card">
+
+                    <div class="health-input-icon temperature">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+
+                    <div class="health-input-content">
+
+                        <label for="temperature">
+                            Temperature
+                        </label>
+
+                        <p>Body temperature</p>
+
+                        <div class="input-with-unit">
+
+                            <input
+                                type="number"
+                                id="temperature"
+                                placeholder="36.8"
+                                min="30"
+                                max="45"
+                                step="0.1"
+                            >
+
+                            <span>°C</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="save-health-btn">
+
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    Save Health Reading
+
+                </button>
+
+            </form>
+
+
+            <!-- DISCLAIMER -->
+
+            <div class="health-disclaimer">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <p>
+                    Enter measurements from a reliable health device
+                    or your healthcare provider. SwasthyaMitra AI does
+                    not measure these values itself and does not provide
+                    medical diagnosis.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="main.js"></script>
+
+    <script>
+        // BMI = weight (kg) / height (m)²
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById("weight").value);
+            const heightCm = parseFloat(document.getElementById("height").value);
+            const bmiInput = document.getElementById("bmi");
+
+            if (!weight || !heightCm || heightCm <= 0) {
+                bmiInput.value = "";
+                return;
+            }
+
+            const heightM = heightCm / 100;
+            const bmi = weight / (heightM * heightM);
+
+            bmiInput.value = bmi.toFixed(1);
+        }
+
+        document.getElementById("weight").addEventListener("input", calculateBMI);
+        document.getElementById("height").addEventListener("input", calculateBMI);
+    </script>
+
+</body>
+
+</html>

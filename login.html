@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SwasthyaMitra AI | Login</title>
+
+    <!-- Your existing CSS - DO NOT CHANGE -->
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+
+<body class="login-page">
+
+    <div class="login-background"></div>
+
+
+    <main class="login-container">
+
+
+        <!-- =========================
+             LEFT SIDE
+        ========================== -->
+
+        <section class="login-info">
+
+
+            <!-- BRAND -->
+
+            <a href="index.html" class="login-brand">
+
+                <span class="brand-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </span>
+
+                <span>
+
+                    <strong>
+                        SwasthyaMitra AI
+                    </strong>
+
+                    <small>
+                        Your AI Health Companion
+                    </small>
+
+                </span>
+
+            </a>
+
+
+            <!-- WELCOME -->
+
+            <div class="login-welcome">
+
+
+                <!-- SECURITY BADGE -->
+
+                <span class="login-badge">
+
+                    <i class="fa-solid fa-shield-heart"></i>
+
+                    <span>
+                        Secure Healthcare
+                    </span>
+
+                </span>
+
+
+                <!-- TITLE -->
+
+                <h1>
+                    <span>
+                        Welcome back, Mitra.
+                    </span>
+                </h1>
+
+
+                <!-- DESCRIPTION -->
+
+                <p>
+                    Access your personalized healthcare
+                    journey, health records, AI assistance
+                    and more.
+                </p>
+
+
+                <!-- FEATURES -->
+
+                <div class="login-features">
+
+
+                    <!-- FEATURE 1 -->
+
+                    <div>
+
+                        <i class="fa-solid fa-robot"></i>
+
+                        <span>
+                            AI Health Assistant
+                        </span>
+
+                    </div>
+
+
+                    <!-- FEATURE 2 -->
+
+                    <div>
+
+                        <i class="fa-solid fa-file-medical"></i>
+
+                        <span>
+                            Personal Health Records
+                        </span>
+
+                    </div>
+
+
+                    <!-- FEATURE 3 -->
+
+                    <div>
+
+                        <i class="fa-solid fa-user-doctor"></i>
+
+                        <span>
+                            Connect with Healthcare Professionals
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             RIGHT SIDE
+        ========================== -->
+
+        <section class="login-card">
+
+
+            <!-- LOGIN HEADER -->
+
+            <div class="login-card-header">
+
+                <h2>
+                    Sign In
+                </h2>
+
+                <p>
+                    Enter your details to continue
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 LOGIN FORM
+            ========================== -->
+
+            <form
+                id="loginPageForm"
+                onsubmit="event.preventDefault(); loginUser();">
+
+
+                <!-- EMAIL -->
+
+                <div class="login-form-group">
+
+                    <label for="loginPageEmail">
+                        Email address
+                    </label>
+
+
+                    <div class="login-input">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="loginPageEmail"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="login-form-group">
+
+
+                    <div class="password-label">
+
+                        <label for="loginPagePassword">
+                            Password
+                        </label>
+
+
+                        <a
+                            href="#"
+                            onclick="return false;">
+
+                            Forgot password?
+
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="login-input">
+
+                        <i class="fa-solid fa-lock"></i>
+
+
+                        <input
+                            type="password"
+                            id="loginPagePassword"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+
+
+                        <!-- PASSWORD SHOW/HIDE -->
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="toggleLoginPassword()"
+                            aria-label="Show password">
+
+                            <i class="fa-regular fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REMEMBER ME -->
+
+                <label class="remember-me">
+
+                    <input
+                        type="checkbox"
+                        id="rememberMe">
+
+                    <span>
+                        Remember me
+                    </span>
+
+                </label>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-submit">
+
+                    <span>
+                        Sign In
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+
+            <!-- =========================
+                 DIVIDER
+            ========================== -->
+
+            <div class="login-divider">
+
+                <span>
+                    or
+                </span>
+
+            </div>
+
+
+
+            <!-- =========================
+                 SIGN UP
+            ========================== -->
+
+            <div class="signup-prompt">
+
+                <span>
+                    Don't have an account?
+                </span>
+
+
+                <a href="index.html">
+                    Create an account
+                </a>
+
+            </div>
+
+
+
+            <!-- =========================
+                 SECURITY
+            ========================== -->
+
+            <div class="login-security">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Your information is protected
+                    with secure authentication.
+                </span>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="login-footer">
+
+        <span>
+            © 2026 SwasthyaMitra AI
+        </span>
+
+        <span>
+            General health information only.
+            Not a substitute for professional medical advice.
+        </span>
+
+    </footer>
+
+
+
+    <!-- =========================
+         SUPABASE
+    ========================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+    <!-- =========================
+         YOUR MAIN JAVASCRIPT
+    ========================== -->
+
+    <script src="main.js"></script>
+
+
+
+    <!-- =========================
+         PASSWORD TOGGLE
+    ========================== -->
+
+    <script>
+
+        function toggleLoginPassword() {
+
+            const password =
+                document.getElementById("loginPagePassword");
+
+            const icon =
+                document.querySelector(".password-toggle i");
+
+
+            if (!password || !icon) {
+                return;
+            }
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove("fa-eye");
+
+                icon.classList.add("fa-eye-slash");
+
+            } else {
+
+                password.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+
+                icon.classList.add("fa-eye");
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

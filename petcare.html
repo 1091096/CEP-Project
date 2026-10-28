@@ -1,0 +1,3111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PetMitra - Complete Pet Care</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
+}
+
+:root{
+    --green:#2f7d5b;
+    --green-dark:#215c43;
+    --green-light:#eaf7ef;
+    --orange:#f29b4b;
+    --cream:#fffaf3;
+    --text:#25352d;
+    --muted:#718078;
+    --white:#fff;
+    --border:#e5ebe7;
+    --shadow:0 10px 30px rgba(35,70,50,.09);
+}
+
+body{
+    background:var(--cream);
+    color:var(--text);
+}
+
+button{
+    border:none;
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,250,243,.96);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+}
+
+.nav-inner{
+    height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:23px;
+    font-weight:800;
+    color:var(--green-dark);
+}
+
+.logo-icon{
+    width:43px;
+    height:43px;
+    border-radius:14px;
+    background:var(--green);
+    color:white;
+    display:grid;
+    place-items:center;
+    font-size:23px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.nav-links a:hover{
+    color:var(--green);
+}
+
+.nav-actions{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:white;
+    border:1px solid var(--border);
+    font-size:18px;
+    position:relative;
+}
+
+.badge{
+    position:absolute;
+    top:-3px;
+    right:-3px;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#ed6759;
+    color:white;
+    font-size:10px;
+    display:grid;
+    place-items:center;
+}
+
+.login-btn,
+.primary-btn{
+    background:var(--green);
+    color:white;
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:700;
+}
+
+.primary-btn:hover{
+    background:var(--green-dark);
+}
+
+.secondary-btn{
+    background:white;
+    color:var(--green-dark);
+    border:1px solid var(--border);
+    padding:12px 20px;
+    border-radius:12px;
+    font-weight:700;
+}
+
+.menu-btn{
+    display:none;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    padding:65px 0 50px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:45px;
+    align-items:center;
+}
+
+.hero-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--green-light);
+    color:var(--green-dark);
+    padding:9px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:55px;
+    line-height:1.08;
+    letter-spacing:-2px;
+    margin-bottom:18px;
+}
+
+.hero h1 span{
+    color:var(--green);
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.7;
+    max-width:560px;
+    margin-bottom:25px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.hero-stats{
+    display:flex;
+    gap:35px;
+    margin-top:35px;
+}
+
+.stat strong{
+    display:block;
+    font-size:23px;
+}
+
+.stat span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.hero-image{
+    position:relative;
+    min-height:450px;
+}
+
+.hero-main-image{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+    border-radius:35px;
+    box-shadow:var(--shadow);
+}
+
+.float-card{
+    position:absolute;
+    background:white;
+    box-shadow:var(--shadow);
+    padding:15px 18px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.float-card.one{
+    left:-20px;
+    top:45px;
+}
+
+.float-card.two{
+    right:-20px;
+    bottom:45px;
+}
+
+.float-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:var(--green-light);
+    display:grid;
+    place-items:center;
+    font-size:20px;
+}
+
+/* ================= SECTION ================= */
+
+section{
+    padding:70px 0;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:28px;
+}
+
+.section-head h2{
+    font-size:32px;
+    margin-bottom:6px;
+}
+
+.section-head p{
+    color:var(--muted);
+}
+
+.view-all{
+    color:var(--green);
+    font-weight:700;
+    font-size:14px;
+}
+
+/* ================= PET CATEGORIES ================= */
+
+.pet-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:18px;
+}
+
+.pet-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:20px;
+    text-align:center;
+    transition:.25s;
+    cursor:pointer;
+}
+
+.pet-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow);
+}
+
+.pet-card img{
+    width:120px;
+    height:100px;
+    object-fit:cover;
+    border-radius:18px;
+    margin-bottom:12px;
+}
+
+.pet-card h3{
+    font-size:16px;
+}
+
+.pet-card p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* ================= SERVICE CARDS ================= */
+
+.services{
+    background:#f3f9f5;
+}
+
+.service-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.service-card{
+    background:white;
+    border-radius:22px;
+    padding:24px;
+    border:1px solid var(--border);
+    transition:.25s;
+}
+
+.service-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+}
+
+.service-icon{
+    width:52px;
+    height:52px;
+    border-radius:16px;
+    background:var(--green-light);
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    margin-bottom:17px;
+}
+
+.service-card h3{
+    margin-bottom:8px;
+}
+
+.service-card p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* ================= PHARMACY ================= */
+
+.pharmacy-toolbar{
+    display:flex;
+    gap:12px;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+.search-box{
+    flex:1;
+    min-width:240px;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    padding:15px 18px;
+    border-radius:13px;
+    border:1px solid var(--border);
+    outline:none;
+    background:white;
+    font-size:14px;
+}
+
+.filter-select{
+    padding:15px;
+    border-radius:13px;
+    border:1px solid var(--border);
+    background:white;
+    outline:none;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.product-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:20px;
+    overflow:hidden;
+    transition:.25s;
+    position:relative;
+}
+
+.product-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+}
+
+.product-image{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+    background:#f3f6f3;
+}
+
+.wish{
+    position:absolute;
+    right:12px;
+    top:12px;
+    width:35px;
+    height:35px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+
+.product-info{
+    padding:17px;
+}
+
+.product-category{
+    font-size:11px;
+    color:var(--green);
+    font-weight:700;
+    text-transform:uppercase;
+}
+
+.product-info h3{
+    font-size:15px;
+    margin:7px 0;
+}
+
+.brand{
+    font-size:12px;
+    color:var(--muted);
+}
+
+.price-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:13px;
+}
+
+.price{
+    font-weight:800;
+    font-size:17px;
+}
+
+.mrp{
+    color:#9ba59f;
+    font-size:12px;
+    text-decoration:line-through;
+    margin-left:5px;
+}
+
+.add-cart{
+    width:38px;
+    height:38px;
+    border-radius:11px;
+    background:var(--green);
+    color:white;
+    font-size:18px;
+}
+
+/* ================= VET ================= */
+
+.vet-section{
+    background:white;
+}
+
+.vet-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:35px;
+    align-items:center;
+}
+
+.vet-image{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+    border-radius:28px;
+}
+
+.vet-content h2{
+    font-size:37px;
+    margin-bottom:15px;
+}
+
+.vet-content p{
+    color:var(--muted);
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.vet-features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.feature{
+    background:#f5faf7;
+    padding:15px;
+    border-radius:13px;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* ================= DOCTORS ================= */
+
+.doctor-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.doctor-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:20px;
+    display:flex;
+    gap:15px;
+}
+
+.doctor-card img{
+    width:90px;
+    height:90px;
+    border-radius:18px;
+    object-fit:cover;
+}
+
+.doctor-info h3{
+    font-size:16px;
+}
+
+.doctor-info p{
+    color:var(--muted);
+    font-size:12px;
+    margin:5px 0;
+}
+
+.rating{
+    color:#e89a32;
+    font-size:13px;
+}
+
+/* ================= GROOMING ================= */
+
+.groom-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.groom-card{
+    overflow:hidden;
+    background:white;
+    border-radius:22px;
+    border:1px solid var(--border);
+}
+
+.groom-card img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+}
+
+.groom-content{
+    padding:18px;
+}
+
+.groom-content h3{
+    margin-bottom:7px;
+}
+
+.groom-content p{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+/* ================= DIAGNOSTICS ================= */
+
+.diagnostics{
+    background:#f3f9f5;
+}
+
+.package-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.package{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:23px;
+}
+
+.package-label{
+    display:inline-block;
+    padding:6px 9px;
+    background:var(--green-light);
+    color:var(--green);
+    border-radius:7px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.package h3{
+    margin:15px 0 8px;
+}
+
+.package p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+}
+
+.test-list{
+    margin:17px 0;
+    display:grid;
+    gap:8px;
+    font-size:13px;
+}
+
+.package-price{
+    font-size:22px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+/* ================= FOOD ================= */
+
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.food-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid var(--border);
+}
+
+.food-card img{
+    width:100%;
+    height:170px;
+    object-fit:cover;
+}
+
+.food-card div{
+    padding:17px;
+}
+
+.food-card h3{
+    font-size:15px;
+}
+
+.food-card p{
+    color:var(--muted);
+    font-size:12px;
+    margin:5px 0 12px;
+}
+
+/* ================= PRESCRIPTION ================= */
+
+.prescription{
+    background:var(--green-dark);
+    color:white;
+}
+
+.prescription-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:35px;
+    align-items:center;
+}
+
+.prescription h2{
+    font-size:37px;
+    margin-bottom:12px;
+}
+
+.prescription p{
+    color:#d8e9df;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.prescription-box{
+    background:white;
+    color:var(--text);
+    padding:28px;
+    border-radius:24px;
+}
+
+.upload-area{
+    border:2px dashed #cbdad1;
+    border-radius:17px;
+    padding:35px 20px;
+    text-align:center;
+    margin-bottom:15px;
+    cursor:pointer;
+}
+
+.upload-area span{
+    font-size:35px;
+    display:block;
+    margin-bottom:8px;
+}
+
+/* ================= ARTICLES ================= */
+
+.article-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.article-card{
+    background:white;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid var(--border);
+}
+
+.article-card img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
+
+.article-body{
+    padding:20px;
+}
+
+.article-body small{
+    color:var(--green);
+    font-weight:700;
+}
+
+.article-body h3{
+    margin:8px 0;
+    line-height:1.35;
+}
+
+.article-body p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* ================= NEWSLETTER ================= */
+
+.newsletter{
+    background:#eef7f1;
+}
+
+.newsletter-box{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+}
+
+.newsletter h2{
+    font-size:28px;
+}
+
+.newsletter p{
+    color:var(--muted);
+    margin-top:6px;
+}
+
+.email-form{
+    display:flex;
+    gap:8px;
+}
+
+.email-form input{
+    width:280px;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#18382b;
+    color:white;
+    padding:55px 0 25px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+    gap:35px;
+}
+
+footer h3{
+    margin-bottom:15px;
+}
+
+footer p,
+footer a{
+    color:#bfd2c7;
+    font-size:13px;
+    line-height:2;
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.12);
+    margin-top:35px;
+    padding-top:20px;
+    color:#9eb8aa;
+    font-size:12px;
+}
+
+/* ================= MODALS ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(20,35,28,.55);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:min(520px,100%);
+    background:white;
+    border-radius:25px;
+    padding:28px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:#f2f5f3;
+}
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    outline:none;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+/* ================= CART ================= */
+
+.cart-item{
+    display:flex;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.cart-item img{
+    width:65px;
+    height:65px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-info h4{
+    font-size:14px;
+}
+
+.cart-item-info p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:7px;
+}
+
+.qty button{
+    width:25px;
+    height:25px;
+    border-radius:7px;
+    background:#edf4ef;
+}
+
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    font-size:18px;
+    font-weight:800;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#18382b;
+    color:white;
+    padding:14px 18px;
+    border-radius:13px;
+    box-shadow:var(--shadow);
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:3000;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:950px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .hero-grid,
+    .vet-grid,
+    .prescription-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .pet-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .service-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .doctor-grid{
+        grid-template-columns:1fr;
+    }
+
+    .groom-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .package-grid{
+        grid-template-columns:1fr;
+    }
+
+    .food-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .article-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .newsletter-box{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+
+@media(max-width:600px){
+
+    .nav-inner{
+        height:65px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .login-btn{
+        display:none;
+    }
+
+    .hero{
+        padding-top:35px;
+    }
+
+    .hero h1{
+        font-size:35px;
+    }
+
+    .hero-main-image{
+        height:330px;
+    }
+
+    .float-card.one{
+        left:5px;
+    }
+
+    .float-card.two{
+        right:5px;
+    }
+
+    .pet-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .service-grid,
+    .groom-grid,
+    .food-grid,
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero-stats{
+        gap:20px;
+    }
+
+    .section-head{
+        display:block;
+    }
+
+    .view-all{
+        display:inline-block;
+        margin-top:10px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .email-form{
+        width:100%;
+        flex-direction:column;
+    }
+
+    .email-form input{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+<div class="container nav-inner">
+
+<a href="#" class="logo">
+    <div class="logo-icon">🐾</div>
+    PetMitra
+</a>
+
+<nav class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#pharmacy">Pharmacy</a>
+    <a href="#vets">Vets</a>
+    <a href="#grooming">Grooming</a>
+    <a href="#diagnostics">Diagnostics</a>
+    <a href="#food">Pet Food</a>
+</nav>
+
+<div class="nav-actions">
+
+<button class="icon-btn" onclick="openCart()">
+    🛒
+    <span class="badge" id="cartCount">0</span>
+</button>
+
+<button class="icon-btn" onclick="openPetModal()">🐶</button>
+
+<button class="login-btn" onclick="openLogin()">Login</button>
+
+<button class="icon-btn menu-btn">☰</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<main id="home">
+
+<section class="hero">
+
+<div class="container hero-grid">
+
+<div>
+
+<div class="hero-tag">
+    🐾 Trusted care for your furry family
+</div>
+
+<h1>
+    Better care.<br>
+    <span>Happier pets.</span>
+</h1>
+
+<p>
+    Everything your pet needs in one place — veterinary care,
+    medicines, grooming, diagnostics, nutrition and more.
+</p>
+
+<div class="hero-buttons">
+
+<button class="primary-btn" onclick="scrollToSection('pharmacy')">
+    Shop for Pets
+</button>
+
+<button class="secondary-btn" onclick="openVetBooking()">
+    🩺 Book a Vet
+</button>
+
+</div>
+
+<div class="hero-stats">
+
+<div class="stat">
+<strong>10K+</strong>
+<span>Happy Pet Parents</span>
+</div>
+
+<div class="stat">
+<strong>500+</strong>
+<span>Pet Products</span>
+</div>
+
+<div class="stat">
+<strong>50+</strong>
+<span>Veterinary Experts</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="hero-image">
+
+<img
+class="hero-main-image"
+src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=900&q=85"
+alt="Happy dog">
+
+<div class="float-card one">
+<div class="float-icon">🩺</div>
+<div>
+<strong>Vet Care</strong>
+<br>
+<small>Expert advice</small>
+</div>
+</div>
+
+<div class="float-card two">
+<div class="float-icon">💚</div>
+<div>
+<strong>Healthy Pets</strong>
+<br>
+<small>Happy families</small>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PET CATEGORIES ================= -->
+
+<section>
+
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>Shop by Pet</h2>
+<p>Find everything your companion needs.</p>
+</div>
+<a href="#pharmacy" class="view-all">View all →</a>
+</div>
+
+<div class="pet-grid">
+
+<div class="pet-card" onclick="filterPet('Dog')">
+<img src="https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=400&q=80">
+<h3>Dogs</h3>
+<p>Food • Care • Medicines</p>
+</div>
+
+<div class="pet-card" onclick="filterPet('Cat')">
+<img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=400&q=80">
+<h3>Cats</h3>
+<p>Food • Toys • Wellness</p>
+</div>
+
+<div class="pet-card">
+<img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?auto=format&fit=crop&w=400&q=80">
+<h3>Rabbits</h3>
+<p>Food • Care • Accessories</p>
+</div>
+
+<div class="pet-card">
+<img src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?auto=format&fit=crop&w=400&q=80">
+<h3>Birds</h3>
+<p>Food • Cages • Wellness</p>
+</div>
+
+<div class="pet-card">
+<img src="https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=400&q=80">
+<h3>Small Pets</h3>
+<p>Food • Toys • Care</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SERVICES ================= -->
+
+<section class="services">
+
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>Complete Pet Care</h2>
+<p>From everyday essentials to expert healthcare.</p>
+</div>
+</div>
+
+<div class="service-grid">
+
+<div class="service-card" onclick="openVetBooking()">
+<div class="service-icon">🩺</div>
+<h3>Veterinary Care</h3>
+<p>Book appointments with trusted veterinary professionals.</p>
+</div>
+
+<div class="service-card" onclick="scrollToSection('pharmacy')">
+<div class="service-icon">💊</div>
+<h3>Pet Pharmacy</h3>
+<p>Medicines, supplements and healthcare products for pets.</p>
+</div>
+
+<div class="service-card" onclick="scrollToSection('grooming')">
+<div class="service-icon">✂️</div>
+<h3>Grooming</h3>
+<p>Keep your pet clean, comfortable and looking their best.</p>
+</div>
+
+<div class="service-card" onclick="scrollToSection('diagnostics')">
+<div class="service-icon">🧪</div>
+<h3>Diagnostics</h3>
+<p>Preventive health packages and essential pet tests.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PHARMACY ================= -->
+
+<section id="pharmacy">
+
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>Pet Pharmacy</h2>
+<p>Trusted products for everyday pet health.</p>
+</div>
+<a href="#pharmacy" class="view-all">Explore pharmacy →</a>
+</div>
+
+<div class="pharmacy-toolbar">
+
+<div class="search-box">
+<input
+type="text"
+id="productSearch"
+placeholder="Search medicines, supplements, care products..."
+oninput="renderProducts()">
+</div>
+
+<select class="filter-select" id="categoryFilter" onchange="renderProducts()">
+<option value="All">All Categories</option>
+<option value="Medicines">Medicines</option>
+<option value="Supplements">Supplements</option>
+<option value="Skin & Coat">Skin & Coat</option>
+<option value="Dental Care">Dental Care</option>
+<option value="Accessories">Accessories</option>
+</select>
+
+<select class="filter-select" id="petFilter" onchange="renderProducts()">
+<option value="All">All Pets</option>
+<option value="Dog">Dogs</option>
+<option value="Cat">Cats</option>
+</select>
+
+</div>
+
+<div class="product-grid" id="productGrid"></div>
+
+</div>
+
+</section>
+
+
+<!-- ================= VETS ================= -->
+
+<section class="vet-section" id="vets">
+
+<div class="container vet-grid">
+
+<img
+class="vet-image"
+src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=900&q=85"
+alt="Veterinarian with dog">
+
+<div class="vet-content">
+
+<h2>Expert veterinary care, when you need it.</h2>
+
+<p>
+Get professional veterinary guidance for your pet.
+Book appointments for routine checkups, nutrition,
+skin problems, dental issues and more.
+</p>
+
+<div class="vet-features">
+
+<div class="feature">✓ Experienced Vets</div>
+<div class="feature">✓ Easy Appointments</div>
+<div class="feature">✓ Online Consultation</div>
+<div class="feature">✓ Follow-up Support</div>
+
+</div>
+
+<button class="primary-btn" onclick="openVetBooking()">
+Find a Veterinarian
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= DOCTORS ================= -->
+
+<section>
+
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>Meet Our Veterinary Experts</h2>
+<p>Experienced professionals for your pet's wellbeing.</p>
+</div>
+</div>
+
+<div class="doctor-grid">
+
+<div class="doctor-card">
+
+<img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=80">
+
+<div class="doctor-info">
+<h3>Dr. Ananya Sharma</h3>
+<p>Veterinary Physician</p>
+<div class="rating">★★★★★ 4.9</div>
+<br>
+<button class="primary-btn" onclick="openVetBooking()">Book</button>
+</div>
+
+</div>
+
+<div class="doctor-card">
+
+<img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=300&q=80">
+
+<div class="doctor-info">
+<h3>Dr. Rahul Mehta</h3>
+<p>Pet Dermatologist</p>
+<div class="rating">★★★★★ 4.8</div>
+<br>
+<button class="primary-btn" onclick="openVetBooking()">Book</button>
+</div>
+
+</div>
+
+<div class="doctor-card">
+
+<img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=300&q=80">
+
+<div class="doctor-info">
+<h3>Dr. Priya Deshmukh</h3>
+<p>Veterinary Nutritionist</p>
+<div class="rating">★★★★★ 4.9</div>
+<br>
+<button class="primary-btn" onclick="openVetBooking()">Book</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= GROOMING ================= -->
+
+<section id="grooming" class="services">
+
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>Pet Grooming</h2>
+<p>Professional grooming for healthy, happy pets.</p>
+</div>
+</div>
+
+<div class="groom-grid">
+
+<div class="groom-card">
+
+<img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=500&q=80">
+
+<div class="groom-content">
+<h3>Full Grooming</h3>
+<p>Bath, drying, brushing and basic styling.</p>
+<button class="primary-btn" onclick="bookGrooming('Full Grooming')">Book ₹699</button>
+</div>
+
+</div>
+
+<div class="groom-card">
+
+<img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80">
+
+<div class="groom-content">
+<h3>Bath & Dry</h3>
+<p>Gentle cleansing with pet-friendly products.</p>
+<button class="primary-btn" onclick="bookGrooming('Bath & Dry')">Book ₹399</button>
+</div>
+
+</div>
+
+<div class="groom-card">
+
+<img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80">
+
+<div class="groom-content">
+<h3>Nail Trimming</h3>
+<p>Safe and professional nail care.</p>
+<button class="primary-btn" onclick="bookGrooming('Nail Trimming')">Book ₹199</button>
+</div>
+
+</div>
+
+<div class="groom-card">
+
+<img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=80">
+
+<div class="groom-content">
+<h3>Tick & Flea Bath</h3>
+<p>Special care for tick and flea prevention.</p>
+<button class="primary-btn" onclick="bookGrooming('Tick & Flea Bath')">Book ₹499</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= DIAGNOSTICS ================= -->
+
+<section id="diagnostics" class="diagnostics">
+
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>Pet Health Packages</h2>
+<p>Preventive testing to help keep your pet healthy.</p>
+</div>
+</div>
+
+<div class="package-grid">
+
+<div class="package">
+
+<span class="package-label">POPULAR</span>
+
+<h3>Puppy Wellness Package</h3>
+
+<p>
+A basic preventive health check for growing puppies.
+</p>
+
+<div class="test-list">
+<span>✓ CBC</span>
+<span>✓ Liver Function</span>
+<span>✓ Kidney Function</span>
+<span>✓ Stool Examination</span>
+</div>
+
+<div class="package-price">₹999</div>
+
+<button class="primary-btn" onclick="bookTest('Puppy Wellness Package')">
+Book Test
+</button>
+
+</div>
+
+
+<div class="package">
+
+<span class="package-label">PREVENTIVE</span>
+
+<h3>Adult Dog Health Package</h3>
+
+<p>
+Essential annual screening for adult dogs.
+</p>
+
+<div class="test-list">
+<span>✓ CBC</span>
+<span>✓ Liver Profile</span>
+<span>✓ Kidney Profile</span>
+<span>✓ Thyroid Screening</span>
+</div>
+
+<div class="package-price">₹1,499</div>
+
+<button class="primary-btn" onclick="bookTest('Adult Dog Health Package')">
+Book Test
+</button>
+
+</div>
+
+
+<div class="package">
+
+<span class="package-label">CAT CARE</span>
+
+<h3>Cat Wellness Package</h3>
+
+<p>
+Preventive screening designed for adult cats.
+</p>
+
+<div class="test-list">
+<span>✓ CBC</span>
+<span>✓ Kidney Profile</span>
+<span>✓ Liver Profile</span>
+<span>✓ Urine Examination</span>
+</div>
+
+<div class="package-price">₹1,299</div>
+
+<button class="primary-btn" onclick="bookTest('Cat Wellness Package')">
+Book Test
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= FOOD ================= -->
+
+<section id="food">
+
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>Pet Food & Nutrition</h2>
+<p>Nutritious food for every life stage.</p>
+</div>
+</div>
+
+<div class="food-grid">
+
+<div class="food-card">
+
+<img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=500&q=80">
+
+<div>
+<h3>Puppy Food</h3>
+<p>Balanced nutrition for growing puppies.</p>
+<button class="secondary-btn" onclick="foodAlert('Puppy Food')">
+Explore
+</button>
+</div>
+
+</div>
+
+<div class="food-card">
+
+<img src="https://images.unsplash.com/photo-1568640347023-a616a30bc3bd?auto=format&fit=crop&w=500&q=80">
+
+<div>
+<h3>Adult Dog Food</h3>
+<p>Daily nutrition for active adult dogs.</p>
+<button class="secondary-btn" onclick="foodAlert('Adult Dog Food')">
+Explore
+</button>
+</div>
+
+</div>
+
+<div class="food-card">
+
+<img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=500&q=80">
+
+<div>
+<h3>Kitten Food</h3>
+<p>High-quality nutrition for kittens.</p>
+<button class="secondary-btn" onclick="foodAlert('Kitten Food')">
+Explore
+</button>
+</div>
+
+</div>
+
+<div class="food-card">
+
+<img src="https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?auto=format&fit=crop&w=500&q=80">
+
+<div>
+<h3>Pet Treats</h3>
+<p>Tasty rewards for training and bonding.</p>
+<button class="secondary-btn" onclick="foodAlert('Pet Treats')">
+Explore
+</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PRESCRIPTION ================= -->
+
+<section class="prescription">
+
+<div class="container prescription-grid">
+
+<div>
+
+<h2>Have a pet prescription?</h2>
+
+<p>
+Upload your veterinarian's prescription and easily find
+the medicines and healthcare products you need.
+</p>
+
+<button class="secondary-btn" onclick="openPrescription()">
+Upload Prescription
+</button>
+
+</div>
+
+<div class="prescription-box">
+
+<div class="upload-area" onclick="document.getElementById('prescriptionFile').click()">
+
+<span>📄</span>
+
+<strong>Upload Prescription</strong>
+
+<br>
+
+<small>
+JPG, PNG or PDF
+</small>
+
+<input
+type="file"
+id="prescriptionFile"
+hidden
+accept=".jpg,.jpeg,.png,.pdf"
+onchange="prescriptionUploaded()">
+
+</div>
+
+<button class="primary-btn" style="width:100%" onclick="detectLocation()">
+📍 Detect Location
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ARTICLES ================= -->
+
+<section>
+
+<div class="container">
+
+<div class="section-head">
+<div>
+<h2>Pet Health & Care</h2>
+<p>Simple guidance for better pet parenting.</p>
+</div>
+<a href="#" class="view-all">View all →</a>
+</div>
+
+<div class="article-grid">
+
+<div class="article-card">
+
+<img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=700&q=80">
+
+<div class="article-body">
+
+<small>DOG CARE</small>
+
+<h3>How often should you deworm your dog?</h3>
+
+<p>
+Learn why regular deworming is important and what
+pet parents should discuss with their veterinarian.
+</p>
+
+<br>
+
+<button class="secondary-btn" onclick="readArticle('Deworming your dog')">
+Read Article
+</button>
+
+</div>
+
+</div>
+
+
+<div class="article-card">
+
+<img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=700&q=80">
+
+<div class="article-body">
+
+<small>CAT CARE</small>
+
+<h3>Signs that your cat may not be feeling well</h3>
+
+<p>
+Understand common changes in appetite, behavior,
+activity and grooming habits.
+</p>
+
+<br>
+
+<button class="secondary-btn" onclick="readArticle('Cat health signs')">
+Read Article
+</button>
+
+</div>
+
+</div>
+
+
+<div class="article-card">
+
+<img src="https://images.unsplash.com/photo-1601758174114-e711c0cbaa69?auto=format&fit=crop&w=700&q=80">
+
+<div class="article-body">
+
+<small>PET WELLNESS</small>
+
+<h3>Simple ways to keep your pet active</h3>
+
+<p>
+Exercise, play and enrichment can help support your
+pet's physical and mental wellbeing.
+</p>
+
+<br>
+
+<button class="secondary-btn" onclick="readArticle('Pet activity')">
+Read Article
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= NEWSLETTER ================= -->
+
+<section class="newsletter">
+
+<div class="container newsletter-box">
+
+<div>
+<h2>Stay updated on pet care 🐾</h2>
+<p>Get helpful tips, reminders and special offers.</p>
+</div>
+
+<div class="email-form">
+
+<input type="email" id="newsletterEmail" placeholder="Your email address">
+
+<button class="primary-btn" onclick="subscribeNewsletter()">
+Subscribe
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div>
+
+<div class="logo" style="color:white;margin-bottom:15px">
+<div class="logo-icon">🐾</div>
+PetMitra
+</div>
+
+<p>
+Complete pet care for happier, healthier companions.
+From medicines and food to vets and grooming.
+</p>
+
+</div>
+
+<div>
+
+<h3>Pet Care</h3>
+
+<a href="#pharmacy">Pet Pharmacy</a><br>
+<a href="#food">Pet Food</a><br>
+<a href="#grooming">Grooming</a><br>
+<a href="#diagnostics">Diagnostics</a>
+
+</div>
+
+<div>
+
+<h3>Services</h3>
+
+<a href="#vets">Find a Vet</a><br>
+<a href="#" onclick="openPrescription()">Prescription</a><br>
+<a href="#" onclick="openPetModal()">My Pets</a><br>
+<a href="#">Health Records</a>
+
+</div>
+
+<div>
+
+<h3>Support</h3>
+
+<a href="#">Help Center</a><br>
+<a href="#">Contact Us</a><br>
+<a href="#">Privacy Policy</a><br>
+<a href="#">Terms</a>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2026 PetMitra. College Project Demo • Made with ❤️ for pets.
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div class="modal" id="loginModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+<h2>Welcome to PetMitra</h2>
+<button class="close" onclick="closeModal('loginModal')">✕</button>
+</div>
+
+<div class="form-group">
+<label>Mobile Number</label>
+<input id="loginPhone" placeholder="Enter mobile number">
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input type="password" placeholder="Enter password">
+</div>
+
+<button class="primary-btn" style="width:100%" onclick="loginUser()">
+Login
+</button>
+
+<p style="text-align:center;margin-top:15px;color:var(--muted);font-size:13px">
+Demo login — no real authentication connected.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- ================= PET PROFILE MODAL ================= -->
+
+<div class="modal" id="petModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+<h2>🐾 My Pet</h2>
+<button class="close" onclick="closeModal('petModal')">✕</button>
+</div>
+
+<div class="form-group">
+<label>Pet Name</label>
+<input id="petName" placeholder="e.g. Bruno">
+</div>
+
+<div class="form-group">
+<label>Pet Type</label>
+
+<select id="petType">
+<option>Dog</option>
+<option>Cat</option>
+<option>Rabbit</option>
+<option>Bird</option>
+<option>Other</option>
+</select>
+
+</div>
+
+<div class="form-group">
+<label>Breed</label>
+<input id="petBreed" placeholder="e.g. Labrador">
+</div>
+
+<div class="form-group">
+<label>Age</label>
+<input id="petAge" type="number" placeholder="Age in years">
+</div>
+
+<div class="form-group">
+<label>Notes</label>
+<textarea id="petNotes" placeholder="Vaccination, allergies, special care..."></textarea>
+</div>
+
+<button class="primary-btn" style="width:100%" onclick="savePet()">
+Save Pet Profile
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= VET MODAL ================= -->
+
+<div class="modal" id="vetModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+<h2>🩺 Book a Vet</h2>
+<button class="close" onclick="closeModal('vetModal')">✕</button>
+</div>
+
+<div class="form-group">
+<label>Pet Name</label>
+<input id="vetPetName" placeholder="Pet name">
+</div>
+
+<div class="form-group">
+<label>Select Specialist</label>
+
+<select id="vetSpecialist">
+
+<option>General Veterinary</option>
+<option>Pet Dermatology</option>
+<option>Pet Nutrition</option>
+<option>Pet Dental Care</option>
+<option>Emergency Consultation</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+<label>Date</label>
+<input type="date" id="vetDate">
+</div>
+
+<div class="form-group">
+<label>Preferred Time</label>
+
+<select id="vetTime">
+
+<option>10:00 AM</option>
+<option>12:00 PM</option>
+<option>3:00 PM</option>
+<option>5:00 PM</option>
+<option>7:00 PM</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+<label>Consultation Type</label>
+
+<select>
+<option>Clinic Visit</option>
+<option>Online Consultation</option>
+<option>Home Visit</option>
+</select>
+
+</div>
+
+<button class="primary-btn" style="width:100%" onclick="confirmVetBooking()">
+Confirm Appointment
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= CART MODAL ================= -->
+
+<div class="modal" id="cartModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+<h2>🛒 Your Cart</h2>
+<button class="close" onclick="closeModal('cartModal')">✕</button>
+</div>
+
+<div id="cartItems"></div>
+
+<div class="cart-total">
+<span>Total</span>
+<span id="cartTotal">₹0</span>
+</div>
+
+<br>
+
+<button class="primary-btn" style="width:100%" onclick="checkout()">
+Proceed to Checkout
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= PRESCRIPTION MODAL ================= -->
+
+<div class="modal" id="prescriptionModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+<h2>📋 Pet Prescription</h2>
+<button class="close" onclick="closeModal('prescriptionModal')">✕</button>
+</div>
+
+<div class="upload-area" onclick="document.getElementById('modalPrescription').click()">
+
+<span>📄</span>
+
+<strong>Select Prescription</strong>
+
+<br>
+
+<small>Upload JPG, PNG or PDF</small>
+
+<input
+type="file"
+id="modalPrescription"
+hidden
+accept=".jpg,.jpeg,.png,.pdf"
+onchange="modalPrescriptionUploaded()">
+
+</div>
+
+<button class="primary-btn" style="width:100%" onclick="detectLocation()">
+📍 Detect My Location
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* ============================================================
+   PETMITRA JAVASCRIPT
+============================================================ */
+
+const products = [
+
+{
+id:1,
+name:"Flea & Tick Protection",
+category:"Medicines",
+pet:"Dog",
+brand:"PetShield",
+price:399,
+mrp:499,
+image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:2,
+name:"Joint Support Chews",
+category:"Supplements",
+pet:"Dog",
+brand:"VitaPet",
+price:549,
+mrp:699,
+image:"https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:3,
+name:"Skin & Coat Supplement",
+category:"Skin & Coat",
+pet:"Cat",
+brand:"FurCare",
+price:449,
+mrp:599,
+image:"https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:4,
+name:"Pet Dental Care Kit",
+category:"Dental Care",
+pet:"Dog",
+brand:"SmilePet",
+price:349,
+mrp:449,
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:5,
+name:"Ear Cleaning Solution",
+category:"Medicines",
+pet:"Dog",
+brand:"CleanEar",
+price:299,
+mrp:379,
+image:"https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:6,
+name:"Cat Multivitamin",
+category:"Supplements",
+pet:"Cat",
+brand:"VitaPet",
+price:499,
+mrp:649,
+image:"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:7,
+name:"Omega Skin Support",
+category:"Skin & Coat",
+pet:"Dog",
+brand:"NutriPaw",
+price:699,
+mrp:849,
+image:"https://images.unsplash.com/photo-1568572933382-74d440642117?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:8,
+name:"Puppy Training Pads",
+category:"Accessories",
+pet:"Dog",
+brand:"HomePaw",
+price:299,
+mrp:399,
+image:"https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:9,
+name:"Deworming Tablets",
+category:"Medicines",
+pet:"Dog",
+brand:"PetCare",
+price:199,
+mrp:249,
+image:"https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:10,
+name:"Cat Dental Treats",
+category:"Dental Care",
+pet:"Cat",
+brand:"FreshPaws",
+price:249,
+mrp:299,
+image:"https://images.unsplash.com/photo-1561948955-570b270e7c36?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:11,
+name:"Pet Shampoo",
+category:"Skin & Coat",
+pet:"Dog",
+brand:"FurFresh",
+price:329,
+mrp:399,
+image:"https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+id:12,
+name:"Interactive Pet Toy",
+category:"Accessories",
+pet:"Cat",
+brand:"PlayPaw",
+price:279,
+mrp:349,
+image:"https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=500&q=80"
+}
+
+];
+
+let cart = [];
+
+let petProfile = null;
+
+
+/* ============================================================
+   RENDER PRODUCTS
+============================================================ */
+
+function renderProducts(){
+
+const search =
+document.getElementById("productSearch").value.toLowerCase();
+
+const category =
+document.getElementById("categoryFilter").value;
+
+const pet =
+document.getElementById("petFilter").value;
+
+const grid =
+document.getElementById("productGrid");
+
+const filtered = products.filter(product => {
+
+const matchesSearch =
+product.name.toLowerCase().includes(search) ||
+product.brand.toLowerCase().includes(search);
+
+const matchesCategory =
+category === "All" ||
+product.category === category;
+
+const matchesPet =
+pet === "All" ||
+product.pet === pet;
+
+return matchesSearch &&
+matchesCategory &&
+matchesPet;
+
+});
+
+if(filtered.length === 0){
+
+grid.innerHTML = `
+<div style="grid-column:1/-1;text-align:center;padding:50px">
+<h3>No products found</h3>
+<p style="color:#718078;margin-top:8px">
+Try another search or category.
+</p>
+</div>
+`;
+
+return;
+
+}
+
+grid.innerHTML = filtered.map(product => `
+
+<div class="product-card">
+
+<button class="wish" onclick="wishlist(${product.id})">
+♡
+</button>
+
+<img
+class="product-image"
+src="${product.image}"
+alt="${product.name}"
+onerror="this.src='https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=500&q=80'">
+
+<div class="product-info">
+
+<div class="product-category">
+${product.category}
+</div>
+
+<h3>${product.name}</h3>
+
+<div class="brand">
+${product.brand} • ${product.pet}
+</div>
+
+<div class="price-row">
+
+<div>
+<span class="price">₹${product.price}</span>
+<span class="mrp">₹${product.mrp}</span>
+</div>
+
+<button
+class="add-cart"
+onclick="addToCart(${product.id})">
++
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* ============================================================
+   CART
+============================================================ */
+
+function addToCart(id){
+
+const product =
+products.find(p => p.id === id);
+
+if(!product) return;
+
+const existing =
+cart.find(item => item.id === id);
+
+if(existing){
+
+existing.qty++;
+
+}else{
+
+cart.push({
+id:id,
+qty:1
+});
+
+}
+
+updateCart();
+
+showToast(product.name + " added to cart 🛒");
+
+}
+
+
+function updateCart(){
+
+const count =
+cart.reduce((sum,item) => sum + item.qty,0);
+
+document.getElementById("cartCount").textContent = count;
+
+}
+
+
+function openCart(){
+
+renderCart();
+
+document.getElementById("cartModal")
+.classList.add("active");
+
+}
+
+
+function renderCart(){
+
+const box =
+document.getElementById("cartItems");
+
+if(cart.length === 0){
+
+box.innerHTML = `
+<div style="text-align:center;padding:35px">
+<div style="font-size:45px">🛒</div>
+<h3>Your cart is empty</h3>
+<p style="color:#718078;margin-top:7px">
+Add some products for your pet.
+</p>
+</div>
+`;
+
+document.getElementById("cartTotal").textContent = "₹0";
+
+return;
+
+}
+
+let total = 0;
+
+box.innerHTML = cart.map(item => {
+
+const product =
+products.find(p => p.id === item.id);
+
+const itemTotal =
+product.price * item.qty;
+
+total += itemTotal;
+
+return `
+
+<div class="cart-item">
+
+<img src="${product.image}">
+
+<div class="cart-item-info">
+
+<h4>${product.name}</h4>
+
+<p>₹${product.price} each</p>
+
+<div class="qty">
+
+<button onclick="changeQty(${product.id},-1)">−</button>
+
+<span>${item.qty}</span>
+
+<button onclick="changeQty(${product.id},1)">+</button>
+
+</div>
+
+</div>
+
+<strong>
+₹${itemTotal}
+</strong>
+
+</div>
+
+`;
+
+}).join("");
+
+document.getElementById("cartTotal").textContent =
+"₹" + total;
+
+}
+
+
+function changeQty(id,change){
+
+const item =
+cart.find(item => item.id === id);
+
+if(!item) return;
+
+item.qty += change;
+
+if(item.qty <= 0){
+
+cart =
+cart.filter(item => item.id !== id);
+
+}
+
+updateCart();
+renderCart();
+
+}
+
+
+function checkout(){
+
+if(cart.length === 0){
+
+showToast("Your cart is empty.");
+
+return;
+
+}
+
+showToast("Checkout opened — demo mode 💚");
+
+}
+
+
+/* ============================================================
+   WISHLIST
+============================================================ */
+
+function wishlist(id){
+
+const product =
+products.find(p => p.id === id);
+
+showToast(product.name + " added to wishlist ❤️");
+
+}
+
+
+/* ============================================================
+   PET FILTER
+============================================================ */
+
+function filterPet(pet){
+
+document.getElementById("petFilter").value = pet;
+
+renderProducts();
+
+scrollToSection("pharmacy");
+
+showToast("Showing " + pet + " products 🐾");
+
+}
+
+
+/* ============================================================
+   LOGIN
+============================================================ */
+
+function openLogin(){
+
+document.getElementById("loginModal")
+.classList.add("active");
+
+}
+
+function loginUser(){
+
+const phone =
+document.getElementById("loginPhone").value;
+
+if(!phone){
+
+showToast("Please enter your mobile number.");
+
+return;
+
+}
+
+closeModal("loginModal");
+
+showToast("Welcome to PetMitra! 🐾");
+
+}
+
+
+/* ============================================================
+   PET PROFILE
+============================================================ */
+
+function openPetModal(){
+
+document.getElementById("petModal")
+.classList.add("active");
+
+}
+
+
+function savePet(){
+
+const name =
+document.getElementById("petName").value;
+
+const type =
+document.getElementById("petType").value;
+
+if(!name){
+
+showToast("Please enter your pet's name.");
+
+return;
+
+}
+
+petProfile = {
+
+name:name,
+
+type:type,
+
+breed:document.getElementById("petBreed").value,
+
+age:document.getElementById("petAge").value,
+
+notes:document.getElementById("petNotes").value
+
+};
+
+localStorage.setItem(
+"petmitra_pet",
+JSON.stringify(petProfile)
+);
+
+closeModal("petModal");
+
+showToast(
+"🐾 " + name + "'s profile saved!"
+);
+
+}
+
+
+/* ============================================================
+   VET
+============================================================ */
+
+function openVetBooking(){
+
+document.getElementById("vetModal")
+.classList.add("active");
+
+}
+
+
+function confirmVetBooking(){
+
+const name =
+document.getElementById("vetPetName").value;
+
+const specialist =
+document.getElementById("vetSpecialist").value;
+
+const date =
+document.getElementById("vetDate").value;
+
+if(!name || !date){
+
+showToast("Please fill pet name and date.");
+
+return;
+
+}
+
+closeModal("vetModal");
+
+showToast(
+"Appointment booked for " +
+name +
+" with " +
+specialist +
+" 🩺"
+);
+
+}
+
+
+/* ============================================================
+   GROOMING
+============================================================ */
+
+function bookGrooming(service){
+
+showToast(
+service +
+" selected. Choose your preferred appointment time."
+);
+
+}
+
+
+/* ============================================================
+   DIAGNOSTICS
+============================================================ */
+
+function bookTest(packageName){
+
+showToast(
+packageName +
+" added to booking."
+);
+
+}
+
+
+/* ============================================================
+   FOOD
+============================================================ */
+
+function foodAlert(food){
+
+showToast(
+food +
+" category selected 🍖"
+);
+
+}
+
+
+/* ============================================================
+   PRESCRIPTION
+============================================================ */
+
+function openPrescription(){
+
+document.getElementById("prescriptionModal")
+.classList.add("active");
+
+}
+
+
+function prescriptionUploaded(){
+
+const file =
+document.getElementById("prescriptionFile").files[0];
+
+if(file){
+
+showToast(
+"Prescription uploaded successfully 📄"
+);
+
+}
+
+}
+
+
+function modalPrescriptionUploaded(){
+
+const file =
+document.getElementById("modalPrescription").files[0];
+
+if(file){
+
+showToast(
+"Prescription selected: " +
+file.name
+);
+
+}
+
+}
+
+
+function detectLocation(){
+
+if(!navigator.geolocation){
+
+showToast("Location detection is not supported.");
+
+return;
+
+}
+
+showToast("Detecting your location... 📍");
+
+navigator.geolocation.getCurrentPosition(
+
+position => {
+
+showToast(
+"Location detected successfully 📍"
+);
+
+},
+
+error => {
+
+showToast(
+"Please allow location access."
+);
+
+}
+
+);
+
+}
+
+
+/* ============================================================
+   ARTICLES
+============================================================ */
+
+function readArticle(title){
+
+alert(
+title +
+"\n\nThis demo article would open the complete pet-care guide."
+);
+
+}
+
+
+/* ============================================================
+   NEWSLETTER
+============================================================ */
+
+function subscribeNewsletter(){
+
+const email =
+document.getElementById("newsletterEmail").value;
+
+if(!email || !email.includes("@")){
+
+showToast("Please enter a valid email.");
+
+return;
+
+}
+
+showToast("You're subscribed! 🐾");
+
+}
+
+
+/* ============================================================
+   MODALS
+============================================================ */
+
+function closeModal(id){
+
+document.getElementById(id)
+.classList.remove("active");
+
+}
+
+
+/* close when clicking background */
+
+document.querySelectorAll(".modal")
+.forEach(modal => {
+
+modal.addEventListener("click",function(e){
+
+if(e.target === modal){
+
+modal.classList.remove("active");
+
+}
+
+});
+
+});
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+let toastTimer;
+
+function showToast(message){
+
+const toast =
+document.getElementById("toast");
+
+toast.textContent = message;
+
+toast.classList.add("show");
+
+clearTimeout(toastTimer);
+
+toastTimer =
+setTimeout(() => {
+
+toast.classList.remove("show");
+
+},3000);
+
+}
+
+
+/* ============================================================
+   SCROLL
+============================================================ */
+
+function scrollToSection(id){
+
+const element =
+document.getElementById(id);
+
+if(element){
+
+element.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+}
+
+
+/* ============================================================
+   LOAD PET PROFILE
+============================================================ */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+renderProducts();
+
+updateCart();
+
+const saved =
+localStorage.getItem("petmitra_pet");
+
+if(saved){
+
+petProfile =
+JSON.parse(saved);
+
+}
+
+});
+
+
+/* ============================================================
+   ESCAPE KEY
+============================================================ */
+
+document.addEventListener("keydown",function(e){
+
+if(e.key === "Escape"){
+
+document.querySelectorAll(".modal")
+.forEach(modal => {
+
+modal.classList.remove("active");
+
+});
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

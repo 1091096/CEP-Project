@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blood Banks | SwasthyaMitra AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top right, rgba(22,184,166,.10), transparent 30%),
+                var(--bg);
+        }
+
+        .blood-page {
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        .blood-container {
+            width: min(1150px, 92%);
+            margin: auto;
+        }
+
+        .topbar {
+            padding: 22px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.04);
+            padding: 10px 16px;
+            border-radius: 12px;
+            transition: .25s ease;
+        }
+
+        .back-btn:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .brand {
+            color: var(--primary-light);
+            font-weight: 800;
+        }
+
+        .hero {
+            padding: 35px;
+            border-radius: 26px;
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(13,36,53,.97),
+                    rgba(9,27,42,.97)
+                );
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(239,68,68,.10);
+            border: 1px solid rgba(239,68,68,.18);
+            color: #fca5a5;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 13px;
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: clamp(30px, 5vw, 46px);
+        }
+
+        .hero h1 span {
+            color: #f87171;
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 720px;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        .search-panel {
+            margin-bottom: 28px;
+            padding: 22px;
+            border: 1px solid var(--border);
+            background: rgba(13,36,53,.82);
+            border-radius: 20px;
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr auto;
+            gap: 12px;
+        }
+
+        .input-box,
+        .select-box {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #081b2a;
+            color: var(--text);
+            outline: none;
+        }
+
+        .input-box:focus,
+        .select-box:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(22,184,166,.08);
+        }
+
+        .search-btn {
+            border: none;
+            border-radius: 12px;
+            padding: 13px 20px;
+            cursor: pointer;
+            color: white;
+            font-weight: 700;
+            background: linear-gradient(135deg, #11a997, #0b817c);
+        }
+
+        .section-title {
+            margin-bottom: 15px;
+        }
+
+        .section-title h2 {
+            margin: 0 0 5px;
+        }
+
+        .section-title p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .blood-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .blood-card {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(16,44,64,.96),
+                    rgba(13,36,53,.96)
+                );
+            border: 1px solid var(--border);
+            border-radius: 21px;
+            padding: 22px;
+            transition: .25s ease;
+        }
+
+        .blood-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-hover);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .bank-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: rgba(239,68,68,.10);
+            font-size: 25px;
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .available {
+            color: #86efac;
+            background: rgba(34,197,94,.10);
+            border: 1px solid rgba(34,197,94,.15);
+        }
+
+        .low {
+            color: #fbbf24;
+            background: rgba(251,191,36,.10);
+            border: 1px solid rgba(251,191,36,.15);
+        }
+
+        .unavailable {
+            color: #fca5a5;
+            background: rgba(239,68,68,.10);
+            border: 1px solid rgba(239,68,68,.15);
+        }
+
+        .blood-card h3 {
+            margin: 16px 0 6px;
+            font-size: 18px;
+        }
+
+        .location {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .blood-groups {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 18px;
+        }
+
+        .group-pill {
+            padding: 7px 10px;
+            border-radius: 9px;
+            background: rgba(22,184,166,.08);
+            border: 1px solid rgba(94,234,212,.10);
+            color: var(--primary-light);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 11px 13px;
+            border-radius: 11px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 1px solid var(--border);
+        }
+
+        .call-btn {
+            color: white;
+            background: linear-gradient(135deg, #11a997, #0b817c);
+        }
+
+        .route-btn {
+            color: var(--text);
+            background: rgba(255,255,255,.04);
+        }
+
+        .info-box {
+            margin-top: 28px;
+            padding: 18px;
+            border: 1px solid rgba(251,191,36,.16);
+            border-radius: 17px;
+            background: rgba(251,191,36,.05);
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .empty-state {
+            display: none;
+            padding: 40px 20px;
+            text-align: center;
+            border: 1px dashed var(--border);
+            border-radius: 18px;
+            color: var(--muted);
+            margin-top: 18px;
+        }
+
+        @media (max-width: 800px) {
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blood-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="blood-page">
+
+    <div class="blood-container">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+
+            <a href="swasthyamap.html" class="back-btn">
+                ← Back to Healthcare Hub
+            </a>
+
+            <div class="brand">
+                🩺 SwasthyaMitra AI
+            </div>
+
+        </div>
+
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="badge">
+                🩸 BLOOD BANK DISCOVERY
+            </div>
+
+            <h1>
+                Find <span>Blood</span> Near You
+            </h1>
+
+            <p>
+                Search nearby blood banks, check demo availability,
+                view blood groups and connect with a blood bank from
+                your SwasthyaMitra healthcare dashboard.
+            </p>
+
+        </section>
+
+
+        <!-- SEARCH -->
+        <section class="search-panel">
+
+            <div class="search-grid">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    class="input-box"
+                    placeholder="Search blood bank or area..."
+                >
+
+                <select
+                    id="bloodGroup"
+                    class="select-box">
+
+                    <option value="all">
+                        All Blood Groups
+                    </option>
+
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+
+                </select>
+
+                <button
+                    class="search-btn"
+                    onclick="filterBanks()">
+
+                    🔎 Search
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULTS -->
+        <section>
+
+            <div class="section-title">
+
+                <h2>
+                    Nearby Blood Banks
+                </h2>
+
+                <p>
+                    Sample data for the SwasthyaMitra prototype
+                </p>
+
+            </div>
+
+
+            <div
+                id="bloodGrid"
+                class="blood-grid">
+
+
+                <!-- BANK 1 -->
+
+                <div
+                    class="blood-card"
+                    data-name="city care blood bank"
+                    data-groups="A+ B+ O+ O- AB+">
+
+                    <div class="card-top">
+
+                        <div class="bank-icon">
+                            🩸
+                        </div>
+
+                        <div class="status available">
+                            ● Available
+                        </div>
+
+                    </div>
+
+                    <h3>
+                        City Care Blood Bank
+                    </h3>
+
+                    <div class="location">
+                        📍 Main Road · 2.4 km away
+                    </div>
+
+                    <div class="blood-groups">
+
+                        <span class="group-pill">A+</span>
+                        <span class="group-pill">B+</span>
+                        <span class="group-pill">O+</span>
+                        <span class="group-pill">O-</span>
+                        <span class="group-pill">AB+</span>
+
+                    </div>
+
+                    <div class="card-actions">
+
+                        <button
+                            class="action-btn call-btn"
+                            onclick="callBank('City Care Blood Bank')">
+
+                            📞 Contact
+
+                        </button>
+
+                        <button
+                            class="action-btn route-btn"
+                            onclick="routeTo('City Care Blood Bank')">
+
+                            🗺️ Get Route
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BANK 2 -->
+
+                <div
+                    class="blood-card"
+                    data-name="life care blood centre"
+                    data-groups="A+ A- B+ AB- O+">
+
+                    <div class="card-top">
+
+                        <div class="bank-icon">
+                            🩸
+                        </div>
+
+                        <div class="status available">
+                            ● Available
+                        </div>
+
+                    </div>
+
+                    <h3>
+                        Life Care Blood Centre
+                    </h3>
+
+                    <div class="location">
+                        📍 Civil Lines · 4.1 km away
+                    </div>
+
+                    <div class="blood-groups">
+
+                        <span class="group-pill">A+</span>
+                        <span class="group-pill">A-</span>
+                        <span class="group-pill">B+</span>
+                        <span class="group-pill">AB-</span>
+                        <span class="group-pill">O+</span>
+
+                    </div>
+
+                    <div class="card-actions">
+
+                        <button
+                            class="action-btn call-btn"
+                            onclick="callBank('Life Care Blood Centre')">
+
+                            📞 Contact
+
+                        </button>
+
+                        <button
+                            class="action-btn route-btn"
+                            onclick="routeTo('Life Care Blood Centre')">
+
+                            🗺️ Get Route
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BANK 3 -->
+
+                <div
+                    class="blood-card"
+                    data-name="government blood centre"
+                    data-groups="B+ B- O+ AB+ AB-">
+
+                    <div class="card-top">
+
+                        <div class="bank-icon">
+                            🩸
+                        </div>
+
+                        <div class="status low">
+                            ● Limited
+                        </div>
+
+                    </div>
+
+                    <h3>
+                        Government Blood Centre
+                    </h3>
+
+                    <div class="location">
+                        📍 Central Hospital Campus · 5.2 km away
+                    </div>
+
+                    <div class="blood-groups">
+
+                        <span class="group-pill">B+</span>
+                        <span class="group-pill">B-</span>
+                        <span class="group-pill">O+</span>
+                        <span class="group-pill">AB+</span>
+                        <span class="group-pill">AB-</span>
+
+                    </div>
+
+                    <div class="card-actions">
+
+                        <button
+                            class="action-btn call-btn"
+                            onclick="callBank('Government Blood Centre')">
+
+                            📞 Contact
+
+                        </button>
+
+                        <button
+                            class="action-btn route-btn"
+                            onclick="routeTo('Government Blood Centre')">
+
+                            🗺️ Get Route
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BANK 4 -->
+
+                <div
+                    class="blood-card"
+                    data-name="red drop blood bank"
+                    data-groups="A+ O+ O- AB+">
+
+                    <div class="card-top">
+
+                        <div class="bank-icon">
+                            🩸
+                        </div>
+
+                        <div class="status unavailable">
+                            ● Limited
+                        </div>
+
+                    </div>
+
+                    <h3>
+                        Red Drop Blood Bank
+                    </h3>
+
+                    <div class="location">
+                        📍 Ring Road · 6.7 km away
+                    </div>
+
+                    <div class="blood-groups">
+
+                        <span class="group-pill">A+</span>
+                        <span class="group-pill">O+</span>
+                        <span class="group-pill">O-</span>
+                        <span class="group-pill">AB+</span>
+
+                    </div>
+
+                    <div class="card-actions">
+
+                        <button
+                            class="action-btn call-btn"
+                            onclick="callBank('Red Drop Blood Bank')">
+
+                            📞 Contact
+
+                        </button>
+
+                        <button
+                            class="action-btn route-btn"
+                            onclick="routeTo('Red Drop Blood Bank')">
+
+                            🗺️ Get Route
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="emptyState"
+                class="empty-state">
+
+                🩸
+                <br><br>
+
+                No blood banks found for your search.
+
+                <br>
+
+                Try another blood group or search term.
+
+            </div>
+
+        </section>
+
+
+        <!-- INFORMATION -->
+
+        <div class="info-box">
+
+            <strong>⚠️ Demo Information:</strong>
+
+            The blood-bank availability shown here is
+            <strong>sample data for the SwasthyaMitra prototype</strong>.
+            It is not live blood-stock information. Before relying
+            on blood availability for a real medical situation,
+            confirm directly with the blood bank or appropriate
+            healthcare service.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function filterBanks() {
+
+        const search =
+            document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase()
+                .trim();
+
+        const group =
+            document
+                .getElementById("bloodGroup")
+                .value;
+
+        const cards =
+            document.querySelectorAll(".blood-card");
+
+        let visibleCount = 0;
+
+
+        cards.forEach(function(card) {
+
+            const name =
+                card
+                    .dataset
+                    .name
+                    .toLowerCase();
+
+            const groups =
+                card
+                    .dataset
+                    .groups
+                    .split(" ");
+
+
+            const matchesSearch =
+                !search ||
+                name.includes(search);
+
+            const matchesGroup =
+                group === "all" ||
+                groups.includes(group);
+
+
+            if (
+                matchesSearch &&
+                matchesGroup
+            ) {
+
+                card.style.display =
+                    "block";
+
+                visibleCount++;
+
+            } else {
+
+                card.style.display =
+                    "none";
+
+            }
+
+        });
+
+
+        document
+            .getElementById("emptyState")
+            .style.display =
+                visibleCount === 0
+                    ? "block"
+                    : "none";
+
+    }
+
+
+    function callBank(bankName) {
+
+        alert(
+            "📞 Demo Contact\n\n" +
+            bankName +
+            "\n\nIn the final version, this button can connect to a verified blood-bank phone number."
+        );
+
+    }
+
+
+    function routeTo(bankName) {
+
+        const url =
+            "https://www.google.com/maps/search/" +
+            encodeURIComponent(bankName);
+
+        window.open(
+            url,
+            "_blank"
+        );
+
+    }
+
+</script>
+
+</body>
+</html>

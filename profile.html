@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | SwasthyaMitra AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .profile-page {
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .profile-container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #8bd3dd;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #b8c2cc;
+            margin-bottom: 35px;
+        }
+
+        .profile-card {
+            background: #142331;
+            border: 1px solid #294052;
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #102d35;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+        }
+
+        .profile-info {
+            margin-top: 25px;
+        }
+
+        .info-row {
+            padding: 16px 0;
+            border-bottom: 1px solid #294052;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #8bd3dd;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #ffffff;
+            font-size: 17px;
+        }
+
+        .logout-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #111827;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .status-message {
+            text-align: center;
+            margin-top: 18px;
+            color: #8bd3dd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-page">
+
+        <div class="profile-container">
+
+            <a href="dashboard.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+
+            <h1 class="page-title">My Profile</h1>
+
+            <p class="page-subtitle">
+                Manage your SwasthyaMitra AI account.
+            </p>
+
+
+            <div class="profile-card">
+
+                <div class="profile-avatar">
+                    👤
+                </div>
+
+                <div class="profile-info">
+
+                    <div class="info-row">
+                        <div class="info-label">Name</div>
+                        <div class="info-value" id="profileName">
+                            Loading...
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-label">Email</div>
+                        <div class="info-value" id="profileEmail">
+                            Loading...
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-label">Preferred Language</div>
+                        <div class="info-value" id="profileLanguage">
+                            Loading...
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-label">Account Status</div>
+                        <div class="info-value">
+                            Active
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <button class="logout-btn" onclick="logoutUser()">
+                    🚪 Logout
+                </button>
+
+                <div id="statusMessage" class="status-message"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Main JavaScript -->
+    <script src="main.js"></script>
+
+
+    <script>
+
+        async function loadProfile() {
+
+            const {
+                data: { user },
+                error
+            } = await supabaseClient.auth.getUser();
+
+
+            if (error || !user) {
+
+                document.getElementById("profileName")
+                    .textContent = "Not logged in";
+
+                document.getElementById("profileEmail")
+                    .textContent = "--";
+
+                document.getElementById("profileLanguage")
+                    .textContent = "--";
+
+                return;
+            }
+
+
+            const name =
+                user.user_metadata?.full_name ||
+                "User";
+
+
+            const language =
+                user.user_metadata?.language ||
+                "English";
+
+
+            document.getElementById("profileName")
+                .textContent = name;
+
+
+            document.getElementById("profileEmail")
+                .textContent = user.email || "--";
+
+
+            document.getElementById("profileLanguage")
+                .textContent = language;
+
+        }
+
+
+        async function logoutUser() {
+
+            const { error } =
+                await supabaseClient.auth.signOut();
+
+
+            if (error) {
+
+                alert(
+                    "Logout failed: " +
+                    error.message
+                );
+
+                return;
+            }
+
+
+            alert("You have been logged out.");
+
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+        loadProfile();
+
+    </script>
+
+</body>
+</html>

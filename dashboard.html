@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | SwasthyaMitra AI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+    --bg:#071827;
+    --panel:#0a2638;
+    --panel2:#0d2d40;
+    --line:rgba(64,211,255,.18);
+    --line2:rgba(255,255,255,.07);
+    --text:#effcff;
+    --muted:#86a7b2;
+    --muted2:#5e7e89;
+    --cyan:#43ddff;
+    --teal:#19d3a2;
+    --blue:#3d8dff;
+    --danger:#ff5268;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg)}
+body{
+    font-family:Inter,sans-serif;
+    color:var(--text);
+    overflow-x:hidden;
+}
+button,a{font:inherit}
+button{border:0;cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+.sidebar{
+    position:fixed;inset:0 auto 0 0;width:252px;
+    background:linear-gradient(180deg,#071d2d,#061a29);
+    border-right:1px solid var(--line2);
+    z-index:20;display:flex;flex-direction:column;
+}
+.brand{
+    height:82px;padding:0 20px;display:flex;align-items:center;gap:11px;
+    border-bottom:0;
+}
+.brand-logo{
+    width:44px;height:44px;border-radius:13px;
+    background:linear-gradient(135deg,#16d8ce,#21b9ff);
+    display:grid;place-items:center;font-size:21px;color:#fff;
+    box-shadow:0 8px 24px rgba(25,211,162,.18)
+}
+.brand strong{display:block;font-size:16px}
+.brand strong span{color:#40e8ff}
+.brand small{display:block;color:#7599a5;font-size:10px;margin-top:3px}
+
+.nav{
+    padding:16px 12px;overflow:auto;flex:1
+}
+.nav-title{
+    color:#4d7280;font-size:9px;letter-spacing:1.2px;font-weight:700;
+    margin:11px 10px 8px
+}
+.nav-item{
+    display:flex;align-items:center;gap:12px;
+    padding:11px 12px;margin-bottom:4px;border-radius:10px;
+    color:#91aeb7;font-size:13px;transition:.2s
+}
+.nav-item i{width:20px;text-align:center;font-size:15px}
+.nav-item:hover{background:rgba(25,211,162,.07);color:#e9ffff}
+.nav-item.active{
+    color:#fff;background:linear-gradient(90deg,#12a7a8,#18c2a2);
+    box-shadow:0 7px 20px rgba(25,211,162,.14)
+}
+.nav-item.emergency{color:#ff8290}
+.side-bottom{
+    border-top:1px solid var(--line2);padding:13px 15px
+}
+.profile-mini{display:flex;align-items:center;gap:9px;padding:7px}
+.avatar{
+    width:38px;height:38px;border-radius:50%;
+    display:grid;place-items:center;background:#12384b;color:#68e2ff
+}
+.profile-mini div:nth-child(2){min-width:0;flex:1}
+.profile-mini strong{display:block;font-size:11px}
+.profile-mini span{display:block;color:#6f919d;font-size:9px;margin-top:2px}
+.logout{width:100%;padding:9px;margin-top:5px;text-align:left;background:transparent;color:#7f9ba5;border-radius:9px}
+.logout:hover{background:rgba(255,255,255,.04);color:#fff}
+
+.main{
+    margin-left:252px;min-height:100vh;padding:0 24px 20px;
+    background:
+      radial-gradient(circle at 82% 0%,rgba(21,169,190,.11),transparent 27%),
+      radial-gradient(circle at 10% 70%,rgba(61,141,255,.06),transparent 28%),
+      var(--bg);
+}
+.topbar{
+    height:70px;display:flex;align-items:center;gap:14px;
+    border-bottom:0
+}
+.topbar .top-actions{margin-left:auto}
+.top-heading{display:flex;flex-direction:column;gap:3px;padding-left:4px}
+.top-heading strong{font-size:15px;color:#eafcff;letter-spacing:.1px}
+.top-heading span{font-size:9px;color:#6f9eaa}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:15px}
+.bell{position:relative;background:transparent;color:#b8d7df;font-size:18px}
+.bell b{position:absolute;right:-2px;top:-3px;width:7px;height:7px;background:#ff536b;border-radius:50%}
+.header-user{display:flex;align-items:center;gap:9px}
+.header-user .avatar{width:38px;height:38px}
+.header-user strong{font-size:11px;display:block}
+.header-user span{font-size:9px;color:#79a0ad;display:block;margin-top:2px}
+
+
+.page-heading{
+    padding:12px 8px 16px;
+    min-height:92px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.page-heading span{
+    display:block;font-size:11px;letter-spacing:2px;font-weight:900;color:#42e7d0;margin-bottom:6px;
+}
+.page-heading h1{
+    margin:0;font-size:32px;line-height:1.08;color:#f2fbff;font-weight:900;
+}
+.page-heading p{
+    margin:7px 0 0;color:#9fc2cc;font-size:12px;line-height:1.5;
+}
+
+.hero-row{
+    display:grid;grid-template-columns:minmax(0,1.7fr) minmax(290px,.85fr);
+    gap:14px;margin-top:10px
+}
+.hero{
+    height:190px;
+    min-height:190px;
+    max-height:190px;border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;position:relative;
+    background:#08273a center/cover no-repeat;
+}
+.hero::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(4,24,37,.90) 0%,rgba(4,24,37,.62) 48%,rgba(4,24,37,.08) 100%)
+}
+.hero-content{position:relative;z-index:2;padding:22px 24px;max-width:620px}
+.hero-label{font-size:9px;color:#42e7d0;letter-spacing:1px;font-weight:800}
+.hero h1{font-size:25px;line-height:1.15;margin:7px 0 8px}
+.hero p{color:#a9c8d0;font-size:11px;line-height:1.6;max-width:420px}
+.hero-actions{display:flex;gap:8px;margin-top:16px}
+.btn-primary{
+    background:linear-gradient(90deg,#13c8ad,#1d8dff);color:#fff;
+    padding:9px 13px;border-radius:8px;font-size:10px;font-weight:700
+}
+.btn-secondary{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+    color:#a9cbd3;padding:9px 13px;border-radius:8px;font-size:10px
+}
+.dots{position:absolute;right:18px;bottom:13px;display:flex;gap:5px;z-index:3}
+.dot{width:6px;height:6px;border-radius:50%;background:#55717b}
+.dot.active{width:18px;border-radius:8px;background:#2fe1c3}
+
+.summary{
+    min-height:180px;border:1px solid var(--line);border-radius:16px;
+    background:linear-gradient(145deg,#0b2d41,#082437);padding:18px
+}
+.card-title{display:flex;align-items:center;gap:10px}
+.card-icon{
+    width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(135deg,#388dff,#19d3a2);color:#fff
+}
+.card-title h3{font-size:16px}
+.card-title p{font-size:9px;color:#789aa6;margin-top:3px}
+.summary-body{display:grid;grid-template-columns:105px 1fr;gap:14px;align-items:center;margin-top:10px}
+.score{
+    width:92px;height:92px;border-radius:50%;display:grid;place-items:center;
+    background:conic-gradient(#19d3a2 0 18%,#1c4554 18% 100%);
+    position:relative
+}
+.score::after{content:"";position:absolute;inset:8px;border-radius:50%;background:#0a2738}
+.score div{position:relative;z-index:1;text-align:center}
+.score strong{font-size:21px}
+.score span{display:block;color:#43e1c5;font-size:8px;margin-top:2px}
+.profile-status{color:#8eb1bc;font-size:9px;text-align:center;margin-top:5px}
+.summary-list{display:grid;gap:7px}
+.summary-item{
+    display:flex;justify-content:space-between;gap:8px;padding:7px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);font-size:9px
+}
+.summary-item span{color:#8aa9b2}
+.summary-item strong{color:#dffcff;font-weight:600}
+.summary-empty{color:#55dfc5}
+
+.quick{
+    display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:10px
+}
+.quick-card:nth-child(1) .quick-icon{background:linear-gradient(135deg,#18d9c5,#168cff);color:#fff}
+.quick-card:nth-child(2) .quick-icon{background:linear-gradient(135deg,#ff5f9d,#ff7a45);color:#fff}
+.quick-card:nth-child(3) .quick-icon{background:linear-gradient(135deg,#7659ff,#b34cff);color:#fff}
+.quick-card:nth-child(4) .quick-icon{background:linear-gradient(135deg,#18d89d,#70e35d);color:#fff}
+.quick-card:nth-child(5) .quick-icon{background:linear-gradient(135deg,#8b5cff,#3d7cff);color:#fff}
+.quick-card h4{font-size:11px;margin-bottom:4px;color:#f3ffff}
+
+.quick-card{
+    height:82px;border:1px solid rgba(55,211,255,.19);border-radius:12px;
+    background:linear-gradient(145deg,#0a2b3e,#082437);
+    display:flex;align-items:center;gap:10px;padding:11px 12px;
+    transition:.2s
+}
+.quick-card:hover{transform:translateY(-2px);border-color:rgba(55,211,255,.4)}
+.quick-icon{
+    flex:0 0 38px;width:38px;height:38px;border-radius:50%;
+    display:grid;place-items:center;background:#103e58;color:#53dfff;font-size:15px
+}
+.quick-card h4{font-size:10px;margin-bottom:4px}
+.quick-card p{font-size:8px;color:#7195a1;line-height:1.35}
+
+.dashboard-grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:10px;
+    align-items:stretch
+}
+.dashboard-grid .col{display:contents}
+.dashboard-grid .card{min-height:150px;height:100%;box-sizing:border-box}
+.dashboard-grid .empty{min-height:88px}
+/* Every dashboard section occupies an equal two-column cell. */
+.dashboard-grid .col > .card{height:100%}
+
+.col{display:grid;gap:10px;align-content:start}
+.card{
+    border:1px solid rgba(55,211,255,.17);border-radius:14px;
+    background:linear-gradient(145deg,#0a2b3e,#082437);
+    padding:13px;min-width:0
+}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:11px}
+.card-head h3{font-size:15px}
+.card-head p{font-size:8px;color:#6f919c;margin-top:2px}
+.view{
+    color:#41e4d0;background:transparent;font-size:8px;white-space:nowrap
+}
+.empty{
+    min-height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;border:1px dashed rgba(91,210,223,.15);border-radius:10px;
+    background:rgba(255,255,255,.015);padding:11px
+}
+.empty i{font-size:19px;color:#4fcddd;margin-bottom:6px}
+.empty strong{font-size:10px}
+.empty span{font-size:8px;color:#7598a4;max-width:260px;margin-top:4px;line-height:1.4}
+.empty .small-btn{margin-top:8px}
+
+.small-btn{
+    border-radius:7px;padding:7px 10px;font-size:8px;color:#fff;
+    background:linear-gradient(90deg,#11c8ad,#287ff0)
+}
+.report-link{
+    display:flex;align-items:center;justify-content:space-between;
+    min-height:92px;border:1px solid rgba(255,255,255,.06);border-radius:10px;
+    padding:12px;background:#0a2637
+}
+.report-link div{display:flex;align-items:center;gap:9px}
+.report-link i{color:#52dfff}
+.report-link span{font-size:9px;color:#8aaab4;display:block;margin-top:3px}
+.report-link .arrow{color:#40ddc6}
+
+.wellness{
+    min-height:150px;position:relative;overflow:hidden
+}
+.wellness::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(6,28,42,.98) 0%,rgba(6,28,42,.84) 50%,rgba(6,28,42,.25) 100%);
+    pointer-events:none
+}
+.wellness-bg{position:absolute;inset:0;background:center/cover no-repeat;opacity:.62}
+.wellness-content{position:relative;z-index:2}
+.wellness-content h3{font-size:12px}
+.wellness-content p{font-size:8px;color:#86a7b2;margin-top:4px;max-width:250px;line-height:1.5}
+.wellness-content .small-btn{margin-top:10px}
+
+.ai{
+    background:linear-gradient(145deg,#0b3341,#09283a);
+    border-color:rgba(25,211,162,.24)
+}
+.ai-badge{font-size:8px;color:#46dfc4}
+.ai p{font-size:8px;color:#86a8b1;line-height:1.5;margin-bottom:9px}
+.ai-question{
+    display:block;width:100%;text-align:left;padding:7px 9px;margin:5px 0;
+    border-radius:8px;background:#0c3447;border:1px solid rgba(255,255,255,.05);
+    color:#9bc0ca;font-size:8px
+}
+.ai-question:hover{border-color:rgba(25,211,162,.25);color:#e9ffff}
+.ai-chat{width:100%;margin-top:5px}
+
+.consult-empty{min-height:110px}
+.emergency{
+    border-color:rgba(255,82,104,.35);
+    background:linear-gradient(145deg,#301727,#20131f)
+}
+.emergency .card-icon{background:#ff4962}
+.emergency p{font-size:8px;color:#a8848c;line-height:1.4;margin:7px 0}
+.call-btn{width:100%;background:#ff3f57;color:#fff;border-radius:8px;padding:8px;font-size:9px;font-weight:700}
+.nearby .empty{min-height:125px}
+
+.bottom-tip{
+    margin-top:10px;min-height:58px;border-radius:13px;
+    border:1px solid rgba(25,211,162,.14);
+    background:linear-gradient(90deg,rgba(25,211,162,.10),rgba(25,211,162,.025));
+    display:flex;align-items:center;gap:10px;padding:10px 14px
+}
+.bottom-tip i{font-size:18px;color:#4ce2c5}
+.bottom-tip strong{font-size:9px}
+.bottom-tip p{font-size:8px;color:#7797a0;margin-top:3px}
+
+.footer{display:flex;justify-content:space-between;color:#496b76;font-size:7px;padding:9px 2px 0}
+
+.mobile-menu{display:none;background:transparent;color:#9bc0c9;font-size:18px}
+
+@media(max-width:1200px){
+    .sidebar{width:220px}.main{margin-left:220px;padding:0 16px 16px}
+    .dashboard-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .col.right{grid-column:1/-1;grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:850px){
+    .sidebar{transform:translateX(-100%)}.main{margin-left:0}
+    .mobile-menu{display:block}
+    .hero-row{grid-template-columns:1fr}.summary{min-height:170px}
+    .quick{grid-template-columns:repeat(2,1fr)}
+    .dashboard-grid{grid-template-columns:1fr}
+    .col.right{grid-column:auto;grid-template-columns:1fr}
+    .header-user>div:not(.avatar){display:none}
+}
+@media(max-width:560px){
+    .main{padding:0 10px 14px}.quick{grid-template-columns:1fr}
+    .quick-card{height:70px}.topbar{height:62px}
+    .hero h1{font-size:21px}.hero{min-height:190px}
+    .summary-body{grid-template-columns:1fr}
+    .score{margin:auto}
+}
+
+
+.hero{
+  overflow:hidden !important;
+}
+.hero-image,
+.hero .hero-bg,
+.hero-bg,
+.hero::before{
+  background-size:cover !important;
+  background-position:center !important;
+}
+.hero img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover !important;
+  display:block;
+}
+
+
+
+
+.dashboard-quote{
+  margin:12px 0 4px;
+  min-height:58px;
+  box-sizing:border-box;
+  border:1px solid rgba(55,211,255,.22);
+  border-radius:14px;
+  background:linear-gradient(100deg,rgba(11,65,82,.92),rgba(8,38,58,.95));
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 16px;
+  color:#e9fbff;
+}
+.dashboard-quote .quote-mark{
+  font-size:34px;
+  line-height:1;
+  color:#39e6d0;
+  font-weight:800;
+}
+.dashboard-quote strong{
+  display:block;
+  font-size:13px;
+  line-height:1.2;
+}
+.dashboard-quote small{
+  display:block;
+  margin-top:3px;
+  color:#79aabd;
+  font-size:10px;
+}
+
+
+.hero{
+  position:relative !important;
+  overflow:hidden !important;
+}
+.hero > *:not(.hero-image-layer){
+  position:relative;
+  z-index:2;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(4,24,37,.90) 0%,rgba(4,24,37,.62) 48%,rgba(4,24,37,.18) 100%);
+}
+
+
+.health-library-card{
+  min-height:145px;
+}
+.library-empty{
+  min-height:88px;
+  border:1px dashed rgba(55,211,255,.18);
+  border-radius:12px;
+  background:rgba(7,39,57,.45);
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  padding:12px 14px;
+  box-sizing:border-box;
+}
+.library-empty > i{
+  color:#49d9ff;
+  font-size:20px;
+  margin-bottom:5px;
+}
+.library-empty strong{
+  color:#e9fbff;
+  font-size:12px;
+}
+.library-empty span{
+  color:#759dab;
+  font-size:9px;
+  margin:3px 0 8px;
+}
+
+
+.smartwatch-card{margin-top:10px;border:1px solid rgba(67,221,255,.22);border-radius:14px;background:linear-gradient(145deg,#0b3044,#082437);padding:14px}.smartwatch-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.smartwatch-title{display:flex;align-items:center;gap:10px}.smartwatch-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#19d3a2,#3d8dff);color:#fff;font-size:17px}.smartwatch-title h3{font-size:15px}.smartwatch-title p{font-size:8px;color:#7195a1;margin-top:3px}.smartwatch-status{display:flex;align-items:center;gap:6px;font-size:8px;color:#8aaab4}.smartwatch-status-dot{width:7px;height:7px;border-radius:50%;background:#657d86}.smartwatch-status-dot.connected{background:#20d7a3;box-shadow:0 0 9px rgba(32,215,163,.55)}.smartwatch-body{display:grid;grid-template-columns:1.15fr 2fr;gap:12px}.smartwatch-connect-panel{border:1px dashed rgba(67,221,255,.18);border-radius:11px;background:rgba(255,255,255,.015);padding:12px;display:flex;flex-direction:column;justify-content:center}.smartwatch-connect-panel strong{font-size:11px}.smartwatch-connect-panel span{color:#789aa6;font-size:8px;line-height:1.45;margin-top:5px}.smartwatch-connect-btn{margin-top:10px;border-radius:8px;padding:9px 12px;color:#fff;background:linear-gradient(90deg,#11c8ad,#287ff0);font-size:9px;font-weight:700}.smartwatch-connect-btn:disabled{opacity:.6;cursor:wait}.smartwatch-note{color:#5f7f8b!important}.smartwatch-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.smartwatch-metric{min-height:88px;border:1px solid rgba(255,255,255,.06);border-radius:10px;background:#0a2637;padding:10px;display:flex;flex-direction:column;justify-content:center}.smartwatch-metric i{font-size:15px;margin-bottom:7px}.smartwatch-metric:nth-child(1) i{color:#ff5d76}.smartwatch-metric:nth-child(2) i{color:#51dfc1}.smartwatch-metric:nth-child(3) i{color:#8e72ff}.smartwatch-metric:nth-child(4) i{color:#54dfff}.smartwatch-metric strong{font-size:14px}.smartwatch-metric span{font-size:8px;color:#7195a1;margin-top:3px}.smartwatch-sync{margin-top:8px;font-size:8px;color:#678994}@media(max-width:850px){.smartwatch-body{grid-template-columns:1fr}}@media(max-width:560px){.smartwatch-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+
+<body class="dashboard-page">
+
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brand-logo"><i class="fa-solid fa-heart-pulse"></i></div>
+        <div>
+            <strong>SwasthyaMitra <span>AI</span></strong>
+            <small>Your Health. Our Priority.</small>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <div class="nav-title">MAIN</div>
+        <a href="dashboard.html" class="nav-item active"><i class="fa-solid fa-house"></i><span>Dashboard</span></a>
+        <a href="ai-assistant.html" class="nav-item"><i class="fa-solid fa-robot"></i><span>AI Assistant</span></a>
+        <a href="health-entry.html" class="nav-item"><i class="fa-solid fa-heart-pulse"></i><span>Health Assessment</span></a>
+
+        <div class="nav-title">HEALTH</div>
+        <a href="health-history.html" class="nav-item"><i class="fa-solid fa-file-medical"></i><span>Health Reports</span></a>
+        <a href="appointments.html" class="nav-item"><i class="fa-solid fa-user-doctor"></i><span>Doctor Connect</span></a>
+        <a href="pharmacy.html" class="nav-item"><i class="fa-solid fa-pills"></i><span>Pharmacy</span></a>
+        <a href="petcare.html" class="nav-item"><i class="fa-solid fa-paw"></i><span>Pet Care</span></a>
+        <a href="swasthyamap.html" class="nav-item"><i class="fa-solid fa-map-location-dot"></i><span>SwasthyaMap</span></a>
+
+        <div class="nav-title">SUPPORT</div>
+        <a href="emergency.html" class="nav-item emergency"><i class="fa-solid fa-truck-medical"></i><span>Emergency Support</span></a>
+        <a href="health-library.html" class="nav-item"><i class="fa-solid fa-book-medical"></i><span>Health Library</span></a>
+        <a href="profile.html" class="nav-item"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+
+    <div class="side-bottom">
+        <div class="profile-mini">
+            <div class="avatar"><i class="fa-solid fa-user"></i></div>
+            <div>
+                <strong id="dashboardUserName">Welcome, Mitra</strong>
+                <span>My Health Profile</span>
+            </div>
+            <i class="fa-solid fa-chevron-right" style="color:#678894;font-size:10px"></i>
+        </div>
+        <button class="logout" onclick="logoutUser()"><i class="fa-solid fa-right-from-bracket"></i> &nbsp; Logout</button>
+    </div>
+</aside>
+
+<main class="main">
+
+    <header class="topbar">
+        <!-- Search removed as requested; profile/notification area remains. -->
+        <button class="mobile-menu"><i class="fa-solid fa-bars"></i></button>
+        <div class="top-actions">
+            <button class="bell"><i class="fa-regular fa-bell"></i><b></b></button>
+            <div class="header-user">
+                <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                <div>
+                    <strong id="headerUserName">Mitra</strong>
+                    <span>Patient</span>
+                </div>
+                <i class="fa-solid fa-chevron-down" style="font-size:10px;color:#83a8b4"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-heading">
+        <span>SWASTHYAMITRA AI</span>
+        <h1>Your Health Journey Starts Here</h1>
+        <p>“Take care of your body. It’s the only place you have to live.”</p>
+    </div>
+
+<section class="hero-row">
+        <div class="hero" id="hero">
+            <div class="hero-content">
+                                <div class="hero-label" id="heroLabel">WELCOME TO YOUR HEALTH SPACE</div>
+                <h1 id="heroTitle">Good Morning, Mitra. 👋</h1>
+                <p id="heroText">Your health journey starts here. Add your information when you're ready and use the tools around you to manage your care.</p>
+                <div class="hero-actions">
+                    <button class="btn-primary" onclick="window.location.href='health-entry.html'">Complete Health Profile</button>
+                    <button class="btn-secondary" onclick="window.location.href='appointments.html'">Book Appointment</button>
+                </div>
+            </div>
+            <div class="dots" id="heroDots"></div>
+        </div>
+
+        <div class="summary">
+            <div class="card-title">
+                <div class="card-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                <div><h3>Health Summary</h3><p>Your health at a glance</p></div>
+            </div>
+            <div class="summary-body">
+                <div>
+                    <div class="score" id="healthSummaryScore"><div><strong id="healthSummaryPercent">0%</strong><span id="healthSummaryLabel">Not added</span></div></div>
+                    <div class="profile-status" id="healthSummaryStatus">Add health information to build your summary.</div>
+                </div>
+                <div class="summary-list">
+                    <div class="summary-item"><span>Weight</span><strong id="summaryWeight" class="summary-empty">Not added</strong></div>
+                    <div class="summary-item"><span>Blood Pressure</span><strong id="summaryBloodPressure" class="summary-empty">Not added</strong></div>
+                    <div class="summary-item"><span>Heart Rate</span><strong id="summaryHeartRate" class="summary-empty">Not added</strong></div>
+                    <div class="summary-item"><span>BMI</span><strong id="summaryBmi" class="summary-empty">Not added</strong></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick">
+        <button class="quick-card" onclick="window.location.href='appointments.html'">
+            <div class="quick-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <div><h4>Book Appointment</h4><p>Find a doctor when you need one</p></div>
+        </button>
+        <button class="quick-card" onclick="window.location.href='pharmacy.html'">
+            <div class="quick-icon"><i class="fa-solid fa-pills"></i></div>
+            <div><h4>Order Medicines</h4><p>Browse pharmacy</p></div>
+        </button>
+        <button class="quick-card" onclick="window.location.href='health-history.html'">
+            <div class="quick-icon"><i class="fa-solid fa-file-medical"></i></div>
+            <div><h4>View Reports</h4><p>Your reports will appear here</p></div>
+        </button>
+        <button class="quick-card" onclick="window.location.href='health-library.html'">
+            <div class="quick-icon"><i class="fa-solid fa-book-medical"></i></div>
+            <div><h4>Health Library</h4><p>Explore trusted health information</p></div>
+        </button>
+        <button class="quick-card" onclick="window.location.href='ai-assistant.html'">
+            <div class="quick-icon"><i class="fa-solid fa-robot"></i></div>
+            <div><h4>AI Assistant</h4><p>Ask your health questions</p></div>
+        </button>
+    </section>
+
+    <section class="dashboard-grid">
+
+        <!-- LEFT COLUMN -->
+        <div class="col">
+            <div class="card">
+                <div class="card-head">
+                    <div><h3><i class="fa-regular fa-calendar-check" style="color:#48ddcb;margin-right:6px"></i> Upcoming Appointments</h3><p>Your scheduled consultations</p></div>
+                    <button class="view" onclick="window.location.href='appointments.html'">View All →</button>
+                </div>
+                <div class="empty">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                    <strong>No appointments yet</strong>
+                    <span>Your booked doctor consultations will appear here.</span>
+                    <button class="small-btn" onclick="window.location.href='appointments.html'">Book Appointment</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-head">
+                    <div><h3><i class="fa-solid fa-file-medical" style="color:#54dfff;margin-right:6px"></i> Health Reports</h3><p>Your health records</p></div>
+                    <button class="view" onclick="window.location.href='health-history.html'">View All →</button>
+                </div>
+                <div class="report-link" onclick="window.location.href='health-history.html'" style="cursor:pointer">
+                    <div>
+                        <i class="fa-solid fa-folder-open"></i>
+                        <div><strong style="font-size:10px">No reports yet</strong><span>Open Health Reports to view or manage your records.</span></div>
+                    </div>
+                    <i class="fa-solid fa-arrow-right arrow"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE COLUMN -->
+        <div class="col">
+            <div class="card">
+                <div class="card-head">
+                    <div><h3><i class="fa-solid fa-pills" style="color:#55dfff;margin-right:6px"></i> Recent Orders (Pharmacy)</h3><p>Your latest medicine orders</p></div>
+                    <button class="view" onclick="window.location.href='pharmacy.html'">View All →</button>
+                </div>
+                <div id="dashboardPharmacyOrders" class="empty">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <strong>No pharmacy orders yet</strong>
+                    <span>Your real orders will appear here after you place one.</span>
+                    <button class="small-btn" onclick="window.location.href='pharmacy.html'">Browse Pharmacy</button>
+                </div>
+            </div>
+
+            <div class="card health-library-card">
+                <div class="card-head">
+                    <div><h3><i class="fa-solid fa-book-medical" style="color:#51e0bf;margin-right:6px"></i> Health Library</h3><p>Helpful health information in one place</p></div>
+                    <button class="view" onclick="window.location.href='health-library.html'">View All →</button>
+                </div>
+                <div class="library-empty">
+                    <i class="fa-solid fa-book-open"></i>
+                    <strong>Explore the Health Library</strong>
+                    <span>Read trusted articles, wellness guides and general health information.</span>
+                    <button class="small-btn" onclick="window.location.href='health-library.html'">Open Health Library</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="col right">
+            <div class="card ai">
+                <div class="card-head">
+                    <div><h3><i class="fa-solid fa-robot" style="color:#55e4ff;margin-right:6px"></i> AI Health Assistant</h3><p>Ask your health questions</p></div>
+                    <span class="ai-badge">● Online</span>
+                </div>
+                <button class="ai-question" onclick="window.location.href='ai-assistant.html'">How can I improve my sleep?</button>
+                <button class="ai-question" onclick="window.location.href='ai-assistant.html'">What should I know about my symptoms?</button>
+                <button class="ai-question" onclick="window.location.href='ai-assistant.html'">Give me healthy lifestyle tips</button>
+                <button class="small-btn ai-chat" onclick="window.location.href='ai-assistant.html'">Chat Now →</button>
+            </div>
+
+            <div class="card">
+                <div class="card-head">
+                    <div><h3><i class="fa-solid fa-user-doctor" style="color:#50ddff;margin-right:6px"></i> Upcoming Consultation</h3><p>Online doctor consultation</p></div>
+                </div>
+                <div class="empty consult-empty">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <strong>No consultation scheduled</strong>
+                    <span>Your online consultation will appear here after booking.</span>
+                    <button class="small-btn" onclick="window.location.href='appointments.html'">Find a Doctor</button>
+                </div>
+            </div>
+
+            <div class="card emergency">
+                <div class="card-head" style="margin-bottom:4px">
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <div class="card-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div><h3>Emergency</h3><p style="color:#b18a92">Need urgent help?</p></div>
+                    </div>
+                </div>
+                <p>For urgent medical emergencies, contact local emergency services.</p>
+                <button class="call-btn" onclick="window.location.href='emergency.html'"><i class="fa-solid fa-phone"></i> Emergency Support</button>
+            </div>
+
+            <div class="card nearby">
+                <div class="card-head">
+                    <div><h3><i class="fa-solid fa-location-dot" style="color:#51dfff;margin-right:6px"></i> Nearby Hospitals & Clinics</h3><p>Find healthcare around you</p></div>
+                    <button class="view" onclick="window.location.href='swasthyamap.html'">View All →</button>
+                </div>
+                <div class="empty">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <strong>Find healthcare near you</strong>
+                    <span>Choose a location in SwasthyaMap to see hospitals, clinics and services.</span>
+                    <button class="small-btn" onclick="window.location.href='swasthyamap.html'">Open SwasthyaMap</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="smartwatch-card" id="smartwatchConnect"><div class="smartwatch-head"><div class="smartwatch-title"><div class="smartwatch-icon"><i class="fa-solid fa-heart-pulse"></i></div><div><h3>Smartwatch Connect</h3><p>Connect a compatible Bluetooth health device and sync wellness data.</p></div></div><div class="smartwatch-status"><span class="smartwatch-status-dot" id="smartwatchStatusDot"></span><span id="smartwatchStatus">Not connected</span></div></div><div class="smartwatch-body"><div class="smartwatch-connect-panel"><strong id="smartwatchDeviceName">No smartwatch connected</strong><span id="smartwatchMessage">Use a compatible Bluetooth device. The browser connection currently reads standard heart-rate data.</span><button class="smartwatch-connect-btn" id="smartwatchConnectBtn" type="button" onclick="connectSmartwatch()"><i class="fa-brands fa-bluetooth-b"></i> Connect Smartwatch</button><span class="smartwatch-note">Steps, sleep, calories and other historical metrics need a supported Health Connect/native sync.</span></div><div><div class="smartwatch-metrics"><div class="smartwatch-metric"><i class="fa-solid fa-heart-pulse"></i><strong id="watchHeartRate">—</strong><span>Heart Rate (BPM)</span></div><div class="smartwatch-metric"><i class="fa-solid fa-shoe-prints"></i><strong id="watchSteps">Not synced</strong><span>Steps</span></div><div class="smartwatch-metric"><i class="fa-solid fa-bed"></i><strong id="watchSleep">Not synced</strong><span>Sleep</span></div><div class="smartwatch-metric"><i class="fa-solid fa-rotate"></i><strong id="watchSync">Not synced</strong><span>Last Sync</span></div></div><div class="smartwatch-sync" id="watchSyncMessage">No smartwatch data received yet.</div></div></div></section>
+
+<div class="dashboard-quote">
+  <span class="quote-mark">“</span>
+  <div>
+    <strong>Healthy habits today, a healthier tomorrow.</strong>
+    <small>Your health journey matters — keep taking one step at a time.</small>
+  </div>
+</div>
+
+<footer class="footer">
+        <span>© 2026 SwasthyaMitra AI</span>
+        <span>General health information only. Not a substitute for professional medical advice.</span>
+    </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="main.js"></script>
+
+<script>
+const heroImages = [
+  "images/dashboard/hero1.jpg",
+  "images/dashboard/hero2.jpg",
+  "images/dashboard/hero3.jpg",
+  "images/dashboard/hero4.jpg"
+];
+const heroSlides = [
+    {label:"WELCOME TO YOUR HEALTH SPACE",title:"Good Morning, {name}. 👋",text:"Your health journey starts here. Add your information when you're ready and use the tools around you to manage your care."},
+    {label:"DOCTOR CARE",title:"Care when you need it.",text:"Find doctors, choose a consultation and book a time that works for you."},
+    {label:"WELLNESS",title:"Build healthier habits.",text:"Explore nutrition, wellness and healthy routines at your own pace."},
+    {label:"AI HEALTH MITRA",title:"Your health questions, answered.",text:"Use AI Health Mitra for general health information and guidance."}
+];
+let heroIndex=0;
+let dashboardFirstName="Mitra";
+
+function setHero(i){
+    heroIndex=i;
+    const s=heroSlides[i];
+    const hero=document.getElementById("hero");
+    hero.style.backgroundImage=`url("${heroImages[i]}")`;
+    document.getElementById("heroLabel").textContent=s.label;
+    document.getElementById("heroTitle").textContent=s.title.replace("{name}",dashboardFirstName);
+    document.getElementById("heroText").textContent=s.text;
+    document.querySelectorAll(".dot").forEach((d,n)=>d.classList.toggle("active",n===i));
+}
+function buildDots(){
+    const box=document.getElementById("heroDots");
+    box.innerHTML="";
+    heroSlides.forEach((_,i)=>{
+        const d=document.createElement("button");
+        d.className="dot"+(i===0?" active":"");
+        d.onclick=()=>setHero(i);
+        box.appendChild(d);
+    });
+}
+buildDots();
+setHero(0);
+setInterval(()=>setHero((heroIndex+1)%heroSlides.length),5000);
+
+
+
+let smartwatchDevice=null;let smartwatchHeartRateCharacteristic=null;let lastHrSave=0;
+function setSmartwatchStatus(c,label){document.getElementById('smartwatchStatusDot').classList.toggle('connected',c);document.getElementById('smartwatchStatus').textContent=label||(c?'Connected':'Not connected')}
+function parseHeartRate(v){const f=v.getUint8(0);return (f&1)?v.getUint16(1,true):v.getUint8(1)}
+async function saveSmartwatchHeartRate(bpm){if(typeof supabaseClient==='undefined')return;const now=Date.now();if(now-lastHrSave<5000)return;lastHrSave=now;try{const {data:{user}}=await supabaseClient.auth.getUser();if(!user)return;const name=smartwatchDevice?.name||'Bluetooth Smartwatch';let deviceId=null;const {data:rows}=await supabaseClient.from('smartwatch_devices').select('id').eq('user_id',user.id).eq('device_name',name).order('created_at',{ascending:false}).limit(1);if(rows?.length)deviceId=rows[0].id;if(!deviceId){const {data:d}=await supabaseClient.from('smartwatch_devices').insert({user_id:user.id,device_name:name,device_type:'smartwatch',connection_type:'bluetooth',is_connected:true,last_connected_at:new Date().toISOString(),last_synced_at:new Date().toISOString()}).select('id').single();deviceId=d?.id||null}const {error}=await supabaseClient.from('heart_rate_samples').insert({user_id:user.id,device_id:deviceId,heart_rate:Number(bpm),recorded_at:new Date().toISOString(),source:'smartwatch'});if(error)throw error;document.getElementById('watchSync').textContent='Just now';document.getElementById('watchSyncMessage').textContent='Live heart-rate reading saved to your account.'}catch(e){console.error('Smartwatch sync:',e);document.getElementById('watchSyncMessage').textContent='Heart-rate received, but database sync failed.'}}
+async function handleHeartRate(e){try{const bpm=parseHeartRate(e.target.value);if(!bpm)return;document.getElementById('watchHeartRate').textContent=bpm;document.getElementById('watchSyncMessage').textContent='Live heart-rate received from your connected device.';await saveSmartwatchHeartRate(bpm)}catch(e){console.error(e)}}
+async function connectSmartwatch(){const b=document.getElementById('smartwatchConnectBtn'),m=document.getElementById('smartwatchMessage');if(!('bluetooth' in navigator)){m.textContent='Bluetooth is not available in this browser. Try Chrome or Edge over HTTPS or localhost.';return}try{b.disabled=true;b.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Connecting...';setSmartwatchStatus(false,'Connecting...');smartwatchDevice=await navigator.bluetooth.requestDevice({filters:[{services:['heart_rate']}],optionalServices:['heart_rate']});smartwatchDevice.addEventListener('gattserverdisconnected',()=>{setSmartwatchStatus(false,'Disconnected');m.textContent='The smartwatch was disconnected. Connect again when ready.';b.disabled=false;b.innerHTML='<i class="fa-brands fa-bluetooth-b"></i> Connect Smartwatch'});const server=await smartwatchDevice.gatt.connect();const service=await server.getPrimaryService('heart_rate');smartwatchHeartRateCharacteristic=await service.getCharacteristic('heart_rate_measurement');await smartwatchHeartRateCharacteristic.startNotifications();smartwatchHeartRateCharacteristic.addEventListener('characteristicvaluechanged',handleHeartRate);document.getElementById('smartwatchDeviceName').textContent=smartwatchDevice.name||'Bluetooth Smartwatch';m.textContent='Connected. Waiting for live heart-rate readings...';setSmartwatchStatus(true,'Connected');b.disabled=false;b.innerHTML='<i class="fa-solid fa-link"></i> Connected'}catch(e){console.error('Smartwatch connection:',e);m.textContent=e.name==='NotFoundError'?'No compatible Bluetooth heart-rate device was selected.':'Could not connect. Make sure the device is nearby and allows Bluetooth heart-rate access.';setSmartwatchStatus(false,'Not connected');b.disabled=false;b.innerHTML='<i class="fa-brands fa-bluetooth-b"></i> Connect Smartwatch'}}
+
+async function loadDashboardHealthSummary(){
+    if(typeof supabaseClient === "undefined") return;
+
+    const percentEl = document.getElementById("healthSummaryPercent");
+    const labelEl = document.getElementById("healthSummaryLabel");
+    const statusEl = document.getElementById("healthSummaryStatus");
+    const scoreEl = document.getElementById("healthSummaryScore");
+    const weightEl = document.getElementById("summaryWeight");
+    const bpEl = document.getElementById("summaryBloodPressure");
+    const hrEl = document.getElementById("summaryHeartRate");
+    const bmiEl = document.getElementById("summaryBmi");
+
+    const setEmpty = (el) => {
+        if(!el) return;
+        el.textContent = "Not added";
+        el.classList.add("summary-empty");
+    };
+
+    try{
+        const {data:{user},error:userError} = await supabaseClient.auth.getUser();
+        if(userError || !user) return;
+
+        const {data,error} = await supabaseClient
+            .from("health_metrics")
+            .select("*")
+            .eq("user_id",user.id)
+            .order("created_at",{ascending:false})
+            .limit(1)
+            .maybeSingle();
+
+        if(error){
+            console.error("Health summary load error:",error);
+            return;
+        }
+
+        if(!data){
+            if(percentEl) percentEl.textContent = "0%";
+            if(labelEl) labelEl.textContent = "Not added";
+            if(statusEl) statusEl.textContent = "Add health information to build your summary.";
+            if(scoreEl) scoreEl.style.background = "conic-gradient(#19d3a2 0 0%,#1c4554 0% 100%)";
+            [weightEl,bpEl,hrEl,bmiEl].forEach(setEmpty);
+            return;
+        }
+
+        const weight = data.weight ?? data.weight_kg;
+        const systolic = data.systolic;
+        const diastolic = data.diastolic;
+        const heartRate = data.heart_rate ?? data.heartRate;
+
+        let bmi = data.bmi ?? data.BMI;
+        if((bmi === null || bmi === undefined || bmi === "") && weight != null){
+            const heightCm = data.height_cm ?? data.height;
+            const heightM = heightCm != null ? Number(heightCm) / 100 : null;
+            if(heightM && heightM > 0){
+                bmi = Number(weight) / (heightM * heightM);
+            }
+        }
+
+        if(weight != null && weight !== ""){
+            weightEl.textContent = `${Number(weight).toFixed(1).replace(/\\.0$/,'')} kg`;
+            weightEl.classList.remove("summary-empty");
+        }else setEmpty(weightEl);
+
+        const hasBp = systolic != null && systolic !== "" && diastolic != null && diastolic !== "";
+        if(hasBp){
+            bpEl.textContent = `${systolic}/${diastolic} mmHg`;
+            bpEl.classList.remove("summary-empty");
+        }else setEmpty(bpEl);
+
+        if(heartRate != null && heartRate !== ""){
+            hrEl.textContent = `${heartRate} BPM`;
+            hrEl.classList.remove("summary-empty");
+        }else setEmpty(hrEl);
+
+        if(bmi != null && bmi !== "" && Number.isFinite(Number(bmi))){
+            bmiEl.textContent = Number(bmi).toFixed(1);
+            bmiEl.classList.remove("summary-empty");
+        }else setEmpty(bmiEl);
+
+        const completed = [
+            weight != null && weight !== "",
+            hasBp,
+            heartRate != null && heartRate !== "",
+            bmi != null && bmi !== "" && Number.isFinite(Number(bmi))
+        ].filter(Boolean).length;
+
+        const percentage = Math.round((completed / 4) * 100);
+        if(percentEl) percentEl.textContent = `${percentage}%`;
+        if(labelEl) labelEl.textContent = percentage === 100 ? "Complete" : "Added";
+        if(statusEl) statusEl.textContent = `${completed} of 4 health summary items added.`;
+        if(scoreEl) scoreEl.style.background = `conic-gradient(#19d3a2 0 ${percentage}%,#1c4554 ${percentage}% 100%)`;
+    }catch(error){
+        console.error("Health summary error:",error);
+    }
+}
+
+async function loadDashboardUser(){
+    if(typeof supabaseClient==="undefined") return;
+    const {data:{user},error}=await supabaseClient.auth.getUser();
+    if(error||!user)return;
+    const name=user.user_metadata?.full_name || user.email?.split("@")[0] || "Mitra";
+    dashboardFirstName=name.split(" ")[0];
+    document.getElementById("dashboardUserName").textContent="Welcome, "+dashboardFirstName;
+    document.getElementById("headerUserName").textContent=dashboardFirstName;
+    setHero(heroIndex);
+}
+
+async function logoutUser(){
+    if(typeof supabaseClient==="undefined"){window.location.href="login.html";return;}
+    const {error}=await supabaseClient.auth.signOut();
+    if(error){alert("Logout failed: "+error.message);return;}
+    window.location.href="login.html";
+}
+
+/* Real pharmacy data only. Empty state remains until the user has actual orders. */
+async function loadDashboardPharmacyOrders(){
+    const box=document.getElementById("dashboardPharmacyOrders");
+    if(typeof supabaseClient==="undefined")return;
+    try{
+        const {data:{user},error:userError}=await supabaseClient.auth.getUser();
+        if(userError||!user){
+            box.innerHTML=`<i class="fa-solid fa-lock"></i><strong>Please log in to view orders</strong><span>Your pharmacy history will appear here.</span>`;
+            return;
+        }
+        const {data:orders,error}=await supabaseClient
+            .from("orders").select("*").eq("user_id",user.id)
+            .order("created_at",{ascending:false}).limit(3);
+        if(error)throw error;
+        if(!orders||orders.length===0){
+            box.innerHTML=`<i class="fa-solid fa-cart-shopping"></i><strong>No pharmacy orders yet</strong><span>Your real orders will appear here after you place one.</span><button class="small-btn" onclick="window.location.href='pharmacy.html'">Browse Pharmacy</button>`;
+            return;
+        }
+        box.className=""; box.innerHTML=orders.map(o=>`
+            <div style="display:flex;justify-content:space-between;gap:8px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+                <div><strong style="font-size:9px">Order #${String(o.id).slice(0,8)}</strong>
+                <div style="font-size:8px;color:#7899a4;margin-top:3px">${new Date(o.created_at).toLocaleDateString("en-IN")}</div></div>
+                <div style="text-align:right"><strong style="font-size:9px">₹${Number(o.total_amount||0).toFixed(0)}</strong>
+                <div style="font-size:8px;color:#48ddc3;margin-top:3px">${o.status||"Pending"}</div></div>
+            </div>`).join("")+
+            `<button class="view" style="margin-top:8px" onclick="window.location.href='pharmacy.html'">View all orders →</button>`;
+    }catch(e){
+        console.error("Dashboard pharmacy error:",e);
+        box.innerHTML=`<i class="fa-solid fa-circle-info"></i><strong>Pharmacy is ready</strong><span>Open Pharmacy to browse medicines and place your first order.</span><button class="small-btn" onclick="window.location.href='pharmacy.html'">Open Pharmacy</button>`;
+    }
+}
+
+loadDashboardUser();
+loadDashboardHealthSummary();
+loadDashboardPharmacyOrders();
+</script>
+
+</body>
+</html>

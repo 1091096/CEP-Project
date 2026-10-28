@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SwasthyaMitra AI | Your AI Health Companion</title>
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         WELCOME / HOME PAGE
+         ===================================================== -->
+
+    <div id="publicApp">
+
+        <!-- NAVBAR -->
+        <header class="public-navbar">
+
+            <a href="#home" class="brand">
+
+                <div class="brand-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+
+                <div>
+                    <div class="brand-name">
+                        SwasthyaMitra AI
+                    </div>
+
+                    <small
+                        style="
+                        display:block;
+                        color:#718797;
+                        font-size:9px;
+                        margin-top:-2px;
+                        "
+                    >
+                        Your AI Health Companion
+                    </small>
+                </div>
+
+            </a>
+
+
+            <nav class="public-nav">
+
+                <a href="#home">
+                    Home
+                </a>
+
+                <a href="#services">
+                    Services
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+
+                <!-- LANGUAGE -->
+                <select id="publicLanguage">
+
+                    <option value="en">
+                        English
+                    </option>
+
+                    <option value="hi">
+                        हिन्दी
+                    </option>
+
+                    <option value="mr">
+                        मराठी
+                    </option>
+
+                    <option value="bn">
+                        বাংলা
+                    </option>
+
+                    <option value="gu">
+                        ગુજરાતી
+                    </option>
+
+                    <option value="pa">
+                        ਪੰਜਾਬੀ
+                    </option>
+
+                    <option value="ta">
+                        தமிழ்
+                    </option>
+
+                    <option value="te">
+                        తెలుగు
+                    </option>
+
+                    <option value="kn">
+                        ಕನ್ನಡ
+                    </option>
+
+                    <option value="ml">
+                        മലയാളം
+                    </option>
+
+                    <option value="or">
+                        ଓଡ଼ିଆ
+                    </option>
+
+                    <option value="as">
+                        অসমীয়া
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="outline-btn"
+                    onclick="openAuth('login')"
+                >
+                    Login
+                </button>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="openAuth('signup')"
+                >
+                    Sign Up
+                </button>
+
+            </nav>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section
+            id="home"
+            class="hero-section"
+        >
+
+            <!-- LEFT SIDE -->
+            <div class="hero-content">
+
+                <div class="hero-badge">
+
+                    <i class="fa-solid fa-sparkles"></i>
+
+                    AI-Powered Healthcare for Bharat
+
+                </div>
+
+
+                <h1>
+
+                    Your Health.<br>
+
+                    <span class="text-gradient">
+                        Your Language.
+                    </span><br>
+
+                    Your Mitra.
+
+                </h1>
+
+
+                <p>
+
+                    SwasthyaMitra AI brings health information,
+                    wellness tools, healthcare discovery and
+                    emergency support together in one simple,
+                    multilingual platform.
+
+                </p>
+
+
+                <!-- BUTTONS -->
+                <div class="hero-buttons">
+
+                    <button
+                        class="primary-btn"
+                        onclick="openAuth('signup')"
+                    >
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                        Get Started
+
+                    </button>
+
+
+                    <a
+                        href="#services"
+                        class="secondary-btn"
+                    >
+
+                        <i class="fa-solid fa-compass"></i>
+
+                        Explore Services
+
+                    </a>
+
+                </div>
+
+
+                <div class="hero-language-note">
+
+                    <i class="fa-solid fa-globe"></i>
+
+                    Available in 12 Indian languages
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT SIDE -->
+            <div class="hero-visual">
+
+                <!-- PHONE -->
+                <div class="phone-container">
+
+                    <div class="phone-frame">
+
+                        <!-- PHONE TOP -->
+                        <div class="phone-top">
+
+                            <span>
+                                9:41
+                            </span>
+
+                            <div>
+                                <i class="fa-solid fa-signal"></i>
+                                <i class="fa-solid fa-wifi"></i>
+                                <i class="fa-solid fa-battery-full"></i>
+                            </div>
+
+                        </div>
+
+
+                        <!-- PHONE HEADER -->
+                        <div class="phone-header">
+
+                            <div>
+
+                                <small>
+                                    Welcome to
+                                </small>
+
+                                <strong>
+                                    SwasthyaMitra
+                                </strong>
+
+                            </div>
+
+                            <div class="phone-profile">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                        </div>
+
+
+                        <!-- AI CARD -->
+                        <div class="phone-ai-card">
+
+                            <div class="ai-avatar">
+
+                                <i class="fa-solid fa-robot"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    AI Health Assistant
+                                </strong>
+
+                                <span>
+                                    How can I help you today?
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PHONE OPTIONS -->
+                        <div class="phone-options">
+
+                            <div class="phone-option">
+
+                                <div class="phone-option-icon">
+                                    <i class="fa-solid fa-stethoscope"></i>
+                                </div>
+
+                                <span>
+                                    Health Assessment
+                                </span>
+
+                            </div>
+
+
+                            <div class="phone-option">
+
+                                <div class="phone-option-icon blue">
+                                    <i class="fa-solid fa-user-doctor"></i>
+                                </div>
+
+                                <span>
+                                    Find Doctors
+                                </span>
+
+                            </div>
+
+
+                            <div class="phone-option">
+
+                                <div class="phone-option-icon green">
+                                    <i class="fa-solid fa-hospital"></i>
+                                </div>
+
+                                <span>
+                                    Nearby Hospitals
+                                </span>
+
+                            </div>
+
+
+                            <div class="phone-option">
+
+                                <div class="phone-option-icon purple">
+                                    <i class="fa-solid fa-file-medical"></i>
+                                </div>
+
+                                <span>
+                                    Health Records
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- HEALTH SCORE -->
+                        <div class="phone-score">
+
+                            <div>
+
+                                <small>
+                                    Health Score
+                                </small>
+
+                                <strong>
+                                    82
+                                </strong>
+
+                                <span>
+                                    /100
+                                </span>
+
+                            </div>
+
+
+                            <div class="score-circle">
+
+                                <i class="fa-solid fa-heart-pulse"></i>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PHONE BOTTOM -->
+                        <div class="phone-bottom">
+
+                            <span class="active">
+                                <i class="fa-solid fa-house"></i>
+                                Home
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-chart-line"></i>
+                                Health
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-robot"></i>
+                                AI
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-user"></i>
+                                Profile
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FLOATING HEART -->
+                    <div class="floating-card heart-card">
+
+                        <i class="fa-solid fa-heart-pulse"></i>
+
+                        <div>
+                            <strong>72 BPM</strong>
+                            <span>Heart Rate</span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FLOATING LOCATION -->
+                    <div class="floating-card location-card">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <div>
+                            <strong>Healthcare Near You</strong>
+                            <span>Find hospitals & doctors</span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- FLOATING AI -->
+                    <div class="floating-card ai-floating-card">
+
+                        <div class="mini-ai">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+
+                        <div>
+                            <strong>AI Assistant</strong>
+                            <span>Always here to help</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             TRUST / FEATURE STRIP
+             ===================================================== -->
+
+        <section class="feature-strip">
+
+            <div class="feature-item">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        AI Health Assistance
+                    </strong>
+
+                    <span>
+                        24/7 health awareness
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="feature-item">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-language"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        12 Indian Languages
+                    </strong>
+
+                    <span>
+                        Speak in your language
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="feature-item">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-file-medical"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Health Records
+                    </strong>
+
+                    <span>
+                        Your health, organized
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="feature-item">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-truck-medical"></i>
+                </div>
+
+                <div>
+                    <strong>
+                        Emergency Support
+                    </strong>
+
+                    <span>
+                        Help when you need it
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SERVICES
+             ===================================================== -->
+
+        <section
+            id="services"
+            class="services-section"
+        >
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    OUR SERVICES
+                </span>
+
+                <h2>
+                    Everything you need for
+                    <span class="text-gradient">
+                        better health
+                    </span>
+                </h2>
+
+                <p>
+                    Simple, accessible healthcare tools
+                    designed for everyday health awareness.
+                </p>
+
+            </div>
+
+
+            <div class="service-grid">
+
+                <!-- SERVICE 1 -->
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+
+                    <h3>
+                        AI Assistant
+                    </h3>
+
+                    <p>
+                        Ask health-related questions and
+                        get easy-to-understand information
+                        whenever you need it.
+                    </p>
+
+                    <span class="service-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </div>
+
+
+                <!-- SERVICE 2 -->
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+
+                    <h3>
+                        Doctor Connect
+                    </h3>
+
+                    <p>
+                        Discover healthcare professionals
+                        and manage your doctor appointments.
+                    </p>
+
+                    <span class="service-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </div>
+
+
+                <!-- SERVICE 3 -->
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-pills"></i>
+                    </div>
+
+                    <h3>
+                        Pharmacy
+                    </h3>
+
+                    <p>
+                        Explore medicines, medication
+                        information and your medicine history.
+                    </p>
+
+                    <span class="service-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </div>
+
+
+                <!-- SERVICE 4 -->
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-file-medical"></i>
+                    </div>
+
+                    <h3>
+                        Health Reports
+                    </h3>
+
+                    <p>
+                        Keep track of vitals, activity,
+                        diagnostics, hospital records and more.
+                    </p>
+
+                    <span class="service-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </div>
+
+
+                <!-- SERVICE 5 -->
+                <div class="service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+
+                    <h3>
+                        SwasthyaMap
+                    </h3>
+
+                    <p>
+                        Find hospitals, pharmacies,
+                        doctors and healthcare facilities nearby.
+                    </p>
+
+                    <span class="service-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </div>
+
+
+                <!-- SERVICE 6 -->
+                <div class="service-card emergency-service-card">
+
+                    <div class="service-icon">
+                        <i class="fa-solid fa-truck-medical"></i>
+                    </div>
+
+                    <h3>
+                        Emergency Care
+                    </h3>
+
+                    <p>
+                        Quickly access important emergency
+                        contacts and nearby healthcare facilities.
+                    </p>
+
+                    <span class="service-arrow">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             ABOUT
+             ===================================================== -->
+
+        <section
+            id="about"
+            class="about-section"
+        >
+
+            <div class="about-content">
+
+                <div class="about-text">
+
+                    <span class="section-label">
+                        ABOUT SWASTHYAMITRA AI
+                    </span>
+
+                    <h2>
+                        Healthcare that feels
+                        <span class="text-gradient">
+                            closer to home.
+                        </span>
+                    </h2>
+
+                    <p>
+                        SwasthyaMitra AI is designed as a
+                        digital health companion that helps
+                        people understand, organize and
+                        navigate their healthcare journey.
+                    </p>
+
+                    <p>
+                        From health awareness and personal
+                        health records to finding healthcare
+                        services, our goal is to make digital
+                        health tools easier and more accessible.
+                    </p>
+
+
+                    <div class="about-points">
+
+                        <div>
+                            <i class="fa-solid fa-circle-check"></i>
+                            AI-powered health awareness
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-circle-check"></i>
+                            Multilingual experience
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-circle-check"></i>
+                            Healthcare discovery
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-circle-check"></i>
+                            Personal health organization
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LANGUAGE CARD -->
+                <div class="language-card">
+
+                    <div class="language-card-header">
+
+                        <div class="language-card-icon">
+                            <i class="fa-solid fa-language"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Your language matters.
+                            </h3>
+
+                            <p>
+                                SwasthyaMitra AI supports
+                                12 Indian languages.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="language-grid">
+
+                        <div class="language-item">
+                            English
+                        </div>
+
+                        <div class="language-item">
+                            हिन्दी
+                        </div>
+
+                        <div class="language-item">
+                            मराठी
+                        </div>
+
+                        <div class="language-item">
+                            বাংলা
+                        </div>
+
+                        <div class="language-item">
+                            ગુજરાતી
+                        </div>
+
+                        <div class="language-item">
+                            ਪੰਜਾਬੀ
+                        </div>
+
+                        <div class="language-item">
+                            தமிழ்
+                        </div>
+
+                        <div class="language-item">
+                            తెలుగు
+                        </div>
+
+                        <div class="language-item">
+                            ಕನ್ನಡ
+                        </div>
+
+                        <div class="language-item">
+                            മലയാളം
+                        </div>
+
+                        <div class="language-item">
+                            ଓଡ଼ିଆ
+                        </div>
+
+                        <div class="language-item">
+                            অসমীয়া
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FOOTER
+             ===================================================== -->
+
+        <footer class="public-footer">
+
+            <div class="footer-content">
+
+                <div class="footer-brand">
+
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+
+                    <strong>
+                        SwasthyaMitra AI
+                    </strong>
+
+                </div>
+
+
+                <p>
+                    Your AI Health Companion for Bharat.
+                </p>
+
+
+                <div class="footer-socials">
+
+                    <span>
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </span>
+
+                    <span>
+                        <i class="fa-brands fa-instagram"></i>
+                    </span>
+
+                    <span>
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </span>
+
+                    <span>
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 SwasthyaMitra AI
+                </span>
+
+                <span>
+                    Built for accessible health awareness in India
+                </span>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         LOGIN / SIGNUP MODAL
+         We'll make this functional in the next step.
+         ===================================================== -->
+
+    <div
+        id="authModal"
+        class="modal-overlay hidden"
+    >
+
+        <div class="auth-modal">
+
+            <button
+                class="modal-close"
+                onclick="closeAuth()"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+
+            <div class="auth-logo">
+
+                <i class="fa-solid fa-heart-pulse"></i>
+
+                SwasthyaMitra AI
+
+            </div>
+
+
+            <!-- LOGIN -->
+            <div id="loginForm">
+
+                <h2>
+                    Welcome Back 👋
+                </h2>
+
+                <p>
+                    Sign in to continue your health journey.
+                </p>
+
+
+                <form>
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            placeholder="you@example.com"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            placeholder="Enter your password"
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="primary-btn auth-submit"
+                        onclick="loginUser()"
+                    >
+
+                        Sign In
+
+                    </button>
+
+                </form>
+
+
+                <div class="auth-switch">
+
+                    Don't have an account?
+
+                    <button
+                        type="button"
+                        onclick="showSignup()"
+                    >
+                        Create Account
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- SIGNUP -->
+            <div
+                id="signupForm"
+                class="hidden"
+            >
+
+                <h2>
+                    Create Your Account
+                </h2>
+
+                <p>
+                    Start your SwasthyaMitra AI journey.
+                </p>
+
+
+                <form>
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            placeholder="Your name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            placeholder="you@example.com"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <input
+                            type="password"
+                            placeholder="Create a password"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Preferred Language
+                        </label>
+
+                        <select>
+
+                            <option>
+                                English
+                            </option>
+
+                            <option>
+                                हिन्दी
+                            </option>
+
+                            <option>
+                                मराठी
+                            </option>
+
+                            <option>
+                                বাংলা
+                            </option>
+
+                            <option>
+                                ગુજરાતી
+                            </option>
+
+                            <option>
+                                ਪੰਜਾਬੀ
+                            </option>
+
+                            <option>
+                                தமிழ்
+                            </option>
+
+                            <option>
+                                తెలుగు
+                            </option>
+
+                            <option>
+                                ಕನ್ನಡ
+                            </option>
+
+                            <option>
+                                മലയാളം
+                            </option>
+
+                            <option>
+                                ଓଡ଼ିଆ
+                            </option>
+
+                            <option>
+                                অসমীয়া
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                type="button"
+                 class="primary-btn auth-submit"
+                  onclick="createAccount()"
+            >
+            Create Account
+            </button>
+
+                </form>
+
+
+                <div class="auth-switch">
+
+                    Already have an account?
+
+                    <button
+                        type="button"
+                        onclick="showLogin()"
+                    >
+                        Sign In
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HEALTH DISCLAIMER -->
+
+    <div class="health-disclaimer">
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        SwasthyaMitra AI provides general health information
+        for awareness purposes only. It does not provide
+        medical diagnosis or replace professional medical advice.
+
+    </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="language.js"></script>
+<script src="main.js"></script>
+
+
+</body>
+</html>

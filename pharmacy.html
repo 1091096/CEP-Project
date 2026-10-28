@@ -1,0 +1,6898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SwasthyaMitra AI | Your Digital Health Partner</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --navy:#062B49;
+    --navy2:#062B49;
+    --blue:#0877C9;
+    --teal:#0AA878;
+    --green:#0AA878;
+    --mint:#F4F8FB;
+    --sky:#F4F8FB;
+    --soft:#F4F8FB;
+    --white:#FFFFFF;
+    --text:#062B49;
+    --muted:#667482;
+    --border:#DCE6ED;
+    --danger:#0877C9;
+    --orange:#0877C9;
+    --shadow:0 10px 35px rgba(6,43,73,.10);
+    --radius:18px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Inter',Arial,sans-serif;
+    background:var(--soft);
+    color:var(--text);
+}
+
+button,input,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ================= HEADER ================= */
+
+.top-strip{
+    background:var(--navy);
+    color:white;
+    padding:8px 5%;
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+}
+
+.top-strip span{
+    opacity:.9;
+}
+
+header{
+    background:white;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 3px 18px rgba(0,0,0,.08);
+}
+
+.navbar{
+    max-width:1450px;
+    margin:auto;
+    min-height:76px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:12px 4%;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:205px;
+}
+
+.logo-icon{
+    width:48px;
+    height:48px;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--teal),var(--blue));
+    color:white;
+    display:grid;
+    place-items:center;
+    font-size:25px;
+    font-weight:800;
+    box-shadow:0 8px 20px rgba(10,168,120,.22);
+}
+
+.logo-text strong{
+    display:block;
+    color:var(--navy);
+    font-size:20px;
+}
+
+.logo-text span{
+    color:var(--teal);
+    font-size:11px;
+    font-weight:700;
+}
+
+.search-box{
+    flex:1;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    height:46px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:var(--soft);
+    padding:0 48px 0 18px;
+    outline:none;
+    color:var(--text);
+}
+
+.search-box input:focus{
+    border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(10,168,120,.10);
+}
+
+.search-icon{
+    position:absolute;
+    right:17px;
+    top:13px;
+    color:var(--muted);
+}
+
+/* ================= LOCATION ================= */
+
+.location-box{
+    min-width:190px;
+    position:relative;
+}
+
+.location-main{
+    min-height:46px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:white;
+    padding:6px 10px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    cursor:pointer;
+}
+
+.location-pin{
+    width:30px;
+    height:30px;
+    border-radius:9px;
+    background:var(--mint);
+    display:grid;
+    place-items:center;
+    flex-shrink:0;
+}
+
+.location-text{
+    min-width:0;
+    flex:1;
+}
+
+.location-label{
+    display:block;
+    font-size:9px;
+    color:var(--muted);
+    font-weight:600;
+}
+
+.location-value{
+    display:block;
+    color:var(--navy);
+    font-size:11px;
+    font-weight:800;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.location-change{
+    color:var(--teal);
+    font-size:10px;
+    font-weight:800;
+    border:0;
+    background:transparent;
+    white-space:nowrap;
+}
+
+.location-panel{
+    position:absolute;
+    right:0;
+    top:55px;
+    width:290px;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:16px;
+    box-shadow:0 15px 40px rgba(5,43,73,.16);
+    display:none;
+    z-index:2000;
+}
+
+.location-panel.show{
+    display:block;
+}
+
+.location-panel h4{
+    color:var(--navy);
+    font-size:14px;
+    margin-bottom:6px;
+}
+
+.location-panel p{
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.5;
+    margin-bottom:13px;
+}
+
+.detect-location-btn{
+    width:100%;
+    border:0;
+    background:linear-gradient(135deg,var(--teal),#0AA878);
+    color:white;
+    padding:10px;
+    border-radius:9px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.location-status{
+    display:none;
+    margin-top:10px;
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.5;
+}
+
+.location-status.show{
+    display:block;
+}
+
+.location-error{
+    color:var(--danger);
+}
+
+.location-success{
+    color:var(--teal);
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.nav-btn{
+    border:0;
+    background:transparent;
+    color:var(--text);
+    padding:8px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.icon-btn{
+    position:relative;
+    width:43px;
+    height:43px;
+    border:1px solid var(--border);
+    background:white;
+    border-radius:12px;
+    font-size:19px;
+}
+
+.count{
+    position:absolute;
+    right:-5px;
+    top:-5px;
+    min-width:18px;
+    height:18px;
+    padding:0 5px;
+    border-radius:20px;
+    background:var(--danger);
+    color:white;
+    font-size:10px;
+    display:grid;
+    place-items:center;
+}
+
+/* ================= CATEGORY NAV ================= */
+
+.category-nav{
+    border-top:1px solid var(--border);
+    background:white;
+    overflow-x:auto;
+}
+
+.category-nav-inner{
+    max-width:1450px;
+    margin:auto;
+    padding:0 4%;
+    display:flex;
+    gap:5px;
+}
+
+.category-nav button{
+    border:0;
+    background:transparent;
+    padding:15px 16px;
+    color:var(--muted);
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+    border-bottom:3px solid transparent;
+}
+
+.category-nav button:hover,
+.category-nav button.active{
+    color:var(--teal);
+    border-bottom-color:var(--teal);
+}
+
+/* =========================================================
+   NEW HERO IMAGE SLIDER
+========================================================= */
+
+.hero{
+    max-width:1450px;
+    margin:24px auto 30px;
+    padding:0 4%;
+}
+
+.hero-slider{
+    position:relative;
+    min-height:430px;
+    height:430px;
+    border-radius:28px;
+    overflow:hidden;
+    background:var(--navy);
+    box-shadow:var(--shadow);
+}
+
+.hero-slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .7s ease,visibility .7s ease;
+}
+
+.hero-slide.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.hero-slide-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero-slide-overlay{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3,35,61,.96) 0%,
+            rgba(5,61,76,.82) 43%,
+            rgba(5,91,91,.42) 75%,
+            rgba(3,35,61,.25) 100%
+        );
+}
+
+.hero-slide-content{
+    position:relative;
+    z-index:2;
+    height:100%;
+    max-width:720px;
+    padding:55px;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    color:white;
+}
+
+.hero-badge{
+    display:inline-flex;
+    width:max-content;
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.2);
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:11px;
+    margin-bottom:18px;
+    backdrop-filter:blur(5px);
+}
+
+.hero-slide-content h1{
+    font-size:43px;
+    line-height:1.12;
+    margin-bottom:15px;
+}
+
+.hero-slide-content h1 span{
+    color:#0AA878;
+}
+
+.hero-slide-content p{
+    color:#DCE6ED;
+    line-height:1.7;
+    font-size:14px;
+    max-width:620px;
+    margin-bottom:24px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.primary-btn{
+    background:linear-gradient(135deg,var(--teal),#0AA878);
+    border:0;
+    color:white;
+    padding:13px 21px;
+    border-radius:11px;
+    font-weight:700;
+    box-shadow:0 8px 20px rgba(10,168,120,.22);
+}
+
+.secondary-btn{
+    background:white;
+    border:0;
+    color:var(--navy);
+    padding:13px 21px;
+    border-radius:11px;
+    font-weight:700;
+}
+
+.hero-arrow{
+    position:absolute;
+    z-index:5;
+    top:50%;
+    transform:translateY(-50%);
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.3);
+    background:rgba(3,35,61,.5);
+    color:white;
+    font-size:25px;
+    display:grid;
+    place-items:center;
+    backdrop-filter:blur(5px);
+    transition:.2s;
+}
+
+.hero-arrow:hover{
+    background:rgba(10,168,120,.92);
+}
+
+.hero-prev{
+    left:20px;
+}
+
+.hero-next{
+    right:20px;
+}
+
+.hero-dots{
+    position:absolute;
+    z-index:6;
+    left:50%;
+    bottom:20px;
+    transform:translateX(-50%);
+    display:flex;
+    gap:7px;
+}
+
+.hero-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    border:0;
+    background:rgba(255,255,255,.45);
+    padding:0;
+    transition:.25s;
+}
+
+.hero-dot.active{
+    width:25px;
+    border-radius:20px;
+    background:#0AA878;
+}
+
+/* ================= SERVICE STRIP ================= */
+
+.service-strip{
+    max-width:1450px;
+    margin:0 auto 30px;
+    padding:0 4%;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.service-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    box-shadow:0 5px 20px rgba(5,43,73,.04);
+}
+
+.service-icon{
+    width:46px;
+    height:46px;
+    border-radius:13px;
+    background:var(--mint);
+    display:grid;
+    place-items:center;
+    font-size:22px;
+}
+
+.service-card strong{
+    display:block;
+    font-size:13px;
+    margin-bottom:4px;
+}
+
+.service-card span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* ================= MAIN ================= */
+
+.container{
+    max-width:1450px;
+    margin:auto;
+    padding:0 4%;
+}
+
+.section{
+    margin:42px 0;
+}
+
+.section-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-bottom:18px;
+}
+
+.section-heading h2{
+    color:var(--navy);
+    font-size:25px;
+}
+
+.section-heading p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+.view-all{
+    color:var(--teal);
+    font-weight:700;
+    font-size:13px;
+}
+
+/* ================= CATEGORY PROMO ================= */
+
+.category-promos{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.promo-card{
+    min-height:210px;
+    border-radius:20px;
+    padding:25px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,#F4F8FB,#F4F8FB);
+    border:1px solid #DCE6ED;
+}
+
+.promo-card:nth-child(2){
+    background:linear-gradient(135deg,#F4F8FB,#F4F8FB);
+}
+
+.promo-card:nth-child(3){
+    background:linear-gradient(135deg,#F4F8FB,#F4F8FB);
+}
+
+.promo-card h3{
+    font-size:21px;
+    color:var(--navy);
+    margin-bottom:8px;
+}
+
+.promo-card p{
+    color:#667482;
+    font-size:12px;
+    line-height:1.6;
+    max-width:240px;
+}
+
+.promo-card button{
+    margin-top:18px;
+    border:0;
+    background:var(--navy);
+    color:white;
+    padding:10px 15px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.promo-image{
+    position:absolute;
+    right:-15px;
+    bottom:-15px;
+    width:150px;
+    height:150px;
+    object-fit:cover;
+    border-radius:50%;
+    border:8px solid rgba(255,255,255,.65);
+}
+
+/* ================= PRODUCTS ================= */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+}
+
+.product-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:17px;
+    overflow:hidden;
+    transition:.25s;
+    position:relative;
+}
+
+.product-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow);
+}
+
+.product-image{
+    height:190px;
+    background:#F4F8FB;
+    position:relative;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.3s;
+}
+
+.product-card:hover .product-image img{
+    transform:scale(1.05);
+}
+
+.discount-tag{
+    position:absolute;
+    left:10px;
+    top:10px;
+    background:#F4F8FB;
+    color:#0AA878;
+    padding:5px 8px;
+    border-radius:7px;
+    font-size:10px;
+    font-weight:800;
+}
+
+.wishlist{
+    position:absolute;
+    right:10px;
+    top:10px;
+    width:32px;
+    height:32px;
+    border:0;
+    border-radius:50%;
+    background:white;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+    font-size:16px;
+}
+
+.wishlist.active{
+    color:#0877C9;
+}
+
+.product-info{
+    padding:14px;
+}
+
+.product-brand{
+    color:var(--teal);
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+.product-name{
+    color:var(--navy);
+    font-size:13px;
+    font-weight:700;
+    margin:7px 0;
+    min-height:36px;
+}
+
+.product-sub{
+    color:var(--muted);
+    font-size:10px;
+    margin-bottom:9px;
+}
+
+.price-row{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.price{
+    color:var(--navy);
+    font-size:16px;
+    font-weight:800;
+}
+
+.mrp{
+    color:#667482;
+    font-size:11px;
+    text-decoration:line-through;
+}
+
+.product-actions{
+    display:flex;
+    gap:7px;
+    margin-top:12px;
+}
+
+.add-cart{
+    flex:1;
+    border:0;
+    background:var(--teal);
+    color:white;
+    padding:9px;
+    border-radius:9px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.details-btn{
+    border:1px solid var(--border);
+    background:white;
+    color:var(--navy);
+    width:39px;
+    border-radius:9px;
+}
+
+/* ================= HOMEOPATHY ================= */
+
+.homeopathy-banner{
+    background:
+        linear-gradient(90deg,rgba(4,43,67,.95),rgba(7,82,86,.84)),
+        url("https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1400&q=80")
+        center/cover;
+    border-radius:24px;
+    min-height:260px;
+    padding:40px;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    overflow:hidden;
+}
+
+.homeopathy-content{
+    max-width:600px;
+}
+
+.homeopathy-content h2{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.homeopathy-content p{
+    color:#DCE6ED;
+    line-height:1.7;
+    font-size:13px;
+}
+
+.homeopathy-tag{
+    display:inline-block;
+    background:rgba(255,255,255,.15);
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:11px;
+    margin-bottom:14px;
+}
+
+.homeopathy-image{
+    width:250px;
+    height:220px;
+    border-radius:22px;
+    object-fit:cover;
+    border:5px solid rgba(255,255,255,.25);
+}
+
+/* ================= PACKAGES ================= */
+
+.package-wrap{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.package-card{
+    background:white;
+    border-radius:20px;
+    border:1px solid var(--border);
+    padding:22px;
+    box-shadow:0 6px 25px rgba(5,43,73,.06);
+}
+
+.demo-label{
+    display:inline-block;
+    background:#F4F8FB;
+    color:#0877C9;
+    padding:5px 9px;
+    border-radius:6px;
+    font-size:9px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.package-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.package-card h3{
+    color:var(--navy);
+    font-size:20px;
+}
+
+.tests{
+    color:var(--teal);
+    font-weight:800;
+    font-size:13px;
+}
+
+.rating{
+    background:#F4F8FB;
+    color:#0AA878;
+    padding:6px 9px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.package-meta{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:13px 0;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin:13px 0;
+}
+
+.chip{
+    background:#F4F8FB;
+    color:#667482;
+    padding:7px 9px;
+    border-radius:7px;
+    font-size:10px;
+    font-weight:600;
+}
+
+.package-desc{
+    background:#F4F8FB;
+    padding:12px;
+    border-radius:10px;
+    color:#667482;
+    font-size:10px;
+    line-height:1.6;
+}
+
+.package-bottom{
+    margin-top:17px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.package-price strong{
+    font-size:22px;
+    color:var(--navy);
+}
+
+.package-price span{
+    color:#667482;
+    font-size:11px;
+    text-decoration:line-through;
+    margin-left:5px;
+}
+
+.saved{
+    color:#0877C9;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.book-btn{
+    background:var(--blue);
+    color:white;
+    border:0;
+    padding:11px 18px;
+    border-radius:9px;
+    font-weight:800;
+    font-size:11px;
+}
+
+/* ================= ARTICLES ================= */
+
+.article-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:17px;
+}
+
+.article-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:17px;
+    overflow:hidden;
+}
+
+.article-image{
+    height:145px;
+}
+
+.article-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.article-body{
+    padding:15px;
+}
+
+.source{
+    font-size:10px;
+    color:var(--teal);
+    font-weight:800;
+}
+
+.article-body h3{
+    font-size:14px;
+    color:var(--navy);
+    margin:7px 0;
+}
+
+.article-body p{
+    font-size:11px;
+    color:var(--muted);
+    line-height:1.55;
+    min-height:50px;
+}
+
+.article-link{
+    display:inline-block;
+    margin-top:11px;
+    color:var(--blue);
+    font-size:11px;
+    font-weight:800;
+}
+
+/* ================= SHOP PAGE ================= */
+
+.shop-area{
+    display:grid;
+    grid-template-columns:245px 1fr;
+    gap:22px;
+    align-items:start;
+}
+
+.filters{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    position:sticky;
+    top:115px;
+}
+
+.filter-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.filter-title h3{
+    font-size:17px;
+    color:var(--navy);
+}
+
+.clear-btn{
+    border:0;
+    background:transparent;
+    color:var(--teal);
+    font-size:10px;
+    font-weight:800;
+}
+
+.filter-group{
+    border-top:1px solid var(--border);
+    padding:15px 0;
+}
+
+.filter-group h4{
+    font-size:11px;
+    color:var(--navy);
+    margin-bottom:11px;
+}
+
+.radio-row,.check-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:8px 0;
+    font-size:11px;
+    color:#667482;
+}
+
+.radio-row input,.check-row input{
+    accent-color:var(--teal);
+}
+
+.subcategory-select{
+    width:100%;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:9px;
+    background:#F4F8FB;
+    color:var(--text);
+    outline:none;
+    font-size:11px;
+}
+
+.brand-list{
+    max-height:170px;
+    overflow:auto;
+}
+
+.shop-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.results-count{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.sort-select{
+    border:1px solid var(--border);
+    background:white;
+    border-radius:9px;
+    padding:9px 12px;
+    font-size:11px;
+}
+
+/* ================= MODALS ================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(1,23,39,.65);
+    z-index:3000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(700px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:white;
+    border-radius:22px;
+    padding:25px;
+    position:relative;
+}
+
+.modal-close{
+    position:absolute;
+    right:17px;
+    top:15px;
+    width:35px;
+    height:35px;
+    border:0;
+    border-radius:50%;
+    background:#F4F8FB;
+    color:var(--navy);
+}
+
+.modal-title{
+    color:var(--navy);
+    font-size:22px;
+    margin-bottom:18px;
+}
+
+.cart-item{
+    display:flex;
+    gap:13px;
+    align-items:center;
+    border-bottom:1px solid #F4F8FB;
+    padding:13px 0;
+}
+
+.cart-item img{
+    width:65px;
+    height:65px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-info strong{
+    display:block;
+    font-size:12px;
+}
+
+.cart-item-info span{
+    color:var(--teal);
+    font-weight:700;
+    font-size:12px;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.qty button{
+    width:26px;
+    height:26px;
+    border:1px solid var(--border);
+    background:white;
+    border-radius:6px;
+}
+
+.cart-summary{
+    background:#F4F8FB;
+    padding:17px;
+    border-radius:12px;
+    margin-top:15px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    padding:5px 0;
+    font-size:12px;
+}
+
+.summary-total{
+    border-top:1px solid var(--border);
+    margin-top:8px;
+    padding-top:10px;
+    font-weight:800;
+    font-size:15px;
+}
+
+.full-btn{
+    width:100%;
+    margin-top:13px;
+}
+
+/* Product modal */
+
+.product-detail{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.product-detail img{
+    width:100%;
+    height:310px;
+    object-fit:cover;
+    border-radius:16px;
+}
+
+.detail-brand{
+    color:var(--teal);
+    font-weight:800;
+    font-size:11px;
+}
+
+.product-detail h2{
+    color:var(--navy);
+    margin:8px 0;
+}
+
+.detail-description{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.7;
+    margin:15px 0;
+}
+
+.detail-list{
+    list-style:none;
+    margin:10px 0;
+}
+
+.detail-list li{
+    font-size:11px;
+    color:#667482;
+    margin:8px 0;
+}
+
+.detail-price{
+    font-size:24px;
+    font-weight:800;
+    color:var(--navy);
+}
+
+.detail-mrp{
+    font-size:12px;
+    color:#667482;
+    text-decoration:line-through;
+}
+
+/* Prescription */
+
+.upload-box{
+    border:2px dashed #DCE6ED;
+    background:#F4F8FB;
+    padding:35px;
+    border-radius:15px;
+    text-align:center;
+}
+
+.upload-box input{
+    margin-top:18px;
+}
+
+.upload-note{
+    margin-top:15px;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* ================= PRESCRIPTION CHECKOUT FLOW ================= */
+.prescription-flow-box{
+    width:min(760px,100%);
+    max-height:92vh;
+    overflow:auto;
+    background:white;
+    border-radius:24px;
+    padding:30px;
+    position:relative;
+    box-shadow:0 25px 70px rgba(3,38,63,.22);
+}
+.prescription-progress{display:flex;align-items:center;justify-content:center;margin:4px 40px 28px}
+.progress-step{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#F4F8FB;color:#667482;font-size:12px;font-weight:800;border:2px solid #DCE6ED}
+.progress-step.active{background:var(--teal);color:white;border-color:var(--teal)}
+.progress-step.done{background:var(--navy);color:white;border-color:var(--navy)}
+.progress-line{height:2px;background:#DCE6ED;flex:1;max-width:110px}
+.prescription-step{display:none}.prescription-step.active{display:block}
+.rx-step-label{color:var(--teal);font-size:12px;font-weight:800;letter-spacing:.7px;margin-bottom:7px}
+.prescription-step h2{color:var(--navy);font-size:29px;margin-bottom:7px}.rx-subtitle{color:var(--muted);font-size:14px;margin-bottom:20px;line-height:1.6}
+.rx-upload-card{border:2px dashed #DCE6ED;background:#F4F8FB;border-radius:16px;padding:28px;text-align:center}.rx-upload-icon{font-size:42px}.rx-upload-card h3{color:var(--navy);margin:9px 0 5px;font-size:18px}.rx-upload-card p{font-size:13px;color:var(--muted)}
+.rx-upload-card input{display:none}.rx-upload-btn{display:inline-block;margin-top:15px;background:var(--blue);color:white;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer}.rx-file-name{margin-top:12px;font-size:13px;color:var(--teal);font-weight:700}
+.rx-info-box{background:#F4F8FB;border-radius:13px;padding:16px;margin:18px 0;color:#667482;font-size:13px;line-height:1.65}.rx-info-box strong{color:var(--navy)}.rx-info-box ul{margin:7px 0 0 17px}
+.rx-address-search{display:flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:10px;padding:0 12px;background:#F4F8FB}.rx-address-search input{border:0;outline:0;background:transparent;width:100%;height:48px;font-size:14px}.rx-or{text-align:center;color:var(--muted);font-size:12px;margin:12px 0}
+.rx-form-grid{display:grid;grid-template-columns:1fr;gap:13px}.rx-form-grid.two{grid-template-columns:1fr 1fr}.rx-field.full{grid-column:1/-1}.rx-field label{display:block;color:var(--navy);font-size:13px;font-weight:700;margin-bottom:6px}.rx-field label span{color:var(--muted);font-weight:500}.rx-field input,.rx-field select{width:100%;height:48px;border:1px solid var(--border);border-radius:9px;padding:0 12px;background:white;color:var(--text);outline:none;font-size:14px}.rx-field input:focus,.rx-field select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,168,120,.10)}
+.rx-location-btn{width:100%;height:48px;border:1px solid #DCE6ED;background:#F4F8FB;color:var(--teal);border-radius:10px;font-size:14px;font-weight:800}.rx-address-type{display:flex;gap:8px;margin:16px 0;flex-wrap:wrap}.address-type{border:1px solid var(--border);background:white;color:#667482;border-radius:22px;padding:10px 16px;font-size:13px;font-weight:700}.address-type.active{border-color:var(--blue);background:var(--mint);color:var(--teal)}
+.rx-section-title{font-size:17px;color:var(--navy);margin:20px 0 12px}.rx-help{font-size:12px;color:var(--muted);margin-top:7px}.rx-actions{display:flex;justify-content:space-between;gap:10px;margin-top:24px}.rx-back-btn{border:1px solid var(--border);background:white;color:var(--navy);padding:12px 18px;border-radius:10px;font-size:14px;font-weight:800}.rx-actions .primary-btn{margin:0}.rx-patient-choice{display:flex;gap:10px;margin-bottom:14px}.patient-option{flex:1;border:1px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;color:var(--navy);font-size:14px;font-weight:700}.patient-option.active{border-color:var(--blue);background:var(--mint)}.patient-option input{accent-color:var(--teal)}.rx-checkbox{display:flex;gap:8px;align-items:center;background:var(--soft);border-radius:10px;padding:13px;font-size:13px;color:#667482;margin-bottom:17px}.rx-checkbox input{accent-color:var(--teal)}.rx-your-details{margin-top:20px;padding-top:18px;border-top:1px solid #F4F8FB}.rx-your-details h3{font-size:17px;color:var(--navy);margin-bottom:12px}
+.rx-delivery-date{background:#F4F8FB;color:#0AA878;border-radius:11px;padding:14px;font-size:14px;margin-bottom:14px}.rx-benefit{background:#F4F8FB;border-radius:12px;padding:16px;margin-bottom:14px;color:var(--navy);font-size:13px}.rx-benefit>div{display:flex;gap:10px;margin-top:10px;color:#667482;line-height:1.5}.rx-summary-card{border:1px solid var(--border);border-radius:13px;padding:15px;margin-top:12px}.rx-summary-row{display:flex;justify-content:space-between;gap:15px;padding:8px 0;font-size:13px;color:#667482;border-bottom:1px solid #F4F8FB}.rx-summary-row:last-child{border-bottom:0}.rx-summary-row strong{color:var(--navy)}.rx-summary-row small{font-weight:500;color:var(--muted)}.rx-summary-title{display:flex;justify-content:space-between;color:var(--navy);font-size:12px;font-weight:800;margin-bottom:8px}.rx-summary-title button{border:0;background:transparent;color:var(--teal);font-size:10px;font-weight:800}.rx-summary-card>strong{font-size:14px;color:var(--navy)}.rx-summary-card>p{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5}.rx-payment{margin-top:16px}.rx-payment h3{font-size:16px;color:var(--navy);margin-bottom:10px}.rx-payment label{display:block;border:1px solid var(--border);border-radius:10px;padding:13px;margin:8px 0;font-size:14px;color:#667482}.rx-payment input{accent-color:var(--teal);margin-right:7px}.rx-payment span{float:right;color:var(--orange);font-size:9px;font-weight:800}.rx-confirm-btn{width:100%;margin-top:18px}.rx-demo-note{text-align:center;color:var(--muted);font-size:11px;margin-top:10px}.rx-success-icon{width:70px;height:70px;border-radius:50%;background:var(--mint);color:var(--teal);display:grid;place-items:center;font-size:38px;font-weight:800;margin:15px auto}.rxStepSuccess{}.rx-order-number{text-align:center;background:#F4F8FB;padding:14px;border-radius:10px;color:#667482;font-size:13px;margin:15px 0}.rx-order-number strong{color:var(--navy)}.rx-success-card{background:#F4F8FB;border-radius:12px;padding:16px;color:#0AA878;font-size:13px;line-height:1.6;margin-bottom:15px}.rx-success-card span{color:#667482}.rx-success-card strong{color:var(--navy)}
+@media(max-width:600px){.prescription-flow-box{padding:22px 16px;border-radius:18px}.prescription-progress{margin-left:10px;margin-right:10px}.rx-form-grid.two{grid-template-columns:1fr}.rx-field.full{grid-column:auto}.rx-actions{flex-direction:column-reverse}.rx-actions button{width:100%}}
+
+/* Toast */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:var(--navy);
+    color:white;
+    padding:13px 18px;
+    border-radius:10px;
+    z-index:5000;
+    font-size:12px;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#062B49;
+    color:white;
+    margin-top:60px;
+}
+
+.footer-main{
+    max-width:1450px;
+    margin:auto;
+    padding:45px 4%;
+    display:grid;
+    grid-template-columns:1.5fr repeat(4,1fr);
+    gap:30px;
+}
+
+.footer-brand p{
+    color:#DCE6ED;
+    font-size:11px;
+    line-height:1.7;
+    margin-top:12px;
+    max-width:280px;
+}
+
+.footer-col h4{
+    font-size:12px;
+    margin-bottom:14px;
+}
+
+.footer-col a{
+    display:block;
+    color:#DCE6ED;
+    font-size:11px;
+    margin:9px 0;
+    cursor:pointer;
+}
+
+.footer-col a:hover{
+    color:#0AA878;
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.1);
+    padding:17px 4%;
+    text-align:center;
+    color:#DCE6ED;
+    font-size:10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1200px){
+
+    .location-box{
+        min-width:165px;
+    }
+
+    .product-grid{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .article-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .footer-main{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:1000px){
+
+    .location-box{
+        order:4;
+        flex:1;
+        min-width:180px;
+    }
+
+    .navbar{
+        flex-wrap:wrap;
+    }
+
+    .search-box{
+        order:3;
+        flex-basis:100%;
+    }
+}
+
+@media(max-width:800px){
+
+    .top-strip{
+        display:none;
+    }
+
+    .navbar{
+        flex-wrap:wrap;
+        gap:10px;
+    }
+
+    .logo{
+        min-width:auto;
+    }
+
+    .search-box{
+        order:3;
+        flex-basis:100%;
+    }
+
+    .location-box{
+        order:4;
+        flex:1;
+    }
+
+    .nav-btn{
+        display:none;
+    }
+
+    .hero{
+        margin-top:15px;
+    }
+
+    .hero-slider{
+        height:470px;
+        min-height:470px;
+        border-radius:22px;
+    }
+
+    .hero-slide-content{
+        padding:30px 25px 55px;
+        justify-content:center;
+    }
+
+    .hero-slide-content h1{
+        font-size:31px;
+    }
+
+    .hero-slide-content p{
+        font-size:13px;
+    }
+
+    .hero-arrow{
+        width:38px;
+        height:38px;
+        font-size:20px;
+    }
+
+    .hero-prev{
+        left:12px;
+    }
+
+    .hero-next{
+        right:12px;
+    }
+
+    .service-strip{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .category-promos{
+        grid-template-columns:1fr;
+    }
+
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .package-wrap{
+        grid-template-columns:1fr;
+    }
+
+    .shop-area{
+        grid-template-columns:1fr;
+    }
+
+    .filters{
+        position:static;
+    }
+
+    .homeopathy-image{
+        display:none;
+    }
+
+    .product-detail{
+        grid-template-columns:1fr;
+    }
+
+    .footer-main{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:500px){
+
+    .navbar{
+        padding:10px 3%;
+    }
+
+    .logo-icon{
+        width:42px;
+        height:42px;
+        font-size:21px;
+    }
+
+    .logo-text strong{
+        font-size:17px;
+    }
+
+    .location-box{
+        width:100%;
+        min-width:100%;
+    }
+
+    .location-panel{
+        left:0;
+        right:auto;
+        width:100%;
+    }
+
+    .hero{
+        padding:0 3%;
+    }
+
+    .hero-slider{
+        height:480px;
+        min-height:480px;
+    }
+
+    .hero-slide-content{
+        padding:25px 22px 55px;
+    }
+
+    .hero-slide-content h1{
+        font-size:28px;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+    }
+
+    .hero-actions button{
+        width:100%;
+    }
+
+    .service-strip{
+        grid-template-columns:1fr;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .product-image{
+        height:150px;
+    }
+
+    .product-info{
+        padding:10px;
+    }
+
+    .product-name{
+        font-size:11px;
+    }
+
+    .price{
+        font-size:14px;
+    }
+
+    .article-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer-main{
+        grid-template-columns:1fr;
+    }
+}
+
+/* ================= SWASTHYAMITRA AI BRAND THEME ================= */
+:root{
+    --navy:#062B49;
+    --navy2:#062B49;
+    --blue:#0877C9;
+    --teal:#0AA878;
+    --green:#0AA878;
+    --mint:#F4F8FB;
+    --sky:#F4F8FB;
+    --soft:#F4F8FB;
+    --white:#FFFFFF;
+    --text:#062B49;
+    --muted:#667482;
+    --border:#DCE6ED;
+    --danger:#0AA878;
+    --orange:#0AA878;
+}
+body{background:#F4F8FB;color:#062B49;}
+header{background:#FFFFFF;}
+.top-strip{background:#062B49;}
+footer,.footer-main,.footer-bottom{background:#062B49;}
+input,select,textarea{background:#FFFFFF;color:#062B49;border-color:#DCE6ED;}
+input:focus,select:focus,textarea:focus{border-color:#0877C9;box-shadow:0 0 0 3px rgba(8,119,201,.12);}
+.primary-btn,.search-btn,.hero-btn{background:#0877C9;border-color:#0877C9;}
+.primary-btn:hover,.search-btn:hover,.hero-btn:hover{background:#062B49;}
+.success,.discount,.health-highlight{color:#0AA878;}
+.section,.shop-area,.content-section{background:#F4F8FB;}
+.card,.service-card,.article-card,.product-card,.filters,.modal-box,.location-panel,.cart-panel,.package-card,.info-card,.health-card,.stat-card{background:#FFFFFF;border-color:#DCE6ED;}
+.logo-icon{background:linear-gradient(135deg,#0AA878,#0877C9);}
+.logo-text strong,.section-heading h2,.modal-title{color:#062B49;}
+.logo-text span,.location-change,.article-link,.link{color:#0877C9;}
+.location-pin{background:#F4F8FB;}
+.muted,.secondary-text,.subtitle,.section-heading p{color:#667482;}
+.category-nav button:hover,.category-nav button.active{color:#0877C9;border-color:#0877C9;}
+.progress-bar,.progress-fill{background:#0AA878;}
+.badge,.tag{background:#F4F8FB;border-color:#DCE6ED;color:#062B49;}
+</style>
+
+<style id="swasthyamitra-final-palette">
+/* SWASTHYAMITRA AI — GLOBAL BRAND PALETTE */
+:root{
+  --navy:#062B49 !important;
+  --navy2:#062B49 !important;
+  --blue:#0877C9 !important;
+  --teal:#0AA878 !important;
+  --green:#0AA878 !important;
+  --soft:#F4F8FB !important;
+  --white:#FFFFFF !important;
+  --text:#062B49 !important;
+  --muted:#667482 !important;
+  --border:#DCE6ED !important;
+}
+html,body{background:#F4F8FB !important;color:#062B49 !important;}
+header,.navbar,.category-nav{background:#FFFFFF !important;}
+.card,.service-card,.article-card,.product-card,.filters,.modal-box,.location-panel,.cart-panel,.package-card,.info-card,.health-card,.stat-card,.prescription-flow-box{background:#FFFFFF !important;border-color:#DCE6ED !important;}
+a,.link,.article-link,.location-change{color:#0877C9 !important;}
+.category-nav button{color:#667482 !important;background:#FFFFFF !important;border-bottom-color:transparent !important;}
+.category-nav button:hover,.category-nav button.active{color:#0877C9 !important;border-bottom-color:#0877C9 !important;}
+.primary-btn,.search-btn,.hero-btn,.detect-location-btn,.rx-upload-btn{background:#0877C9 !important;border-color:#0877C9 !important;color:#FFFFFF !important;}
+.primary-btn:hover,.search-btn:hover,.hero-btn:hover,.detect-location-btn:hover{background:#062B49 !important;border-color:#062B49 !important;}
+.secondary-btn,.outline-btn{background:#FFFFFF !important;color:#0877C9 !important;border-color:#DCE6ED !important;}
+input,select,textarea{background:#FFFFFF !important;color:#062B49 !important;border-color:#DCE6ED !important;}
+input:focus,select:focus,textarea:focus{border-color:#0877C9 !important;box-shadow:0 0 0 3px rgba(8,119,201,.12) !important;}
+.success,.discount,.health-highlight,.progress-fill,.progress-bar{color:#0AA878 !important;}
+.badge,.tag{background:#F4F8FB !important;border-color:#DCE6ED !important;color:#062B49 !important;}
+footer,.footer-main,.footer-bottom,.top-strip{background:#062B49 !important;color:#FFFFFF !important;}
+.section,.shop-area,.content-section{background:#F4F8FB !important;}
+.muted,.secondary-text,.subtitle,.section-heading p{color:#667482 !important;}
+.logo-icon{background:linear-gradient(135deg,#0AA878,#0877C9) !important;}
+</style>
+</head>
+
+<body>
+
+<div class="top-strip">
+    <span>🩺 SwasthyaMitra AI — Smart Healthcare Shopping</span>
+    <span>Secure • Simple • Health-focused</span>
+</div>
+
+<header>
+
+<nav class="navbar">
+
+    <a href="#home" class="logo">
+        <div class="logo-icon">✚</div>
+        <div class="logo-text">
+            <strong>SwasthyaMitra</strong>
+            <span>AI HEALTH PARTNER</span>
+        </div>
+    </a>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="globalSearch"
+            placeholder="Search medicines, vitamins, devices, personal care..."
+            oninput="globalSearch()"
+        >
+        <span class="search-icon">⌕</span>
+    </div>
+
+    <!-- LOCATION COMPONENT -->
+    <div class="location-box">
+
+        <div class="location-main" onclick="toggleLocationPanel()">
+
+            <div class="location-pin">📍</div>
+
+            <div class="location-text">
+                <span class="location-label">Deliver to</span>
+                <span
+                    class="location-value"
+                    id="locationValue">
+                    Detect your location
+                </span>
+            </div>
+
+            <button
+                class="location-change"
+                id="locationChangeBtn"
+                onclick="event.stopPropagation();openLocationPanel()">
+                Detect
+            </button>
+
+        </div>
+
+        <div
+            class="location-panel"
+            id="locationPanel">
+
+            <h4>📍 Your delivery location</h4>
+
+            <p>
+                Allow your browser to access your location
+                so we can show your city and state.
+                Your coordinates are not stored.
+            </p>
+
+            <button
+                class="detect-location-btn"
+                id="detectLocationBtn"
+                onclick="detectLocation()">
+                Detect Location
+            </button>
+
+            <div
+                class="location-status"
+                id="locationStatus">
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="nav-actions">
+
+        <button class="nav-btn" onclick="openPrescription()">
+            📄 Prescription
+        </button>
+
+        <button class="icon-btn" onclick="showWishlist()" title="Wishlist">
+            ♡
+            <span class="count" id="wishlistCount">0</span>
+        </button>
+
+        <button class="icon-btn" onclick="openCart()" title="Cart">
+            🛒
+            <span class="count" id="cartCount">0</span>
+        </button>
+
+        <button
+    class="secondary-btn"
+    onclick="openOrders()">
+    📦 My Orders
+</button>
+
+<button
+    class="secondary-btn"
+    onclick="openAdminOrders()">
+    🛠️ Admin Orders
+</button>
+
+<button
+    class="secondary-btn"
+    onclick="openAdminDashboard()">
+    📊 Dashboard
+</button>
+
+
+    </div>
+
+</nav>
+
+<div class="category-nav">
+
+    <div class="category-nav-inner">
+
+        <button class="active" onclick="goHome()">Home</button>
+
+        <button onclick="selectCategory('Health Conditions')">
+            Health Conditions
+        </button>
+
+        <button onclick="selectCategory('Personal Care')">
+            Personal Care
+        </button>
+
+        <button onclick="selectCategory('Vitamins & Supplements')">
+            Vitamins & Supplements
+        </button>
+
+        <button onclick="selectCategory('Diabetes Care')">
+            Diabetes Care
+        </button>
+
+        <button onclick="selectCategory('Healthcare Devices')">
+            Healthcare Devices
+        </button>
+
+        <button onclick="selectCategory('Homeopathic Medicine')">
+            Homeopathy
+        </button>
+
+    </div>
+
+</div>
+
+</header>
+
+<main id="home">
+
+<!-- =========================================================
+     HERO IMAGE SLIDER
+========================================================= -->
+
+<section class="hero">
+
+    <div
+        class="hero-slider"
+        id="heroSlider"
+        onmouseenter="pauseHeroSlider()"
+        onmouseleave="resumeHeroSlider()">
+
+        <!-- SLIDE 1 -->
+        <div class="hero-slide active">
+
+            <img
+                class="hero-slide-image"
+                src="https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=1600&q=85"
+                alt="Online pharmacy medicines">
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <div class="hero-badge">
+                    💊 ONLINE PHARMACY
+                </div>
+
+                <h1>
+                    Your Health,
+                    <span>Delivered Simply.</span>
+                </h1>
+
+                <p>
+                    Explore medicines, everyday healthcare essentials,
+                    personal care products and wellness products
+                    through the SwasthyaMitra AI healthcare marketplace.
+                </p>
+
+                <div class="hero-actions">
+
+                    <button
+                        class="primary-btn"
+                        onclick="selectCategory('Health Conditions')">
+                        Explore Medicines
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="openShop()">
+                        Shop Healthcare
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="hero-slide">
+
+            <img
+                class="hero-slide-image"
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1600&q=85"
+                alt="Doctor and patient healthcare">
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <div class="hero-badge">
+                    🩺 HEALTHCARE SUPPORT
+                </div>
+
+                <h1>
+                    Healthcare Made
+                    <span>More Accessible.</span>
+                </h1>
+
+                <p>
+                    Discover health-focused products and resources
+                    designed to make everyday healthcare shopping
+                    easier and more convenient.
+                </p>
+
+                <div class="hero-actions">
+
+                    <button
+                        class="primary-btn"
+                        onclick="openShop()">
+                        Explore Healthcare
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="openPrescription()">
+                        Upload Prescription
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="hero-slide">
+
+            <img
+                class="hero-slide-image"
+                src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1600&q=85"
+                alt="Laboratory diagnostics">
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <div class="hero-badge">
+                    🧪 DIAGNOSTICS
+                </div>
+
+                <h1>
+                    Understand Your Health
+                    <span>Better.</span>
+                </h1>
+
+                <p>
+                    Explore preventive health-check packages and
+                    diagnostic information designed for this
+                    healthcare marketplace project.
+                </p>
+
+                <div class="hero-actions">
+
+                    <button
+                        class="primary-btn"
+                        onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})">
+                        Book Lab Tests
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'})">
+                        View Packages
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="hero-slide">
+
+            <img
+                class="hero-slide-image"
+                src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1600&q=85"
+                alt="Vitamins and supplements">
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <div class="hero-badge">
+                    🌿 VITAMINS & WELLNESS
+                </div>
+
+                <h1>
+                    Everyday Wellness,
+                    <span>Made Simple.</span>
+                </h1>
+
+                <p>
+                    Browse vitamins, minerals, supplements and
+                    everyday wellness essentials in one convenient
+                    healthcare catalogue.
+                </p>
+
+                <div class="hero-actions">
+
+                    <button
+                        class="primary-btn"
+                        onclick="selectCategory('Vitamins & Supplements')">
+                        Shop Wellness
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="openShop()">
+                        View Products
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SLIDE 5 -->
+        <div class="hero-slide">
+
+            <img
+                class="hero-slide-image"
+                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=85"
+                alt="Diabetes care">
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <div class="hero-badge">
+                    🩸 DIABETES CARE
+                </div>
+
+                <h1>
+                    Smarter Everyday
+                    <span>Diabetes Care.</span>
+                </h1>
+
+                <p>
+                    Find glucose monitoring products, testing
+                    accessories, nutrition products and other
+                    diabetes-care essentials.
+                </p>
+
+                <div class="hero-actions">
+
+                    <button
+                        class="primary-btn"
+                        onclick="selectCategory('Diabetes Care')">
+                        Explore Diabetes Care
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="openShop()">
+                        View Products
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SLIDE 6 -->
+        <div class="hero-slide">
+
+            <img
+                class="hero-slide-image"
+                src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1600&q=85"
+                alt="Healthcare devices">
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <div class="hero-badge">
+                    🩺 HEALTHCARE DEVICES
+                </div>
+
+                <h1>
+                    Healthcare Devices
+                    <span>For Everyday Needs.</span>
+                </h1>
+
+                <p>
+                    Browse blood pressure monitors, thermometers,
+                    nebulizers, pulse oximeters, supports and
+                    home healthcare equipment.
+                </p>
+
+                <div class="hero-actions">
+
+                    <button
+                        class="primary-btn"
+                        onclick="selectCategory('Healthcare Devices')">
+                        Shop Devices
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="openShop()">
+                        Explore Store
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SLIDE 7 -->
+        <div class="hero-slide">
+
+            <img
+                class="hero-slide-image"
+                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=85"
+                alt="Wellness and natural care">
+
+            <div class="hero-slide-overlay"></div>
+
+            <div class="hero-slide-content">
+
+                <div class="hero-badge">
+                    🌿 HOMEOPATHY & WELLNESS
+                </div>
+
+                <h1>
+                    Natural Care &
+                    <span>Wellness.</span>
+                </h1>
+
+                <p>
+                    Explore the dedicated homeopathy and wellness
+                    collection available in the SwasthyaMitra AI
+                    healthcare marketplace demo.
+                </p>
+
+                <div class="hero-actions">
+
+                    <button
+                        class="primary-btn"
+                        onclick="selectCategory('Homeopathic Medicine')">
+                        Explore Homeopathy
+                    </button>
+
+                    <button
+                        class="secondary-btn"
+                        onclick="openShop()">
+                        View Collection
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button
+            class="hero-arrow hero-prev"
+            onclick="previousHeroSlide()"
+            aria-label="Previous slide">
+            ‹
+        </button>
+
+        <button
+            class="hero-arrow hero-next"
+            onclick="nextHeroSlide()"
+            aria-label="Next slide">
+            ›
+        </button>
+
+        <div class="hero-dots" id="heroDots">
+
+            <button
+                class="hero-dot active"
+                onclick="goToHeroSlide(0)">
+            </button>
+
+            <button
+                class="hero-dot"
+                onclick="goToHeroSlide(1)">
+            </button>
+
+            <button
+                class="hero-dot"
+                onclick="goToHeroSlide(2)">
+            </button>
+
+            <button
+                class="hero-dot"
+                onclick="goToHeroSlide(3)">
+            </button>
+
+            <button
+                class="hero-dot"
+                onclick="goToHeroSlide(4)">
+            </button>
+
+            <button
+                class="hero-dot"
+                onclick="goToHeroSlide(5)">
+            </button>
+
+            <button
+                class="hero-dot"
+                onclick="goToHeroSlide(6)">
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= SERVICES ================= -->
+
+<section class="service-strip">
+
+    <div class="service-card">
+        <div class="service-icon">🚚</div>
+        <div>
+            <strong>Fast Delivery</strong>
+            <span>Healthcare essentials at your doorstep</span>
+        </div>
+    </div>
+
+    <div class="service-card">
+        <div class="service-icon">🔒</div>
+        <div>
+            <strong>Secure Shopping</strong>
+            <span>Simple and protected checkout demo</span>
+        </div>
+    </div>
+
+    <div class="service-card">
+        <div class="service-icon">💊</div>
+        <div>
+            <strong>Wide Selection</strong>
+            <span>Products across multiple health categories</span>
+        </div>
+    </div>
+
+    <div class="service-card">
+        <div class="service-icon">🧠</div>
+        <div>
+            <strong>AI Health Experience</strong>
+            <span>Smart and easy product discovery</span>
+        </div>
+    </div>
+
+</section>
+
+<div class="container">
+
+<!-- ================= PROMO CARDS ================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>Explore Health Essentials</h2>
+            <p>Curated collections for everyday healthcare needs</p>
+        </div>
+    </div>
+
+    <div class="category-promos">
+
+        <div class="promo-card">
+
+            <h3>Daily Wellness</h3>
+
+            <p>
+                Vitamins, minerals, supplements and everyday
+                wellness essentials.
+            </p>
+
+            <button onclick="selectCategory('Vitamins & Supplements')">
+                View Wellness
+            </button>
+
+            <img
+                class="promo-image"
+                src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=500&q=80"
+                alt="Healthcare wellness products"
+            >
+
+        </div>
+
+        <div class="promo-card">
+
+            <h3>Diabetes Care</h3>
+
+            <p>
+                Glucose monitoring products, strips and
+                everyday diabetes-care essentials.
+            </p>
+
+            <button onclick="selectCategory('Diabetes Care')">
+                Shop Diabetes Care
+            </button>
+
+            <img
+                class="promo-image"
+                src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=500&q=80"
+                alt="Diabetes care"
+            >
+
+        </div>
+
+        <div class="promo-card">
+
+            <h3>Healthcare Devices</h3>
+
+            <p>
+                BP monitors, thermometers, nebulizers,
+                supports and home healthcare equipment.
+            </p>
+
+            <button onclick="selectCategory('Healthcare Devices')">
+                View Devices
+            </button>
+
+            <img
+                class="promo-image"
+                src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=500&q=80"
+                alt="Healthcare devices"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= NEW ARRIVALS ================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>New Arrivals</h2>
+            <p>Fresh additions to the SwasthyaMitra catalogue</p>
+        </div>
+
+        <button class="view-all" onclick="openShop()">
+            View All →
+        </button>
+
+    </div>
+
+    <div class="product-grid" id="newArrivals"></div>
+
+</section>
+
+<!-- ================= BEST SELLERS ================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>Best Sellers</h2>
+            <p>Popular healthcare essentials</p>
+        </div>
+
+        <button class="view-all" onclick="openShop()">
+            View All →
+        </button>
+
+    </div>
+
+    <div class="product-grid" id="bestSellers"></div>
+
+</section>
+
+<!-- ================= HOMEOPATHY ================= -->
+
+<section class="section">
+
+    <div class="homeopathy-banner">
+
+        <div class="homeopathy-content">
+
+            <div class="homeopathy-tag">
+                🌿 HOMEOPATHY COLLECTION
+            </div>
+
+            <h2>Homeopathy & Natural Care</h2>
+
+            <p>
+                Discover the dedicated Homeopathic Medicine
+                collection in your healthcare marketplace.
+                Browse skin care, digestive care, hair care
+                and general wellness products.
+            </p>
+
+            <button
+                class="secondary-btn"
+                style="margin-top:20px"
+                onclick="selectCategory('Homeopathic Medicine')">
+                Explore Homeopathy
+            </button>
+
+        </div>
+
+        <img
+            class="homeopathy-image"
+            src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=700&q=80"
+            alt="Homeopathic medicine bottles"
+        >
+
+    </div>
+
+</section>
+
+<!-- ================= TRENDING ================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>Trending Now</h2>
+            <p>Popular picks across different healthcare categories</p>
+        </div>
+
+    </div>
+
+    <div class="product-grid" id="trendingProducts"></div>
+
+</section>
+
+<!-- ================= TOP PACKAGES ================= -->
+
+<section class="section" id="packages">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>Top Packages</h2>
+            <p>Preventive health-check packages — sample data for project demonstration</p>
+        </div>
+
+        <span class="view-all">View All →</span>
+
+    </div>
+
+    <div class="package-wrap">
+
+        <div class="package-card">
+
+            <span class="demo-label">DEMO PACKAGE</span>
+
+            <div class="package-top">
+
+                <div>
+                    <h3>83 TESTS</h3>
+                    <div class="tests">Preventive Plus</div>
+                </div>
+
+                <div class="rating">
+                    ★ 4.83
+                </div>
+
+            </div>
+
+            <div class="package-meta">
+                <span>👥 12k+ sample bookings</span>
+                <span>🚚 Free collection</span>
+                <span>⏱ 15 hr</span>
+                <span>🧪 83 tests</span>
+                <span>📋 8 profiles</span>
+            </div>
+
+            <div class="chips">
+                <span class="chip">CBC</span>
+                <span class="chip">LFT</span>
+                <span class="chip">Urine Routine</span>
+                <span class="chip">KFT</span>
+                <span class="chip">Lipid Profile</span>
+                <span class="chip">Thyroid Profile</span>
+                <span class="chip">Blood Glucose</span>
+                <span class="chip">Vitamin B12</span>
+                <span class="chip">Vitamin D</span>
+            </div>
+
+            <div class="package-desc">
+                Comprehensive preventive screening package
+                covering commonly used health profiles.
+            </div>
+
+            <div class="package-bottom">
+
+                <div class="package-price">
+                    <strong>₹999</strong>
+                    <span>₹2,498</span>
+                    <div class="saved">
+                        Saved with project coupon code
+                    </div>
+                </div>
+
+                <button class="book-btn" onclick="bookPackage('Preventive Plus')">
+                    Book
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="package-card">
+
+            <span class="demo-label">DEMO PACKAGE</span>
+
+            <div class="package-top">
+
+                <div>
+                    <h3>85 TESTS</h3>
+                    <div class="tests">Active Life</div>
+                </div>
+
+                <div class="rating">
+                    ★ 4.92
+                </div>
+
+            </div>
+
+            <div class="package-meta">
+                <span>👥 8k+ sample bookings</span>
+                <span>🚚 Free collection</span>
+                <span>⏱ 15 hr</span>
+                <span>🧪 85 tests</span>
+                <span>📋 8 profiles</span>
+            </div>
+
+            <div class="package-desc">
+
+                <strong>Everything in Preventive Plus</strong>
+
+                <br><br>
+
+                All 83 tests and 8 profiles +
+
+                <br><br>
+
+                <b>2 additional tests</b>
+
+                <br>
+
+                • DIABETES HbA1c<br>
+                • Average Blood Glucose
+
+            </div>
+
+            <div class="package-bottom">
+
+                <div class="package-price">
+                    <strong>₹1,299</strong>
+                    <span>₹2,899</span>
+                    <div class="saved">
+                        Sample coupon savings
+                    </div>
+                </div>
+
+                <button class="book-btn" onclick="bookPackage('Active Life')">
+                    Book
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= ARTICLES ================= -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>Health Resources</h2>
+            <p>Read trusted health information from WHO and CDC</p>
+        </div>
+
+    </div>
+
+    <div class="article-grid">
+
+        <article class="article-card">
+
+            <div class="article-image">
+                <img
+                    src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=700&q=80"
+                    alt="Healthcare"
+                >
+            </div>
+
+            <div class="article-body">
+
+                <span class="source">WHO</span>
+
+                <h3>Diabetes</h3>
+
+                <p>
+                    Learn about diabetes, prevention,
+                    symptoms and healthy lifestyle practices.
+                </p>
+
+                <a
+                    class="article-link"
+                    href="https://www.who.int/news-room/fact-sheets/detail/diabetes"
+                    target="_blank">
+                    Read WHO Article →
+                </a>
+
+            </div>
+
+        </article>
+
+        <article class="article-card">
+
+            <div class="article-image">
+                <img
+                    src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=700&q=80"
+                    alt="Healthy food"
+                >
+            </div>
+
+            <div class="article-body">
+
+                <span class="source">WHO</span>
+
+                <h3>Healthy Diet</h3>
+
+                <p>
+                    Explore general information about healthy
+                    eating and balanced dietary choices.
+                </p>
+
+                <a
+                    class="article-link"
+                    href="https://www.who.int/health-topics/healthy-diet"
+                    target="_blank">
+                    Read WHO Article →
+                </a>
+
+            </div>
+
+        </article>
+
+        <article class="article-card">
+
+            <div class="article-image">
+                <img
+                    src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=700&q=80"
+                    alt="Physical activity"
+                >
+            </div>
+
+            <div class="article-body">
+
+                <span class="source">WHO</span>
+
+                <h3>Physical Activity</h3>
+
+                <p>
+                    Understand the importance of regular
+                    physical activity for overall health.
+                </p>
+
+                <a
+                    class="article-link"
+                    href="https://www.who.int/health-topics/physical-activity"
+                    target="_blank">
+                    Read WHO Article →
+                </a>
+
+            </div>
+
+        </article>
+
+        <article class="article-card">
+
+            <div class="article-image">
+                <img
+                    src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=700&q=80"
+                    alt="Diabetes care"
+                >
+            </div>
+
+            <div class="article-body">
+
+                <span class="source">CDC</span>
+
+                <h3>Living With Diabetes</h3>
+
+                <p>
+                    Explore CDC resources covering everyday
+                    diabetes management and healthy living.
+                </p>
+
+                <a
+                    class="article-link"
+                    href="https://www.cdc.gov/diabetes/living-with/index.html"
+                    target="_blank">
+                    Read CDC Article →
+                </a>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- ================= SHOP ================= -->
+
+<section class="section" id="shop">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>Healthcare Store</h2>
+            <p>Browse the complete SwasthyaMitra catalogue</p>
+        </div>
+
+    </div>
+
+    <div class="shop-area">
+
+        <aside class="filters">
+
+            <div class="filter-title">
+
+                <h3>Filters</h3>
+
+                <button class="clear-btn" onclick="clearFilters()">
+                    Clear
+                </button>
+
+            </div>
+
+            <div class="filter-group">
+
+                <h4>Category</h4>
+
+                <label class="radio-row">
+                    <input type="radio" name="category" value="All" checked onchange="applyFilters()">
+                    All Categories
+                </label>
+
+                <label class="radio-row">
+                    <input type="radio" name="category" value="Health Conditions" onchange="applyFilters()">
+                    Health Conditions
+                </label>
+
+                <label class="radio-row">
+                    <input type="radio" name="category" value="Personal Care" onchange="applyFilters()">
+                    Personal Care
+                </label>
+
+                <label class="radio-row">
+                    <input type="radio" name="category" value="Vitamins & Supplements" onchange="applyFilters()">
+                    Vitamins & Supplements
+                </label>
+
+                <label class="radio-row">
+                    <input type="radio" name="category" value="Diabetes Care" onchange="applyFilters()">
+                    Diabetes Care
+                </label>
+
+                <label class="radio-row">
+                    <input type="radio" name="category" value="Healthcare Devices" onchange="applyFilters()">
+                    Healthcare Devices
+                </label>
+
+                <label class="radio-row">
+                    <input type="radio" name="category" value="Homeopathic Medicine" onchange="applyFilters()">
+                    Homeopathic Medicine
+                </label>
+
+            </div>
+
+            <div class="filter-group">
+
+                <h4>Subcategory</h4>
+
+                <select
+                    class="subcategory-select"
+                    id="subcategory"
+                    onchange="applyFilters()">
+                </select>
+
+            </div>
+
+            <div class="filter-group">
+
+                <h4>Brand</h4>
+
+                <div class="brand-list" id="brandFilters"></div>
+
+            </div>
+
+        </aside>
+
+        <div>
+
+            <div class="shop-top">
+
+                <span class="results-count" id="resultsCount">
+                    Showing products
+                </span>
+
+                <select
+                    class="sort-select"
+                    id="sortSelect"
+                    onchange="applyFilters()">
+
+                    <option value="default">Sort: Recommended</option>
+                    <option value="low">Price: Low to High</option>
+                    <option value="high">Price: High to Low</option>
+                    <option value="name">Name: A to Z</option>
+
+                </select>
+
+            </div>
+
+            <div class="product-grid" id="shopProducts"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <div class="logo">
+
+                <div class="logo-icon">✚</div>
+
+                <div class="logo-text">
+
+                    <strong style="color:white">
+                        SwasthyaMitra
+                    </strong>
+
+                    <span>
+                        AI HEALTH PARTNER
+                    </span>
+
+                </div>
+
+            </div>
+
+            <p>
+                A college-project healthcare ecommerce
+                platform concept designed to make health
+                product discovery simple and accessible.
+            </p>
+
+        </div>
+
+        <div class="footer-col">
+
+            <h4>Healthcare</h4>
+
+            <a onclick="selectCategory('Health Conditions')">
+                Health Conditions
+            </a>
+
+            <a onclick="selectCategory('Diabetes Care')">
+                Diabetes Care
+            </a>
+
+            <a onclick="selectCategory('Healthcare Devices')">
+                Healthcare Devices
+            </a>
+
+            <a onclick="selectCategory('Homeopathic Medicine')">
+                Homeopathy
+            </a>
+
+        </div>
+
+        <div class="footer-col">
+
+            <h4>Wellness</h4>
+
+            <a onclick="selectCategory('Personal Care')">
+                Personal Care
+            </a>
+
+            <a onclick="selectCategory('Vitamins & Supplements')">
+                Vitamins & Supplements
+            </a>
+
+            <a href="#packages">
+                Health Packages
+            </a>
+
+            <a href="#shop">
+                All Products
+            </a>
+
+        </div>
+
+        <div class="footer-col">
+
+            <h4>Health Resources</h4>
+
+            <a href="https://www.who.int/news-room/fact-sheets/detail/diabetes" target="_blank">
+                WHO Diabetes
+            </a>
+
+            <a href="https://www.who.int/health-topics/healthy-diet" target="_blank">
+                WHO Healthy Diet
+            </a>
+
+            <a href="https://www.who.int/health-topics/physical-activity" target="_blank">
+                WHO Physical Activity
+            </a>
+
+            <a href="https://www.cdc.gov/diabetes/living-with/index.html" target="_blank">
+                CDC Diabetes
+            </a>
+
+        </div>
+
+        <div class="footer-col">
+
+            <h4>About</h4>
+
+            <a href="#home">
+                About SwasthyaMitra
+            </a>
+
+            <a href="#shop">
+                Healthcare Store
+            </a>
+
+            <a href="#packages">
+                Diagnostic Packages
+            </a>
+
+            <a onclick="openPrescription()">
+                Prescription Upload
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 SwasthyaMitra AI • College Project Demo •
+        Product and package information shown as sample data
+    </div>
+
+</footer>
+
+<!-- ================= CART MODAL ================= -->
+
+<div class="modal" id="cartModal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('cartModal')">
+            ×
+        </button>
+
+        <h2 class="modal-title">
+            Your Cart
+        </h2>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-summary" id="cartSummary"></div>
+
+    </div>
+
+</div>
+
+<!-- ================= CHECKOUT MODAL ================= -->
+
+<div class="modal" id="checkoutModal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('checkoutModal')">
+            ×
+        </button>
+
+        <h2 class="modal-title">
+            Complete Your Order
+        </h2>
+
+        <p style="margin-bottom:20px;color:#666;">
+            Enter your details to place your order.
+        </p>
+
+        <input
+            type="text"
+            id="checkoutName"
+            placeholder="Full Name"
+            style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #ddd;border-radius:8px;"
+        >
+
+        <input
+            type="tel"
+            id="checkoutPhone"
+            placeholder="Mobile Number"
+            style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #ddd;border-radius:8px;"
+        >
+
+        <textarea
+            id="checkoutAddress"
+            placeholder="Delivery Address"
+            rows="4"
+            style="width:100%;padding:14px;margin-bottom:12px;border:1px solid #ddd;border-radius:8px;resize:vertical;"
+        ></textarea>
+
+        <select
+            id="checkoutPayment"
+            style="width:100%;padding:14px;margin-bottom:18px;border:1px solid #ddd;border-radius:8px;"
+        >
+            <option value="">Select Payment Method</option>
+            <option value="Cash on Delivery">Cash on Delivery</option>
+            <option value="UPI">UPI</option>
+           
+        </select>
+
+        <button
+            onclick="placeOrder()"
+            style="width:100%;padding:15px;border:none;border-radius:8px;background:#0b7a75;color:white;font-size:16px;font-weight:700;cursor:pointer;"
+        >
+            Place Order
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PRODUCT MODAL ================= -->
+
+<div class="modal" id="productModal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('productModal')">
+            ×
+        </button>
+
+        <div class="product-detail" id="productDetail"></div>
+
+    </div>
+
+</div>
+
+<!-- ================= PRESCRIPTION CHECKOUT FLOW ================= -->
+<div class="modal" id="prescriptionModal">
+    <div class="prescription-flow-box">
+
+        <button class="modal-close" onclick="closePrescriptionFlow()">×</button>
+
+        <div class="prescription-progress">
+            <span class="progress-step active" data-step="1">1</span>
+            <span class="progress-line"></span>
+            <span class="progress-step" data-step="2">2</span>
+            <span class="progress-line"></span>
+            <span class="progress-step" data-step="3">3</span>
+            <span class="progress-line"></span>
+            <span class="progress-step" data-step="4">4</span>
+        </div>
+
+        <!-- STEP 1: UPLOAD -->
+        <section class="prescription-step active" id="rxStep1">
+            <div class="rx-step-label">STEP 1 OF 4</div>
+            <h2>Upload your prescription</h2>
+            <p class="rx-subtitle">Upload a valid prescription to start ordering.</p>
+
+            <div class="rx-upload-card">
+                <div class="rx-upload-icon">📄</div>
+                <h3>Upload Prescription</h3>
+                <p>JPG, JPEG, PNG or PDF • Maximum 5 MB</p>
+                <input type="file" id="prescriptionFile" accept=".jpg,.jpeg,.png,.pdf" onchange="prescriptionSelected()">
+                <label for="prescriptionFile" class="rx-upload-btn">Choose Prescription</label>
+                <div id="fileName" class="rx-file-name"></div>
+            </div>
+
+            <div class="rx-info-box">
+                <strong>ⓘ Please keep in mind:</strong>
+                <ul>
+                    <li>Prescription should contain doctor, patient and medicine details.</li>
+                    <li>Supported formats: JPG, JPEG, PNG and PDF.</li>
+                    <li>Make sure the prescription is clear and all doctor, patient and medicine details are visible.</li>
+                </ul>
+            </div>
+
+            <button class="primary-btn rx-next-btn" onclick="goToPrescriptionStep(2)">Proceed →</button>
+        </section>
+
+        <!-- STEP 2: DELIVERY ADDRESS -->
+        <section class="prescription-step" id="rxStep2">
+            <div class="rx-step-label">STEP 2 OF 4</div>
+            <h2>Add delivery address</h2>
+            <p class="rx-subtitle">Where should the prescription order be delivered?</p>
+
+            <div class="rx-address-search">🔍 <input id="rxPincodeSearch" type="text" placeholder="Search by building, area or pincode"></div>
+            <div class="rx-or">OR</div>
+
+            <div class="rx-form-grid">
+                <div class="rx-field full">
+                    <label>Pincode</label>
+                    <input id="rxPincode" type="text" inputmode="numeric" maxlength="6" placeholder="Enter pincode">
+                </div>
+                <div class="rx-field full">
+                    <label>Current Location</label>
+                    <button type="button" class="rx-location-btn" onclick="useCurrentLocationForPrescription()">📍 Use Current Location</button>
+                </div>
+                <div class="rx-field full">
+                    <label>House no / Floor / Building</label>
+                    <input id="rxHouse" type="text" placeholder="House no / Floor / Building">
+                </div>
+                <div class="rx-field full">
+                    <label>Area / Locality</label>
+                    <input id="rxArea" type="text" placeholder="Area / Locality">
+                </div>
+                <div class="rx-field full">
+                    <label>Landmark <span>(Optional)</span></label>
+                    <input id="rxLandmark" type="text" placeholder="Landmark (Optional)">
+                </div>
+            </div>
+
+            <div class="rx-address-type">
+                <button type="button" class="address-type active" onclick="selectAddressType(this)">⌂ Home</button>
+                <button type="button" class="address-type" onclick="selectAddressType(this)">💼 Work</button>
+                <button type="button" class="address-type" onclick="selectAddressType(this)">📍 Other</button>
+            </div>
+
+            <h3 class="rx-section-title">Receiver details</h3>
+            <div class="rx-form-grid two">
+                <div class="rx-field"><label>First name</label><input id="rxReceiverFirst" type="text" placeholder="First name"></div>
+                <div class="rx-field"><label>Last name</label><input id="rxReceiverLast" type="text" placeholder="Last name"></div>
+                <div class="rx-field full"><label>Mobile Number</label><input id="rxMobile" type="tel" maxlength="10" placeholder="10-digit mobile number"></div>
+            </div>
+            <p class="rx-help">We'll share delivery related updates on this number.</p>
+
+            <div class="rx-actions">
+                <button class="rx-back-btn" onclick="goToPrescriptionStep(1)">← Back</button>
+                <button class="primary-btn" onclick="savePrescriptionAddress()">Save & Continue →</button>
+            </div>
+        </section>
+
+        <!-- STEP 3: PATIENT DETAILS -->
+        <section class="prescription-step" id="rxStep3">
+            <div class="rx-step-label">STEP 3 OF 4</div>
+            <h2>Last step! Add patient details</h2>
+            <p class="rx-subtitle">These details will be used for generating invoice and prescriptions.</p>
+
+            <div class="rx-patient-choice">
+                <label class="patient-option active"><input type="radio" name="patientWho" value="me" checked onchange="togglePatientDetails()"> <span>Me</span></label>
+                <label class="patient-option"><input type="radio" name="patientWho" value="someone" onchange="togglePatientDetails()"> <span>Someone else</span></label>
+            </div>
+
+            <label class="rx-checkbox"><input type="checkbox" id="sameReceiver" checked onchange="syncReceiverToPatient()"> Patient name is same as receiver name</label>
+
+            <div class="rx-form-grid two">
+                <div class="rx-field"><label>Patient's first name</label><input id="rxPatientFirst" type="text" placeholder="Patient's first name"></div>
+                <div class="rx-field"><label>Patient's last name</label><input id="rxPatientLast" type="text" placeholder="Patient's last name"></div>
+                <div class="rx-field"><label>Patient's age (in years)</label><input id="rxPatientAge" type="number" min="0" max="120" placeholder="Age"></div>
+                <div class="rx-field"><label>Gender</label><select id="rxGender"><option value="">Select gender</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+            </div>
+
+            <div class="rx-your-details">
+                <h3>Your details</h3>
+                <div class="rx-form-grid two">
+                    <div class="rx-field"><label>First name</label><input id="rxYourFirst" type="text" placeholder="First name"></div>
+                    <div class="rx-field"><label>Last name</label><input id="rxYourLast" type="text" placeholder="Last name"></div>
+                    <div class="rx-field full"><label>Age</label><input id="rxYourAge" type="number" min="0" max="120" placeholder="Age"></div>
+                </div>
+            </div>
+
+            <div class="rx-actions">
+                <button class="rx-back-btn" onclick="goToPrescriptionStep(2)">← Back</button>
+                <button class="primary-btn" onclick="savePrescriptionPatient()">Save & Continue →</button>
+            </div>
+        </section>
+
+        <!-- STEP 4: ORDER SUMMARY -->
+        <section class="prescription-step" id="rxStep4">
+            <div class="rx-step-label">STEP 4 OF 4</div>
+            <h2>Order Summary</h2>
+            <p class="rx-subtitle">Review your prescription order before confirmation.</p>
+
+            <div class="rx-delivery-date">🚚 <strong>Delivery by 3rd - 5th Oct</strong></div>
+
+            <div class="rx-benefit">
+                <strong>Benefits after the order is placed</strong>
+                <div>📞 <span><b>Pharmacist call</b><br>Our pharmacist will call you to confirm the medicines in your prescription.</span></div>
+            </div>
+
+            <div class="rx-summary-card">
+                <div class="rx-summary-row"><span>Prescription Uploaded</span><strong id="rxSummaryFile">—</strong></div>
+                <div class="rx-summary-row"><span>Prescription order</span><strong>Prescription review</strong></div>
+                <div class="rx-summary-row"><span>Delivery</span><strong>Free</strong></div>
+            </div>
+
+            <div class="rx-summary-card">
+                <div class="rx-summary-title">📍 DELIVER TO <button onclick="goToPrescriptionStep(2)">Change</button></div>
+                <strong id="rxSummaryAddress">Home</strong>
+                <p id="rxSummaryAddressText">Address will appear here.</p>
+            </div>
+
+            <div class="rx-summary-card">
+                <div class="rx-summary-title">👤 PATIENT <button onclick="goToPrescriptionStep(3)">Change</button></div>
+                <strong id="rxSummaryPatient">Patient details</strong>
+                <p id="rxSummaryPatientMeta">—</p>
+            </div>
+
+            <div class="rx-payment">
+                <h3>Select payment mode</h3>
+                <label><input type="radio" name="rxPayment" value="Cash on Delivery" checked> Cash on Delivery</label>
+                <label><input type="radio" name="rxPayment" value="UPI / Online"> UPI / Online</label>
+            </div>
+
+            <button class="primary-btn rx-confirm-btn" onclick="confirmPrescriptionOrder()">Confirm Order</button>
+            <p class="rx-demo-note">Your order details will be used to prepare the prescription request.</p>
+        </section>
+
+        <!-- SUCCESS -->
+        <section class="prescription-step" id="rxStepSuccess">
+            <div class="rx-success-icon">✓</div>
+            <h2>Order Confirmed!</h2>
+            <p class="rx-subtitle">Your prescription order has been created successfully.</p>
+            <div class="rx-order-number">Order ID: <strong id="rxOrderId">SMRX-000000</strong></div>
+            <div class="rx-success-card">📞 <strong>Pharmacist call</strong><br><span>Our pharmacist will call to confirm the medicines in your prescription.</span></div>
+            <button class="primary-btn rx-next-btn" onclick="closePrescriptionFlow()">Continue Shopping</button>
+        </section>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* ============================================================
+   HERO SLIDER
+============================================================ */
+
+let currentHeroSlide = 0;
+let heroTimer = null;
+let heroPaused = false;
+
+const heroSlides = document.querySelectorAll(".hero-slide");
+const heroDots = document.querySelectorAll(".hero-dot");
+
+function showHeroSlide(index){
+
+    if(!heroSlides.length) return;
+
+    if(index >= heroSlides.length){
+        index = 0;
+    }
+
+    if(index < 0){
+        index = heroSlides.length - 1;
+    }
+
+    heroSlides.forEach(slide=>{
+        slide.classList.remove("active");
+    });
+
+    heroDots.forEach(dot=>{
+        dot.classList.remove("active");
+    });
+
+    heroSlides[index].classList.add("active");
+
+    if(heroDots[index]){
+        heroDots[index].classList.add("active");
+    }
+
+    currentHeroSlide = index;
+}
+
+function nextHeroSlide(){
+    showHeroSlide(currentHeroSlide + 1);
+    restartHeroTimer();
+}
+
+function previousHeroSlide(){
+    showHeroSlide(currentHeroSlide - 1);
+    restartHeroTimer();
+}
+
+function goToHeroSlide(index){
+    showHeroSlide(index);
+    restartHeroTimer();
+}
+
+function startHeroTimer(){
+
+    clearInterval(heroTimer);
+
+    heroTimer = setInterval(()=>{
+
+        if(!heroPaused){
+            showHeroSlide(currentHeroSlide + 1);
+        }
+
+    },4000);
+}
+
+function restartHeroTimer(){
+
+    clearInterval(heroTimer);
+
+    if(!heroPaused){
+        startHeroTimer();
+    }
+}
+
+function pauseHeroSlider(){
+
+    heroPaused = true;
+    clearInterval(heroTimer);
+
+}
+
+function resumeHeroSlider(){
+
+    heroPaused = false;
+    startHeroTimer();
+
+}
+
+showHeroSlide(0);
+startHeroTimer();
+
+
+/* ============================================================
+   LOCATION DETECTION
+============================================================ */
+
+const LOCATION_STORAGE_KEY = "sm_readable_location";
+
+function getSavedLocation(){
+
+    try{
+
+        return localStorage.getItem(
+            LOCATION_STORAGE_KEY
+        );
+
+    }catch(error){
+
+        return null;
+
+    }
+
+}
+
+function saveReadableLocation(location){
+
+    try{
+
+        localStorage.setItem(
+            LOCATION_STORAGE_KEY,
+            location
+        );
+
+    }catch(error){
+
+        console.warn(
+            "Could not save location.",
+            error
+        );
+
+    }
+
+}
+
+function setLocationText(location){
+
+    const value =
+        document.getElementById("locationValue");
+
+    const changeBtn =
+        document.getElementById("locationChangeBtn");
+
+    if(location){
+
+        value.textContent = location;
+        changeBtn.textContent = "Change";
+
+    }else{
+
+        value.textContent =
+            "Detect your location";
+
+        changeBtn.textContent =
+            "Detect";
+
+    }
+
+}
+
+function openLocationPanel(){
+
+    document
+        .getElementById("locationPanel")
+        .classList.add("show");
+
+}
+
+function toggleLocationPanel(){
+
+    const panel =
+        document.getElementById("locationPanel");
+
+    panel.classList.toggle("show");
+
+}
+
+function closeLocationPanel(){
+
+    document
+        .getElementById("locationPanel")
+        .classList.remove("show");
+
+}
+
+function setLocationStatus(
+    message,
+    type=""
+){
+
+    const status =
+        document.getElementById("locationStatus");
+
+    status.textContent =
+        message;
+
+    status.className =
+        "location-status show";
+
+    if(type){
+        status.classList.add(type);
+    }
+
+}
+
+function setLocationLoading(){
+
+    const button =
+        document.getElementById(
+            "detectLocationBtn"
+        );
+
+    button.disabled = true;
+
+    button.textContent =
+        "Detecting location...";
+
+    setLocationStatus(
+        "📍 Requesting location permission from your browser...",
+        ""
+    );
+
+}
+
+function resetLocationButton(){
+
+    const button =
+        document.getElementById(
+            "detectLocationBtn"
+        );
+
+    button.disabled = false;
+
+    button.textContent =
+        "Detect Location";
+
+}
+
+function detectLocation(){
+
+    openLocationPanel();
+
+    if(!("geolocation" in navigator)){
+
+        resetLocationButton();
+
+        setLocationStatus(
+            "Location detection unavailable in this browser.",
+            "location-error"
+        );
+
+        setLocationText(null);
+
+        return;
+
+    }
+
+    setLocationLoading();
+
+    navigator.geolocation.getCurrentPosition(
+
+        async function(position){
+
+            const latitude =
+                position.coords.latitude;
+
+            const longitude =
+                position.coords.longitude;
+
+            try{
+
+                const readableLocation =
+                    await reverseGeocode(
+                        latitude,
+                        longitude
+                    );
+
+                if(!readableLocation){
+
+                    throw new Error(
+                        "Could not determine readable location."
+                    );
+
+                }
+
+                setLocationText(
+                    readableLocation
+                );
+
+                saveReadableLocation(
+                    readableLocation
+                );
+
+                resetLocationButton();
+
+                setLocationStatus(
+                    "✓ Location detected successfully.",
+                    "location-success"
+                );
+
+            }catch(error){
+
+                resetLocationButton();
+
+                setLocationStatus(
+                    "Unable to convert your location into a readable city/state. Please try again.",
+                    "location-error"
+                );
+
+            }
+
+        },
+
+        function(error){
+
+            resetLocationButton();
+
+            if(error.code === 1){
+
+                setLocationText(null);
+
+                setLocationStatus(
+                    "📍 Location permission was denied. Please allow location access in your browser and try again.",
+                    "location-error"
+                );
+
+            }else if(error.code === 2){
+
+                setLocationStatus(
+                    "📍 Your location could not be determined. Please try again.",
+                    "location-error"
+                );
+
+            }else if(error.code === 3){
+
+                setLocationStatus(
+                    "📍 Location request timed out. Please try again.",
+                    "location-error"
+                );
+
+            }else{
+
+                setLocationStatus(
+                    "📍 Location unavailable. Please try again.",
+                    "location-error"
+                );
+
+            }
+
+        },
+
+        {
+            enableHighAccuracy:false,
+            timeout:15000,
+            maximumAge:300000
+        }
+
+    );
+
+}
+
+async function reverseGeocode(
+    latitude,
+    longitude
+){
+
+    /*
+       Coordinates are only used temporarily for
+       reverse geocoding and are NOT saved in localStorage.
+    */
+
+    const url =
+        "https://nominatim.openstreetmap.org/reverse" +
+        "?format=jsonv2" +
+        "&lat=" + encodeURIComponent(latitude) +
+        "&lon=" + encodeURIComponent(longitude) +
+        "&zoom=10" +
+        "&addressdetails=1";
+
+    const response =
+        await fetch(
+            url,
+            {
+                headers:{
+                    "Accept":"application/json"
+                }
+            }
+        );
+
+    if(!response.ok){
+
+        throw new Error(
+            "Reverse geocoding failed."
+        );
+
+    }
+
+    const data =
+        await response.json();
+
+    const address =
+        data.address || {};
+
+    const city =
+        address.city ||
+        address.town ||
+        address.municipality ||
+        address.village ||
+        address.county ||
+        "";
+
+    const state =
+        address.state ||
+        "";
+
+    const country =
+        address.country ||
+        "";
+
+    let result = "";
+
+    if(city && state){
+
+        result =
+            city + ", " + state;
+
+    }else if(city && country){
+
+        result =
+            city + ", " + country;
+
+    }else if(state && country){
+
+        result =
+            state + ", " + country;
+
+    }else if(country){
+
+        result =
+            country;
+
+    }else if(data.display_name){
+
+        /*
+           Only the readable reverse-geocoded
+           address is used. Raw coordinates are
+           never stored.
+        */
+
+        result =
+            data.display_name
+                .split(",")
+                .slice(0,3)
+                .join(",")
+                .trim();
+
+    }
+
+    return result || null;
+
+}
+
+
+/* Restore ONLY readable saved location.
+   No automatic browser permission request. */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const savedLocation =
+            getSavedLocation();
+
+        if(savedLocation){
+
+            setLocationText(
+                savedLocation
+            );
+
+        }else{
+
+            setLocationText(null);
+
+        }
+
+    }
+);
+
+
+/* Close location dropdown when clicking outside */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const locationBox =
+            document.querySelector(
+                ".location-box"
+            );
+
+        if(
+            locationBox &&
+            !locationBox.contains(event.target)
+        ){
+
+            closeLocationPanel();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   PRODUCT DATABASE
+============================================================ */
+
+const products = [
+
+{
+id:1,
+name:"Digestive Wellness Tablets",
+category:"Health Conditions",
+subcategory:"Digestive Care",
+brand:"SwasthyaMitra",
+price:249,
+mrp:320,
+discount:22,
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:2,
+name:"Daily Respiratory Support",
+category:"Health Conditions",
+subcategory:"Respiratory Care",
+brand:"WellLife",
+price:299,
+mrp:399,
+discount:25,
+image:"https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:3,
+name:"Joint Wellness Tablets",
+category:"Health Conditions",
+subcategory:"Joint Care",
+brand:"HealthPlus",
+price:349,
+mrp:450,
+discount:22,
+image:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:4,
+name:"Seasonal Allergy Care",
+category:"Health Conditions",
+subcategory:"Allergy Care",
+brand:"WellLife",
+price:229,
+mrp:299,
+discount:23,
+image:"https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:5,
+name:"Cold & Wellness Care Kit",
+category:"Health Conditions",
+subcategory:"Cold & Flu Care",
+brand:"SwasthyaMitra",
+price:399,
+mrp:499,
+discount:20,
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:6,
+name:"Everyday Immunity Support",
+category:"Health Conditions",
+subcategory:"General Wellness",
+brand:"NutriWell",
+price:279,
+mrp:350,
+discount:20,
+image:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:7,
+name:"Skin Wellness Care",
+category:"Health Conditions",
+subcategory:"Skin Care",
+brand:"HealthPlus",
+price:319,
+mrp:399,
+discount:20,
+image:"https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:8,
+name:"Women's Wellness Support",
+category:"Health Conditions",
+subcategory:"Women's Wellness",
+brand:"WellLife",
+price:429,
+mrp:550,
+discount:22,
+image:"https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:9,
+name:"Hydrating Face Moisturizer",
+category:"Personal Care",
+subcategory:"Skin Care",
+brand:"SwasthyaMitra",
+price:299,
+mrp:399,
+discount:25,
+image:"https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:10,
+name:"Daily Care Shampoo",
+category:"Personal Care",
+subcategory:"Hair Care",
+brand:"WellLife",
+price:249,
+mrp:320,
+discount:22,
+image:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:11,
+name:"Gentle Baby Care Lotion",
+category:"Personal Care",
+subcategory:"Baby & Mom Care",
+brand:"WellLife",
+price:279,
+mrp:350,
+discount:20,
+image:"https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:12,
+name:"Complete Oral Care Kit",
+category:"Personal Care",
+subcategory:"Oral Care",
+brand:"HealthPlus",
+price:199,
+mrp:260,
+discount:23,
+image:"https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:13,
+name:"Gentle Body Wash",
+category:"Personal Care",
+subcategory:"Bath & Body",
+brand:"WellLife",
+price:229,
+mrp:299,
+discount:23,
+image:"https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:14,
+name:"Daily Hand Wash",
+category:"Personal Care",
+subcategory:"Bath & Body",
+brand:"SwasthyaMitra",
+price:149,
+mrp:199,
+discount:25,
+image:"https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:15,
+name:"Sensitive Skin Cleanser",
+category:"Personal Care",
+subcategory:"Skin Care",
+brand:"HealthPlus",
+price:269,
+mrp:349,
+discount:23,
+image:"https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:16,
+name:"Hair Nourishing Conditioner",
+category:"Personal Care",
+subcategory:"Hair Care",
+brand:"WellLife",
+price:259,
+mrp:330,
+discount:21,
+image:"https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:17,
+name:"Daily Multivitamin Tablets",
+category:"Vitamins & Supplements",
+subcategory:"Multivitamins",
+brand:"NutriWell",
+price:399,
+mrp:499,
+discount:20,
+image:"https://www.ajhospital.in/storage/files/news/Blog/drive-download-20220906T084647Z-001/2.png"
+},
+
+{
+id:18,
+name:"Calcium & Vitamin D3 Tablets",
+category:"Vitamins & Supplements",
+subcategory:"Calcium & Minerals",
+brand:"NutriWell",
+price:299,
+mrp:390,
+discount:23,
+image:"https://www.ajhospital.in/storage/files/news/Blog/drive-download-20220906T084647Z-001/2.png"
+},
+
+{
+id:19,
+name:"Vitamin B12 B Complex",
+category:"Vitamins & Supplements",
+subcategory:"Vitamin B12 & B Complex",
+brand:"NutriWell",
+price:329,
+mrp:420,
+discount:22,
+image:"https://www.ajhospital.in/storage/files/news/Blog/drive-download-20220906T084647Z-001/2.png"
+},
+
+{
+id:20,
+name:"Omega Fish Oil Capsules",
+category:"Vitamins & Supplements",
+subcategory:"Omega & Fish Oil",
+brand:"NutriWell",
+price:499,
+mrp:650,
+discount:23,
+image:"https://www.ajhospital.in/storage/files/news/Blog/drive-download-20220906T084647Z-001/2.png"
+},
+
+{
+id:21,
+name:"Protein Supplement Powder",
+category:"Vitamins & Supplements",
+subcategory:"Protein Supplements",
+brand:"NutriWell",
+price:799,
+mrp:999,
+discount:20,
+image:"https://www.ajhospital.in/storage/files/news/Blog/drive-download-20220906T084647Z-001/2.png"
+},
+
+{
+id:22,
+name:"Vitamin C Wellness Tablets",
+category:"Vitamins & Supplements",
+subcategory:"Vitamin C",
+brand:"HealthPlus",
+price:249,
+mrp:320,
+discount:22,
+image:"https://www.ajhospital.in/storage/files/news/Blog/drive-download-20220906T084647Z-001/2.png"
+},
+
+{
+id:23,
+name:"Iron & Folic Acid Support",
+category:"Vitamins & Supplements",
+subcategory:"Iron & Folic Acid",
+brand:"NutriWell",
+price:289,
+mrp:370,
+discount:22,
+image:"https://www.ajhospital.in/storage/files/news/Blog/drive-download-20220906T084647Z-001/2.png"
+},
+
+{
+id:24,
+name:"Magnesium Mineral Tablets",
+category:"Vitamins & Supplements",
+subcategory:"Calcium & Minerals",
+brand:"NutriWell",
+price:349,
+mrp:450,
+discount:22,
+image:"https://www.ajhospital.in/storage/files/news/Blog/drive-download-20220906T084647Z-001/2.png"
+},
+
+{
+id:25,
+name:"Digital Glucose Testing Kit",
+category:"Diabetes Care",
+subcategory:"Blood Glucose Monitors",
+brand:"CarePro",
+price:699,
+mrp:899,
+discount:22,
+image:"https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:26,
+name:"Glucose Test Strips Pack",
+category:"Diabetes Care",
+subcategory:"Test Strips & Lancets",
+brand:"CarePro",
+price:499,
+mrp:599,
+discount:17,
+image:"https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:27,
+name:"Sugar-Free Food Sweetener",
+category:"Diabetes Care",
+subcategory:"Sugar Substitutes",
+brand:"NutriWell",
+price:179,
+mrp:220,
+discount:19,
+image:"https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:28,
+name:"Diabetes Care Nutrition Mix",
+category:"Diabetes Care",
+subcategory:"Diabetes Nutrition",
+brand:"NutriWell",
+price:599,
+mrp:749,
+discount:20,
+image:"https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:29,
+name:"Lancing Device",
+category:"Diabetes Care",
+subcategory:"Test Strips & Lancets",
+brand:"CarePro",
+price:299,
+mrp:399,
+discount:25,
+image:"https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:30,
+name:"Glucose Monitor Carry Case",
+category:"Diabetes Care",
+subcategory:"Diabetes Accessories",
+brand:"CarePro",
+price:249,
+mrp:320,
+discount:22,
+image:"https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:31,
+name:"Diabetic-Friendly Snack Pack",
+category:"Diabetes Care",
+subcategory:"Diabetes Nutrition",
+brand:"NutriWell",
+price:349,
+mrp:450,
+discount:22,
+image:"https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:32,
+name:"Daily Sugar Monitoring Journal",
+category:"Diabetes Care",
+subcategory:"Diabetes Accessories",
+brand:"SwasthyaMitra",
+price:129,
+mrp:179,
+discount:28,
+image:"https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:33,
+name:"Automatic Digital BP Monitor",
+category:"Healthcare Devices",
+subcategory:"BP Monitors",
+brand:"CarePro",
+price:1299,
+mrp:1699,
+discount:24,
+image:"https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:34,
+name:"Portable Nebulizer Machine",
+category:"Healthcare Devices",
+subcategory:"Nebulizers & Vaporizers",
+brand:"CarePro",
+price:1499,
+mrp:1999,
+discount:25,
+image:"https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:35,
+name:"Knee Support Brace",
+category:"Healthcare Devices",
+subcategory:"Supports & Braces",
+brand:"HealthPlus",
+price:349,
+mrp:499,
+discount:30,
+image:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:36,
+name:"Digital Thermometer",
+category:"Healthcare Devices",
+subcategory:"Thermometers",
+brand:"CarePro",
+price:199,
+mrp:299,
+discount:33,
+image:"https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:37,
+name:"Pulse Oximeter",
+category:"Healthcare Devices",
+subcategory:"Pulse Oximeters",
+brand:"CarePro",
+price:799,
+mrp:1099,
+discount:27,
+image:"https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:38,
+name:"Heating Pad",
+category:"Healthcare Devices",
+subcategory:"Pain Relief Devices",
+brand:"HealthPlus",
+price:599,
+mrp:799,
+discount:25,
+image:"https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:39,
+name:"Wrist Support",
+category:"Healthcare Devices",
+subcategory:"Supports & Braces",
+brand:"HealthPlus",
+price:249,
+mrp:349,
+discount:29,
+image:"https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:40,
+name:"Digital Weighing Scale",
+category:"Healthcare Devices",
+subcategory:"Health Monitoring",
+brand:"CarePro",
+price:899,
+mrp:1199,
+discount:25,
+image:"https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:41,
+name:"Homeopathic Skin Care Drops",
+category:"Homeopathic Medicine",
+subcategory:"Homeopathy Skin Care",
+brand:"WellLife",
+price:199,
+mrp:249,
+discount:20,
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:42,
+name:"Homeopathic Digestive Care Drops",
+category:"Homeopathic Medicine",
+subcategory:"Homeopathy Digestive Care",
+brand:"WellLife",
+price:179,
+mrp:229,
+discount:22,
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:43,
+name:"Homeopathic Hair Care Drops",
+category:"Homeopathic Medicine",
+subcategory:"Homeopathy Hair Care",
+brand:"WellLife",
+price:229,
+mrp:299,
+discount:23,
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:44,
+name:"Homeopathic General Wellness",
+category:"Homeopathic Medicine",
+subcategory:"Homeopathy Wellness",
+brand:"WellLife",
+price:249,
+mrp:320,
+discount:22,
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:45,
+name:"Homeopathic Personal Care Kit",
+category:"Homeopathic Medicine",
+subcategory:"Homeopathy Personal Care",
+brand:"HealthPlus",
+price:399,
+mrp:499,
+discount:20,
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+},
+
+{
+id:46,
+name:"Homeopathic Wellness Drops",
+category:"Homeopathic Medicine",
+subcategory:"Homeopathy Wellness",
+brand:"WellLife",
+price:219,
+mrp:279,
+discount:22,
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80"
+}
+
+];
+
+
+/* ============================================================
+   STATE
+============================================================ */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("sm_cart") || "[]"
+    );
+
+let wishlist =
+    JSON.parse(
+        localStorage.getItem("sm_wishlist") || "[]"
+    );
+
+
+/* ============================================================
+   HELPERS
+============================================================ */
+
+function saveState(){
+
+    localStorage.setItem(
+        "sm_cart",
+        JSON.stringify(cart)
+    );
+
+    localStorage.setItem(
+        "sm_wishlist",
+        JSON.stringify(wishlist)
+    );
+
+    updateCounts();
+
+}
+
+function updateCounts(){
+
+    const cartCount =
+        cart.reduce(
+            (total,item)=>total + item.qty,
+            0
+        );
+
+    document.getElementById(
+        "cartCount"
+    ).textContent =
+        cartCount;
+
+    document.getElementById(
+        "wishlistCount"
+    ).textContent =
+        wishlist.length;
+
+}
+
+function toast(message){
+
+    const el =
+        document.getElementById("toast");
+
+    el.textContent =
+        message;
+
+    el.classList.add("show");
+
+    setTimeout(()=>{
+        el.classList.remove("show");
+    },2200);
+
+}
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+/* ============================================================
+   CATEGORY + SUBCATEGORY
+============================================================ */
+
+function populateSubcategories(){
+
+    const category =
+        document.querySelector(
+            'input[name="category"]:checked'
+        ).value;
+
+    const select =
+        document.getElementById(
+            "subcategory"
+        );
+
+    const previousValue = select.value;
+
+    select.innerHTML =
+        `<option value="All">All Subcategories</option>`;
+
+    if(category === "All"){
+        return;
+    }
+
+    const subs = [
+        ...new Set(
+            products
+                .filter(
+                    p=>p.category === category
+                )
+                .map(
+                    p=>p.subcategory
+                )
+        )
+    ];
+
+    subs.forEach(sub=>{
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+        option.value =
+            sub;
+
+        option.textContent =
+            sub;
+
+        select.appendChild(
+            option
+        );
+
+    });
+
+    if([...select.options].some(option => option.value === previousValue)){
+        select.value = previousValue;
+    }
+
+}
+
+
+/* ============================================================
+   BRAND FILTERS
+============================================================ */
+
+function renderBrandFilters(){
+
+    const brands =
+        [...new Set(
+            products.map(
+                p=>p.brand
+            )
+        )];
+
+    const container =
+        document.getElementById(
+            "brandFilters"
+        );
+
+    container.innerHTML = "";
+
+    brands.forEach(brand=>{
+
+        container.innerHTML += `
+            <label class="check-row">
+
+                <input
+                    type="checkbox"
+                    value="${brand}"
+                    onchange="applyFilters()"
+                >
+
+                ${brand}
+
+            </label>
+        `;
+
+    });
+
+}
+
+
+/* ============================================================
+   FILTERING
+============================================================ */
+
+function applyFilters(){
+
+    populateSubcategories();
+
+    const search =
+        document.getElementById(
+            "globalSearch"
+        )
+        .value
+        .toLowerCase()
+        .trim();
+
+    const category =
+        document.querySelector(
+            'input[name="category"]:checked'
+        ).value;
+
+    const subcategory =
+        document.getElementById(
+            "subcategory"
+        ).value;
+
+    const selectedBrands =
+        [
+            ...document.querySelectorAll(
+                '#brandFilters input:checked'
+            )
+        ].map(
+            input=>input.value
+        );
+
+    let filtered =
+        products.filter(
+            product=>{
+
+                const matchesSearch =
+                    !search ||
+                    product.name
+                        .toLowerCase()
+                        .includes(search) ||
+                    product.brand
+                        .toLowerCase()
+                        .includes(search) ||
+                    product.category
+                        .toLowerCase()
+                        .includes(search) ||
+                    product.subcategory
+                        .toLowerCase()
+                        .includes(search);
+
+                const matchesCategory =
+                    category === "All" ||
+                    product.category === category;
+
+                const matchesSubcategory =
+                    subcategory === "All" ||
+                    product.subcategory === subcategory;
+
+                const matchesBrand =
+                    selectedBrands.length === 0 ||
+                    selectedBrands.includes(
+                        product.brand
+                    );
+
+                return (
+                    matchesSearch &&
+                    matchesCategory &&
+                    matchesSubcategory &&
+                    matchesBrand
+                );
+
+            }
+        );
+
+    const sort =
+        document.getElementById(
+            "sortSelect"
+        ).value;
+
+    if(sort === "low"){
+        filtered.sort(
+            (a,b)=>a.price-b.price
+        );
+    }
+
+    if(sort === "high"){
+        filtered.sort(
+            (a,b)=>b.price-a.price
+        );
+    }
+
+    if(sort === "name"){
+        filtered.sort(
+            (a,b)=>
+                a.name.localeCompare(
+                    b.name
+                )
+        );
+    }
+
+    renderProducts(
+        filtered,
+        "shopProducts"
+    );
+
+    document.getElementById(
+        "resultsCount"
+    ).textContent =
+        `Showing ${filtered.length} products`;
+
+}
+
+
+/* ============================================================
+   CLEAR FILTERS
+============================================================ */
+
+function clearFilters(){
+
+    document.querySelector(
+        'input[name="category"][value="All"]'
+    ).checked = true;
+
+    document
+        .querySelectorAll(
+            '#brandFilters input'
+        )
+        .forEach(input=>{
+            input.checked = false;
+        });
+
+    document.getElementById(
+        "globalSearch"
+    ).value = "";
+
+    document.getElementById(
+        "sortSelect"
+    ).value = "default";
+
+    populateSubcategories();
+
+    applyFilters();
+
+}
+
+
+/* ============================================================
+   PRODUCT CARD
+============================================================ */
+
+function renderProducts(
+    list,
+    elementId
+){
+
+    const container =
+        document.getElementById(
+            elementId
+        );
+
+    container.innerHTML = "";
+
+    if(list.length === 0){
+
+        container.innerHTML = `
+
+            <div style="
+                grid-column:1/-1;
+                padding:45px;
+                background:white;
+                border-radius:15px;
+                text-align:center;
+                color:#667482;
+            ">
+
+                <div style="font-size:40px">
+                    🔎
+                </div>
+
+                <h3 style="
+                    margin:10px;
+                    color:#062B49
+                ">
+                    No products found
+                </h3>
+
+                <p style="font-size:12px">
+                    Try another category or search term.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+    list.forEach(product=>{
+
+        const liked =
+            wishlist.includes(
+                product.id
+            );
+
+        container.innerHTML += `
+
+        <div class="product-card">
+
+            <div class="product-image">
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                    loading="lazy"
+                >
+
+                <span class="discount-tag">
+                    ${product.discount}% OFF
+                </span>
+
+                <button
+                    class="wishlist ${liked ? "active":""}"
+                    onclick="toggleWishlist(${product.id})">
+
+                    ${liked ? "♥":"♡"}
+
+                </button>
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-brand">
+                    ${product.brand}
+                </div>
+
+                <div class="product-name">
+                    ${product.name}
+                </div>
+
+                <div class="product-sub">
+                    ${product.subcategory}
+                </div>
+
+                <div class="price-row">
+
+                    <span class="price">
+                        ₹${product.price}
+                    </span>
+
+                    <span class="mrp">
+                        ₹${product.mrp}
+                    </span>
+
+                </div>
+
+                <div class="product-actions">
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart(${product.id})">
+
+                        Add to Cart
+
+                    </button>
+
+                    <button
+                        class="details-btn"
+                        onclick="showProduct(${product.id})">
+
+                        ↗
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ============================================================
+   HOME PRODUCT SECTIONS
+============================================================ */
+
+function renderHomeSections(){
+
+    renderProducts(
+        products.slice(0,5),
+        "newArrivals"
+    );
+
+    renderProducts(
+        products
+            .slice()
+            .sort(
+                (a,b)=>
+                    b.discount-a.discount
+            )
+            .slice(0,5),
+        "bestSellers"
+    );
+
+    renderProducts(
+        [
+            products[16],
+            products[24],
+            products[32],
+            products[40],
+            products[20]
+        ],
+        "trendingProducts"
+    );
+
+}
+
+
+/* ============================================================
+   CART
+============================================================ */
+
+function addToCart(id){
+
+    const product =
+        products.find(
+            p=>p.id===id
+        );
+
+    const existing =
+        cart.find(
+            item=>item.id===id
+        );
+
+    if(existing){
+
+        existing.qty++;
+
+    }else{
+
+        cart.push({
+            id:id,
+            qty:1
+        });
+
+    }
+
+    saveState();
+
+    toast(
+        `${product.name} added to cart`
+    );
+
+}
+
+function openCart(){
+
+    renderCart();
+
+    document
+        .getElementById("cartModal")
+        .classList.add("show");
+
+}
+
+function renderCart(){
+
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
+
+    if(cart.length === 0){
+
+        container.innerHTML = `
+
+            <div style="
+                text-align:center;
+                padding:40px 10px;
+                color:#667482;
+            ">
+
+                <div style="font-size:42px">
+                    🛒
+                </div>
+
+                <h3 style="
+                    color:#062B49;
+                    margin:10px
+                ">
+                    Your cart is empty
+                </h3>
+
+                <p style="font-size:11px">
+                    Add healthcare products to continue.
+                </p>
+
+            </div>
+        `;
+
+        document.getElementById(
+            "cartSummary"
+        ).innerHTML = "";
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    let subtotal = 0;
+    let total = 0;
+
+    cart.forEach(item=>{
+
+        const product =
+            products.find(
+                p=>p.id===item.id
+            );
+
+        subtotal +=
+            product.mrp * item.qty;
+
+        total +=
+            product.price * item.qty;
+
+        container.innerHTML += `
+
+            <div class="cart-item">
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+                <div class="cart-item-info">
+
+                    <strong>
+                        ${product.name}
+                    </strong>
+
+                    <span>
+                        ₹${product.price}
+                    </span>
+
+                </div>
+
+                <div class="qty">
+
+                    <button
+                        onclick="changeQty(${product.id},-1)">
+                        −
+                    </button>
+
+                    <span>
+                        ${item.qty}
+                    </span>
+
+                    <button
+                        onclick="changeQty(${product.id},1)">
+                        +
+                    </button>
+
+                </div>
+
+                <button
+                    onclick="removeFromCart(${product.id})"
+                    style="
+                        border:0;
+                        background:transparent;
+                        color:#0877C9;
+                    ">
+                    ×
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+    const savings =
+        subtotal-total;
+
+    document.getElementById(
+        "cartSummary"
+    ).innerHTML = `
+
+        <div class="summary-row">
+            <span>MRP Total</span>
+            <strong>₹${subtotal}</strong>
+        </div>
+
+        <div class="summary-row">
+            <span>Discount</span>
+            <strong style="color:#0AA878">
+                - ₹${savings}
+            </strong>
+        </div>
+
+        <div class="summary-row summary-total">
+            <span>Total</span>
+            <strong>₹${total}</strong>
+        </div>
+
+        <button
+            class="primary-btn full-btn"
+            onclick="checkout()">
+            Proceed to Checkout
+        </button>
+    `;
+
+}
+
+function changeQty(
+    id,
+    change
+){
+
+    const item =
+        cart.find(
+            i=>i.id===id
+        );
+
+    if(!item) return;
+
+    item.qty += change;
+
+    if(item.qty <= 0){
+
+        cart =
+            cart.filter(
+                i=>i.id!==id
+            );
+
+    }
+
+    saveState();
+
+    renderCart();
+
+}
+
+function removeFromCart(id){
+
+    cart =
+        cart.filter(
+            item=>item.id!==id
+        );
+
+    saveState();
+
+    renderCart();
+
+    toast(
+        "Product removed from cart"
+    );
+
+}
+
+
+/* ============================================================
+   WISHLIST
+============================================================ */
+
+function toggleWishlist(id){
+
+    const index =
+        wishlist.indexOf(id);
+
+    if(index === -1){
+
+        wishlist.push(id);
+
+        toast(
+            "Added to wishlist"
+        );
+
+    }else{
+
+        wishlist.splice(
+            index,
+            1
+        );
+
+        toast(
+            "Removed from wishlist"
+        );
+
+    }
+
+    saveState();
+
+    applyFilters();
+
+    renderHomeSections();
+
+}
+
+function showWishlist(){
+
+    const wishlistProducts =
+        products.filter(
+            p=>wishlist.includes(
+                p.id
+            )
+        );
+
+    if(
+        wishlistProducts.length === 0
+    ){
+
+        toast(
+            "Your wishlist is empty"
+        );
+
+        return;
+
+    }
+
+    document
+        .getElementById("shop")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    renderProducts(
+        wishlistProducts,
+        "shopProducts"
+    );
+
+    document.getElementById(
+        "resultsCount"
+    ).textContent =
+        `Wishlist • ${wishlistProducts.length} products`;
+
+}
+
+
+/* ============================================================
+   PRODUCT DETAILS
+============================================================ */
+
+function showProduct(id){
+
+    const product =
+        products.find(
+            p=>p.id===id
+        );
+
+    document.getElementById(
+        "productDetail"
+    ).innerHTML = `
+
+        <div>
+
+            <img
+                src="${product.image}"
+                alt="${product.name}"
+            >
+
+        </div>
+
+        <div>
+
+            <span class="detail-brand">
+                ${product.brand}
+            </span>
+
+            <h2>
+                ${product.name}
+            </h2>
+
+            <div class="detail-price">
+                ₹${product.price}
+
+                <span class="detail-mrp">
+                    ₹${product.mrp}
+                </span>
+            </div>
+
+            <p class="detail-description">
+                A sample healthcare catalogue product
+                for the SwasthyaMitra AI college project.
+            </p>
+
+            <ul class="detail-list">
+
+                <li>
+                    ✓ Category: ${product.category}
+                </li>
+
+                <li>
+                    ✓ Subcategory: ${product.subcategory}
+                </li>
+
+                <li>
+                    ✓ Brand: ${product.brand}
+                </li>
+
+                <li>
+                    ✓ Sample discount: ${product.discount}%
+                </li>
+
+            </ul>
+
+            <button
+                class="primary-btn full-btn"
+                onclick="
+                    addToCart(${product.id});
+                    closeModal('productModal')
+                ">
+
+                Add to Cart
+
+            </button>
+
+        </div>
+
+    `;
+
+    document
+        .getElementById(
+            "productModal"
+        )
+        .classList.add("show");
+
+}
+
+
+/* ============================================================
+   SEARCH
+============================================================ */
+
+function globalSearch(){
+
+    const search =
+        document.getElementById(
+            "globalSearch"
+        )
+        .value
+        .trim();
+
+    if(search.length > 0){
+
+        document
+            .getElementById("shop")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+    }
+
+    applyFilters();
+
+}
+
+
+/* ============================================================
+   CATEGORY NAVIGATION
+============================================================ */
+
+function selectCategory(category){
+
+    document.getElementById("shop")?.scrollIntoView({behavior:"smooth"});
+
+    const radios = document.querySelectorAll('input[name="category"]');
+    let matched = false;
+
+    radios.forEach(radio=>{
+        radio.checked = radio.value === category;
+        if(radio.checked) matched = true;
+    });
+
+    if(!matched){
+        const allRadio = document.querySelector('input[name="category"][value="All"]');
+        if(allRadio) allRadio.checked = true;
+    }
+
+    // Reset the subcategory whenever the main category changes so an old
+    // subcategory never prevents the new category's products from showing.
+    const subcategory = document.getElementById("subcategory");
+    if(subcategory) subcategory.value = "All";
+
+    document.querySelectorAll('.category-nav button').forEach(button=>{
+        button.classList.toggle(
+            'active',
+            button.textContent.trim().toLowerCase() ===
+            (category === 'Home' || category === 'All' ? 'home' : category === 'Homeopathic Medicine' ? 'homeopathy' : category.toLowerCase())
+        );
+    });
+
+    applyFilters();
+
+}
+
+function goHome(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+function openShop(){
+
+    document
+        .getElementById("shop")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* ============================================================
+   PRESCRIPTION CHECKOUT FLOW
+============================================================ */
+
+let prescriptionData = {
+    fileName: "",
+    addressType: "Home",
+    address: {},
+    patient: {},
+    payment: "Cash on Delivery"
+};
+
+function openPrescription(){
+    document.getElementById("prescriptionModal").classList.add("show");
+    goToPrescriptionStep(1);
+}
+
+function closePrescriptionFlow(){
+    document.getElementById("prescriptionModal").classList.remove("show");
+}
+
+function prescriptionSelected(){
+    const file = document.getElementById("prescriptionFile").files[0];
+    const fileName = document.getElementById("fileName");
+
+    if(!file){
+        fileName.textContent = "";
+        return;
+    }
+
+    const allowed = ["image/jpeg","image/png","application/pdf"];
+    const maxSize = 5 * 1024 * 1024;
+
+    if(!allowed.includes(file.type) || file.size > maxSize){
+        fileName.textContent = "Invalid file. Use JPG, PNG or PDF under 5 MB.";
+        document.getElementById("prescriptionFile").value = "";
+        return;
+    }
+
+    prescriptionData.fileName = file.name;
+    fileName.textContent = `✓ Selected: ${file.name}`;
+}
+
+function goToPrescriptionStep(step){
+    const file = document.getElementById("prescriptionFile").files[0];
+
+    if(step === 2 && !file){
+        toast("Please upload your prescription first");
+        return;
+    }
+
+    document.querySelectorAll(".prescription-step").forEach(el => el.classList.remove("active"));
+    const target = document.getElementById(`rxStep${step}`);
+    if(target) target.classList.add("active");
+
+    document.querySelectorAll(".progress-step").forEach(el => {
+        const n = Number(el.dataset.step);
+        el.classList.toggle("active", n === step);
+        el.classList.toggle("done", n < step);
+    });
+}
+
+function selectAddressType(button){
+    document.querySelectorAll(".address-type").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    prescriptionData.addressType = button.textContent.trim().replace(/^..\s*/,"");
+}
+
+function savePrescriptionAddress(){
+    const pincode = document.getElementById("rxPincode").value.trim();
+    const house = document.getElementById("rxHouse").value.trim();
+    const area = document.getElementById("rxArea").value.trim();
+    const first = document.getElementById("rxReceiverFirst").value.trim();
+    const last = document.getElementById("rxReceiverLast").value.trim();
+    const mobile = document.getElementById("rxMobile").value.trim();
+
+    if(!/^\d{6}$/.test(pincode)){
+        toast("Please enter a valid 6-digit pincode"); return;
+    }
+    if(!house || !area){
+        toast("Please enter house/building and area/locality"); return;
+    }
+    if(!first || !last){
+        toast("Please enter receiver name"); return;
+    }
+    if(!/^\d{10}$/.test(mobile)){
+        toast("Please enter a valid 10-digit mobile number"); return;
+    }
+
+    prescriptionData.address = {pincode, house, area, landmark:document.getElementById("rxLandmark").value.trim(), first, last, mobile};
+
+    document.getElementById("rxYourFirst").value = first;
+    document.getElementById("rxYourLast").value = last;
+    syncReceiverToPatient();
+    goToPrescriptionStep(3);
+}
+
+function syncReceiverToPatient(){
+    const same = document.getElementById("sameReceiver").checked;
+    if(!same) return;
+    document.getElementById("rxPatientFirst").value = document.getElementById("rxReceiverFirst").value.trim();
+    document.getElementById("rxPatientLast").value = document.getElementById("rxReceiverLast").value.trim();
+}
+
+function togglePatientDetails(){
+    const selected = document.querySelector('input[name="patientWho"]:checked').value;
+    const sameBox = document.getElementById("sameReceiver");
+    if(selected === "me"){
+        sameBox.checked = true;
+        syncReceiverToPatient();
+    }
+}
+
+function savePrescriptionPatient(){
+    const first = document.getElementById("rxPatientFirst").value.trim();
+    const last = document.getElementById("rxPatientLast").value.trim();
+    const age = document.getElementById("rxPatientAge").value.trim();
+    const gender = document.getElementById("rxGender").value;
+
+    if(!first || !last || age === "" || !gender){
+        toast("Please complete all patient details"); return;
+    }
+    if(Number(age) < 0 || Number(age) > 120){
+        toast("Please enter a valid patient age"); return;
+    }
+
+    prescriptionData.patient = {first,last,age,gender};
+    document.getElementById("rxSummaryFile").textContent = prescriptionData.fileName || "Uploaded prescription";
+    document.getElementById("rxSummaryAddress").textContent = prescriptionData.addressType;
+    const a = prescriptionData.address;
+    document.getElementById("rxSummaryAddressText").textContent = `${a.house}, ${a.area}${a.landmark ? ", " + a.landmark : ""}, ${a.pincode}. Receiver: ${a.first} ${a.last}`;
+    document.getElementById("rxSummaryPatient").textContent = `${first} ${last}`;
+    document.getElementById("rxSummaryPatientMeta").textContent = `${age} years • ${gender}`;
+
+    goToPrescriptionStep(4);
+}
+
+async function useCurrentLocationForPrescription(){
+
+    if(!navigator.geolocation){
+        toast("Location is not supported by this browser");
+        return;
+    }
+
+    const button = document.querySelector(".rx-location-btn");
+    if(button){
+        button.disabled = true;
+        button.textContent = "📍 Detecting your current location...";
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        async position => {
+            try{
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                const url =
+                    "https://nominatim.openstreetmap.org/reverse" +
+                    "?format=jsonv2" +
+                    "&lat=" + encodeURIComponent(latitude) +
+                    "&lon=" + encodeURIComponent(longitude) +
+                    "&zoom=18&addressdetails=1";
+
+                const response = await fetch(url, {headers:{"Accept":"application/json"}});
+                if(!response.ok) throw new Error("Reverse geocoding failed");
+
+                const data = await response.json();
+                const a = data.address || {};
+
+                const pincode = a.postcode || "";
+                const area =
+                    a.suburb || a.neighbourhood || a.residential ||
+                    a.quarter || a.village || a.town || a.city || "";
+                const house =
+                    [a.house_number, a.road].filter(Boolean).join(", ");
+                const landmark =
+                    a.amenity || a.shop || a.building || "";
+
+                if(pincode) document.getElementById("rxPincode").value = pincode;
+                if(area) document.getElementById("rxArea").value = area;
+                if(house) document.getElementById("rxHouse").value = house;
+                if(landmark && !document.getElementById("rxLandmark").value)
+                    document.getElementById("rxLandmark").value = landmark;
+
+                const searchBox = document.getElementById("rxPincodeSearch");
+                if(searchBox) searchBox.value = data.display_name || "Current location";
+
+                toast("Current location detected successfully");
+            }catch(error){
+                toast("Could not read the address from your current location. Please enter it manually.");
+            }finally{
+                if(button){
+                    button.disabled = false;
+                    button.textContent = "📍 Use Current Location";
+                }
+            }
+        },
+        error => {
+            if(button){
+                button.disabled = false;
+                button.textContent = "📍 Use Current Location";
+            }
+
+            if(error.code === 1){
+                toast("Location permission was denied. Please allow location access in your browser.");
+            }else{
+                toast("Could not detect your current location. Please try again.");
+            }
+        },
+        {enableHighAccuracy:true, timeout:15000, maximumAge:60000}
+    );
+}
+
+
+function confirmPrescriptionOrder(){
+    const payment = document.querySelector('input[name="rxPayment"]:checked');
+    if(!payment){
+        toast("Please select a payment mode"); return;
+    }
+
+    prescriptionData.payment = payment.value;
+    const orderId = "SMRX-" + Math.floor(100000 + Math.random() * 900000);
+    document.getElementById("rxOrderId").textContent = orderId;
+
+    document.querySelectorAll(".prescription-step").forEach(el => el.classList.remove("active"));
+    document.getElementById("rxStepSuccess").classList.add("active");
+    document.querySelectorAll(".progress-step").forEach(el => { el.classList.remove("active"); el.classList.add("done"); });
+    toast("Prescription order confirmed successfully");
+}
+
+
+/* ============================================================
+   CHECKOUT
+============================================================ */
+
+function checkout(){
+
+    if(cart.length === 0){
+
+        toast("Your cart is empty");
+
+        return;
+
+    }
+
+    document
+        .getElementById("checkoutModal")
+        .classList.add("show");
+
+}
+
+async function placeOrder(){
+
+  const demoOption =
+    document.querySelector(
+        '#checkoutPayment option[value="Demo Payment"]'
+    );
+
+if(demoOption){
+    demoOption.remove();
+}
+
+    const name =
+        document.getElementById("checkoutName").value.trim();
+
+    const phone =
+        document.getElementById("checkoutPhone").value.trim();
+
+    const address =
+        document.getElementById("checkoutAddress").value.trim();
+
+    const payment =
+        document.getElementById("checkoutPayment").value;
+
+
+    if(!name || !phone || !address || !payment){
+
+        alert("Please fill all checkout details.");
+
+        return;
+
+    }
+
+
+    if(cart.length === 0){
+
+    alert("Your cart is empty.");
+
+    return;
+
+}
+
+
+/* GET LOGGED-IN USER */
+
+const {
+    data: { user },
+    error: userError
+} = await supabaseClient.auth.getUser();
+
+if(userError || !user){
+
+    alert("Please login before placing an order.");
+
+    return;
+
+}
+
+
+    let total = 0;
+
+
+    cart.forEach(item => {
+
+        const product =
+            products.find(p => p.id === item.id);
+
+        if(product){
+
+            total += product.price * item.qty;
+
+        }
+
+    });
+
+
+    try {
+
+    console.log("Creating order...");
+
+
+   const { data: { user: currentUser } } =
+    await supabaseClient.auth.getUser();
+
+console.log("Current user:", currentUser?.id || "Guest");
+
+    const { data: order, error: orderError } =
+            await supabaseClient
+                .from("orders")
+                .insert({
+
+                   user_id: currentUser?.id || null,
+                  customer_name: name,
+                    phone: phone,
+                    address: address,
+                    payment_method: payment,
+                    total_amount: total,
+                    status: "Pending"
+
+                })
+                .select()
+                .single();
+
+
+        if(orderError){
+
+            console.error(
+                "Order error:",
+                orderError
+            );
+
+            alert(
+                "Order failed:\n\n" +
+                orderError.message
+            );
+
+            return;
+
+        }
+
+
+        console.log(
+            "Order created:",
+            order.id
+        );
+
+
+        const orderItems = [];
+
+
+        cart.forEach(item => {
+
+            const product =
+                products.find(p => p.id === item.id);
+
+            if(product){
+
+                orderItems.push({
+
+                    order_id: order.id,
+                    product_id: product.id,
+                    product_name: product.name,
+                    quantity: item.qty,
+                    price: product.price
+
+                });
+
+            }
+
+        });
+
+
+        const { error: itemError } =
+            await supabaseClient
+                .from("order_items")
+                .insert(orderItems);
+
+
+        if(itemError){
+
+            console.error(
+                "Order items error:",
+                itemError
+            );
+
+            alert(
+                "Order created, but items failed:\n\n" +
+                itemError.message
+            );
+
+            return;
+
+        }
+
+
+        /* CLEAR CART */
+
+        cart = [];
+
+        localStorage.removeItem("sm_cart");
+
+        saveState();
+
+
+        closeModal("checkoutModal");
+        closeModal("cartModal");
+
+
+        alert(
+            "✅ Order Placed Successfully!\n\n" +
+            "Order ID: " + order.id +
+            "\nTotal: ₹" + total.toFixed(2) +
+            "\nStatus: Pending"
+        );
+
+
+    } catch(error){
+
+        console.error(
+            "Checkout error:",
+            error
+        );
+
+        alert(
+            "Something went wrong:\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   PACKAGE
+============================================================ */
+
+function bookPackage(name){
+
+    toast(
+        `${name} package selected — demo booking`
+    );
+
+}
+
+
+/* ============================================================
+   MODAL OUTSIDE CLICK
+============================================================ */
+
+document
+    .querySelectorAll(".modal")
+    .forEach(
+        modal=>{
+
+            modal.addEventListener(
+                "click",
+                function(e){
+
+                    if(
+                        e.target === modal
+                    ){
+
+                        if(modal.id === "prescriptionModal") return;
+
+                        modal.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+/* ============================================================
+   INITIALIZATION
+============================================================ */
+
+populateSubcategories();
+
+renderBrandFilters();
+
+renderHomeSections();
+
+applyFilters();
+
+updateCounts();
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+    "https://vnbnluliymnerkwrmenv.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_gyWwEbHomWuBO74tfIYUHA_qCsixuVu";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+console.log("✅ SwasthyaMitra connected to Supabase");
+
+
+
+
+async function uploadProductsToSupabase() {
+
+    console.log("Uploading SwasthyaMitra products...");
+
+    const rows = products.map(product => ({
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        subcategory: product.subcategory,
+        brand: product.brand,
+        price: product.price,
+        mrp: product.mrp,
+        discount: product.discount,
+        image_url: product.image,
+        active: true
+    }));
+
+    console.log("Products found:", rows.length);
+
+    const { data, error } = await supabaseClient
+        .from("products")
+        .upsert(rows, {
+            onConflict: "id"
+        })
+        .select();
+
+    if (error) {
+
+        console.error(
+            "❌ Supabase error:",
+            error
+        );
+
+        alert(
+            "Upload failed:\n\n" +
+            error.message
+        );
+
+        return;
+    }
+
+    console.log(
+        "✅ Products uploaded:",
+        data.length
+    );
+
+    alert(
+        "✅ Success!\n\n" +
+        data.length +
+        " products uploaded to Supabase."
+    );
+}
+
+
+async function loadProductsFromSupabase() {
+
+    console.log("📦 Loading products from Supabase...");
+
+    const { data, error } = await supabaseClient
+        .from("products")
+        .select("*")
+        .eq("active", true)
+        .order("id", { ascending: true });
+
+    if (error) {
+
+        console.error(
+            "❌ Product loading error:",
+            error
+        );
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+
+        console.warn(
+            "⚠️ No products found in Supabase"
+        );
+
+        return;
+    }
+
+
+    /*
+       Supabase columns
+       ↓
+       Existing website product format
+    */
+
+    products.length = 0;
+
+
+    data.forEach(product => {
+
+        products.push({
+
+            id: product.id,
+            name: product.name,
+            category: product.category,
+            subcategory: product.subcategory,
+            brand: product.brand,
+            price: product.price,
+            mrp: product.mrp,
+            discount: product.discount,
+            image: product.image_url
+
+        });
+
+    });
+
+
+    console.log(
+        "✅ Products loaded from Supabase:",
+        products.length
+    );
+
+
+    /*
+       Refresh website UI
+    */
+
+    applyFilters();
+
+}
+
+
+/*
+   Load products after the page has loaded
+*/
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    await loadProductsFromSupabase();
+
+});
+
+
+// ================= MY ORDERS =================
+
+function openOrders(){
+
+    document
+        .getElementById("ordersModal")
+        .classList.add("show");
+
+}
+
+
+async function loadMyOrders(){
+
+    const phone =
+        document
+        .getElementById("ordersPhone")
+        .value
+        .trim();
+
+    if(!phone){
+
+        alert("Please enter your mobile number.");
+
+        return;
+    }
+
+    const ordersList =
+        document.getElementById("ordersList");
+
+    ordersList.innerHTML =
+        "<p>Loading your orders...</p>";
+
+
+    // Get orders
+    const { data: orders, error: orderError } =
+        await supabaseClient
+        .from("orders")
+        .select("*")
+        .eq("phone", phone)
+        .order("created_at", {
+            ascending: false
+        });
+
+
+    if(orderError){
+
+        console.error("Orders error:", orderError);
+
+        ordersList.innerHTML =
+            "<p>Unable to load orders.</p>";
+
+        return;
+    }
+
+
+    if(!orders || orders.length === 0){
+
+        ordersList.innerHTML =
+            "<p>No orders found for this mobile number.</p>";
+
+        return;
+    }
+
+
+    // Get order items
+    const orderIds =
+        orders.map(order => order.id);
+
+    const { data: items, error: itemError } =
+        await supabaseClient
+        .from("order_items")
+        .select("*")
+        .in("order_id", orderIds);
+
+
+    if(itemError){
+
+        console.error(
+            "Order items error:",
+            itemError
+        );
+
+        ordersList.innerHTML =
+            "<p>Orders found, but products could not be loaded.</p>";
+
+        return;
+    }
+
+
+    ordersList.innerHTML =
+        orders.map(order => {
+
+            const orderItems =
+                items.filter(
+                    item =>
+                    item.order_id === order.id
+                );
+
+
+            return `
+
+                <div style="
+                    border:1px solid #ddd;
+                    border-radius:12px;
+                    padding:16px;
+                    margin-bottom:15px;
+                ">
+
+                    <h3>
+                        📦 Order #${order.id}
+                    </h3>
+
+                    <p>
+                        <strong>Date:</strong>
+                        ${new Date(
+                            order.created_at
+                        ).toLocaleString()}
+                    </p>
+
+                    <div style="
+    margin:15px 0;
+    padding:12px;
+    background:#f8f9fa;
+    border-radius:10px;
+">
+
+    <strong>Order Status</strong>
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        margin-top:12px;
+        font-size:13px;
+        text-align:center;
+    ">
+
+        <div>
+            <div>🕐</div>
+            <small>Pending</small>
+        </div>
+
+        <div>→</div>
+
+        <div>
+            <div>✅</div>
+            <small>Confirmed</small>
+        </div>
+
+        <div>→</div>
+
+        <div>
+            <div>📦</div>
+            <small>Packed</small>
+        </div>
+
+        <div>→</div>
+
+        <div>
+            <div>🚚</div>
+            <small>Shipped</small>
+        </div>
+
+        <div>→</div>
+
+        <div>
+            <div>🏠</div>
+            <small>Delivered</small>
+        </div>
+
+    </div>
+
+    <p style="margin-bottom:0;">
+        <strong>Current Status:</strong>
+        ${order.status}
+    </p>
+
+</div>
+
+
+                    <div style="
+                        margin-top:12px;
+                        padding-top:10px;
+                        border-top:1px solid #eee;
+                    ">
+
+                        <strong>
+                            Products Ordered:
+                        </strong>
+
+                        ${
+
+                            orderItems.length === 0
+
+                            ?
+
+                            "<p>No product details found.</p>"
+
+                            :
+
+                            orderItems.map(item => `
+
+                                <div style="
+                                    display:flex;
+                                    justify-content:space-between;
+                                    gap:10px;
+                                    padding:8px 0;
+                                ">
+
+                                    <span>
+                                        ${item.product_name}
+                                        × ${item.quantity}
+                                    </span>
+
+                                    <strong>
+                                        ₹${(
+                                            Number(item.price) *
+                                            Number(item.quantity)
+                                        ).toFixed(2)}
+                                    </strong>
+
+                                </div>
+
+                            `).join("")
+
+                        }
+
+                    </div>
+
+
+                    <div style="
+                        margin-top:10px;
+                        padding-top:10px;
+                        border-top:1px solid #eee;
+                    ">
+
+                        <p>
+                            <strong>Payment:</strong>
+                            ${order.payment_method}
+                        </p>
+
+                        <h3>
+                            Total: ₹${Number(
+                                order.total_amount
+                            ).toFixed(2)}
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+// ================= ADMIN ORDER MANAGEMENT =================
+
+function openAdminOrders(){
+
+    document
+        .getElementById("adminOrdersModal")
+        .classList.add("show");
+
+    loadAdminOrders();
+}
+
+
+async function loadAdminOrders(){
+
+    const container =
+        document.getElementById("adminOrdersList");
+
+    container.innerHTML =
+        "<p>Loading orders...</p>";
+
+
+    const { data: orders, error } =
+        await supabaseClient
+        .from("orders")
+        .select("*")
+        .order("created_at", {
+            ascending: false
+        });
+
+
+    if(error){
+
+        console.error(
+            "Admin orders error:",
+            error
+        );
+
+        container.innerHTML =
+            "<p>Unable to load orders.</p>";
+
+        return;
+    }
+
+
+    if(!orders || orders.length === 0){
+
+        container.innerHTML =
+            "<p>No orders found.</p>";
+
+        return;
+    }
+
+
+    container.innerHTML = orders.map(order => `
+
+        <div style="
+            border:1px solid #ddd;
+            border-radius:12px;
+            padding:16px;
+            margin-bottom:15px;
+        ">
+
+            <h3>
+                📦 Order #${order.id}
+            </h3>
+
+            <p>
+                <strong>Customer:</strong>
+                ${order.customer_name}
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                ${order.phone}
+            </p>
+
+            <p>
+                <strong>Address:</strong>
+                ${order.address}
+            </p>
+
+            <p>
+                <strong>Total:</strong>
+                ₹${Number(order.total_amount).toFixed(2)}
+            </p>
+
+            <p>
+                <strong>Payment:</strong>
+                ${order.payment_method}
+            </p>
+
+            <p>
+                <strong>Order Date:</strong>
+                ${new Date(
+                    order.created_at
+                ).toLocaleString()}
+            </p>
+
+
+            <div style="
+                display:flex;
+                gap:10px;
+                align-items:center;
+                flex-wrap:wrap;
+                margin-top:15px;
+            ">
+
+                <strong>Status:</strong>
+
+                <select
+                    id="status-${order.id}"
+                    style="
+                        padding:8px;
+                        border-radius:8px;
+                        border:1px solid #ccc;
+                    "
+                >
+
+                    <option value="Pending"
+                        ${order.status === "Pending" ? "selected" : ""}>
+                        Pending
+                    </option>
+
+                    <option value="Confirmed"
+                        ${order.status === "Confirmed" ? "selected" : ""}>
+                        Confirmed
+                    </option>
+
+                    <option value="Packed"
+                        ${order.status === "Packed" ? "selected" : ""}>
+                        Packed
+                    </option>
+
+                    <option value="Shipped"
+                        ${order.status === "Shipped" ? "selected" : ""}>
+                        Shipped
+                    </option>
+
+                    <option value="Delivered"
+                        ${order.status === "Delivered" ? "selected" : ""}>
+                        Delivered
+                    </option>
+
+                </select>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="updateOrderStatus(${order.id})">
+                    Update Status
+                </button>
+
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+
+async function updateOrderStatus(orderId){
+
+    const select =
+        document.getElementById(
+            "status-" + orderId
+        );
+
+    const newStatus =
+        select.value;
+
+
+    const { error } =
+        await supabaseClient
+        .from("orders")
+        .update({
+            status: newStatus
+        })
+        .eq("id", orderId);
+
+
+    if(error){
+
+        console.error(
+            "Status update error:",
+            error
+        );
+
+        alert(
+            "❌ Status update failed:\n\n" +
+            error.message
+        );
+
+        return;
+    }
+
+
+    alert(
+        "✅ Order #" +
+        orderId +
+        " updated to " +
+        newStatus
+    );
+
+
+    loadAdminOrders();
+}
+
+// ================= ADMIN DASHBOARD =================
+
+function openAdminDashboard(){
+
+    document
+        .getElementById("adminDashboardModal")
+        .classList.add("show");
+
+    loadAdminDashboard();
+}
+
+
+async function loadAdminDashboard(){
+
+    const stats =
+        document.getElementById("dashboardStats");
+
+    stats.innerHTML =
+        "<p>Loading dashboard...</p>";
+
+
+    const { data: orders, error } =
+        await supabaseClient
+        .from("orders")
+        .select("*");
+
+
+    if(error){
+
+        console.error(
+            "Dashboard error:",
+            error
+        );
+
+        stats.innerHTML =
+            "<p>Unable to load dashboard.</p>";
+
+        return;
+    }
+
+
+    const totalOrders =
+        orders.length;
+
+
+    const totalSales =
+        orders.reduce(
+            (sum, order) =>
+                sum + Number(order.total_amount || 0),
+            0
+        );
+
+
+    const pending =
+        orders.filter(
+            order => order.status === "Pending"
+        ).length;
+
+
+    const confirmed =
+        orders.filter(
+            order => order.status === "Confirmed"
+        ).length;
+
+
+    const packed =
+        orders.filter(
+            order => order.status === "Packed"
+        ).length;
+
+
+    const shipped =
+        orders.filter(
+            order => order.status === "Shipped"
+        ).length;
+
+
+    const delivered =
+        orders.filter(
+            order => order.status === "Delivered"
+        ).length;
+
+
+    stats.innerHTML = `
+
+        <div style="
+            padding:20px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        ">
+            <h2>📦</h2>
+            <h2>${totalOrders}</h2>
+            <p>Total Orders</p>
+        </div>
+
+
+        <div style="
+            padding:20px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        ">
+            <h2>💰</h2>
+            <h2>₹${totalSales.toFixed(2)}</h2>
+            <p>Total Sales</p>
+        </div>
+
+
+        <div style="
+            padding:20px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        ">
+            <h2>⏳</h2>
+            <h2>${pending}</h2>
+            <p>Pending</p>
+        </div>
+
+
+        <div style="
+            padding:20px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        ">
+            <h2>✅</h2>
+            <h2>${confirmed}</h2>
+            <p>Confirmed</p>
+        </div>
+
+
+        <div style="
+            padding:20px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        ">
+            <h2>📦</h2>
+            <h2>${packed}</h2>
+            <p>Packed</p>
+        </div>
+
+
+        <div style="
+            padding:20px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        ">
+            <h2>🚚</h2>
+            <h2>${shipped}</h2>
+            <p>Shipped</p>
+        </div>
+
+
+        <div style="
+            padding:20px;
+            border-radius:12px;
+            border:1px solid #ddd;
+            text-align:center;
+        ">
+            <h2>🏠</h2>
+            <h2>${delivered}</h2>
+            <p>Delivered</p>
+        </div>
+
+    `;
+}
+
+</script>
+
+<!-- ================= MY ORDERS MODAL ================= -->
+
+<div class="modal" id="ordersModal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('ordersModal')">
+            ×
+        </button>
+
+        <h2 class="modal-title">
+            📦 My Orders
+        </h2>
+
+        <input
+            type="tel"
+            id="ordersPhone"
+            placeholder="Enter your mobile number"
+        >
+
+        <button
+            class="primary-btn"
+            onclick="loadMyOrders()">
+            View My Orders
+        </button>
+
+        <div id="ordersList" style="margin-top:20px;"></div>
+
+    </div>
+
+</div>
+
+<!-- ================= ADMIN ORDER MANAGEMENT ================= -->
+
+<div class="modal" id="adminOrdersModal">
+
+    <div class="modal-box" style="max-width:900px;">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('adminOrdersModal')">
+            ×
+        </button>
+
+        <h2 class="modal-title">
+            🛠️ Admin Order Management
+        </h2>
+
+        <button
+            class="primary-btn"
+            onclick="loadAdminOrders()">
+            🔄 Refresh Orders
+        </button>
+
+        <div
+            id="adminOrdersList"
+            style="margin-top:20px;">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= ADMIN DASHBOARD ================= -->
+
+<div class="modal" id="adminDashboardModal">
+
+    <div class="modal-box" style="max-width:900px;">
+
+        <button
+            class="modal-close"
+            onclick="closeModal('adminDashboardModal')">
+            ×
+        </button>
+
+        <h2 class="modal-title">
+            📊 Admin Dashboard
+        </h2>
+
+        <button
+            class="primary-btn"
+            onclick="loadAdminDashboard()">
+            🔄 Refresh Dashboard
+        </button>
+
+        <div
+            id="dashboardStats"
+            style="
+                display:grid;
+                grid-template-columns:
+                    repeat(auto-fit,minmax(160px,1fr));
+                gap:15px;
+                margin-top:20px;
+            ">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="checkoutModal">
+
+    <div class="modal-box">
+
+        <button class="modal-close"
+                onclick="closeModal('checkoutModal')">
+            ×
+        </button>
+
+        <h2 class="modal-title">
+            Complete Your Order
+        </h2>
+
+        <input
+            type="text"
+            id="checkoutName"
+            placeholder="Full Name"
+        >
+
+        <input
+            type="tel"
+            id="checkoutPhone"
+            placeholder="Mobile Number"
+        >
+
+        <textarea
+            id="checkoutAddress"
+            placeholder="Delivery Address"
+            rows="4"
+        ></textarea>
+
+        <select id="checkoutPayment">
+
+            <option value="">
+                Select Payment Method
+            </option>
+
+            <option value="Cash on Delivery">
+                Cash on Delivery
+            </option>
+
+            <option value="UPI">
+                UPI
+            </option>
+
+        </select>
+
+        <button
+            class="primary-btn full-btn"
+            onclick="placeOrder()"
+        >
+            Place Order
+        </button>
+
+    </div>
+
+</div>
+
+</body>
+</html>

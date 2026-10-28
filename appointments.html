@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SwasthyaMitra — Find Care & Book Appointment</title>
+<style>
+:root{
+  --blue:#0757a8;--blue2:#0a6fbd;--teal:#10b8a6;--red:#ef3340;
+  --ink:#17212b;--muted:#667582;--bg:#f5f8fb;--card:#fff;--line:#dfe7ee;
+  --shadow:0 12px 35px rgba(17,52,80,.10);--soft:#eef6fc;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:#fff}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.top{
+  position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--line);
+  height:76px;display:flex;align-items:center;padding:0 5%;gap:26px
+}
+.logo{font-size:25px;font-weight:850;color:var(--blue);white-space:nowrap}
+.logo span{color:var(--teal)}
+.nav{display:flex;gap:23px;margin-left:auto;align-items:center;font-size:14px}
+.nav a:hover{color:var(--blue)}
+.loc-pill{border-left:1px solid var(--line);padding-left:18px;display:flex;gap:7px;align-items:center;font-size:14px}
+.emergency{color:var(--red);font-weight:750;white-space:nowrap}
+.btn{border:0;border-radius:7px;padding:13px 19px;font-weight:750}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#064887}
+.btn-red{background:var(--red);color:#fff}.btn-teal{background:var(--teal);color:#073e39}
+.btn-outline{background:#fff;border:1px solid #b9cbd8;color:var(--blue)}
+.hero{height:515px;position:relative;overflow:hidden;display:flex;align-items:center}
+.hero-img{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1s}
+.hero-img.active{opacity:1}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,42,76,.82),rgba(6,58,87,.36),rgba(0,0,0,.12))}
+.hero-content{position:relative;z-index:2;width:min(1100px,92%);margin:auto;color:#fff}
+.hero h1{font-size:52px;line-height:1.05;margin:0 0 14px;max-width:700px}
+.hero p{font-size:20px;max-width:680px;line-height:1.5;margin:0 0 27px}
+.hero-search{display:flex;max-width:760px;background:#fff;padding:7px;border-radius:9px;box-shadow:0 18px 45px #0004}
+.hero-search input{flex:1;border:0;outline:0;padding:15px;font-size:16px}
+.hero-dots{display:flex;gap:7px;margin-top:18px}.dot{width:9px;height:9px;background:#ffffff77;border-radius:50%}.dot.on{background:#fff}
+.quick{width:min(1120px,92%);margin:-36px auto 0;position:relative;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.quick button{border:0;background:#fff;box-shadow:var(--shadow);border-radius:10px;padding:22px 15px;text-align:left;font-weight:800;color:var(--blue)}
+.quick button span{display:block;color:var(--muted);font-size:13px;font-weight:500;margin-top:5px}
+.section{width:min(1120px,92%);margin:78px auto}
+.section h2{font-size:38px;margin:0 0 8px}
+.section .sub{color:var(--muted);margin:0 0 25px;font-size:16px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tab{border:1px solid var(--line);background:#fff;padding:11px 16px;border-radius:7px;color:#3d4d59;font-weight:700}
+.tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.specialties{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.specialty{border:1px solid var(--line);background:#fff;border-radius:10px;padding:18px 8px;text-align:center;transition:.2s}
+.specialty:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.specialty .ico{font-size:29px;margin-bottom:8px}.specialty b{font-size:13px}
+.map-panel{border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);background:#fff}
+.map-toolbar{padding:16px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.map-toolbar input{flex:1;min-width:240px;padding:13px;border:1px solid var(--line);border-radius:7px;outline:none}
+.map-layout{display:grid;grid-template-columns:1.45fr .65fr;min-height:550px}
+.manual-map{
+  position:relative;overflow:hidden;min-height:550px;
+  background:
+    linear-gradient(28deg,transparent 0 48%,#d7e1e8 49% 51%,transparent 52%),
+    linear-gradient(103deg,transparent 0 43%,#d7e1e8 44% 46%,transparent 47%),
+    linear-gradient(163deg,transparent 0 67%,#d7e1e8 68% 70%,transparent 71%),
+    linear-gradient(90deg,transparent 0 29%,#e5edf2 30% 31%,transparent 32%),
+    #dff0f6;
+}
+.manual-map:before{content:"";position:absolute;inset:0;background:
+  radial-gradient(circle at 18% 22%,#b7d4dc 0 5%,transparent 5.5%),
+  radial-gradient(circle at 75% 70%,#c4dce2 0 7%,transparent 7.5%),
+  radial-gradient(circle at 55% 25%,#c5dfe4 0 4%,transparent 4.5%);
+  opacity:.9}
+.map-label{position:absolute;color:#54707d;font-weight:750;font-size:13px;background:#ffffffaa;padding:5px 8px;border-radius:5px}
+.pin{position:absolute;width:43px;height:43px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;border:3px solid #fff;box-shadow:0 4px 12px #0004;z-index:3}
+.pin span{transform:rotate(45deg);font-size:17px;color:#fff}
+.pin.doctor{background:var(--blue)}.pin.diet{background:var(--teal)}.pin.facility{background:var(--red)}
+.pin.selected{outline:5px solid #ffffffaa;transform:rotate(-45deg) scale(1.12)}
+.map-note{position:absolute;left:16px;bottom:16px;background:#fff;border-radius:8px;padding:11px 13px;box-shadow:var(--shadow);font-size:12px;color:var(--muted);z-index:5}
+.map-side{padding:18px;background:#fff;overflow:auto;max-height:550px}
+.map-side h3{margin:0 0 13px}
+.place{border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:11px}
+.place.selected{border:2px solid var(--blue);background:#f7fbff}
+.place h4{margin:0 0 5px}.place p{margin:4px 0;color:var(--muted);font-size:13px}
+.badge{display:inline-block;padding:5px 8px;border-radius:5px;background:#e9f3fb;color:var(--blue);font-size:11px;font-weight:800}
+.badge.teal{background:#e8f8f5;color:#087c6e}.badge.red{background:#fff0f1;color:#c92632}
+.place .actions{display:flex;gap:7px;margin-top:10px}.place button{flex:1;padding:9px;border:0;border-radius:6px;font-weight:750}
+.place .choose{background:var(--blue);color:#fff}.place .book{background:#edf5fb;color:var(--blue)}
+.map-legend{display:flex;gap:13px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:12px}.legend{display:flex;gap:6px;align-items:center}.legend i{width:10px;height:10px;border-radius:50%}.legend .b{background:var(--blue)}.legend .t{background:var(--teal)}.legend .r{background:var(--red)}
+.doctor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.doctor-card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 6px 22px rgba(20,50,80,.07)}
+.doctor-card img{width:100%;height:205px;object-fit:cover}.doctor-body{padding:16px}.doctor-body h3{margin:0 0 5px;font-size:17px}
+.role{color:var(--blue);font-size:13px;font-weight:800}.doctor-body p{font-size:13px;color:var(--muted);line-height:1.45;margin:8px 0}
+.rating{color:#d89d00;font-size:13px}.doctor-actions{display:flex;gap:7px;margin-top:12px}.doctor-actions button{flex:1;padding:10px;border:0;border-radius:6px;font-weight:750}
+.book-now{background:var(--blue);color:#fff}.view{background:#edf5fb;color:var(--blue)}
+.diet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.diet-card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 6px 22px rgba(20,50,80,.06)}
+.diet-card img{width:100%;height:190px;object-fit:cover}.diet-body{padding:17px}.diet-body h3{margin:0 0 5px}.diet-body p{color:var(--muted);font-size:13px;line-height:1.5}.diet-actions{display:flex;gap:7px}.diet-actions button{flex:1;padding:10px;border:0;border-radius:6px;font-weight:750}
+.facilities{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.facility{border:1px solid var(--line);border-radius:12px;background:#fff;padding:21px;box-shadow:0 5px 18px rgba(20,50,80,.05)}
+.facility .fi{font-size:33px}.facility h3{margin:11px 0 5px}.facility p{color:var(--muted);font-size:13px;line-height:1.5}.facility button{width:100%;border:1px solid #c8d9e5;background:#f7fbff;color:var(--blue);padding:10px;border-radius:6px;font-weight:750}
+.articles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.article{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}.article img{width:100%;height:190px;object-fit:cover}.article-body{padding:18px}.article-body h3{margin:0 0 8px}.article-body p{color:var(--muted);font-size:14px;line-height:1.5}.read{color:var(--blue);font-weight:800}
+.wellness{background:#f2f8fb;padding:72px 0}.well-grid{width:min(1120px,92%);margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.well-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:23px}.well-card .wi{font-size:31px}.well-card h3{margin:10px 0 7px}.well-card p{color:var(--muted);font-size:13px;line-height:1.5}
+.cta{background:linear-gradient(100deg,#0757a8,#087f9d);color:#fff;border-radius:14px;padding:40px;display:flex;justify-content:space-between;align-items:center;gap:20px}.cta h2{margin:0 0 8px}.cta p{margin:0;color:#dcefff}
+footer{background:#10202d;color:#d7e0e7;padding:48px 5%;margin-top:75px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:35px}.footer-grid h4{color:#fff}.footer-grid a{display:block;margin:9px 0;color:#b7c5ce}.notice{border-top:1px solid #334653;margin-top:25px;padding-top:18px;color:#9fb0bb;font-size:11px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:3000;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}
+.modal-box{width:min(650px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:15px;padding:26px;box-shadow:0 25px 70px #0006}
+.modal-top{display:flex;justify-content:space-between;gap:15px;align-items:start}.modal-top h2{margin:0}.x{border:0;background:#f1f4f6;width:35px;height:35px;border-radius:50%;font-size:20px}
+.stepper{display:flex;gap:6px;margin:20px 0}.step{flex:1;text-align:center;padding:9px 4px;background:#eef3f7;color:#6a7985;border-radius:6px;font-size:12px;font-weight:800}.step.active{background:#e8f3fb;color:var(--blue)}.step.done{background:#e9f8f5;color:#087c6e}
+.booking-section{display:none}.booking-section.active{display:block}
+.doctor-summary{display:flex;gap:13px;border:1px solid var(--line);padding:13px;border-radius:9px;background:#f8fbfd}.doctor-summary img{width:65px;height:65px;border-radius:8px;object-fit:cover}.doctor-summary h4{margin:0 0 5px}
+.field{margin:14px 0}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;color:#4c5b66}.field input,.field select{width:100%;padding:12px;border:1px solid #d4dfe7;border-radius:7px;outline:none}
+.date-row{display:flex;gap:8px;overflow:auto;padding-bottom:5px}.date-btn{min-width:88px;padding:11px 8px;border:1px solid var(--line);background:#fff;border-radius:8px}.date-btn strong{display:block}.date-btn small{color:var(--muted)}.date-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}.date-btn.active small{color:#dcefff}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.slot{padding:10px;border:1px solid #cbd9e3;background:#fff;border-radius:7px;color:#315064}.slot:hover,.slot.active{background:#eaf3fa;border-color:var(--blue);color:var(--blue);font-weight:800}.slot.taken{background:#f1f3f5;color:#a2adb5;text-decoration:line-through;cursor:not-allowed}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:9px}.mode button{padding:13px;border:1px solid var(--line);background:#fff;border-radius:8px;text-align:left}.mode button.active{border:2px solid var(--blue);background:#f5faff}
+.confirm-box{background:#f2faf8;border:1px solid #bce9df;border-radius:10px;padding:18px}.confirm-row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #d8eee9;padding:9px 0;font-size:14px}.confirm-row:last-child{border-bottom:0}.confirm-row span:first-child{color:var(--muted)}
+.modal-actions{display:flex;gap:8px;margin-top:18px}.modal-actions button{flex:1}
+.success{text-align:center;padding:18px}.success .check{width:70px;height:70px;border-radius:50%;display:grid;place-items:center;background:#e5f8f3;color:#07967f;font-size:37px;margin:0 auto 15px}
+.toast{position:fixed;right:20px;bottom:20px;background:#122a38;color:#fff;padding:13px 16px;border-radius:8px;box-shadow:var(--shadow);display:none;z-index:5000}.toast.show{display:block}
+
+@media(max-width:950px){
+ .nav{display:none}.quick{grid-template-columns:repeat(2,1fr)}.specialties{grid-template-columns:repeat(3,1fr)}
+ .map-layout{grid-template-columns:1fr}.map-side{max-height:430px}.doctor-grid{grid-template-columns:repeat(2,1fr)}
+ .facilities,.well-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+ .top{padding:0 18px}.emergency,.loc-pill{display:none}.hero{height:520px}.hero h1{font-size:37px}.hero p{font-size:17px}
+ .quick,.doctor-grid,.diet-grid,.articles,.facilities,.well-grid{grid-template-columns:1fr}
+ .specialties{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .specialty{min-width:0;padding:15px 6px;min-height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+ .specialty .ico{font-size:25px;margin-bottom:6px}
+ .specialty b{font-size:12px;line-height:1.25;word-break:break-word}
+ .tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;gap:8px;padding:2px 2px 9px;margin-bottom:16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ .tabs::-webkit-scrollbar{display:none}
+ .tab{flex:0 0 auto;white-space:nowrap;padding:10px 14px;font-size:13px}
+ .hero-search{flex-direction:column}.hero-search button{margin:2px}.section{margin:55px auto}.footer-grid{grid-template-columns:1fr}
+ .slots{grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:601px) and (max-width:950px){
+ .specialties{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+ .specialty{min-width:0}
+ .tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}
+ .tab{flex:0 0 auto;white-space:nowrap}
+}
+
+/* SwasthyaMitra theme polish */
+:root{
+  --blue:#0B5CAB;
+  --blue2:#0F73C8;
+  --blue-dark:#084985;
+  --teal:#12A89D;
+  --teal-dark:#087E77;
+  --red:#E5484D;
+  --red-dark:#C9363B;
+  --ink:#172B3A;
+  --muted:#667887;
+  --line:#DCE6EE;
+  --soft:#EEF7FC;
+  --shadow:0 12px 32px rgba(11,72,112,.10);
+}
+.btn{
+  min-height:44px;border-radius:8px;padding:12px 19px;font-weight:800;
+  letter-spacing:.05px;transition:background .18s,transform .18s,box-shadow .18s,border-color .18s;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 7px 18px rgba(11,72,112,.16)}
+.btn:active{transform:translateY(0);box-shadow:none}
+.btn:focus-visible,.tab:focus-visible,.quick button:focus-visible,.specialty:focus-visible,
+.place button:focus-visible,.doctor-actions button:focus-visible,.diet-actions button:focus-visible,
+.facility button:focus-visible,.date-btn:focus-visible,.slot:focus-visible,.mode button:focus-visible{
+  outline:3px solid rgba(18,168,157,.28);outline-offset:2px
+}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 5px 14px rgba(11,92,171,.18)}
+.btn-blue:hover{background:var(--blue-dark)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 5px 14px rgba(229,72,77,.16)}
+.btn-red:hover{background:var(--red-dark)}
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 5px 14px rgba(18,168,157,.16)}
+.btn-teal:hover{background:var(--teal-dark)}
+.btn-outline{background:#fff;border:1px solid #B8CBD9;color:var(--blue);box-shadow:none}
+.btn-outline:hover{background:var(--soft);border-color:#8FB2CA;color:var(--blue-dark)}
+.hero-search .btn{min-width:140px}
+.quick button{border:1px solid #E1EAF0;border-top:3px solid var(--blue);transition:.2s}
+.quick button:nth-child(2){border-top-color:var(--teal)}
+.quick button:nth-child(3){border-top-color:#7B8CCB}
+.quick button:nth-child(4){border-top-color:var(--red)}
+.quick button:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(11,72,112,.13)}
+.quick button:hover{color:var(--blue-dark)}
+.tab.active{background:var(--blue);border-color:var(--blue);box-shadow:0 4px 12px rgba(11,92,171,.16)}
+.tab:hover:not(.active){background:var(--soft);border-color:#B7CEDF;color:var(--blue)}
+.place .choose,.book-now{background:var(--blue);color:#fff;box-shadow:0 4px 10px rgba(11,92,171,.12)}
+.place .choose:hover,.book-now:hover{background:var(--blue-dark)}
+.place .book,.view{background:var(--soft);color:var(--blue);border:1px solid #D8E7F1}
+.place .book:hover,.view:hover{background:#E3F1F9;color:var(--blue-dark)}
+.facility button{background:var(--soft);border:1px solid #CFE0EB;color:var(--blue)}
+.facility button:hover{background:#E3F1F9;border-color:#AFCBDD;color:var(--blue-dark)}
+.date-btn.active{background:var(--blue);border-color:var(--blue);box-shadow:0 4px 12px rgba(11,92,171,.15)}
+.slot:hover,.slot.active{background:#E8F4FB;border-color:var(--blue);color:var(--blue-dark);box-shadow:0 3px 9px rgba(11,92,171,.10)}
+.mode button.active{border-color:var(--blue);background:#F3F9FD;box-shadow:inset 0 0 0 1px var(--blue)}
+.cta .btn{background:#fff !important;color:var(--blue) !important;border:1px solid rgba(255,255,255,.8);box-shadow:0 7px 20px rgba(0,0,0,.12)}
+.cta .btn:hover{background:#F3FAFD !important;color:var(--blue-dark) !important}
+.x:hover{background:#EAF3F8;color:var(--blue)}
+.success .check{background:#E4F7F4;color:var(--teal-dark)}
+
+.btn{border:0;border-radius:8px;padding:11px 17px;font-weight:800;transition:.2s ease;box-shadow:0 4px 12px rgba(7,87,168,.12)}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(7,87,168,.16)}
+.btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff}
+.btn-teal{background:linear-gradient(135deg,#0a9f91,var(--teal));color:#fff}
+.btn-red{background:var(--red);color:#fff}
+.btn-outline{background:#fff!important;color:var(--blue)!important;border:1px solid #b9d4ea!important;box-shadow:none!important}
+.btn-outline:hover{background:#eef6fc!important;border-color:var(--blue)!important}
+.well-card{position:relative;display:flex;flex-direction:column;min-height:245px}
+.well-card .btn{margin-top:auto;width:100%}
+.well-card .wi{width:52px;height:52px;display:grid;place-items:center;border-radius:14px;background:var(--soft)}
+.well-card:nth-child(2) .wi,.well-card:nth-child(4) .wi{background:#eaf9f6}
+.well-card:nth-child(3) .wi{background:#fff1f2}
+.well-card p{min-height:58px}
+.program-tag{display:inline-flex;width:max-content;margin:2px 0 8px;padding:5px 9px;border-radius:999px;background:#eef6fc;color:var(--blue);font-size:11px;font-weight:800}
+.location-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--blue);font-size:12px;font-weight:750;margin:5px 4px 0 0}
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<style>
+#liveMap{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+#manualMap.location-live .map-label,#manualMap.location-live .pin,#manualMap.location-live .map-note{display:none}
+.live-location-btn{white-space:nowrap}
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<style>#liveMap{min-height:550px;width:100%;z-index:1}.leaflet-popup-content-wrapper{border-radius:10px}.map-drill-back{position:absolute;z-index:1000;top:12px;left:12px;background:#fff;border:1px solid #ddd;padding:9px 12px;border-radius:8px;box-shadow:0 2px 8px #0002;display:none;cursor:pointer;font-weight:700}.map-level{position:absolute;z-index:1000;top:12px;right:12px;background:#fff;padding:9px 12px;border-radius:8px;box-shadow:0 2px 8px #0002;font-weight:700}</style>
+</head>
+
+<body>
+
+<header class="top">
+  <div class="logo">Swasthya<span>Mitra</span></div>
+  <div class="emergency">🚨 24/7 Emergency</div>
+  <nav class="nav">
+    <a href="#doctors">Find a Doctor</a>
+    <a href="#map-section">Hospitals & Clinics</a>
+    <a href="#facilities">Diagnostics</a>
+    <a href="#wellness">Wellness</a>
+    <a href="#articles">Health Articles</a>
+  </nav>
+  <div class="loc-pill">📍 <span id="topLocation">Choose location</span></div>
+  <button class="btn btn-blue" onclick="openBooking()">Book Appointment</button>
+</header>
+
+<section class="hero">
+  <div class="hero-img active" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1800&q=85')"></div>
+  <div class="hero-img" style="background-image:url('https://images.unsplash.com/photo-1550831107-1553da8c8464?auto=format&fit=crop&w=1800&q=85')"></div>
+  <div class="hero-img" style="background-image:url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1800&q=85')"></div>
+  <div class="hero-content">
+    <h1>Trusted care, right when you need it.</h1>
+    <p>Find doctors, hospitals, diagnostic services and dietitians near your chosen location — then book a real appointment flow in a few simple steps.</p>
+    <div class="hero-search">
+      <input id="heroSearch" placeholder="Search doctor, specialty, hospital or service">
+      <button class="btn btn-blue" onclick="searchCare()">Search Care</button>
+    </div>
+    <div class="hero-dots"><i class="dot on"></i><i class="dot"></i><i class="dot"></i></div>
+  </div>
+</section>
+
+<div class="quick">
+  <button onclick="openLocation()">📍 Find care near me<span>Choose a location on our map</span></button>
+  <button onclick="openBooking()">👨‍⚕️ Book a doctor<span>Select doctor → date → time → confirm</span></button>
+  <button onclick="openBooking('diet')">🥗 Book a dietitian<span>Personal nutrition consultation</span></button>
+  <button onclick="document.getElementById('facilities').scrollIntoView()">🩻 Diagnostic tests<span>X-ray, MRI, CT scan and more</span></button>
+</div>
+
+<section class="section" id="specialties">
+  <h2>Find the right specialist</h2>
+  <p class="sub">Choose a specialty and see available professionals.</p>
+  <div class="specialties">
+    <button class="specialty" onclick="filterDoctors('Cardiology')"><div class="ico">❤️</div><b>Cardiology</b></button>
+    <button class="specialty" onclick="filterDoctors('Dermatology')"><div class="ico">🧴</div><b>Dermatology</b></button>
+    <button class="specialty" onclick="filterDoctors('Pediatrics')"><div class="ico">🧒</div><b>Pediatrics</b></button>
+    <button class="specialty" onclick="filterDoctors('Orthopedics')"><div class="ico">🦴</div><b>Orthopedics</b></button>
+    <button class="specialty" onclick="filterDoctors('Neurology')"><div class="ico">🧠</div><b>Neurology</b></button>
+    <button class="specialty" onclick="filterDoctors('General Physician')"><div class="ico">🩺</div><b>General Physician</b></button>
+  </div>
+</section>
+
+<section class="section" id="map-section">
+  <h2>Find healthcare near your location</h2>
+  <p class="sub">Explore Maharashtra only. Click a city such as Mumbai or Amravati, then click an area to see the doctors available in that area.</p>
+  <div class="map-panel">
+    <div class="map-toolbar">
+      <input id="locationSearch" placeholder="Search Maharashtra city or locality — e.g. Mumbai, Andheri West, Pune, Amravati">
+      <button class="btn btn-blue" onclick="chooseLocationFromSearch()">Choose Location</button>
+      <button class="btn btn-outline" onclick="openLocation()">Change location</button>
+      <button class="btn btn-teal live-location-btn" onclick="detectLiveLocation()">📍 Use my live location</button>
+    </div>
+    <div class="map-layout">
+      <div class="manual-map" id="manualMap" style="display:none">
+        <div class="map-label" style="left:8%;top:13%">Delhi NCR</div>
+        <div class="map-label" style="left:50%;top:10%">Jaipur</div>
+        <div class="map-label" style="left:72%;top:25%">Kolkata</div>
+        <div class="map-label" style="left:29%;top:37%">Ahmedabad</div>
+        <div class="map-label" style="left:55%;top:47%">Mumbai</div>
+        <div class="map-label" style="left:74%;top:58%">Hyderabad</div>
+        <div class="map-label" style="left:42%;top:70%">Pune</div>
+        <div class="map-label" style="left:65%;top:80%">Bengaluru</div>
+        <div class="map-label" style="left:20%;top:79%">Chennai</div>
+
+        <button class="pin doctor" style="left:13%;top:25%" title="Dr. Ananya Rao" onclick="selectPlace('Dr. Ananya Rao')"><span>✚</span></button>
+        <button class="pin facility" style="left:51%;top:22%" title="SwasthyaMitra Diagnostics" onclick="selectPlace('SwasthyaMitra Diagnostics')"><span>+</span></button>
+        <button class="pin doctor" style="left:69%;top:34%" title="Dr. Rohan Mehta" onclick="selectPlace('Dr. Rohan Mehta')"><span>✚</span></button>
+        <button class="pin diet" style="left:52%;top:52%" title="Dr. Neha Kapoor" onclick="selectPlace('Dr. Neha Kapoor')"><span>◆</span></button>
+        <button class="pin doctor" style="left:76%;top:60%" title="Dr. Vikram Shah" onclick="selectPlace('Dr. Vikram Shah')"><span>✚</span></button>
+        <button class="pin facility" style="left:43%;top:67%" title="City Imaging Centre" onclick="selectPlace('City Imaging Centre')"><span>+</span></button>
+        <button class="pin doctor" style="left:63%;top:78%" title="Dr. Priya Iyer" onclick="selectPlace('Dr. Priya Iyer')"><span>✚</span></button>
+
+        <div class="map-note">🗺️ Manual demo map • Tap a marker to view the provider</div>
+      </div>
+
+      <div style="position:relative">
+        <button id="mapBack" class="map-drill-back" onclick="mapBack()">← Back</button>
+        <div id="mapLevel" class="map-level">Maharashtra cities</div>
+        <div id="liveMap" aria-label="Maharashtra healthcare map"></div>
+      </div>
+
+      <aside class="map-side">
+        <h3 id="resultsTitle">Care providers near selected location</h3>
+        <div id="placeList"></div>
+        <div class="map-legend">
+          <span class="legend"><i class="b"></i> Doctor</span>
+          <span class="legend"><i class="t"></i> Dietitian</span>
+          <span class="legend"><i class="r"></i> Hospital / Diagnostic</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="doctors">
+  <h2>Doctors available for appointment</h2>
+  <p class="sub">Choose a doctor, select a date, pick an available slot and confirm.</p>
+
+  <!-- ALL DOCTORS + ALL CATEGORIES -->
+  <div class="tabs">
+    <button class="tab active" onclick="filterDoctors('all',this)">All Doctors</button>
+    <button class="tab" onclick="filterDoctors('Cardiology',this)">Cardiology</button>
+    <button class="tab" onclick="filterDoctors('Dermatology',this)">Dermatology</button>
+    <button class="tab" onclick="filterDoctors('Pediatrics',this)">Pediatrics</button>
+    <button class="tab" onclick="filterDoctors('Orthopedics',this)">Orthopedics</button>
+    <button class="tab" onclick="filterDoctors('Neurology',this)">Neurology</button>
+    <button class="tab" onclick="filterDoctors('General Physician',this)">General Physician</button>
+    <button class="tab" onclick="filterDoctors('Gynecology',this)">Gynecology</button>
+    <button class="tab" onclick="filterDoctors('ENT',this)">ENT</button>
+    <button class="tab" onclick="filterDoctors('Ophthalmology',this)">Ophthalmology</button>
+    <button class="tab" onclick="filterDoctors('Dentistry',this)">Dentistry</button>
+    <button class="tab" onclick="filterDoctors('Psychiatry',this)">Psychiatry</button>
+    <button class="tab" onclick="filterDoctors('Gastroenterology',this)">Gastroenterology</button>
+   
+  </div>
+
+  <div class="doctor-grid" id="doctorGrid"></div>
+</section>
+
+<section class="section" id="dietitians">
+  <h2>Dietitian & nutrition appointments</h2>
+  <p class="sub">Book nutrition counselling using the same date-and-slot workflow as a doctor appointment.</p>
+  <div class="diet-grid" id="dietGrid"></div>
+</section>
+
+<section class="section" id="facilities">
+  <h2>Diagnostic & healthcare facilities</h2>
+  <p class="sub">Explore common diagnostic services before your visit.</p>
+  <div class="facilities">
+    <div class="facility"><div class="fi">🩻</div><h3>X-Ray</h3><p>Digital radiography for bones, chest and routine imaging.</p><button onclick="facilityBook('X-Ray')">Book / enquire</button></div>
+    <div class="facility"><div class="fi">🧲</div><h3>MRI Scan</h3><p>Non-invasive magnetic resonance imaging with appointment scheduling.</p><button onclick="facilityBook('MRI Scan')">Book / enquire</button></div>
+    <div class="facility"><div class="fi">🖥️</div><h3>CT Scan</h3><p>Computed tomography services for detailed cross-sectional imaging.</p><button onclick="facilityBook('CT Scan')">Book / enquire</button></div>
+    <div class="facility"><div class="fi">🔬</div><h3>Laboratory Tests</h3><p>Routine blood, urine and other pathology investigations.</p><button onclick="facilityBook('Laboratory Tests')">Book / enquire</button></div>
+    <div class="facility"><div class="fi">🫀</div><h3>ECG & Cardiac Tests</h3><p>ECG and selected cardiac diagnostic services.</p><button onclick="facilityBook('ECG & Cardiac Tests')">Book / enquire</button></div>
+    <div class="facility"><div class="fi">🦴</div><h3>Ultrasound</h3><p>Ultrasound imaging for selected abdominal and soft-tissue studies.</p><button onclick="facilityBook('Ultrasound')">Book / enquire</button></div>
+    <div class="facility"><div class="fi">🩸</div><h3>Health Checkups</h3><p>Preventive packages and routine screening panels.</p><button onclick="facilityBook('Health Checkup')">Book / enquire</button></div>
+    <div class="facility"><div class="fi">🏥</div><h3>Hospital Services</h3><p>Find hospitals, emergency services and specialist departments.</p><button onclick="openLocation()">Find nearby</button></div>
+  </div>
+</section>
+
+<section class="section" id="articles">
+  <h2>Health articles & guides</h2>
+  <p class="sub">Simple educational content for everyday health decisions.</p>
+  <div class="articles">
+    <article class="article"><img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=900&q=80"><div class="article-body"><h3>Understanding preventive health checkups</h3><p>What routine screening can include and how to prepare for a clinic visit.</p><a class="read" href="#facilities">Read guide →</a></div></article>
+    <article class="article"><img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=900&q=80"><div class="article-body"><h3>Building a balanced everyday diet</h3><p>Practical nutrition basics, meal planning and when to seek a dietitian.</p><a class="read" href="#dietitians">Read guide →</a></div></article>
+    <article class="article"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=80"><div class="article-body"><h3>Preparing for a doctor appointment</h3><p>Questions, medicines and reports that can make your consultation easier.</p><a class="read" href="#doctors">Read guide →</a></div></article>
+  </div>
+</section>
+
+<section class="wellness" id="wellness">
+  <div class="well-grid">
+    <div class="well-card"><div class="wi">🥗</div><span class="program-tag">Nutrition</span><h3>Personalized Diet Care</h3><p>One-to-one meal planning with a dietitian for weight, nutrition and lifestyle goals.</p><button class="btn btn-teal" onclick="openBooking('diet')">Book dietitian</button></div>
+    <div class="well-card"><div class="wi">❤️</div><span class="program-tag">Preventive care</span><h3>Heart Health Program</h3><p>Build a practical routine around heart-friendly habits, checkups and follow-up care.</p><button class="btn btn-blue" onclick="facilityBook('Heart Health Program')">Explore program</button></div>
+    <div class="well-card"><div class="wi">⚖️</div><span class="program-tag">Lifestyle</span><h3>Healthy Weight Journey</h3><p>Structured support for food choices, activity, progress tracking and sustainable habits.</p><button class="btn btn-outline" onclick="openBooking('diet')">Start journey</button></div>
+    <div class="well-card"><div class="wi">🌙</div><span class="program-tag">Mind & sleep</span><h3>Stress & Sleep Wellness</h3><p>Simple routines for sleep hygiene, relaxation, movement and everyday wellbeing.</p><button class="btn btn-outline" onclick="toast('Stress & Sleep Wellness selected')">Explore wellness</button></div>
+    <div class="well-card"><div class="wi">🩺</div><span class="program-tag">Metabolic health</span><h3>Diabetes Support</h3><p>Coordinate doctor visits, nutrition support and routine diagnostic services in one place.</p><button class="btn btn-blue" onclick="startBookingDoctor(6)">Book care</button></div>
+    <div class="well-card"><div class="wi">🧘</div><span class="program-tag">Everyday fitness</span><h3>Active Living Program</h3><p>Gentle movement, hydration and daily activity ideas designed around your care journey.</p><button class="btn btn-teal" onclick="toast('Active Living Program selected')">View program</button></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="cta"><div><h2>Ready to book your care?</h2><p>Choose your location, select a provider, pick a date and slot, and get a confirmation.</p></div><button class="btn" style="background:#fff;color:var(--blue)" onclick="openBooking()">Book Appointment</button></div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div><div class="logo" style="color:#fff">Swasthya<span>Mitra</span></div><p>Healthcare discovery, appointments, diagnostics and wellness across India in one patient-friendly experience.</p></div>
+    <div><h4>Care</h4><a href="#doctors">Doctors</a><a href="#dietitians">Dietitians</a><a href="#map-section">Hospitals</a></div>
+    <div><h4>Services</h4><a href="#facilities">X-Ray</a><a href="#facilities">MRI</a><a href="#facilities">CT Scan</a></div>
+    <div><h4>Wellness</h4><a href="#wellness">Diet plans</a><a href="#articles">Articles</a><a href="#wellness">Programs</a></div>
+  </div>
+  <div class="notice">Demo healthcare interface. Appointment availability, prices and provider details shown here are sample data for the prototype.</div>
+</footer>
+
+<div class="modal" id="locationModal">
+  <div class="modal-box">
+    <div class="modal-top"><h2>Choose your location</h2><button class="x" onclick="closeModal('locationModal')">×</button></div>
+    <p style="color:var(--muted)">Select a locality manually. The selected location will be used to show nearby doctors, dietitians and facilities.</p>
+    <div class="field"><label>SEARCH MAHARASHTRA LOCALITY</label><input id="localityInput" placeholder="e.g. Mumbai, Andheri West, Bandra West, Amravati"></div>
+    <div class="field"><label>MAHARASHTRA LOCATIONS</label><select id="localitySelect"><option value="">Select a location</option><option>Mumbai</option><option>Mumbai • Andheri West</option><option>Mumbai • Andheri East</option><option>Mumbai • Bandra West</option><option>Mumbai • Bandra East</option><option>Mumbai • Borivali</option><option>Mumbai • Dadar</option><option>Mumbai • Powai</option><option>Mumbai • Ghatkopar</option><option>Mumbai • Kurla</option><option>Mumbai • Malad</option><option>Mumbai • Thane</option><option>Mumbai • Navi Mumbai</option><option>Pune</option><option>Nagpur</option><option>Amravati</option><option>Nashik</option><option>Chhatrapati Sambhajinagar</option><option>Kolhapur</option></select></div>
+    <button class="btn btn-blue" style="width:100%" onclick="saveLocation()">Continue with this location</button>
+  </div>
+</div>
+
+<div class="modal" id="bookingModal">
+  <div class="modal-box">
+    <div class="modal-top"><h2 id="bookingTitle">Book Appointment</h2><button class="x" onclick="closeModal('bookingModal')">×</button></div>
+    <div class="stepper"><div class="step active" id="s1">1. Provider</div><div class="step" id="s2">2. Date & Time</div><div class="step" id="s3">3. Patient</div><div class="step" id="s4">4. Confirm</div></div>
+
+    <div class="booking-section active" id="bookStep1">
+      <div id="bookingProviderList"></div>
+      <div class="field"><label>CONSULTATION MODE</label><div class="mode"><button class="active" data-mode="In-person visit" onclick="setMode(this)">🏥 In-person visit<br><small>Visit clinic</small></button><button data-mode="Online consultation" onclick="setMode(this)">💻 Online consultation<br><small>Video consultation</small></button></div></div>
+      <button class="btn btn-blue" style="width:100%" onclick="nextBooking(2)">Continue to date & time</button>
+    </div>
+
+    <div class="booking-section" id="bookStep2">
+      <div class="doctor-summary" id="bookingSummary"></div>
+      <div class="field"><label>SELECT DATE</label><div class="date-row" id="dateRow"></div></div>
+      <div class="field"><label>AVAILABLE TIME SLOTS</label><div class="slots" id="slotGrid"></div></div>
+      <div class="modal-actions"><button class="btn btn-outline" onclick="nextBooking(1)">Back</button><button class="btn btn-blue" onclick="nextBooking(3)">Continue</button></div>
+    </div>
+
+    <div class="booking-section" id="bookStep3">
+      <div class="doctor-summary" id="patientBookingSummary"></div>
+      <div class="field"><label>PATIENT NAME</label><input id="patientName" placeholder="Enter patient name"></div>
+      <div class="field"><label>MOBILE NUMBER</label><input id="patientPhone" placeholder="10-digit mobile number" inputmode="numeric"></div>
+      <div class="field"><label>REASON FOR VISIT</label><input id="patientReason" placeholder="Optional — e.g. follow-up, consultation"></div>
+      <div class="modal-actions"><button class="btn btn-outline" onclick="nextBooking(2)">Back</button><button class="btn btn-blue" onclick="nextBooking(4)">Review appointment</button></div>
+    </div>
+
+    <div class="booking-section" id="bookStep4">
+      <div class="confirm-box" id="confirmationPreview"></div>
+      <div class="modal-actions"><button class="btn btn-outline" onclick="nextBooking(3)">Edit</button><button class="btn btn-blue" onclick="confirmBooking()">Confirm appointment</button></div>
+    </div>
+
+    <div class="booking-section" id="bookSuccess">
+      <div class="success"><div class="check">✓</div><h2>Appointment confirmed</h2><p style="color:var(--muted)">Your appointment has been successfully booked in this prototype.</p><div class="confirm-box" id="successDetails"></div><button class="btn btn-blue" style="width:100%;margin-top:15px" onclick="closeModal('bookingModal')">Done</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* =========================================================
+   DOCTORS
+   Existing doctors are kept + additional category doctors
+   ========================================================= */
+
+const doctors=[
+ {id:1,name:"Dr. Rohan Mehta",spec:"Dermatology",qual:"MD Dermatology",exp:"9 years",rating:"4.8",place:"Skin & Laser Centre • Andheri West, Mumbai",area:"Andheri West",city:"Mumbai",fee:"₹600",img:"https://images.pexels.com/photos/32428850/pexels-photo-32428850.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:2,name:"Dr. Aisha Khan",spec:"Cardiology",qual:"MD, DM Cardiology",exp:"12 years",rating:"4.9",place:"HeartCare Clinic • Bandra West, Mumbai",area:"Bandra West",city:"Mumbai",fee:"₹700",img:"https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:3,name:"Dr. Sameer Patil",spec:"Orthopedics",qual:"MS Orthopedics",exp:"14 years",rating:"4.8",place:"Joint & Bone Centre • Borivali, Mumbai",area:"Borivali",city:"Mumbai",fee:"₹650",img:"https://images.pexels.com/photos/32428850/pexels-photo-32428850.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:4,name:"Dr. Kavita Deshmukh",spec:"Pediatrics",qual:"MD Pediatrics",exp:"11 years",rating:"4.9",place:"Little Care Clinic • Dadar, Mumbai",area:"Dadar",city:"Mumbai",fee:"₹550",img:"https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:5,name:"Dr. Aditya Joshi",spec:"General Physician",qual:"MD Medicine",exp:"10 years",rating:"4.7",place:"MediFirst Clinic • Powai, Mumbai",area:"Powai",city:"Mumbai",fee:"₹450",img:"https://images.pexels.com/photos/32428850/pexels-photo-32428850.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:6,name:"Dr. Sneha Kulkarni",spec:"Gynecology",qual:"MS, DNB",exp:"10 years",rating:"4.8",place:"Women's Care Centre • Ghatkopar, Mumbai",area:"Ghatkopar",city:"Mumbai",fee:"₹650",img:"https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:7,name:"Dr. Neel Shah",spec:"ENT",qual:"MS ENT",exp:"13 years",rating:"4.8",place:"ENT & Hearing Clinic • Andheri East, Mumbai",area:"Andheri East",city:"Mumbai",fee:"₹500",img:"https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:8,name:"Dr. Pooja More",spec:"Neurology",qual:"DM Neurology",exp:"13 years",rating:"4.9",place:"NeuroCare Clinic • Thane, Maharashtra",area:"Thane",city:"Thane",fee:"₹900",img:"https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:9,name:"Dr. Rahul Deshpande",spec:"Cardiology",qual:"MD, DM Cardiology",exp:"15 years",rating:"4.9",place:"Vidarbha Heart Centre • Nagpur, Maharashtra",area:"Nagpur",city:"Nagpur",fee:"₹700",img:"https://images.pexels.com/photos/32428850/pexels-photo-32428850.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:10,name:"Dr. Anjali Wankhede",spec:"General Physician",qual:"MD Medicine",exp:"9 years",rating:"4.8",place:"Amravati Health Clinic • Amravati, Maharashtra",area:"Amravati",city:"Amravati",fee:"₹450",img:"https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:11,name:"Dr. Vikram Shah",spec:"Orthopedics",qual:"MS Orthopedics",exp:"15 years",rating:"4.8",place:"Ortho & Joint Centre • Pune, Maharashtra",area:"Pune",city:"Pune",fee:"₹650",img:"https://images.pexels.com/photos/32428850/pexels-photo-32428850.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:12,name:"Dr. Meera Pawar",spec:"Dermatology",qual:"MD Dermatology",exp:"8 years",rating:"4.8",place:"SkinCare Clinic • Nashik, Maharashtra",area:"Nashik",city:"Nashik",fee:"₹600",img:"https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=700"},
+
+]
+
+const dietitians=[
+ {id:"d1",name:"Ms. Aditi Sharma",spec:"Sports Nutritionist",qual:"MSc Nutrition & Dietetics",exp:"7 years",rating:"4.8",place:"Active Nutrition • Bandra West, Mumbai",area:"Bandra West",city:"Mumbai",fee:"₹550",img:"https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:"d2",name:"Dr. Kavya Patil",spec:"Clinical Dietitian",qual:"MSc Clinical Nutrition",exp:"8 years",rating:"4.9",place:"NutriCare • Andheri West, Mumbai",area:"Andheri West",city:"Mumbai",fee:"₹500",img:"https://images.pexels.com/photos/32428850/pexels-photo-32428850.jpeg?auto=compress&cs=tinysrgb&w=700"},
+ {id:"d3",name:"Dr. Rutuja Joshi",spec:"Diabetes Nutrition",qual:"PhD Nutrition",exp:"10 years",rating:"4.9",place:"Wellness Centre • Pune, Maharashtra",area:"Pune",city:"Pune",fee:"₹600",img:"https://images.pexels.com/photos/32428850/pexels-photo-32428850.jpeg?auto=compress&cs=tinysrgb&w=700"}
+];
+
+const places=doctors.map(d=>({
+ name:d.name,
+ type:"Doctor",
+ tag:d.spec,
+ location:d.place.replace(/^.*• /,""),
+ detail:d.place+" • "+d.rating+" ★",
+ action:"doctor",
+ city:d.city,
+ area:d.area
+}))
+.concat(dietitians.map(d=>({
+ name:d.name,
+ type:"Dietitian",
+ tag:d.spec,
+ location:d.place.replace(/^.*• /,""),
+ detail:d.place+" • "+d.rating+" ★",
+ action:"diet",
+ city:d.city,
+ area:d.area
+})))
+.concat([
+  {name:"Sahyadri Diagnostics",type:"Diagnostic",tag:"X-Ray • MRI • CT",location:"Pune, Maharashtra",detail:"Imaging & Lab Services",action:"facility",city:"Pune",area:"Pune"},
+  {name:"Amravati Diagnostic Centre",type:"Diagnostic",tag:"MRI • CT • Ultrasound",location:"Amravati, Maharashtra",detail:"Advanced Imaging Centre",action:"facility",city:"Amravati",area:"Amravati"}
+]);
+
+let selectedLocation="Mumbai", selectedProvider=null, selectedDate=null, selectedSlot=null, consultationMode="In-person visit", currentFilter="all";
+
+/* Maharashtra-only drill-down map */
+const maharashtraCities={
+ Mumbai:{lat:19.0760,lng:72.8777,areas:{
+  "Andheri West":[19.1364,72.8296],"Andheri East":[19.1197,72.8697],"Bandra West":[19.0607,72.8362],"Bandra East":[19.0629,72.8501],"Borivali":[19.2307,72.8567],"Dadar":[19.0178,72.8478],"Powai":[19.1176,72.9060],"Ghatkopar":[19.0860,72.9081],"Kurla":[19.0726,72.8845],"Malad":[19.1860,72.8481],"Thane":[19.2183,72.9781],"Navi Mumbai":[19.0330,73.0297]
+ }},
+ Pune:{lat:18.5204,lng:73.8567,areas:{"Shivajinagar":[18.5308,73.8475],"Kothrud":[18.5074,73.8077],"Baner":[18.5590,73.7868],"Viman Nagar":[18.5679,73.9143]}},
+ Nagpur:{lat:21.1458,lng:79.0882,areas:{"Dharampeth":[21.1458,79.0733],"Sadar":[21.1606,79.0806],"Manish Nagar":[21.1044,79.0840]}},
+ Amravati:{lat:20.9320,lng:77.7523,areas:{"Camp":[20.9314,77.7523],"Rajapeth":[20.9267,77.7585],"Badnera":[20.8789,77.7482]}},
+ Nashik:{lat:19.9975,lng:73.7898,areas:{"College Road":[20.0077,73.7630],"Gangapur Road":[20.0050,73.7435],"Panchavati":[20.0110,73.7930]}},
+ "Chhatrapati Sambhajinagar":{lat:19.8762,lng:75.3433,areas:{"CIDCO":[19.8590,75.3400],"Garkheda":[19.8612,75.3310]}},
+ Kolhapur:{lat:16.7050,lng:74.2433,areas:{"Rajarampuri":[16.7022,74.2390],"Tarabai Park":[16.7085,74.2190]}}
+};
+
+let mapInstance=null,mapLevelState="cities",mapCity=null;
+
+function initMaharashtraMap(){
+ if(mapInstance)return;
+ mapInstance=L.map('liveMap').setView([19.7515,75.7139],7);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+   maxZoom:19,
+   attribution:'© OpenStreetMap contributors'
+ }).addTo(mapInstance);
+ showMaharashtraCities();
+}
+
+function clearMapMarkers(){
+ mapInstance.eachLayer(l=>{
+   if(l instanceof L.Marker||l instanceof L.CircleMarker)mapInstance.removeLayer(l);
+ });
+}
+
+function showMaharashtraCities(){
+ mapLevelState="cities";
+ mapCity=null;
+ clearMapMarkers();
+ document.getElementById('mapLevel').textContent='Maharashtra cities';
+ document.getElementById('mapBack').style.display='none';
+
+ const group=[];
+
+ Object.entries(maharashtraCities).forEach(([city,d])=>{
+   const m=L.marker([d.lat,d.lng])
+     .addTo(mapInstance)
+     .bindTooltip(city,{permanent:true,direction:'top'});
+
+   m.on('click',()=>openCityOnMap(city));
+   group.push([d.lat,d.lng]);
+ });
+
+ mapInstance.fitBounds(group,{padding:[30,30]});
+}
+
+function openCityOnMap(city){
+ if(!maharashtraCities[city])return;
+
+ mapLevelState="areas";
+ mapCity=city;
+ clearMapMarkers();
+
+ const d=maharashtraCities[city];
+
+ document.getElementById('mapLevel').textContent=city+' areas';
+ document.getElementById('mapBack').style.display='block';
+
+ mapInstance.setView([d.lat,d.lng],11);
+
+ Object.entries(d.areas).forEach(([area,coords])=>{
+   const m=L.marker(coords)
+     .addTo(mapInstance)
+     .bindTooltip(area,{permanent:true,direction:'top'});
+
+   m.on('click',()=>openAreaOnMap(city,area,coords));
+ });
+
+ setLocation(city);
+ document.getElementById('locationSearch').value=city;
+}
+
+function openAreaOnMap(city,area,coords){
+ const full=city==='Mumbai'?'Mumbai • '+area:city;
+
+ setLocation(full);
+
+ mapLevelState='doctors';
+ mapCity=city;
+ clearMapMarkers();
+
+ document.getElementById('mapLevel').textContent=area+' doctors';
+ document.getElementById('mapBack').style.display='block';
+
+ mapInstance.setView(coords,14);
+
+ const ds=doctors.filter(d=>
+   d.city===city &&
+   (d.area===area || city!=='Mumbai' && d.area===city)
+ );
+
+ const dts=dietitians.filter(d=>d.city===city && d.area===area);
+
+ const list=ds.concat(dts);
+
+ if(!list.length){
+   L.marker(coords)
+    .addTo(mapInstance)
+    .bindPopup('<b>No doctor data for this area yet.</b><br>Choose another Maharashtra area.')
+    .openPopup();
+   return;
+ }
+
+ list.forEach((d,i)=>{
+   const lat=coords[0]+((i%3)-1)*0.004;
+   const lng=coords[1]+(Math.floor(i/3))*0.004;
+
+   L.marker([lat,lng])
+    .addTo(mapInstance)
+    .bindPopup(
+      `<b>${d.name}</b><br>${d.spec}<br>${d.place}<br><button onclick="startBookingDoctor(${typeof d.id==='number'?d.id:1})">Book</button>`
+    );
+ });
+}
+
+function mapBack(){
+ if(mapLevelState==='doctors'&&mapCity){
+   openCityOnMap(mapCity);
+ }else if(mapLevelState==='areas'){
+   showMaharashtraCities();
+ }
+}
+
+
+/* =========================================================
+   DOCTOR FILTER
+   ========================================================= */
+
+function renderDoctors(filter="all"){
+ currentFilter=filter;
+
+ const locationDoctors=doctors.filter(locationMatches);
+
+ const list=filter==="all"
+   ?locationDoctors
+   :locationDoctors.filter(d=>d.spec===filter);
+
+ document.getElementById("doctorGrid").innerHTML=list.length
+ ?list.map(d=>`
+ <article class="doctor-card">
+  <img src="${d.img}" alt="${d.name}">
+  <div class="doctor-body">
+   <h3>${d.name}</h3>
+   <div class="role">${d.spec}</div>
+   <p>${d.qual} • ${d.exp}<br>${d.place}</p>
+   <div class="rating">★★★★★ ${d.rating}</div>
+   <div class="doctor-actions">
+    <button class="view" onclick="showDoctor('${d.name}')">View profile</button>
+    <button class="book-now" onclick="startBookingDoctor(${d.id})">Book now</button>
+   </div>
+  </div>
+ </article>
+ `).join("")
+ :`<div class="place"><h4>No doctors available</h4><p>No ${filter} doctors are currently listed for ${selectedLocation}. Choose another Maharashtra location.</p></div>`;
+}
+
+function renderDietitians(){
+ document.getElementById("dietGrid").innerHTML=dietitians.filter(locationMatches).map(d=>`
+ <article class="diet-card">
+  <img src="${d.img}" alt="${d.name}">
+  <div class="diet-body">
+   <h3>${d.name}</h3>
+   <div class="role">${d.spec}</div>
+   <p>${d.qual} • ${d.exp}<br>${d.place}<br><span class="rating">★★★★★ ${d.rating}</span></p>
+   <div class="diet-actions">
+    <button class="view" onclick="showDoctor('${d.name}')">View profile</button>
+    <button class="book-now" onclick="startBookingDiet('${d.id}')">Book now</button>
+   </div>
+  </div>
+ </article>
+ `).join("");
+}
+
+function normalizeLocation(v){
+ return String(v||"").trim().replace(/\s+/g," ");
+}
+
+function isMaharashtraLocation(loc){
+ const v=normalizeLocation(loc).toLowerCase();
+
+ const allowed=[
+   "mumbai","thane","navi mumbai","pune","nagpur","amravati",
+   "nashik","chhatrapati sambhajinagar","aurangabad","kolhapur",
+   "andheri","bandra","borivali","dadar","powai","ghatkopar",
+   "kurla","malad"
+ ];
+
+ return v.includes("maharashtra") ||
+   allowed.some(x=>v===x || v.startsWith(x+" ") || v.startsWith(x+",") || v.includes("• "+x));
+}
+
+function locationMatches(item){
+ const selected=normalizeLocation(selectedLocation).toLowerCase();
+ const city=(item.city||"").toLowerCase();
+ const area=(item.area||"").toLowerCase();
+
+ if(!selected)return false;
+
+ if(selected.startsWith("mumbai • "))
+   return city==="mumbai" && area===selected.split("•")[1].trim();
+
+ if(selected==="mumbai")
+   return city==="mumbai";
+
+ const clean=selected.replace(/,?\s*maharashtra/i,"").trim();
+
+ return city===clean || area===clean;
+}
+
+function renderPlaces(){
+ const filtered=places.filter(locationMatches);
+
+ document.getElementById("resultsTitle").textContent=
+   `Care providers near ${selectedLocation} • Maharashtra`;
+
+ document.getElementById("placeList").innerHTML=filtered.length
+ ?filtered.map((p)=>{
+   const i=places.indexOf(p);
+
+   return `<div class="place" id="place-${i}">
+    <span class="badge ${p.action==="diet"?"teal":p.action==="facility"?"red":""}">${p.type}</span>
+    <h4>${p.name}</h4>
+    <p><b>${p.tag}</b> • ${p.location}</p>
+    <p>${p.detail}</p>
+    <div class="actions">
+      <button class="choose" onclick="selectPlace('${p.name.replace(/'/g,"\\'")}')">Select</button>
+      <button class="book" onclick="${
+        p.action==="facility"
+        ?`facilityBook('${p.tag}')`
+        :p.action==="diet"
+        ?`startBookingDiet('${dietitians.find(d=>d.name===p.name)?.id||"d1"}')`
+        :`startBookingDoctor(${doctors.find(d=>d.name===p.name)?.id||1})`
+      }">Book</button>
+    </div>
+   </div>`;
+ }).join("")
+ :`<div class="place">
+    <h4>No providers in this Maharashtra area yet</h4>
+    <p>Choose another Mumbai area or Maharashtra city.</p>
+   </div>`;
+}
+
+function setLocation(loc){
+ loc=normalizeLocation(loc);
+
+ if(!loc)return;
+
+ if(!isMaharashtraLocation(loc)){
+   toast("This appointment search is available only in Maharashtra");
+   return;
+ }
+
+ selectedLocation=loc;
+
+ document.getElementById("topLocation").textContent=selectedLocation;
+ document.getElementById("locationSearch").value=selectedLocation;
+
+ renderPlaces();
+ renderDoctors(currentFilter);
+ renderDietitians();
+
+ toast("Location set to "+selectedLocation);
+}
+
+function openLocation(){
+ document.getElementById("locationModal").classList.add("show");
+}
+
+function saveLocation(){
+ const typed=normalizeLocation(document.getElementById("localityInput").value);
+ const selected=document.getElementById("localitySelect").value;
+ const value=typed||selected||"Mumbai";
+
+ if(!isMaharashtraLocation(value)){
+   toast("Please select a Maharashtra city or locality");
+   return;
+ }
+
+ setLocation(value);
+ closeModal("locationModal");
+}
+
+function chooseLocationFromSearch(){
+ const v=normalizeLocation(document.getElementById("locationSearch").value);
+
+ if(!v){
+   setLocation("Mumbai");
+   return;
+ }
+
+ if(!isMaharashtraLocation(v)){
+   toast("Only Maharashtra locations are supported");
+   return;
+ }
+
+ const areaMap={
+  "andheri west":"Mumbai • Andheri West",
+  "andheri east":"Mumbai • Andheri East",
+  "bandra west":"Mumbai • Bandra West",
+  "bandra east":"Mumbai • Bandra East",
+  "borivali":"Mumbai • Borivali",
+  "dadar":"Mumbai • Dadar",
+  "powai":"Mumbai • Powai",
+  "ghatkopar":"Mumbai • Ghatkopar",
+  "kurla":"Mumbai • Kurla",
+  "malad":"Mumbai • Malad",
+  "thane":"Mumbai • Thane",
+  "navi mumbai":"Mumbai • Navi Mumbai"
+ };
+
+ setLocation(areaMap[v.toLowerCase()]||v);
+}
+
+function selectPlace(name){
+ const el=places.find((p)=>p.name===name);
+
+ if(!el)return;
+
+ const i=places.indexOf(el);
+
+ document.querySelectorAll(".place").forEach(x=>x.classList.remove("selected"));
+ document.getElementById("place-"+i)?.classList.add("selected");
+
+ document.querySelectorAll(".pin").forEach(x=>x.classList.remove("selected"));
+
+ const pins=document.querySelectorAll(".pin");
+
+ const pinMap={
+  "Dr. Ananya Rao":0,
+  "SwasthyaMitra Diagnostics":1,
+  "Dr. Rohan Mehta":2,
+  "Dr. Neha Kapoor":3,
+  "Dr. Vikram Shah":4,
+  "City Imaging Centre":5,
+  "Dr. Priya Iyer":6
+ };
+
+ if(pinMap[name]!=null)
+   pins[pinMap[name]].classList.add("selected");
+
+ toast(name+" selected");
+}
+
+function filterDoctors(filter,button){
+ renderDoctors(filter);
+
+ if(button){
+   document.querySelectorAll(".tabs .tab").forEach(t=>t.classList.remove("active"));
+   button.classList.add("active");
+ }
+
+ document.getElementById("doctors").scrollIntoView({behavior:"smooth"});
+}
+
+function showDoctor(name){
+ toast(name+" profile selected — choose Book now to continue");
+ document.getElementById("doctors").scrollIntoView({behavior:"smooth"});
+}
+
+
+/* =========================================================
+   BOOKING
+   ========================================================= */
+
+function openBooking(type){
+ if(type==="diet")
+   startBookingDiet("d1");
+ else
+   startBookingDoctor(1);
+}
+
+function startBookingDoctor(id){
+ selectedProvider=doctors.find(d=>d.id===id);
+
+ if(!selectedProvider){
+   toast("Doctor not found");
+   return;
+ }
+
+ selectedDate=null;
+ selectedSlot=null;
+ consultationMode="In-person visit";
+
+ openBookingModal();
+}
+
+function startBookingDiet(id){
+ selectedProvider=dietitians.find(d=>d.id===id);
+
+ if(!selectedProvider){
+   toast("Dietitian not found");
+   return;
+ }
+
+ selectedDate=null;
+ selectedSlot=null;
+ consultationMode="In-person visit";
+
+ openBookingModal();
+}
+
+function openBookingModal(){
+ document.getElementById("bookingModal").classList.add("show");
+
+ document.getElementById("bookingTitle").textContent=
+   `Book with ${selectedProvider.name}`;
+
+ renderProviderStep();
+ renderDates();
+ renderSlots();
+ renderSummary();
+
+ nextBooking(1);
+}
+
+function renderProviderStep(){
+ document.getElementById("bookingProviderList").innerHTML=
+ `<div class="doctor-summary">
+   <img src="${selectedProvider.img}">
+   <div>
+    <h4>${selectedProvider.name}</h4>
+    <div class="role">${selectedProvider.spec}</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px">
+      ${selectedProvider.qual} • ${selectedProvider.exp}<br>
+      ${selectedProvider.place}<br>
+      <b>${selectedProvider.fee}</b> consultation
+    </div>
+   </div>
+ </div>`;
+}
+
+function setMode(btn){
+ consultationMode=btn.dataset.mode;
+
+ document.querySelectorAll(".mode button")
+   .forEach(b=>b.classList.remove("active"));
+
+ btn.classList.add("active");
+}
+
+function dateOptions(){
+ const arr=[];
+ let d=new Date();
+
+ d.setHours(0,0,0,0);
+
+ for(let i=0;i<7;i++){
+   let x=new Date(d);
+   x.setDate(d.getDate()+i);
+   arr.push(x);
+ }
+
+ return arr;
+}
+
+function renderDates(){
+ document.getElementById("dateRow").innerHTML=
+ dateOptions().map((d,i)=>{
+   const day=d.toLocaleDateString("en-IN",{weekday:"short"});
+   const num=d.getDate();
+   const mon=d.toLocaleDateString("en-IN",{month:"short"});
+
+   return `<button class="date-btn ${i===0?"active":""}" onclick="chooseDate(this,'${d.toISOString()}')">
+     <strong>${i===0?"Today":day}</strong>
+     <small>${num} ${mon}</small>
+   </button>`;
+ }).join("");
+
+ selectedDate=dateOptions()[0];
+}
+
+function chooseDate(btn,iso){
+ document.querySelectorAll(".date-btn")
+   .forEach(b=>b.classList.remove("active"));
+
+ btn.classList.add("active");
+
+ selectedDate=new Date(iso);
+ selectedSlot=null;
+
+ renderSlots();
+ renderSummary();
+}
+
+function renderSlots(){
+ const slots=[
+  "09:00 AM","09:30 AM","10:00 AM","10:30 AM",
+  "11:00 AM","11:30 AM","12:00 PM","02:00 PM",
+  "02:30 PM","03:00 PM","04:00 PM","05:00 PM",
+  "05:30 PM","06:00 PM","06:30 PM","07:00 PM"
+ ];
+
+ document.getElementById("slotGrid").innerHTML=
+ slots.map((s,i)=>`
+   <button class="slot ${[2,7,13].includes(i)?"taken":""}"
+    ${[2,7,13].includes(i)?"disabled":""}
+    onclick="chooseSlot(this,'${s}')">${s}</button>
+ `).join("");
+}
+
+function chooseSlot(btn,slot){
+ if(btn.disabled)return;
+
+ document.querySelectorAll(".slot")
+   .forEach(b=>b.classList.remove("active"));
+
+ btn.classList.add("active");
+
+ selectedSlot=slot;
+
+ renderSummary();
+}
+
+function renderSummary(){
+ const dateText=selectedDate
+ ?selectedDate.toLocaleDateString("en-IN",{
+   weekday:"long",
+   day:"numeric",
+   month:"long",
+   year:"numeric"
+ })
+ :"Select date";
+
+ document.getElementById("bookingSummary").innerHTML=
+ `<img src="${selectedProvider.img}">
+  <div>
+   <h4>${selectedProvider.name}</h4>
+   <div class="role">${selectedProvider.spec}</div>
+   <div style="font-size:12px;color:var(--muted)">
+    ${selectedProvider.place}<br>
+    ${dateText} • ${selectedSlot||"Select time"}
+   </div>
+  </div>`;
+
+ document.getElementById("patientBookingSummary").innerHTML=
+   document.getElementById("bookingSummary").innerHTML;
+}
+
+function nextBooking(step){
+ if(step===2&&!selectedProvider)return;
+
+ if(step===3&&(!selectedDate||!selectedSlot)){
+   toast("Please select a date and available time slot");
+   return;
+ }
+
+ if(step===4){
+   if(
+     !document.getElementById("patientName").value.trim()||
+     !/^[0-9]{10}$/.test(document.getElementById("patientPhone").value.trim())
+   ){
+     toast("Enter patient name and a valid 10-digit mobile number");
+     return;
+   }
+
+   renderConfirmation();
+ }
+
+ [1,2,3,4].forEach(i=>{
+   document.getElementById("bookStep"+i).classList.remove("active");
+   document.getElementById("s"+i).classList.remove("active","done");
+ });
+
+ if(step<=4){
+   document.getElementById("bookStep"+step).classList.add("active");
+
+   for(let i=1;i<step;i++)
+     document.getElementById("s"+i).classList.add("done");
+
+   document.getElementById("s"+step).classList.add("active");
+ }
+
+ renderSummary();
+}
+
+function renderConfirmation(){
+ const dt=selectedDate.toLocaleDateString("en-IN",{
+   weekday:"long",
+   day:"numeric",
+   month:"long",
+   year:"numeric"
+ });
+
+ document.getElementById("confirmationPreview").innerHTML=`
+  <div class="confirm-row"><span>Provider</span><b>${selectedProvider.name}</b></div>
+  <div class="confirm-row"><span>Specialty</span><b>${selectedProvider.spec}</b></div>
+  <div class="confirm-row"><span>Location</span><b>${selectedProvider.place}</b></div>
+  <div class="confirm-row"><span>Mode</span><b>${consultationMode}</b></div>
+  <div class="confirm-row"><span>Date</span><b>${dt}</b></div>
+  <div class="confirm-row"><span>Time</span><b>${selectedSlot}</b></div>
+  <div class="confirm-row"><span>Patient</span><b>${document.getElementById("patientName").value}</b></div>
+  <div class="confirm-row"><span>Consultation fee</span><b>${selectedProvider.fee}</b></div>
+ `;
+}
+
+function confirmBooking(){
+ const code="SM-"+Math.floor(100000+Math.random()*899999);
+
+ const dt=selectedDate.toLocaleDateString("en-IN",{
+   day:"numeric",
+   month:"short",
+   year:"numeric"
+ });
+
+ document.querySelectorAll(".booking-section")
+   .forEach(s=>s.classList.remove("active"));
+
+ document.getElementById("bookSuccess").classList.add("active");
+ document.getElementById("s4").classList.add("done");
+
+ document.getElementById("successDetails").innerHTML=
+ `<div class="confirm-row"><span>Booking ID</span><b>${code}</b></div>
+  <div class="confirm-row"><span>Provider</span><b>${selectedProvider.name}</b></div>
+  <div class="confirm-row"><span>Date & time</span><b>${dt} • ${selectedSlot}</b></div>
+  <div class="confirm-row"><span>Mode</span><b>${consultationMode}</b></div>
+  <div class="confirm-row"><span>Location</span><b>${selectedProvider.place}</b></div>`;
+
+ toast("Appointment confirmed • "+code);
+}
+
+function facilityBook(name){
+ selectedProvider={
+   name:name,
+   spec:"Diagnostic Facility",
+   qual:"Diagnostic Service",
+   exp:"",
+   rating:"",
+   place:`Selected facility • ${selectedLocation}`,
+   fee:"As applicable",
+   img:"https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=700"
+ };
+
+ selectedDate=null;
+ selectedSlot=null;
+
+ openBookingModal();
+}
+
+function searchCare(){
+ const q=document.getElementById("heroSearch").value.trim().toLowerCase();
+
+ if(q.includes("diet"))
+   document.getElementById("dietitians").scrollIntoView({behavior:"smooth"});
+ else if(q.includes("x-ray")||q.includes("mri")||q.includes("ct"))
+   document.getElementById("facilities").scrollIntoView({behavior:"smooth"});
+ else{
+   document.getElementById("doctors").scrollIntoView({behavior:"smooth"});
+   toast(q?`Showing care results for “${q}”`:"Showing doctors");
+ }
+}
+
+
+/* =========================================================
+   LIVE LOCATION + HOSPITAL MAP
+   ========================================================= */
+
+let liveMap=null;
+let liveUserMarker=null;
+let liveAccuracyCircle=null;
+let liveHospitalMarkers=[];
+let liveLocation=null;
+
+function ensureLiveMap(lat,lng){
+ const mapEl=document.getElementById("liveMap");
+
+ if(!mapEl)return;
+
+ document.getElementById("manualMap").classList.add("location-live");
+
+ if(!liveMap){
+   liveMap=L.map("liveMap",{zoomControl:true})
+     .setView([lat,lng],13);
+
+   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+     maxZoom:19,
+     attribution:"© OpenStreetMap contributors"
+   }).addTo(liveMap);
+ }else{
+   liveMap.setView([lat,lng],13);
+   setTimeout(()=>liveMap.invalidateSize(),100);
+ }
+
+ if(liveUserMarker)
+   liveUserMarker.setLatLng([lat,lng]);
+ else
+   liveUserMarker=L.marker([lat,lng])
+     .addTo(liveMap)
+     .bindPopup("📍 Your live location")
+     .openPopup();
+
+ if(liveAccuracyCircle)
+   liveAccuracyCircle.setLatLng([lat,lng]);
+ else
+   liveAccuracyCircle=L.circle([lat,lng],{radius:50})
+     .addTo(liveMap);
+}
+
+async function reverseGeocode(lat,lng){
+ try{
+   const res=await fetch(
+     `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lng)}&zoom=18&addressdetails=1`,
+     {
+       headers:{
+         "Accept":"application/json"
+       }
+     }
+   );
+
+   if(!res.ok)
+     throw new Error("Reverse geocoding failed");
+
+   return await res.json();
+ }catch(e){
+   return null;
+ }
+}
+
+async function loadNearbyHospitals(lat,lng){
+ const list=document.getElementById("placeList");
+ const title=document.getElementById("resultsTitle");
+
+ title.textContent="Nearby hospitals & healthcare spots";
+
+ list.innerHTML=
+ '<div class="place"><h4>Finding nearby hospitals…</h4><p>Please wait while we load real places around your live location.</p></div>';
+
+ liveHospitalMarkers.forEach(m=>liveMap&&liveMap.removeLayer(m));
+ liveHospitalMarkers=[];
+
+ const query=
+ `[out:json][timeout:20];
+ (node[amenity=hospital](around:10000,${lat},${lng});
+ way[amenity=hospital](around:10000,${lat},${lng});
+ relation[amenity=hospital](around:10000,${lat},${lng}););
+ out center tags;`;
+
+ try{
+   const res=await fetch(
+     "https://overpass-api.de/api/interpreter",
+     {
+       method:"POST",
+       headers:{"Content-Type":"text/plain"},
+       body:query
+     }
+   );
+
+   if(!res.ok)
+     throw new Error("Hospital search failed");
+
+   const data=await res.json();
+
+   const hospitals=(data.elements||[])
+    .map(x=>({
+      name:x.tags?.name||"Hospital",
+      type:x.tags?.healthcare||"Hospital",
+      phone:x.tags?.phone||x.tags?.['contact:phone']||"",
+      lat:x.lat??x.center?.lat,
+      lon:x.lon??x.center?.lon,
+      address:[
+        x.tags?.['addr:housenumber'],
+        x.tags?.['addr:street'],
+        x.tags?.['addr:city']
+      ].filter(Boolean).join(", ")
+    }))
+    .filter(x=>x.lat&&x.lon)
+    .slice(0,12);
+
+   hospitals.sort((a,b)=>
+     distanceKm(lat,lng,a.lat,a.lon)-
+     distanceKm(lat,lng,b.lat,b.lon)
+   );
+
+   if(!hospitals.length){
+     list.innerHTML=
+       '<div class="place"><h4>No hospitals found nearby</h4><p>Try moving the map or use the manual location option.</p></div>';
+     return;
+   }
+
+   hospitals.forEach((h,i)=>{
+     const dist=distanceKm(lat,lng,h.lat,h.lon);
+
+     const marker=L.marker([h.lat,h.lon])
+       .addTo(liveMap)
+       .bindPopup(
+         `<b>${escapeHtml(h.name)}</b><br>${dist.toFixed(1)} km away`
+       );
+
+     liveHospitalMarkers.push(marker);
+   });
+
+   list.innerHTML=hospitals.map((h,i)=>{
+     const dist=distanceKm(lat,lng,h.lat,h.lon);
+
+     const phone=h.phone
+       ?`<button class="book" onclick="window.location.href='tel:${h.phone.replace(/[^0-9+]/g,"")}'">Call</button>`
+       :"";
+
+     return `<div class="place" id="live-place-${i}">
+       <span class="badge red">Hospital</span>
+       <h4>${escapeHtml(h.name)}</h4>
+       <p><b>${dist.toFixed(1)} km away</b> • ${escapeHtml(h.type)}</p>
+       <p>${escapeHtml(h.address||"Nearby healthcare facility")}</p>
+       <div class="actions">
+        <button class="choose" onclick="focusHospital(${i},${h.lat},${h.lon})">Show on map</button>
+        ${phone}
+       </div>
+     </div>`;
+   }).join("");
+
+ }catch(e){
+   list.innerHTML=
+     '<div class="place"><h4>Could not load nearby hospitals</h4><p>Check your internet connection and try again.</p></div>';
+ }
+}
+
+function focusHospital(i,lat,lng){
+ if(liveMap){
+   liveMap.setView([lat,lng],16);
+   liveHospitalMarkers[i]?.openPopup();
+ }
+
+ document.querySelectorAll(".place")
+   .forEach(x=>x.classList.remove("selected"));
+
+ document.getElementById("live-place-"+i)?.classList.add("selected");
+}
+
+function distanceKm(lat1,lon1,lat2,lon2){
+ const R=6371;
+ const rad=Math.PI/180;
+ const dLat=(lat2-lat1)*rad;
+ const dLon=(lon2-lon1)*rad;
+
+ const a=
+   Math.sin(dLat/2)**2+
+   Math.cos(lat1*rad)*
+   Math.cos(lat2*rad)*
+   Math.sin(dLon/2)**2;
+
+ return R*2*Math.atan2(
+   Math.sqrt(a),
+   Math.sqrt(1-a)
+ );
+}
+
+function escapeHtml(v){
+ return String(v??"").replace(
+   /[&<>'"]/g,
+   c=>({
+     "&":"&amp;",
+     "<":"&lt;",
+     ">":"&gt;",
+     "'":"&#39;",
+     "\"":"&quot;"
+   }[c])
+ );
+}
+
+async function detectLiveLocation(){
+ if(!navigator.geolocation){
+   toast("Live location is not supported by this browser");
+   return;
+ }
+
+ toast("Requesting your live location…");
+
+ navigator.geolocation.getCurrentPosition(
+  async pos=>{
+   const lat=pos.coords.latitude;
+   const lon=pos.coords.longitude;
+
+   const geo=await reverseGeocode(lat,lon);
+   const a=geo?.address||{};
+
+   const state=(a.state||"").toLowerCase();
+
+   if(!state.includes("maharashtra")){
+     toast("📍 Your location is outside Maharashtra. This appointment search supports Maharashtra only.");
+     return;
+   }
+
+   const city=
+     a.city||
+     a.town||
+     a.municipality||
+     a.village||
+     "Maharashtra";
+
+   const suburb=
+     a.suburb||
+     a.neighbourhood||
+     a.quarter||
+     a.city_district||
+     "";
+
+   const cityName=/mumbai/i.test(city)?"Mumbai":city;
+
+   const display=
+     /mumbai/i.test(cityName)&&suburb
+     ?`Mumbai • ${suburb}`
+     :`${cityName}, Maharashtra`;
+
+   liveLocation={
+     lat,
+     lon,
+     accuracy:pos.coords.accuracy
+   };
+
+   ensureLiveMap(lat,lon);
+
+   setLocation(display);
+
+   document.getElementById("localityInput").value=display;
+   document.getElementById("locationSearch").value=display;
+
+   toast(`📍 Live location detected • ${display}`);
+
+   await loadNearbyHospitals(lat,lon);
+  },
+  err=>{
+   const msg={
+     1:"Location permission was denied. Allow location access and try again.",
+     2:"Your location could not be determined. Try again.",
+     3:"Location request timed out. Try again."
+   }[err.code]||"Unable to detect location.";
+
+   toast(msg);
+  },
+  {
+    enableHighAccuracy:true,
+    timeout:15000,
+    maximumAge:0
+  }
+);
+
+
+/* =========================================================
+   CLOSE MODAL / TOAST / INITIAL LOAD
+   ========================================================= */
+
+}
+
+function closeModal(id){
+ document.getElementById(id).classList.remove("show");
+}
+
+function toast(msg){
+ const t=document.getElementById("toast");
+
+ t.textContent=msg;
+ t.classList.add("show");
+
+ setTimeout(
+   ()=>t.classList.remove("show"),
+   2400
+ );
+}
+
+document.addEventListener("click",e=>{
+ if(e.target.classList.contains("modal"))
+   e.target.classList.remove("show");
+});
+
+
+/* Initial rendering */
+renderDoctors("all");
+renderDietitians();
+renderPlaces();
+setLocation("Mumbai");
+
+
+/* Initialize Maharashtra map */
+setTimeout(()=>{
+ try{
+   initMaharashtraMap();
+
+   setTimeout(()=>{
+     if(mapInstance)
+       mapInstance.invalidateSize();
+   },100);
+
+ }catch(e){
+   console.error("Maharashtra map initialization failed:",e);
+   toast("Map could not be loaded. Check your internet connection.");
+ }
+},100);
+
+
+/* Live location */
+setTimeout(()=>detectLiveLocation(),700);
+
+
+/* Hero slider */
+let slide=0;
+
+const slides=document.querySelectorAll(".hero-img");
+const dots=document.querySelectorAll(".dot");
+
+setInterval(()=>{
+ slides[slide].classList.remove("active");
+ dots[slide].classList.remove("on");
+
+ slide=(slide+1)%slides.length;
+
+ slides[slide].classList.add("active");
+ dots[slide].classList.add("on");
+},5000);
+
+</script>
+</body>
+</html>

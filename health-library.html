@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SwasthyaMitra AI — Health Library</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --navy: #06131f;
+    --navy-2: #091d2c;
+    --card: rgba(15, 39, 54, 0.78);
+    --card-light: rgba(20, 51, 68, 0.7);
+    --teal: #22d3c5;
+    --cyan: #3ddcff;
+    --text: #f3fbff;
+    --muted: #9bb0bc;
+    --border: rgba(116, 221, 231, 0.15);
+    --shadow: 0 24px 70px rgba(0,0,0,.28);
+    --radius: 24px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(34,211,197,.08), transparent 28%),
+        radial-gradient(circle at 90% 35%, rgba(61,220,255,.07), transparent 30%),
+        var(--navy);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.library {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.library-container {
+    width: min(1240px, calc(100% - 40px));
+    margin: auto;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.library-header {
+    padding: 80px 0 35px;
+    text-align: center;
+}
+
+.library-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(34,211,197,.09);
+    border: 1px solid rgba(34,211,197,.18);
+    color: var(--teal);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    margin-bottom: 20px;
+}
+
+.library-eyebrow span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 14px var(--teal);
+}
+
+.library-header h1 {
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(38px, 5vw, 66px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 18px;
+}
+
+.library-header h1 span {
+    color: var(--teal);
+}
+
+.library-header p {
+    max-width: 730px;
+    margin: auto;
+    color: var(--muted);
+    font-size: 17px;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.featured-section {
+    padding: 20px 0 50px;
+}
+
+.hero-slider {
+    position: relative;
+    min-height: 560px;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    background: #071823;
+}
+
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.03);
+    transition:
+        opacity .8s ease,
+        transform 1.2s ease;
+    pointer-events: none;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg,
+            rgba(3,15,24,.94) 0%,
+            rgba(3,15,24,.74) 42%,
+            rgba(3,15,24,.2) 80%,
+            rgba(3,15,24,.12) 100%),
+        linear-gradient(0deg,
+            rgba(3,15,24,.65),
+            transparent 50%);
+}
+
+.hero-content {
+    position: absolute;
+    left: clamp(25px, 5vw, 70px);
+    bottom: clamp(80px, 9vw, 105px);
+    max-width: 650px;
+    z-index: 2;
+}
+
+.hero-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(34,211,197,.12);
+    border: 1px solid rgba(34,211,197,.25);
+    color: #79f4e9;
+    padding: 8px 13px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 17px;
+    backdrop-filter: blur(12px);
+}
+
+.hero-content h2 {
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(32px, 4.5vw, 60px);
+    line-height: 1.06;
+    letter-spacing: -1.7px;
+    margin-bottom: 18px;
+}
+
+.hero-content p {
+    color: #d2e0e7;
+    font-size: 17px;
+    max-width: 590px;
+    margin-bottom: 27px;
+}
+
+.primary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: linear-gradient(135deg, var(--teal), var(--cyan));
+    color: #03202a;
+    padding: 13px 19px;
+    border-radius: 13px;
+    font-weight: 800;
+    transition: .25s ease;
+    box-shadow: 0 12px 35px rgba(34,211,197,.18);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(34,211,197,.3);
+}
+
+.hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    color: #c2d1d7;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.hero-controls {
+    position: absolute;
+    bottom: 28px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 5;
+}
+
+.hero-dot {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,.35);
+    transition: .3s ease;
+}
+
+.hero-dot.active {
+    width: 28px;
+    border-radius: 999px;
+    background: var(--teal);
+}
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-section {
+    padding: 25px 0 45px;
+}
+
+.search-box {
+    position: relative;
+    max-width: 850px;
+    margin: auto;
+}
+
+.search-box input {
+    width: 100%;
+    height: 66px;
+    border: 1px solid var(--border);
+    outline: none;
+    border-radius: 20px;
+    background: rgba(13,34,48,.86);
+    backdrop-filter: blur(18px);
+    color: white;
+    padding: 0 25px 0 58px;
+    font-size: 16px;
+    box-shadow: 0 15px 50px rgba(0,0,0,.16);
+}
+
+.search-box input::placeholder {
+    color: #75909e;
+}
+
+.search-box input:focus {
+    border-color: rgba(34,211,197,.5);
+    box-shadow: 0 0 0 4px rgba(34,211,197,.06);
+}
+
+.search-icon {
+    position: absolute;
+    left: 21px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 21px;
+    color: var(--teal);
+}
+
+/* =====================================================
+   CATEGORIES
+===================================================== */
+
+.categories {
+    padding-bottom: 48px;
+}
+
+.category-scroll {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    border: 1px solid var(--border);
+    color: #a9c0cb;
+    background: rgba(14,35,49,.62);
+    padding: 10px 17px;
+    border-radius: 999px;
+    transition: .25s ease;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: rgba(34,211,197,.13);
+    color: #75eee3;
+    border-color: rgba(34,211,197,.35);
+}
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-family: "Manrope", sans-serif;
+    font-size: clamp(28px, 3vw, 40px);
+    letter-spacing: -1px;
+}
+
+.section-title p {
+    color: var(--muted);
+    max-width: 500px;
+}
+
+/* =====================================================
+   ARTICLE GRID
+===================================================== */
+
+.articles-section {
+    padding: 25px 0 70px;
+}
+
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.article-card {
+    position: relative;
+    background: linear-gradient(
+        145deg,
+        rgba(17,44,59,.84),
+        rgba(9,27,39,.88)
+    );
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(34,211,197,.3);
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+}
+
+.article-image {
+    position: relative;
+    height: 225px;
+    overflow: hidden;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+
+.article-card:hover .article-image img {
+    transform: scale(1.06);
+}
+
+.article-category {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(4,20,29,.76);
+    border: 1px solid rgba(255,255,255,.1);
+    backdrop-filter: blur(12px);
+    color: #8af3e9;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.article-content {
+    padding: 21px;
+}
+
+.article-content h3 {
+    font-family: "Manrope", sans-serif;
+    font-size: 21px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.article-content p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 18px;
+}
+
+.article-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.read-time {
+    color: #7894a1;
+    font-size: 12px;
+}
+
+.read-btn {
+    border: 0;
+    background: transparent;
+    color: var(--teal);
+    font-weight: 800;
+    font-size: 13px;
+    padding: 7px 0;
+}
+
+.read-btn:hover {
+    color: var(--cyan);
+}
+
+/* =====================================================
+   TOPIC STRIP
+===================================================== */
+
+.topic-strip {
+    margin: 15px 0 70px;
+    padding: 30px;
+    border-radius: 26px;
+    border: 1px solid var(--border);
+    background:
+        linear-gradient(135deg, rgba(34,211,197,.07), rgba(61,220,255,.025)),
+        rgba(11,32,45,.8);
+}
+
+.topic-strip h3 {
+    font-family: "Manrope";
+    font-size: 25px;
+    margin-bottom: 9px;
+}
+
+.topic-strip p {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+.topic-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.topic-pill {
+    padding: 9px 13px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.035);
+    border: 1px solid rgba(255,255,255,.07);
+    color: #b6cbd3;
+    font-size: 13px;
+}
+
+/* =====================================================
+   NO RESULTS
+===================================================== */
+
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 70px 20px;
+    border: 1px dashed rgba(116,221,231,.18);
+    border-radius: 25px;
+    color: var(--muted);
+}
+
+.no-results.show {
+    display: block;
+}
+
+.no-results strong {
+    display: block;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+/* =====================================================
+   DISCLAIMER
+===================================================== */
+
+.health-disclaimer {
+    border-top: 1px solid rgba(255,255,255,.06);
+    padding: 30px 0 60px;
+}
+
+.disclaimer-box {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    max-width: 900px;
+    margin: auto;
+    padding: 20px 22px;
+    border-radius: 17px;
+    background: rgba(255,255,255,.025);
+    border: 1px solid rgba(255,255,255,.06);
+}
+
+.disclaimer-icon {
+    min-width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: rgba(34,211,197,.1);
+    color: var(--teal);
+}
+
+.disclaimer-box p {
+    color: #91a7b2;
+    font-size: 12px;
+}
+
+/* =====================================================
+   ARTICLE MODAL
+===================================================== */
+
+.article-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    background: rgba(1,9,15,.86);
+    backdrop-filter: blur(16px);
+    overflow-y: auto;
+    padding: 25px;
+}
+
+.article-modal.open {
+    display: block;
+    animation: fadeIn .25s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.reader {
+    width: min(900px, 100%);
+    margin: 25px auto;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #081b29;
+    border: 1px solid var(--border);
+    box-shadow: 0 30px 100px rgba(0,0,0,.5);
+    animation: readerIn .35s ease;
+}
+
+@keyframes readerIn {
+    from {
+        transform: translateY(25px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.reader-image {
+    position: relative;
+    height: 390px;
+}
+
+.reader-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.reader-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(4,17,27,.9), transparent 55%);
+}
+
+.close-reader {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 5;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 50%;
+    background: rgba(2,14,22,.65);
+    color: white;
+    font-size: 22px;
+    backdrop-filter: blur(12px);
+}
+
+.reader-heading {
+    position: absolute;
+    z-index: 3;
+    left: 35px;
+    right: 35px;
+    bottom: 30px;
+}
+
+.reader-heading .hero-category {
+    margin-bottom: 10px;
+}
+
+.reader-heading h2 {
+    font-family: "Manrope";
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 1.08;
+}
+
+.reader-body {
+    padding: 35px 45px 50px;
+}
+
+.reader-meta {
+    display: flex;
+    gap: 15px;
+    color: #7e9aa7;
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+
+.reader-body h3 {
+    font-family: "Manrope";
+    color: #effcff;
+    font-size: 25px;
+    margin: 30px 0 12px;
+}
+
+.reader-body p {
+    color: #b5c8d0;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.reader-body ul {
+    margin: 10px 0 20px 22px;
+    color: #b5c8d0;
+}
+
+.reader-body li {
+    margin: 8px 0;
+}
+
+.health-tip {
+    padding: 19px 20px;
+    margin: 25px 0;
+    border-radius: 17px;
+    background: rgba(34,211,197,.07);
+    border: 1px solid rgba(34,211,197,.15);
+}
+
+.health-tip strong {
+    display: block;
+    color: var(--teal);
+    margin-bottom: 6px;
+}
+
+.health-tip p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+    .article-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-slider {
+        min-height: 530px;
+    }
+}
+
+@media (max-width: 700px) {
+    .library-container {
+        width: min(100% - 26px, 1240px);
+    }
+
+    .library-header {
+        padding-top: 50px;
+    }
+
+    .library-header h1 {
+        letter-spacing: -1.2px;
+    }
+
+    .library-header p {
+        font-size: 15px;
+    }
+
+    .hero-slider {
+        min-height: 600px;
+        border-radius: 23px;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(0deg,
+                rgba(3,15,24,.97) 0%,
+                rgba(3,15,24,.7) 55%,
+                rgba(3,15,24,.15) 100%);
+    }
+
+    .hero-content {
+        left: 23px;
+        right: 23px;
+        bottom: 65px;
+    }
+
+    .hero-content h2 {
+        font-size: 34px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .hero-meta {
+        font-size: 12px;
+    }
+
+    .category-scroll {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 5px;
+        scrollbar-width: none;
+    }
+
+    .category-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .category-btn {
+        white-space: nowrap;
+    }
+
+    .article-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .article-image {
+        height: 235px;
+    }
+
+    .section-title {
+        display: block;
+    }
+
+    .section-title p {
+        margin-top: 7px;
+        font-size: 14px;
+    }
+
+    .reader {
+        margin: 0 auto;
+        border-radius: 22px;
+    }
+
+    .article-modal {
+        padding: 10px;
+    }
+
+    .reader-image {
+        height: 320px;
+    }
+
+    .reader-heading {
+        left: 22px;
+        right: 22px;
+        bottom: 23px;
+    }
+
+    .reader-body {
+        padding: 28px 22px 38px;
+    }
+
+    .reader-body p,
+    .reader-body li {
+        font-size: 15px;
+    }
+
+    .topic-strip {
+        padding: 23px;
+    }
+}
+
+@media (max-width: 430px) {
+    .hero-slider {
+        min-height: 570px;
+    }
+
+    .hero-content h2 {
+        font-size: 29px;
+    }
+
+    .hero-content p {
+        font-size: 13.5px;
+    }
+
+    .primary-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .article-content h3 {
+        font-size: 19px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="library" id="health-library">
+
+    <div class="library-container">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="library-header">
+
+            <div class="library-eyebrow">
+                <span></span>
+                SWASTHYAMITRA AI HEALTH LIBRARY
+            </div>
+
+            <h1>
+                Understand Your Health.<br>
+                <span>Live Better.</span>
+            </h1>
+
+            <p>
+                A growing collection of practical, easy-to-understand health
+                knowledge covering wellness, nutrition, exercise, yoga,
+                medical conditions, tests, medicines, sleep and everyday life.
+            </p>
+
+        </header>
+
+
+        <!-- =================================================
+             FEATURED HERO
+        ================================================== -->
+
+        <section class="featured-section">
+
+            <div class="hero-slider" id="heroSlider"></div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <div class="search-icon">⌕</div>
+
+                <input
+                    type="search"
+                    id="articleSearch"
+                    placeholder="Search health articles…"
+                    autocomplete="off"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CATEGORIES
+        ================================================== -->
+
+        <section class="categories">
+
+            <div class="category-scroll" id="categoryFilters">
+
+                <button class="category-btn active" data-category="All">
+                    All
+                </button>
+
+                <button class="category-btn" data-category="Conditions">
+                    Conditions
+                </button>
+
+                <button class="category-btn" data-category="First Aid">
+                    First Aid
+                </button>
+
+                <button class="category-btn" data-category="Medicines">
+                    Medicines
+                </button>
+
+                <button class="category-btn" data-category="Tests">
+                    Tests
+                </button>
+
+                <button class="category-btn" data-category="Nutrition">
+                    Nutrition
+                </button>
+
+                <button class="category-btn" data-category="Wellness">
+                    Wellness
+                </button>
+
+                <button class="category-btn" data-category="Fitness">
+                    Fitness
+                </button>
+
+                <button class="category-btn" data-category="Family Health">
+                    Family Health
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LATEST ARTICLES
+        ================================================== -->
+
+        <section class="articles-section" id="latestReads">
+
+            <div class="section-title">
+
+                <div>
+                    <h2>Latest Health Reads</h2>
+                    <p>
+                        Explore practical health knowledge written to help
+                        you understand your body and make informed everyday choices.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="article-grid" id="articleGrid"></div>
+
+            <div class="no-results" id="noResults">
+
+                <strong>No articles found</strong>
+
+                Try another search term or choose a different category.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             EXPLORE TOPICS
+        ================================================== -->
+
+        <section class="topic-strip">
+
+            <h3>More to Explore</h3>
+
+            <p>
+                The Health Library is designed to grow into a broad health
+                knowledge centre — so there is always something useful to read.
+            </p>
+
+            <div class="topic-pills">
+
+                <span class="topic-pill">🧘 Yoga & Mindfulness</span>
+                <span class="topic-pill">🏃 Exercise</span>
+                <span class="topic-pill">🥗 Healthy Diet</span>
+                <span class="topic-pill">🌙 Better Sleep</span>
+                <span class="topic-pill">🧠 Mental Wellness</span>
+                <span class="topic-pill">🩺 Health Conditions</span>
+                <span class="topic-pill">🧪 Medical Tests</span>
+                <span class="topic-pill">💊 Medicine Safety</span>
+                <span class="topic-pill">👶 Early Life Health</span>
+                <span class="topic-pill">👵 Healthy Aging</span>
+                <span class="topic-pill">💧 Hydration</span>
+                <span class="topic-pill">📱 Modern Lifestyle</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DISCLAIMER
+        ================================================== -->
+
+        <footer class="health-disclaimer">
+
+            <div class="disclaimer-box">
+
+                <div class="disclaimer-icon">ⓘ</div>
+
+                <p>
+                    This Health Library is for general educational purposes only
+                    and does not replace professional medical advice, diagnosis,
+                    or treatment. For urgent symptoms or emergencies, seek
+                    appropriate medical care.
+                </p>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ARTICLE READER
+===================================================== -->
+
+<div class="article-modal" id="articleModal">
+
+    <article class="reader">
+
+        <div class="reader-image">
+
+            <button
+                class="close-reader"
+                id="closeReader"
+                aria-label="Close article"
+            >
+                ×
+            </button>
+
+            <img id="readerImage" src="" alt="">
+
+            <div class="reader-heading">
+
+                <div class="hero-category" id="readerCategory"></div>
+
+                <h2 id="readerTitle"></h2>
+
+            </div>
+
+        </div>
+
+        <div class="reader-body">
+
+            <div class="reader-meta">
+                <span id="readerTime"></span>
+                <span>•</span>
+                <span>SwasthyaMitra AI Health Library</span>
+            </div>
+
+            <div id="readerContent"></div>
+
+        </div>
+
+    </article>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   ARTICLE DATABASE
+========================================================= */
+
+const articles = [
+
+{
+    id: 1,
+    category: "Conditions",
+    title: "High Blood Pressure",
+    description:
+        "Understand what blood pressure numbers mean, why hypertension can develop and how everyday habits can support cardiovascular health.",
+    time: "6 min read",
+    keywords: "hypertension blood pressure heart cardiovascular wellness",
+    image:
+        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>What is high blood pressure?</h3>
+
+        <p>
+            Blood pressure is the force of blood pushing against the walls
+            of your arteries. A blood pressure reading has two numbers:
+            systolic pressure and diastolic pressure.
+        </p>
+
+        <p>
+            Persistently elevated blood pressure can increase the workload
+            on the heart and blood vessels. Many people may have no obvious
+            symptoms, which is why routine blood pressure checks are useful.
+        </p>
+
+        <h3>What can influence blood pressure?</h3>
+
+        <ul>
+            <li>High dietary sodium intake</li>
+            <li>Low physical activity</li>
+            <li>Excess body weight</li>
+            <li>Smoking or tobacco exposure</li>
+            <li>Alcohol consumption</li>
+            <li>Stress and poor sleep</li>
+            <li>Family history and age</li>
+        </ul>
+
+        <div class="health-tip">
+            <strong>Health Tip</strong>
+            <p>
+                Regular monitoring can help you and your healthcare
+                professional understand your blood pressure over time.
+            </p>
+        </div>
+
+        <h3>When should you seek medical advice?</h3>
+
+        <p>
+            If your readings are repeatedly higher than the range recommended
+            for you, discuss them with a qualified healthcare professional.
+            Very high readings accompanied by symptoms such as chest pain,
+            severe breathlessness, confusion or neurological symptoms require
+            urgent medical attention.
+        </p>
+    `
+},
+
+{
+    id: 2,
+    category: "Conditions",
+    title: "Diabetes Basics",
+    description:
+        "A beginner-friendly guide to blood glucose, insulin, lifestyle factors and the difference between common forms of diabetes.",
+    time: "7 min read",
+    keywords: "diabetes glucose insulin type 1 type 2 sugar",
+    image:
+        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>What is diabetes?</h3>
+
+        <p>
+            Diabetes is a group of conditions in which blood glucose levels
+            become too high because the body does not produce enough insulin,
+            does not use insulin effectively, or both.
+        </p>
+
+        <h3>Common types</h3>
+
+        <ul>
+            <li><strong>Type 1 diabetes:</strong> an autoimmune condition that affects insulin production.</li>
+            <li><strong>Type 2 diabetes:</strong> involves insulin resistance and impaired insulin production.</li>
+            <li><strong>Gestational diabetes:</strong> diabetes diagnosed during pregnancy.</li>
+        </ul>
+
+        <h3>Everyday health habits</h3>
+
+        <p>
+            Balanced meals, regular physical activity, adequate sleep,
+            maintaining a healthy weight where appropriate and taking
+            prescribed medicines correctly can all be important parts
+            of diabetes management.
+        </p>
+
+        <div class="health-tip">
+            <strong>Remember</strong>
+            <p>
+                Diabetes management is individual. Treatment targets and
+                medicines should be discussed with your healthcare team.
+            </p>
+        </div>
+    `
+},
+
+{
+    id: 3,
+    category: "Conditions",
+    title: "Cold & Fever",
+    description:
+        "Learn the difference between common cold symptoms and fever, what supportive care can help and when symptoms deserve attention.",
+    time: "5 min read",
+    keywords: "cold fever viral infection flu cough temperature",
+    image:
+        "https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Cold and fever are not the same thing</h3>
+
+        <p>
+            A cold is commonly caused by viral infections affecting the
+            upper respiratory tract. Fever is a temporary increase in body
+            temperature that can occur when the immune system responds to
+            infection or other causes.
+        </p>
+
+        <h3>Supportive care</h3>
+
+        <ul>
+            <li>Drink enough fluids.</li>
+            <li>Rest when you feel unwell.</li>
+            <li>Eat nourishing foods as tolerated.</li>
+            <li>Use medicines only as directed.</li>
+            <li>Wash hands regularly to reduce transmission.</li>
+        </ul>
+
+        <h3>Pay attention to warning signs</h3>
+
+        <p>
+            Seek medical advice if symptoms are severe, persistent,
+            worsening, or occur with breathing difficulty, dehydration,
+            unusual drowsiness, severe pain or other concerning symptoms.
+        </p>
+    `
+},
+
+{
+    id: 4,
+    category: "First Aid",
+    title: "Emergency First Aid",
+    description:
+        "Essential first-aid principles everyone should know for common injuries and sudden health emergencies.",
+    time: "8 min read",
+    keywords: "first aid emergency CPR bleeding burns injury",
+    image:
+        "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Why first aid matters</h3>
+
+        <p>
+            First aid is the immediate assistance given to someone who is
+            injured or suddenly unwell while professional medical care is
+            being arranged.
+        </p>
+
+        <h3>Basic principles</h3>
+
+        <ul>
+            <li>Make sure the environment is safe.</li>
+            <li>Check whether the person responds.</li>
+            <li>Call appropriate emergency services when needed.</li>
+            <li>Control significant external bleeding with appropriate pressure.</li>
+            <li>Do not move an injured person unnecessarily when a serious injury is suspected.</li>
+        </ul>
+
+        <div class="health-tip">
+            <strong>Important</strong>
+            <p>
+                First-aid knowledge is not a substitute for emergency
+                medical services. Follow local emergency guidance and
+                professional instructions.
+            </p>
+        </div>
+    `
+},
+
+{
+    id: 5,
+    category: "Medicines",
+    title: "Medicine Safety",
+    description:
+        "Simple habits that can reduce medication errors, missed doses, duplicate medicines and avoidable interactions.",
+    time: "6 min read",
+    keywords: "medicine medication safety tablets prescription interactions",
+    image:
+        "https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Medicines should be used carefully</h3>
+
+        <p>
+            Medicines can be extremely useful when used correctly, but
+            taking the wrong dose, combining medicines incorrectly or
+            misunderstanding instructions can cause harm.
+        </p>
+
+        <h3>Good medicine habits</h3>
+
+        <ul>
+            <li>Know the name and purpose of each medicine.</li>
+            <li>Follow the prescribed dose and timing.</li>
+            <li>Do not share prescription medicines.</li>
+            <li>Tell healthcare professionals about other medicines and supplements.</li>
+            <li>Check instructions before crushing, splitting or mixing medicines.</li>
+        </ul>
+
+        <div class="health-tip">
+            <strong>Keep a medicine list</strong>
+            <p>
+                A current list of medicines, doses and allergies can be
+                useful when speaking with healthcare professionals.
+            </p>
+        </div>
+    `
+},
+
+{
+    id: 6,
+    category: "Tests",
+    title: "CBC Blood Test",
+    description:
+        "Understand what a complete blood count measures and what red cells, white cells and platelets do.",
+    time: "6 min read",
+    keywords: "CBC blood test hemoglobin platelets white blood cells",
+    image:
+        "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>What is a CBC?</h3>
+
+        <p>
+            A complete blood count, commonly called a CBC, measures several
+            components of blood. It is frequently used as part of routine
+            evaluation and to investigate different symptoms.
+        </p>
+
+        <h3>What does it include?</h3>
+
+        <ul>
+            <li>Red blood cell measurements</li>
+            <li>Hemoglobin and hematocrit</li>
+            <li>White blood cell count</li>
+            <li>Platelet count</li>
+            <li>Several additional blood-cell measurements</li>
+        </ul>
+
+        <p>
+            A single abnormal value does not automatically establish a
+            diagnosis. Results are interpreted alongside symptoms, history
+            and other laboratory findings.
+        </p>
+    `
+},
+
+{
+    id: 7,
+    category: "Tests",
+    title: "HbA1c Test",
+    description:
+        "Learn what HbA1c tells you about average blood glucose over the previous few months and why it is useful.",
+    time: "5 min read",
+    keywords: "HbA1c A1C diabetes blood glucose test",
+    image:
+        "https://images.unsplash.com/photo-1579154206698-7c1b7a7a0f08?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>What is HbA1c?</h3>
+
+        <p>
+            HbA1c is a laboratory measurement that reflects average blood
+            glucose exposure over approximately the previous two to three
+            months.
+        </p>
+
+        <h3>Why is it useful?</h3>
+
+        <p>
+            Healthcare professionals may use HbA1c to help diagnose diabetes
+            or monitor glucose management in people who already have diabetes.
+        </p>
+
+        <div class="health-tip">
+            <strong>Important</strong>
+            <p>
+                HbA1c results can be affected by certain medical conditions
+                and circumstances, so they should be interpreted by a
+                qualified professional.
+            </p>
+        </div>
+    `
+},
+
+{
+    id: 8,
+    category: "Nutrition",
+    title: "Balanced Diet Basics",
+    description:
+        "A practical introduction to building meals around vegetables, fruits, whole grains, protein and healthy fats.",
+    time: "7 min read",
+    keywords: "diet nutrition healthy food balanced meal protein vitamins",
+    image:
+        "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>What does a balanced diet mean?</h3>
+
+        <p>
+            A balanced diet provides a variety of nutrients and enough energy
+            for the body's needs. The ideal balance differs between people
+            depending on age, activity, health status and other factors.
+        </p>
+
+        <h3>Build variety into meals</h3>
+
+        <ul>
+            <li>Include a variety of vegetables and fruits.</li>
+            <li>Choose whole grains where appropriate.</li>
+            <li>Include protein-rich foods.</li>
+            <li>Use healthy sources of fats.</li>
+            <li>Drink adequate fluids.</li>
+            <li>Limit excessive added sugar, salt and highly processed foods.</li>
+        </ul>
+
+        <div class="health-tip">
+            <strong>Simple approach</strong>
+            <p>
+                Focus on what you can add to meals rather than only what
+                you need to remove.
+            </p>
+        </div>
+    `
+},
+
+{
+    id: 9,
+    category: "Wellness",
+    title: "Healthy Sleep",
+    description:
+        "Explore how sleep affects energy, concentration, mood and physical health — and how to build a better sleep routine.",
+    time: "6 min read",
+    keywords: "sleep insomnia bedtime routine rest wellness",
+    image:
+        "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Why sleep matters</h3>
+
+        <p>
+            Sleep supports physical recovery, memory, concentration,
+            emotional regulation and many biological processes.
+        </p>
+
+        <h3>Create a sleep-friendly routine</h3>
+
+        <ul>
+            <li>Keep a relatively consistent sleep schedule.</li>
+            <li>Create a quiet, dark and comfortable sleeping environment.</li>
+            <li>Reduce stimulating activities close to bedtime.</li>
+            <li>Get regular daytime physical activity.</li>
+            <li>Pay attention to caffeine timing.</li>
+        </ul>
+
+        <p>
+            Persistent difficulty sleeping, loud habitual snoring,
+            breathing interruptions during sleep or significant daytime
+            sleepiness may deserve professional evaluation.
+        </p>
+    `
+},
+
+{
+    id: 10,
+    category: "Wellness",
+    title: "Hydration",
+    description:
+        "Understand why fluids matter, what affects your hydration needs and how to recognize signs that you may need more fluids.",
+    time: "4 min read",
+    keywords: "water hydration dehydration fluids electrolytes",
+    image:
+        "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Why hydration matters</h3>
+
+        <p>
+            Water is involved in temperature regulation, circulation,
+            digestion and many other body processes.
+        </p>
+
+        <h3>Hydration needs vary</h3>
+
+        <p>
+            Fluid requirements can change with climate, physical activity,
+            illness, diet, pregnancy and other circumstances.
+        </p>
+
+        <ul>
+            <li>Drink regularly throughout the day.</li>
+            <li>Increase attention to fluids during hot weather and exercise.</li>
+            <li>Replace fluids lost through significant sweating.</li>
+            <li>Follow professional advice if you have a condition requiring fluid restriction.</li>
+        </ul>
+    `
+},
+
+{
+    id: 11,
+    category: "Fitness",
+    title: "Exercise for a Healthier Life",
+    description:
+        "Learn how walking, strength training, mobility and aerobic activity can become part of a sustainable routine.",
+    time: "7 min read",
+    keywords: "exercise fitness walking strength cardio workout health",
+    image:
+        "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Movement is medicine for everyday life</h3>
+
+        <p>
+            Regular physical activity supports cardiovascular fitness,
+            muscle strength, bone health, mobility and overall wellbeing.
+        </p>
+
+        <h3>Think beyond the gym</h3>
+
+        <ul>
+            <li>Walking</li>
+            <li>Cycling</li>
+            <li>Swimming</li>
+            <li>Strength exercises</li>
+            <li>Stretching and mobility</li>
+            <li>Recreational sports</li>
+        </ul>
+
+        <h3>Start small</h3>
+
+        <p>
+            A routine that fits your schedule is easier to maintain than
+            an extremely demanding plan that you cannot sustain.
+        </p>
+    `
+},
+
+{
+    id: 12,
+    category: "Wellness",
+    title: "Yoga for Everyday Wellness",
+    description:
+        "Discover how gentle yoga, breathing practices and mindful movement can complement an active, balanced lifestyle.",
+    time: "6 min read",
+    keywords: "yoga pranayama stretching mindfulness flexibility wellness",
+    image:
+        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Yoga combines movement and awareness</h3>
+
+        <p>
+            Yoga practices can include physical postures, breathing exercises,
+            relaxation and mindfulness. Different styles can vary considerably
+            in intensity.
+        </p>
+
+        <h3>Possible wellness benefits</h3>
+
+        <ul>
+            <li>Improved flexibility and mobility</li>
+            <li>Greater body awareness</li>
+            <li>Relaxation and stress management</li>
+            <li>Support for balance and movement control</li>
+        </ul>
+
+        <div class="health-tip">
+            <strong>Practice safely</strong>
+            <p>
+                Beginners should learn appropriate technique and avoid
+                pushing into pain. People with specific health conditions
+                may benefit from professional guidance.
+            </p>
+        </div>
+    `
+},
+
+{
+    id: 13,
+    category: "Family Health",
+    title: "Building Healthy Habits Early in Life",
+    description:
+        "Why sleep, movement, nutrition, emotional wellbeing and routines during childhood can shape lifelong health habits.",
+    time: "7 min read",
+    keywords: "children child health early life family habits growth nutrition",
+    image:
+        "https://images.unsplash.com/photo-1504150558240-0b4fd8946624?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Healthy habits begin early</h3>
+
+        <p>
+            Childhood and adolescence are important periods of growth and
+            development. Families can support health by creating routines
+            around nutritious food, sleep, physical activity and emotional
+            wellbeing.
+        </p>
+
+        <h3>Useful foundations</h3>
+
+        <ul>
+            <li>Regular sleep schedules</li>
+            <li>Age-appropriate physical activity</li>
+            <li>Nutritious and varied meals</li>
+            <li>Time for outdoor play</li>
+            <li>Supportive communication</li>
+            <li>Healthy relationships with screens and technology</li>
+        </ul>
+    `
+},
+
+{
+    id: 14,
+    category: "Wellness",
+    title: "Modern Life vs Healthy Life",
+    description:
+        "Explore how long screen time, sitting, irregular sleep and fast-paced routines can affect everyday wellbeing.",
+    time: "8 min read",
+    keywords: "modern lifestyle screen time sitting stress digital health routine",
+    image:
+        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Our daily environment has changed</h3>
+
+        <p>
+            Modern life can make many things easier while also encouraging
+            prolonged sitting, extended screen exposure, irregular schedules
+            and reduced time outdoors.
+        </p>
+
+        <h3>Small changes can make a difference</h3>
+
+        <ul>
+            <li>Take regular movement breaks during long periods of sitting.</li>
+            <li>Protect time for sleep.</li>
+            <li>Make meals more intentional.</li>
+            <li>Spend time outdoors when possible.</li>
+            <li>Create boundaries around unnecessary screen use.</li>
+        </ul>
+
+        <div class="health-tip">
+            <strong>The goal isn't perfection</strong>
+            <p>
+                A healthier lifestyle is usually built through sustainable
+                routines rather than extreme short-term changes.
+            </p>
+        </div>
+    `
+},
+
+{
+    id: 15,
+    category: "Nutrition",
+    title: "Understanding Protein",
+    description:
+        "A simple guide to why protein matters, common food sources and how needs can differ throughout life.",
+    time: "5 min read",
+    keywords: "protein diet nutrition muscle vegetarian food eggs pulses",
+    image:
+        "https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Why do we need protein?</h3>
+
+        <p>
+            Protein provides amino acids that the body uses to build and
+            maintain muscles, tissues and many important molecules.
+        </p>
+
+        <h3>Food sources</h3>
+
+        <ul>
+            <li>Beans and lentils</li>
+            <li>Milk and yogurt</li>
+            <li>Eggs</li>
+            <li>Fish and seafood</li>
+            <li>Poultry and meat</li>
+            <li>Nuts and seeds</li>
+            <li>Soy foods</li>
+        </ul>
+
+        <p>
+            Protein requirements vary according to age, body size,
+            activity level, pregnancy, illness and other factors.
+        </p>
+    `
+},
+
+{
+    id: 16,
+    category: "Wellness",
+    title: "Stress and Your Everyday Health",
+    description:
+        "Understand everyday stress, the body's response and practical ways to build healthier recovery routines.",
+    time: "6 min read",
+    keywords: "stress relaxation anxiety wellness breathing mental health",
+    image:
+        "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>What is stress?</h3>
+
+        <p>
+            Stress is the body's response to challenging or demanding
+            situations. Short periods of stress can be part of normal life,
+            while persistent stress may affect sleep, mood and daily habits.
+        </p>
+
+        <h3>Healthy recovery habits</h3>
+
+        <ul>
+            <li>Regular physical activity</li>
+            <li>Consistent sleep</li>
+            <li>Relaxation or breathing practices</li>
+            <li>Time with supportive people</li>
+            <li>Breaks from continuous work or screen use</li>
+        </ul>
+
+        <p>
+            If emotional distress is persistent or interfering with daily
+            life, consider speaking with a qualified healthcare professional.
+        </p>
+    `
+},
+
+{
+    id: 17,
+    category: "Conditions",
+    title: "Understanding Common Allergies",
+    description:
+        "Learn how allergies happen, common triggers and why symptoms can vary from person to person.",
+    time: "6 min read",
+    keywords: "allergy allergies pollen food dust immune symptoms",
+    image:
+        "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>What is an allergy?</h3>
+
+        <p>
+            An allergy occurs when the immune system reacts to a substance
+            that is usually harmless to most people.
+        </p>
+
+        <h3>Common triggers</h3>
+
+        <ul>
+            <li>Pollen</li>
+            <li>Dust mites</li>
+            <li>Animal allergens</li>
+            <li>Certain foods</li>
+            <li>Insect stings</li>
+            <li>Some medicines</li>
+        </ul>
+
+        <p>
+            Symptoms can include sneezing, itching, rashes, swelling,
+            digestive symptoms or breathing problems depending on the allergy.
+        </p>
+    `
+},
+
+{
+    id: 18,
+    category: "Wellness",
+    title: "Healthy Aging",
+    description:
+        "A practical look at movement, nutrition, sleep, social connection and preventive healthcare as we get older.",
+    time: "7 min read",
+    keywords: "aging elderly senior health mobility longevity healthy aging",
+    image:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1200&q=85",
+    content: `
+        <h3>Healthy aging is about maintaining function</h3>
+
+        <p>
+            Healthy aging involves supporting physical function, independence,
+            cognitive wellbeing and social connection throughout later life.
+        </p>
+
+        <h3>Important foundations</h3>
+
+        <ul>
+            <li>Regular movement and strength activities</li>
+            <li>A nutritious and varied diet</li>
+            <li>Good sleep habits</li>
+            <li>Social connection</li>
+            <li>Routine health checks</li>
+            <li>Medication reviews when appropriate</li>
+        </ul>
+
+        <div class="health-tip">
+            <strong>Think long term</strong>
+            <p>
+                Small healthy routines accumulated over many years can
+                support independence and quality of life.
+            </p>
+        </div>
+    `
+}
+
+];
+
+
+/* =========================================================
+   FEATURED STORIES
+========================================================= */
+
+const featuredStories = [
+
+    {
+        category: "Wellness",
+        title: "Healthy Sleep: The Foundation Your Body Needs",
+        description:
+            "Discover how sleep affects energy, concentration, recovery and everyday wellbeing — and build a routine that actually fits modern life.",
+        time: "6 min read",
+        image:
+            "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1800&q=90",
+        articleId: 9
+    },
+
+    {
+        category: "Nutrition",
+        title: "Balanced Diet Basics: Build Better Meals",
+        description:
+            "A practical guide to creating nourishing meals without complicated rules, extreme diets or unnecessary confusion.",
+        time: "7 min read",
+        image:
+            "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1800&q=90",
+        articleId: 8
+    },
+
+    {
+        category: "Fitness",
+        title: "Move More: Exercise for Everyday Health",
+        description:
+            "Walking, strength, mobility and simple movement routines can all contribute to a healthier, more active life.",
+        time: "7 min read",
+        image:
+            "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=90",
+        articleId: 11
+    },
+
+    {
+        category: "Wellness",
+        title: "Modern Life vs Healthy Life",
+        description:
+            "Screens, sitting, irregular schedules and busy routines are changing how we live. Explore simple ways to bring balance back.",
+        time: "8 min read",
+        image:
+            "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=90",
+        articleId: 14
+    },
+
+    {
+        category: "Wellness",
+        title: "Yoga & Mindful Movement",
+        description:
+            "Explore gentle movement, breathing and mindfulness practices that can become part of a sustainable wellness routine.",
+        time: "6 min read",
+        image:
+            "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1800&q=90",
+        articleId: 12
+    },
+
+    {
+        category: "Conditions",
+        title: "Know Your Numbers: Understanding Blood Pressure",
+        description:
+            "Learn what blood pressure numbers mean, why they matter and which everyday factors can influence them.",
+        time: "6 min read",
+        image:
+            "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1800&q=90",
+        articleId: 1
+    }
+
+];
+
+
+/* =========================================================
+   HERO RENDER
+========================================================= */
+
+const heroSlider = document.getElementById("heroSlider");
+
+let currentHero = 0;
+let heroTimer;
+
+function renderHero() {
+
+    heroSlider.innerHTML = "";
+
+    featuredStories.forEach((story, index) => {
+
+        const slide = document.createElement("div");
+
+        slide.className =
+            "hero-slide " + (index === 0 ? "active" : "");
+
+        slide.innerHTML = `
+
+            <img
+                src="${story.image}"
+                alt="${story.title}"
+                loading="${index === 0 ? "eager" : "lazy"}"
+            >
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+
+                <div class="hero-category">
+                    ✦ ${story.category}
+                </div>
+
+                <h2>${story.title}</h2>
+
+                <p>${story.description}</p>
+
+                <button
+                    class="primary-btn"
+                    onclick="openArticle(${story.articleId})"
+                >
+                    Read Article →
+                </button>
+
+                <div class="hero-meta">
+                    <span>📖 ${story.time}</span>
+                    <span>•</span>
+                    <span>SwasthyaMitra AI Health Library</span>
+                </div>
+
+            </div>
+        `;
+
+        heroSlider.appendChild(slide);
+
+    });
+
+    const controls = document.createElement("div");
+
+    controls.className = "hero-controls";
+
+    featuredStories.forEach((_, index) => {
+
+        const dot = document.createElement("button");
+
+        dot.className =
+            "hero-dot " + (index === 0 ? "active" : "");
+
+        dot.setAttribute("aria-label", `Featured story ${index + 1}`);
+
+        dot.addEventListener("click", () => {
+            showHero(index);
+            restartHeroTimer();
+        });
+
+        controls.appendChild(dot);
+
+    });
+
+    heroSlider.appendChild(controls);
+
+    startHeroTimer();
+}
+
+
+function showHero(index) {
+
+    const slides =
+        document.querySelectorAll(".hero-slide");
+
+    const dots =
+        document.querySelectorAll(".hero-dot");
+
+    slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+    });
+
+    dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+    });
+
+    currentHero = index;
+
+}
+
+
+function nextHero() {
+
+    const next =
+        (currentHero + 1) % featuredStories.length;
+
+    showHero(next);
+
+}
+
+
+function startHeroTimer() {
+
+    clearInterval(heroTimer);
+
+    heroTimer =
+        setInterval(nextHero, 5000);
+
+}
+
+
+function restartHeroTimer() {
+
+    clearInterval(heroTimer);
+
+    startHeroTimer();
+
+}
+
+
+/* =========================================================
+   ARTICLE RENDERING
+========================================================= */
+
+const articleGrid =
+    document.getElementById("articleGrid");
+
+const noResults =
+    document.getElementById("noResults");
+
+let selectedCategory = "All";
+let searchTerm = "";
+
+
+function renderArticles() {
+
+    const filtered = articles.filter(article => {
+
+        const categoryMatch =
+            selectedCategory === "All" ||
+            article.category === selectedCategory;
+
+        const searchText = `
+            ${article.title}
+            ${article.category}
+            ${article.description}
+            ${article.keywords}
+        `.toLowerCase();
+
+        const searchMatch =
+            searchText.includes(searchTerm.toLowerCase());
+
+        return categoryMatch && searchMatch;
+
+    });
+
+    articleGrid.innerHTML = "";
+
+    if (!filtered.length) {
+
+        noResults.classList.add("show");
+
+        return;
+
+    }
+
+    noResults.classList.remove("show");
+
+    filtered.forEach(article => {
+
+        const card =
+            document.createElement("article");
+
+        card.className = "article-card";
+
+        card.innerHTML = `
+
+            <div class="article-image">
+
+                <img
+                    src="${article.image}"
+                    alt="${article.title}"
+                    loading="lazy"
+                >
+
+                <span class="article-category">
+                    ${article.category}
+                </span>
+
+            </div>
+
+            <div class="article-content">
+
+                <h3>${article.title}</h3>
+
+                <p>${article.description}</p>
+
+                <div class="article-footer">
+
+                    <span class="read-time">
+                        📖 ${article.time}
+                    </span>
+
+                    <button
+                        class="read-btn"
+                        onclick="openArticle(${article.id})"
+                    >
+                        Read Article →
+                    </button>
+
+                </div>
+
+            </div>
+        `;
+
+        articleGrid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   CATEGORY FILTER
+========================================================= */
+
+document
+    .getElementById("categoryFilters")
+    .addEventListener("click", event => {
+
+        const button =
+            event.target.closest(".category-btn");
+
+        if (!button) return;
+
+        document
+            .querySelectorAll(".category-btn")
+            .forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+        button.classList.add("active");
+
+        selectedCategory =
+            button.dataset.category;
+
+        renderArticles();
+
+    });
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+document
+    .getElementById("articleSearch")
+    .addEventListener("input", event => {
+
+        searchTerm = event.target.value.trim();
+
+        renderArticles();
+
+    });
+
+
+/* =========================================================
+   ARTICLE READER
+========================================================= */
+
+const modal =
+    document.getElementById("articleModal");
+
+const readerImage =
+    document.getElementById("readerImage");
+
+const readerCategory =
+    document.getElementById("readerCategory");
+
+const readerTitle =
+    document.getElementById("readerTitle");
+
+const readerTime =
+    document.getElementById("readerTime");
+
+const readerContent =
+    document.getElementById("readerContent");
+
+
+function openArticle(id) {
+
+    const article =
+        articles.find(item => item.id === id);
+
+    if (!article) return;
+
+    readerImage.src = article.image;
+    readerImage.alt = article.title;
+
+    readerCategory.textContent =
+        `✦ ${article.category}`;
+
+    readerTitle.textContent =
+        article.title;
+
+    readerTime.textContent =
+        `📖 ${article.time}`;
+
+    readerContent.innerHTML =
+        article.content;
+
+    modal.classList.add("open");
+
+    document.body.style.overflow = "hidden";
+
+    modal.scrollTop = 0;
+
+}
+
+
+function closeArticle() {
+
+    modal.classList.remove("open");
+
+    document.body.style.overflow = "";
+
+}
+
+
+document
+    .getElementById("closeReader")
+    .addEventListener("click", closeArticle);
+
+
+modal.addEventListener("click", event => {
+
+    if (event.target === modal) {
+        closeArticle();
+    }
+
+});
+
+
+document.addEventListener("keydown", event => {
+
+    if (event.key === "Escape") {
+        closeArticle();
+    }
+
+});
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+renderHero();
+
+renderArticles();
+
+</script>
+
+</body>
+</html>

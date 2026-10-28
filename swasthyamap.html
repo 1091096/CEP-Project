@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwasthyaMap | SwasthyaMitra AI</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* =========================================================
+   SWASTHYAMAP / HEALTHCARE HUB
+   Existing design preserved — only connections/functionality fixed.
+   ========================================================= */
+
+.hub-page{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top right,rgba(22,184,166,.12),transparent 30%),
+    radial-gradient(circle at bottom left,rgba(59,130,246,.10),transparent 28%),
+    var(--bg);
+  padding-bottom:60px;
+}
+.hub-container{width:min(1200px,92%);margin:0 auto}
+
+.hub-topbar{
+  padding:22px 0;display:flex;align-items:center;
+  justify-content:space-between;gap:15px
+}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  color:var(--text);background:rgba(255,255,255,.05);
+  border:1px solid var(--border);padding:10px 16px;border-radius:12px;
+  transition:.25s ease
+}
+.back-btn:hover{border-color:var(--border-hover);transform:translateY(-2px)}
+.hub-brand{font-weight:800;color:var(--primary-light);letter-spacing:.3px}
+
+.hub-hero{
+  position:relative;overflow:hidden;border:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(13,36,53,.96),rgba(8,27,42,.96));
+  border-radius:28px;padding:42px;box-shadow:var(--shadow);margin-bottom:24px
+}
+.hub-hero::before{
+  content:"";position:absolute;width:240px;height:240px;border-radius:50%;
+  background:rgba(22,184,166,.10);right:-70px;top:-90px
+}
+.hub-hero-content{position:relative;z-index:1;max-width:760px}
+.hub-badge{
+  display:inline-flex;align-items:center;gap:8px;background:rgba(22,184,166,.12);
+  color:var(--primary-light);border:1px solid rgba(94,234,212,.18);
+  padding:8px 14px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:16px
+}
+.hub-hero h1{font-size:clamp(32px,5vw,52px);line-height:1.05;margin:0 0 14px}
+.hub-hero h1 span{color:var(--primary-light)}
+.hub-hero p{color:var(--muted);font-size:17px;line-height:1.7;margin:0 0 24px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+
+.hub-btn{
+  border:none;cursor:pointer;text-decoration:none;display:inline-flex;
+  align-items:center;justify-content:center;gap:9px;padding:13px 18px;
+  border-radius:13px;font-weight:700;font-size:14px;transition:.25s ease
+}
+.hub-btn:hover{transform:translateY(-2px)}
+.hub-btn-primary{
+  color:white;background:linear-gradient(135deg,#11a997,#0b817c);
+  box-shadow:0 10px 25px rgba(22,184,166,.18)
+}
+.hub-btn-secondary{
+  color:var(--text);background:rgba(255,255,255,.05);
+  border:1px solid var(--border)
+}
+.hub-btn-danger{
+  color:white;background:linear-gradient(135deg,#ef4444,#b91c1c);
+  box-shadow:0 10px 25px rgba(239,68,68,.16)
+}
+
+.location-panel{
+  margin-bottom:30px;background:rgba(13,36,53,.78);
+  border:1px solid var(--border);border-radius:20px;padding:20px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap
+}
+.location-info{display:flex;align-items:center;gap:14px}
+.location-icon{
+  width:46px;height:46px;display:grid;place-items:center;border-radius:14px;
+  background:rgba(59,130,246,.12);font-size:22px
+}
+.location-info h3{margin:0 0 4px;font-size:15px}
+.location-info p{margin:0;color:var(--muted);font-size:13px}
+
+.hub-section{margin-top:36px}
+.section-heading{margin-bottom:18px}
+.section-heading h2{margin:0 0 6px;font-size:25px}
+.section-heading p{margin:0;color:var(--muted);font-size:14px}
+
+.emergency-card{
+  border:1px solid rgba(239,68,68,.25);
+  background:linear-gradient(135deg,rgba(127,29,29,.30),rgba(13,36,53,.90));
+  border-radius:22px;padding:24px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;flex-wrap:wrap
+}
+.emergency-left{display:flex;align-items:center;gap:16px}
+.emergency-icon{
+  width:58px;height:58px;display:grid;place-items:center;border-radius:16px;
+  background:rgba(239,68,68,.14);font-size:28px
+}
+.emergency-left h3{margin:0 0 6px}
+.emergency-left p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+.emergency-actions{display:flex;flex-wrap:wrap;gap:10px}
+
+.service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.service-card{
+  position:relative;overflow:hidden;min-height:190px;padding:22px;border-radius:20px;
+  border:1px solid var(--border);
+  background:linear-gradient(145deg,rgba(16,44,64,.92),rgba(13,36,53,.92));
+  transition:.25s ease
+}
+.service-card:hover{
+  transform:translateY(-5px);border-color:var(--border-hover);
+  box-shadow:0 15px 35px rgba(0,0,0,.22)
+}
+.service-icon{
+  width:52px;height:52px;display:grid;place-items:center;border-radius:15px;
+  background:rgba(22,184,166,.10);font-size:25px;margin-bottom:17px
+}
+.service-card h3{margin:0 0 7px;font-size:17px}
+.service-card p{margin:0 0 16px;color:var(--muted);font-size:13px;line-height:1.55}
+.service-link{
+  border:none;background:none;color:var(--primary-light);cursor:pointer;padding:0;
+  font-weight:700;font-size:13px;text-decoration:none;display:inline-flex
+}
+.service-link:hover{text-decoration:underline}
+.live-badge{
+  position:absolute;top:15px;right:15px;font-size:10px;font-weight:800;
+  padding:5px 8px;border-radius:999px;color:var(--primary-light);
+  background:rgba(22,184,166,.10);border:1px solid rgba(94,234,212,.15)
+}
+
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.quick-card{
+  padding:22px;border-radius:20px;border:1px solid var(--border);
+  background:rgba(13,36,53,.75)
+}
+.quick-card h3{margin:0 0 8px}
+.quick-card p{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 15px}
+
+.scheme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.scheme-card{
+  padding:22px;border-radius:20px;border:1px solid var(--border);
+  background:linear-gradient(145deg,rgba(13,36,53,.95),rgba(9,27,42,.95))
+}
+.scheme-card .scheme-icon{font-size:28px;margin-bottom:13px}
+.scheme-card h3{margin:0 0 8px;font-size:17px}
+.scheme-card p{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 16px}
+
+.info-box{
+  margin-top:30px;padding:20px;border-radius:18px;
+  border:1px solid rgba(251,191,36,.16);background:rgba(251,191,36,.05);
+  color:var(--muted);font-size:13px;line-height:1.7
+}
+.info-box strong{color:#fbbf24}
+.hub-footer{
+  margin-top:45px;padding-top:22px;border-top:1px solid var(--border);
+  text-align:center;color:var(--muted-2);font-size:12px
+}
+.hub-toast{
+  position:fixed;left:50%;bottom:25px;transform:translate(-50%,120px);
+  background:#102c40;border:1px solid var(--border-hover);color:var(--text);
+  padding:13px 18px;border-radius:12px;box-shadow:var(--shadow);z-index:9999;
+  opacity:0;transition:.3s ease;max-width:90%;text-align:center;font-size:13px
+}
+.hub-toast.show{transform:translate(-50%,0);opacity:1}
+
+@media(max-width:1000px){
+  .service-grid{grid-template-columns:repeat(2,1fr)}
+  .scheme-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:700px){
+  .hub-hero{padding:28px 22px}
+  .hub-topbar{padding:16px 0}
+  .service-grid,.quick-grid,.scheme-grid{grid-template-columns:1fr}
+  .location-panel,.emergency-card{align-items:flex-start}
+  .emergency-actions{width:100%}
+  .emergency-actions .hub-btn{flex:1}
+}
+</style>
+</head>
+
+<body>
+<div class="hub-page">
+<div class="hub-container">
+
+<header class="hub-topbar">
+  <a href="dashboard.html" class="back-btn">← Back to Dashboard</a>
+  <div class="hub-brand">🩺 SwasthyaMitra AI</div>
+</header>
+
+<section class="hub-hero">
+  <div class="hub-hero-content">
+    <div class="hub-badge">📍 Healthcare Discovery Hub</div>
+    <h1>Your <span>Healthcare</span> Hub</h1>
+    <p>
+      Discover hospitals, blood banks, diagnostics, pharmacies, scans,
+      emergency services, pet care and important health resources — all from one place.
+    </p>
+    <div class="hero-actions">
+      <button class="hub-btn hub-btn-primary" onclick="detectLocation()">📍 Detect My Location</button>
+      <button class="hub-btn hub-btn-danger" onclick="callEmergency()">🚨 Emergency 112</button>
+    </div>
+  </div>
+</section>
+
+<section class="location-panel">
+  <div class="location-info">
+    <div class="location-icon">📍</div>
+    <div>
+      <h3>Current Location</h3>
+      <p id="locationStatus">Location not detected yet</p>
+    </div>
+  </div>
+  <button class="hub-btn hub-btn-secondary" onclick="detectLocation()">Update Location</button>
+</section>
+
+<section class="hub-section">
+  <div class="section-heading">
+    <h2>🚨 Emergency Support</h2>
+    <p>Quick access to emergency assistance and navigation.</p>
+  </div>
+  <div class="emergency-card">
+    <div class="emergency-left">
+      <div class="emergency-icon">🚑</div>
+      <div>
+        <h3>Need Emergency Help?</h3>
+        <p>For emergencies in India, use the national emergency response number 112.</p>
+      </div>
+    </div>
+    <div class="emergency-actions">
+      <a href="tel:112" class="hub-btn hub-btn-danger">📞 Call 112</a>
+      <button class="hub-btn hub-btn-secondary" onclick="openEmergencyRoute()">🗺️ Emergency Route</button>
+      <a href="emergency.html" class="hub-btn hub-btn-secondary">🩺 Emergency Guide</a>
+    </div>
+  </div>
+</section>
+
+<section class="hub-section">
+  <div class="section-heading">
+    <h2>🏥 Healthcare Services</h2>
+    <p>Open the connected SwasthyaMitra services directly.</p>
+  </div>
+
+  <div class="service-grid">
+
+    <div class="service-card">
+      <span class="live-badge">MAP</span>
+      <div class="service-icon">🏥</div>
+      <h3>Hospitals</h3>
+      <p>Find nearby hospitals and healthcare facilities.</p>
+      <a href="appointments.html" class="service-link">Connect Doctor →</a>
+    </div>
+
+    <div class="service-card">
+      <span class="live-badge">MAP</span>
+      <div class="service-icon">🩸</div>
+      <h3>Blood Banks</h3>
+      <p>Check blood availability and find nearby blood banks.</p>
+      <a href="blood-bank.html" class="service-link">Find Blood Banks →</a>
+    </div>
+
+    <div class="service-card">
+      <span class="live-badge">MAP</span>
+      <div class="service-icon">🧪</div>
+      <h3>Diagnostic Centers</h3>
+      <p>Search nearby pathology labs and diagnostic centers.</p>
+      <a href="lab-tests.html" class="service-link">Find Diagnostics →</a>
+    </div>
+
+    <div class="service-card">
+      <span class="live-badge">MAP</span>
+      <div class="service-icon">🩻</div>
+      <h3>Scans &amp; Imaging</h3>
+      <p>Find nearby MRI, CT, X-ray and ultrasound facilities.</p>
+      <a href="appointments.html" class="service-link">Find Scan Centers →</a>
+    </div>
+
+    <div class="service-card">
+      <span class="live-badge">MAP</span>
+      <div class="service-icon">💊</div>
+      <h3>Pharmacies</h3>
+      <p>Search for pharmacies and medical stores near you.</p>
+      <a href="pharmacy.html" class="service-link">Find Pharmacies →</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🚚</div>
+      <h3>Medicine Delivery</h3>
+      <p>Explore the future medicine-delivery section of SwasthyaMitra AI.</p>
+      <a href="pharmacy.html" class="service-link">Explore →</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🛒</div>
+      <h3>Healthcare Shopping</h3>
+      <p>A future hub for health products, wellness items and medical essentials.</p>
+      <a href="pharmacy.html" class="service-link">Explore →</a>
+    </div>
+
+    <div class="service-card">
+      <span class="live-badge">MAP</span>
+      <div class="service-icon">🐾</div>
+      <h3>Pet Care</h3>
+      <p>Find nearby veterinary clinics, pet hospitals and pet-care services.</p>
+      <a href="petcare.html" class="service-link">Find Pet Care →</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="hub-section">
+  <div class="section-heading">
+    <h2>⚡ Quick Healthcare Actions</h2>
+    <p>Jump directly to your connected healthcare tools.</p>
+  </div>
+
+  <div class="quick-grid">
+
+    <div class="quick-card">
+      <h3>👨‍⚕️ Doctor Connect</h3>
+      <p>Open the existing doctor appointment section and connect with available doctors.</p>
+      <a href="appointments.html" class="hub-btn hub-btn-primary">Find Doctors</a>
+    </div>
+
+    <div class="quick-card">
+      <h3>🤖 AI Health Assistant</h3>
+      <p>Open your SwasthyaMitra AI assistant for health questions and guidance.</p>
+      <a href="ai-assistant.html" class="hub-btn hub-btn-primary">Open Assistant</a>
+    </div>
+
+    <div class="quick-card">
+      <h3>📊 Health Records</h3>
+      <p>View your saved health readings and personal health history.</p>
+      <a href="health-history.html" class="hub-btn hub-btn-primary">View Records</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="hub-section">
+  <div class="section-heading">
+    <h2>🇮🇳 Indian Government Health Resources</h2>
+    <p>Useful official healthcare portals and public health resources for people in India.</p>
+  </div>
+
+  <div class="scheme-grid">
+
+    <div class="scheme-card">
+      <div class="scheme-icon">🏥</div>
+      <h3>Ayushman Bharat</h3>
+      <p>Explore official Ayushman Bharat / PM-JAY information and beneficiary services.</p>
+      <button class="hub-btn hub-btn-secondary"
+        onclick="openGovernmentPortal('https://pmjay.gov.in/')">
+        Open Official Portal →
+      </button>
+    </div>
+
+    <div class="scheme-card">
+      <div class="scheme-icon">🪪</div>
+      <h3>ABHA / Digital Health</h3>
+      <p>Explore India's official digital-health and health-account services.</p>
+      <button class="hub-btn hub-btn-secondary"
+        onclick="openGovernmentPortal('https://abha.abdm.gov.in/')">
+        Open ABHA Portal →
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<section class="hub-section">
+  <div class="section-heading">
+    <h2>🧭 How SwasthyaMap Works</h2>
+    <p>A simple healthcare discovery workflow.</p>
+  </div>
+
+  <div class="quick-grid">
+    <div class="quick-card">
+      <h3>1️⃣ Detect</h3>
+      <p>Allow browser location access to find nearby healthcare services.</p>
+    </div>
+    <div class="quick-card">
+      <h3>2️⃣ Discover</h3>
+      <p>Choose hospitals, pharmacies, diagnostics, scans, blood banks or pet care.</p>
+    </div>
+    <div class="quick-card">
+      <h3>3️⃣ Connect</h3>
+      <p>Open the existing SwasthyaMitra page for the service you need.</p>
+    </div>
+  </div>
+</section>
+
+<div class="info-box">
+  <strong>⚠️ Important:</strong>
+  SwasthyaMap is a healthcare discovery and navigation interface.
+  External map and government services may change. In a medical emergency,
+  use appropriate emergency services. SwasthyaMitra AI does not replace
+  professional medical advice, diagnosis or treatment.
+</div>
+
+<footer class="hub-footer">
+  <p>© 2026 SwasthyaMitra AI · Healthcare for Everyone</p>
+  <p>Built as a student healthcare technology project.</p>
+</footer>
+
+</div>
+</div>
+
+<div id="hubToast" class="hub-toast"></div>
+
+<script>
+let currentLatitude = null;
+let currentLongitude = null;
+
+function detectLocation(){
+  const status = document.getElementById("locationStatus");
+
+  if(!navigator.geolocation){
+    status.textContent = "Geolocation is not supported by this browser.";
+    showToast("Your browser does not support location detection.");
+    return;
+  }
+
+  status.textContent = "Detecting your location...";
+
+  navigator.geolocation.getCurrentPosition(
+    function(position){
+      currentLatitude = position.coords.latitude;
+      currentLongitude = position.coords.longitude;
+
+      status.textContent =
+        `Location detected (${currentLatitude.toFixed(4)}, ${currentLongitude.toFixed(4)})`;
+
+      showToast("📍 Location detected successfully!");
+    },
+    function(error){
+      console.error("Location error:", error);
+      status.textContent = "Location permission was not available.";
+      showToast("Please allow location access to use nearby services.");
+    },
+    {
+      enableHighAccuracy:true,
+      timeout:10000,
+      maximumAge:300000
+    }
+  );
+}
+
+function searchNearby(service){
+  const query = encodeURIComponent(service);
+  let mapsURL;
+
+  if(currentLatitude !== null && currentLongitude !== null){
+    mapsURL =
+      `https://www.google.com/maps/search/${query}/@${currentLatitude},${currentLongitude},14z`;
+  }else{
+    mapsURL =
+      `https://www.google.com/maps/search/${query}`;
+  }
+
+  window.open(mapsURL,"_blank");
+  showToast(`Opening nearby ${service}...`);
+}
+
+function callEmergency(){
+  const confirmed = confirm(
+    "For an emergency in India, you can call 112.\n\nDo you want to open the emergency call?"
+  );
+
+  if(confirmed){
+    window.location.href = "tel:112";
+  }
+}
+
+function openEmergencyRoute(){
+  if(currentLatitude === null || currentLongitude === null){
+    showToast("📍 Detect your location first.");
+    detectLocation();
+    return;
+  }
+
+  const destination = encodeURIComponent("nearest hospital emergency room");
+  const routeURL =
+    `https://www.google.com/maps/dir/?api=1&origin=${currentLatitude},${currentLongitude}&destination=${destination}&travelmode=driving`;
+
+  window.open(routeURL,"_blank");
+  showToast("🗺️ Opening emergency route...");
+}
+
+function openBloodBank(){
+  window.location.href = "blood-bank.html";
+}
+
+function openGovernmentPortal(url){
+  window.open(url,"_blank");
+}
+
+let toastTimer;
+
+function showToast(message){
+  const toast = document.getElementById("hubToast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){
+    toast.classList.remove("show");
+  },3000);
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+  console.log("SwasthyaMitra AI Healthcare Hub loaded.");
+});
+</script>
+
+</body>
+</html>

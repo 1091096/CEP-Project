@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Health History | SwasthyaMitra AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .history-page {
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .history-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #8bd3dd;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #b8c2cc;
+            margin-bottom: 35px;
+        }
+
+        .history-card {
+            background: #142331;
+            border: 1px solid #294052;
+            border-radius: 18px;
+            padding: 25px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #102d35;
+            color: #8bd3dd;
+            padding: 15px 10px;
+            text-align: center;
+        }
+
+        td {
+            padding: 15px 10px;
+            text-align: center;
+            border-bottom: 1px solid #294052;
+            color: #e5e7eb;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #b8c2cc;
+        }
+
+        .empty-message {
+            text-align: center;
+            padding: 35px;
+            color: #b8c2cc;
+        }
+
+        .refresh-btn {
+            display: block;
+            margin: 25px auto 0;
+            padding: 11px 22px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: #111827;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="history-page">
+
+        <div class="history-container">
+
+            <a href="dashboard.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+
+            <h1 class="page-title">Health History</h1>
+
+            <p class="page-subtitle">
+                View your previously saved health readings.
+            </p>
+
+            <div class="history-card">
+
+                <div id="loadingMessage" class="loading">
+                    Loading your health history...
+                </div>
+
+                <table id="historyTable" style="display: none;">
+
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Heart Rate</th>
+                            <th>Blood Pressure</th>
+                            <th>Sleep</th>
+                            <th>Steps</th>
+                            <th>SpO₂</th>
+                            <th>Weight</th>
+                            <th>Temperature</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="historyBody"></tbody>
+
+                </table>
+
+                <div id="emptyMessage"
+                     class="empty-message"
+                     style="display: none;">
+
+                    No health readings found yet.<br>
+                    Add your first reading from the Health Entry page.
+
+                </div>
+
+            </div>
+
+            <button class="refresh-btn"
+                    onclick="loadHealthHistory()">
+                🔄 Refresh History
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Your main JavaScript -->
+    <script src="main.js"></script>
+
+
+    <script>
+
+        async function loadHealthHistory() {
+
+            const loadingMessage =
+                document.getElementById("loadingMessage");
+
+            const historyTable =
+                document.getElementById("historyTable");
+
+            const historyBody =
+                document.getElementById("historyBody");
+
+            const emptyMessage =
+                document.getElementById("emptyMessage");
+
+
+            loadingMessage.style.display = "block";
+            historyTable.style.display = "none";
+            emptyMessage.style.display = "none";
+
+            historyBody.innerHTML = "";
+
+
+            // Get logged-in user
+            const {
+                data: { user },
+                error: userError
+            } = await supabaseClient.auth.getUser();
+
+
+            if (userError || !user) {
+
+                loadingMessage.style.display = "none";
+
+                emptyMessage.innerHTML =
+                    "Please log in first to view your health history.";
+
+                emptyMessage.style.display = "block";
+
+                return;
+            }
+
+
+            // Get health records
+            const { data, error } =
+                await supabaseClient
+                    .from("health_metrics")
+                    .select("*")
+                    .eq("user_id", user.id)
+                    .order("created_at", { ascending: false });
+
+
+            if (error) {
+
+                console.error(
+                    "Health history error:",
+                    error
+                );
+
+                loadingMessage.style.display = "none";
+
+                emptyMessage.innerHTML =
+                    "Unable to load health history.";
+
+                emptyMessage.style.display = "block";
+
+                return;
+            }
+
+
+            loadingMessage.style.display = "none";
+
+
+            // No records
+            if (!data || data.length === 0) {
+
+                emptyMessage.style.display = "block";
+
+                return;
+            }
+
+
+            // Display records
+            data.forEach(function(record) {
+
+                const row =
+                    document.createElement("tr");
+
+
+                const date =
+                    record.created_at
+                        ? new Date(record.created_at)
+                            .toLocaleString()
+                        : "--";
+
+
+                const heartRate =
+                    record.heart_rate ?? "--";
+
+
+                const bloodPressure =
+                    `${record.systolic ?? "--"}/${record.diastolic ?? "--"}`;
+
+
+                const sleep =
+                    record.sleep_hours != null ||
+                    record.sleep_minutes != null
+                        ? `${record.sleep_hours ?? 0}h ${record.sleep_minutes ?? 0}m`
+                        : "--";
+
+
+                const steps =
+                    record.steps ?? "--";
+
+
+                const spo2 =
+                    record.spo2 != null
+                        ? `${record.spo2}%`
+                        : "--";
+
+
+                const weight =
+                    record.weight != null
+                        ? `${record.weight} kg`
+                        : "--";
+
+
+                const temperature =
+                    record.temperature != null
+                        ? `${record.temperature} °C`
+                        : "--";
+
+
+                row.innerHTML = `
+                    <td>${date}</td>
+                    <td>${heartRate} BPM</td>
+                    <td>${bloodPressure} mmHg</td>
+                    <td>${sleep}</td>
+                    <td>${steps}</td>
+                    <td>${spo2}</td>
+                    <td>${weight}</td>
+                    <td>${temperature}</td>
+                `;
+
+
+                historyBody.appendChild(row);
+
+            });
+
+
+            historyTable.style.display = "table";
+
+        }
+
+
+        // Load history when page opens
+        loadHealthHistory();
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SwasthyaMitra AI — Lab Tests</title>
+
+    <style>
+        :root {
+            --bg: #07111f;
+            --bg-2: #0b1728;
+            --card: #101e31;
+            --card-2: #13243a;
+            --border: rgba(255,255,255,0.08);
+            --text: #f4f8ff;
+            --muted: #91a1b7;
+            --primary: #28d7a3;
+            --blue: #4e9cff;
+            --warning: #ffc857;
+            --danger: #ff647c;
+            --shadow: 0 18px 50px rgba(0,0,0,0.25);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top right, rgba(40,215,163,0.08), transparent 30%),
+                radial-gradient(circle at top left, rgba(78,156,255,0.08), transparent 28%),
+                var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* NAV */
+
+        .navbar {
+            height: 72px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 4%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(7,17,31,.92);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 800;
+            font-size: 19px;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg,var(--primary),var(--blue));
+            color: #03121a;
+            font-weight: 900;
+        }
+
+        .brand small {
+            display: block;
+            color: var(--primary);
+            font-size: 9px;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 7px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            padding: 10px 13px;
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: white;
+            background: rgba(255,255,255,.06);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: white;
+            padding: 10px 13px;
+            border-radius: 10px;
+        }
+
+        /* PAGE */
+
+        .page {
+            width: min(1450px,92%);
+            margin: auto;
+            padding: 30px 0 70px;
+        }
+
+        .breadcrumb {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb span {
+            color: var(--primary);
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 35px;
+            min-height: 285px;
+            border-radius: 28px;
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(120deg,rgba(40,215,163,.11),rgba(78,156,255,.07)),
+                var(--card);
+            box-shadow: var(--shadow);
+        }
+
+        .demo {
+            display: inline-block;
+            color: var(--warning);
+            background: rgba(255,200,87,.1);
+            border: 1px solid rgba(255,200,87,.18);
+            border-radius: 30px;
+            padding: 7px 11px;
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(30px,4vw,48px);
+            max-width: 750px;
+            line-height: 1.06;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            line-height: 1.6;
+            max-width: 700px;
+            margin-bottom: 23px;
+        }
+
+        .search {
+            display: flex;
+            max-width: 730px;
+            height: 57px;
+            padding: 0 8px 0 17px;
+            background: #081525;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+        }
+
+        .search span {
+            display: grid;
+            place-items: center;
+            font-size: 20px;
+        }
+
+        .search input {
+            flex: 1;
+            outline: 0;
+            border: 0;
+            background: transparent;
+            color: white;
+            padding: 0 13px;
+        }
+
+        .search button,
+        .primary {
+            border: 0;
+            border-radius: 10px;
+            padding: 11px 18px;
+            background: var(--primary);
+            color: #03121a;
+            font-weight: 900;
+        }
+
+        /* CATEGORIES */
+
+        .section {
+            margin-top: 33px;
+        }
+
+        .section-title {
+            margin-bottom: 17px;
+        }
+
+        .section-title h2 {
+            font-size: 23px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(12,1fr);
+            gap: 10px;
+        }
+
+        .category {
+            grid-column: span 2;
+            min-height: 110px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 15px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 13px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .category:hover,
+        .category.active {
+            border-color: rgba(40,215,163,.4);
+            background: var(--card-2);
+            transform: translateY(-3px);
+        }
+
+        .category-icon {
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .category h4 {
+            font-size: 12px;
+        }
+
+        /* PACKAGE */
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 18px;
+        }
+
+        .package {
+            padding: 23px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(130deg,rgba(40,215,163,.07),transparent),
+                var(--card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(40,215,163,.1);
+            color: var(--primary);
+            padding: 6px 9px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .package h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .package-subtitle {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .package-stats {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .stat {
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255,255,255,.035);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .included {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .package-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 15px;
+        }
+
+        .price strong {
+            font-size: 25px;
+        }
+
+        .price del {
+            color: var(--muted);
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .save {
+            display: block;
+            color: var(--primary);
+            font-size: 10px;
+            margin-top: 4px;
+        }
+
+        /* TESTS */
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .count {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .sort {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 15px;
+        }
+
+        .test-card {
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 17px;
+            padding: 18px;
+            transition: .2s;
+        }
+
+        .test-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(78,156,255,.3);
+        }
+
+        .test-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 15px;
+            display: grid;
+            place-items: center;
+            background: rgba(78,156,255,.1);
+            font-size: 25px;
+            margin-bottom: 13px;
+        }
+
+        .test-card h3 {
+            font-size: 14px;
+            min-height: 40px;
+            line-height: 1.4;
+        }
+
+        .test-card p {
+            color: var(--muted);
+            font-size: 11px;
+            margin: 8px 0 15px;
+            line-height: 1.5;
+        }
+
+        .test-price {
+            font-size: 19px;
+            font-weight: 900;
+            margin-bottom: 11px;
+        }
+
+        .test-card button {
+            width: 100%;
+        }
+
+        /* TRUST */
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 15px;
+        }
+
+        .trust {
+            padding: 22px;
+            border-radius: 17px;
+            background: var(--card);
+            border: 1px solid var(--border);
+        }
+
+        .trust-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .trust h3 {
+            margin-bottom: 7px;
+        }
+
+        .trust p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* COLLECTION FLOW */
+
+        .flow {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 10px;
+        }
+
+        .flow-step {
+            padding: 20px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 15px;
+        }
+
+        .number {
+            width: 35px;
+            height: 35px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #03121a;
+            font-weight: 900;
+            margin-bottom: 13px;
+        }
+
+        .flow-step h3 {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .flow-step p {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0,0,0,.72);
+            backdrop-filter: blur(8px);
+            overflow-y: auto;
+            padding: 25px;
+        }
+
+        .modal.show {
+            display: grid;
+            place-items: center;
+        }
+
+        .modal-box {
+            width: min(680px,100%);
+            background: #0c192a;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 25px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            font-size: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            outline: none;
+            background: var(--card);
+            color: white;
+        }
+
+        .slot-grid {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 8px;
+        }
+
+        .slot {
+            padding: 11px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: white;
+        }
+
+        .slot.active {
+            background: var(--primary);
+            color: #03121a;
+        }
+
+        .booking-card {
+            padding: 15px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            margin-bottom: 10px;
+        }
+
+        .booking-card small {
+            color: var(--muted);
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 30px 4%;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        @media(max-width:1100px) {
+            .test-grid {
+                grid-template-columns: repeat(3,1fr);
+            }
+
+            .categories .category {
+                grid-column: span 3;
+            }
+        }
+
+        @media(max-width:800px) {
+            .nav-links {
+                display: none;
+            }
+
+            .package-grid,
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .test-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .flow {
+                grid-template-columns: repeat(2,1fr);
+            }
+        }
+
+        @media(max-width:550px) {
+            .hero {
+                padding: 24px;
+            }
+
+            .categories {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .categories .category {
+                grid-column: span 1;
+            }
+
+            .test-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .package-stats {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .flow {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <a href="dashboard.html" class="brand">
+        <div class="brand-logo">✚</div>
+
+        <div>
+            SwasthyaMitra AI
+            <small>SMART HEALTHCARE</small>
+        </div>
+    </a>
+
+    <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="pharmacy.html">Pharmacy</a>
+        <a href="lab-tests.html" class="active">Lab Tests</a>
+    </div>
+
+    <div class="nav-actions">
+        <button class="nav-btn" onclick="showBookings()">
+            My Bookings
+        </button>
+    </div>
+
+</nav>
+
+<main class="page">
+
+    <div class="breadcrumb">
+        Dashboard / <span>Lab Tests</span>
+    </div>
+
+    <section class="hero">
+
+        <div class="demo">
+            ● COLLEGE PROJECT · DEMO DIAGNOSTIC CATALOGUE
+        </div>
+
+        <h1>
+            Health tests made simpler.
+        </h1>
+
+        <p>
+            Explore preventive packages and individual diagnostic tests,
+            select a patient, choose a home collection slot and create a
+            prototype booking through SwasthyaMitra AI.
+        </p>
+
+        <div class="search">
+
+            <span>⌕</span>
+
+            <input
+                id="searchInput"
+                placeholder="Search tests, packages or health conditions..."
+                oninput="renderTests()"
+            >
+
+            <button onclick="renderTests()">
+                Search
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- CATEGORIES -->
+
+    <section class="section">
+
+        <div class="section-title">
+            <h2>Explore health tests</h2>
+            <p>Find tests based on the health area you want to monitor.</p>
+        </div>
+
+        <div class="categories" id="categoryGrid"></div>
+
+    </section>
+
+    <!-- PACKAGES -->
+
+    <section class="section">
+
+        <div class="section-title">
+            <h2>Top health packages</h2>
+            <p>Comprehensive sample packages for the SwasthyaMitra prototype.</p>
+        </div>
+
+        <div class="package-grid" id="packageGrid"></div>
+
+    </section>
+
+    <!-- TESTS -->
+
+    <section class="section">
+
+        <div class="toolbar">
+
+            <div class="count" id="resultCount">
+                Individual tests
+            </div>
+
+            <select
+                id="sortSelect"
+                class="sort"
+                onchange="renderTests()">
+
+                <option value="featured">Sort: Featured</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+                <option value="name">Name: A-Z</option>
+
+            </select>
+
+        </div>
+
+        <div class="test-grid" id="testGrid"></div>
+
+    </section>
+
+    <!-- TRUST -->
+
+    <section class="section">
+
+        <div class="section-title">
+            <h2>Why trust SwasthyaMitra Labs?</h2>
+        </div>
+
+        <div class="trust-grid">
+
+            <div class="trust">
+                <div class="trust-icon">🏠</div>
+                <h3>Home collection</h3>
+                <p>
+                    Designed for convenient sample collection at the
+                    patient's selected address.
+                </p>
+            </div>
+
+            <div class="trust">
+                <div class="trust-icon">📱</div>
+                <h3>Reports on app</h3>
+                <p>
+                    The future integration can connect authorized
+                    diagnostic providers to make reports available
+                    through the patient's account.
+                </p>
+            </div>
+
+            <div class="trust">
+                <div class="trust-icon">🔐</div>
+                <h3>Healthcare-first design</h3>
+                <p>
+                    Patient and booking workflows are structured so
+                    authorized healthcare APIs can be integrated later.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- HOW COLLECTION WORKS -->
+
+    <section class="section">
+
+        <div class="section-title">
+            <h2>How home sample collection works</h2>
+        </div>
+
+        <div class="flow">
+
+            <div class="flow-step">
+                <div class="number">1</div>
+                <h3>Pick a slot</h3>
+                <p>Select a convenient date and collection time.</p>
+            </div>
+
+            <div class="flow-step">
+                <div class="number">2</div>
+                <h3>Phlebotomist arrives</h3>
+                <p>The authorized provider can assign a collection professional.</p>
+            </div>
+
+            <div class="flow-step">
+                <div class="number">3</div>
+                <h3>Sample collected</h3>
+                <p>Required samples are collected according to the booked tests.</p>
+            </div>
+
+            <div class="flow-step">
+                <div class="number">4</div>
+                <h3>Reports available</h3>
+                <p>Future provider integration can make reports available inside the app.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <strong>SwasthyaMitra AI</strong> · Diagnostic marketplace prototype ·
+    Prices, tests, slots and bookings are sample/demo data until an authorized
+    laboratory API is connected.
+</footer>
+
+
+<!-- BOOKING MODAL -->
+
+<div class="modal" id="bookingModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>Book Lab Test</h2>
+
+            <button class="close" onclick="closeModal('bookingModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div id="selectedTestInfo"></div>
+
+        <div class="form-group">
+
+            <label>Patient</label>
+
+            <select id="patient">
+                <option value="Self">Self</option>
+                <option value="Family Member">Family Member</option>
+                <option value="Parent">Parent</option>
+                <option value="Other">Other</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Patient Name</label>
+
+            <input
+                id="patientName"
+                placeholder="Enter patient name"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Address</label>
+
+            <input
+                id="address"
+                placeholder="Enter home collection address"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Pincode</label>
+
+            <input
+                id="pincode"
+                maxlength="6"
+                placeholder="6-digit pincode"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Collection Date</label>
+
+            <input
+                type="date"
+                id="collectionDate"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Choose collection slot</label>
+
+            <div class="slot-grid" id="slotGrid"></div>
+
+        </div>
+
+        <button
+            class="primary"
+            style="width:100%;margin-top:10px;"
+            onclick="confirmBooking()">
+
+            Confirm Booking
+
+        </button>
+
+        <p style="color:var(--muted);font-size:11px;text-align:center;margin-top:10px;">
+            Prototype only. This does not create a real laboratory booking.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- BOOKINGS MODAL -->
+
+<div class="modal" id="bookingsModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>Booking History</h2>
+
+            <button class="close" onclick="closeModal('bookingsModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div id="bookingHistory"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ==========================================================
+       SWASTHYAMITRA AI LAB TESTS
+       SAMPLE / PROTOTYPE DATA
+       ========================================================== */
+
+    const categories = [
+        ["🩸","Diabetes"],
+        ["🧬","Liver Health"],
+        ["❤️","Heart Health"],
+        ["🫘","Kidney Health"],
+        ["🦴","Bone Health"],
+        ["🦋","Thyroid"],
+        ["🍽️","Digestive Health"],
+        ["🫁","Lung Health"],
+        ["👨","Men's Health"],
+        ["👩","Women's Health"],
+        ["💇","Hair & Skin Health"],
+        ["🌸","PCOD"]
+    ];
+
+    const packages = [
+
+        {
+            id: "PKG001",
+            name: "Preventive Plus",
+            tests: 83,
+            profiles: 8,
+            rating: 4.7,
+            booked: "10K+",
+            collection: "Free",
+            report: "15 hr",
+            price: 1499,
+            mrp: 2999,
+            included:
+                "CBC, LFT, Urine Routine, KFT, Lipid Profile, Thyroid Profile, Blood Glucose, Vitamin B12, Vitamin D"
+        },
+
+        {
+            id: "PKG002",
+            name: "Active Life",
+            tests: 85,
+            profiles: 8,
+            rating: 4.8,
+            booked: "8K+",
+            collection: "Free",
+            report: "15 hr",
+            price: 1799,
+            mrp: 3499,
+            included:
+                "Everything in Preventive Plus + HbA1c and additional diabetes-focused parameters"
+        }
+
+    ];
+
+    const tests = [
+
+        {
+            id: 101,
+            name: "HbA1c",
+            category: "Diabetes",
+            price: 499,
+            icon: "🩸",
+            description: "Average blood glucose assessment over a period of time."
+        },
+
+        {
+            id: 102,
+            name: "Complete Blood Count",
+            category: "General Health",
+            price: 399,
+            icon: "🧪",
+            description: "A broad blood test covering important blood cell parameters."
+        },
+
+        {
+            id: 103,
+            name: "Thyroid Profile – Total T3, T4 & TSH",
+            category: "Thyroid",
+            price: 599,
+            icon: "🦋",
+            description: "Sample package for thyroid-related laboratory parameters."
+        },
+
+        {
+            id: 104,
+            name: "Iron Studies",
+            category: "General Health",
+            price: 699,
+            icon: "🩸",
+            description: "Sample diagnostic panel for iron-related parameters."
+        },
+
+        {
+            id: 105,
+            name: "Liver Function Test",
+            category: "Liver Health",
+            price: 549,
+            icon: "🧬",
+            description: "Sample liver health laboratory panel."
+        },
+
+        {
+            id: 106,
+            name: "Kidney Function Test",
+            category: "Kidney Health",
+            price: 599,
+            icon: "🫘",
+            description: "Sample kidney health laboratory panel."
+        },
+
+        {
+            id: 107,
+            name: "Lipid Profile",
+            category: "Heart Health",
+            price: 499,
+            icon: "❤️",
+            description: "Sample lipid testing panel for cardiovascular monitoring."
+        },
+
+        {
+            id: 108,
+            name: "Vitamin D",
+            category: "Bone Health",
+            price: 699,
+            icon: "☀️",
+            description: "Sample Vitamin D laboratory test."
+        },
+
+        {
+            id: 109,
+            name: "Vitamin B12",
+            category: "General Health",
+            price: 599,
+            icon: "💊",
+            description: "Sample Vitamin B12 laboratory test."
+        },
+
+        {
+            id: 110,
+            name: "Urine Routine",
+            category: "Kidney Health",
+            price: 249,
+            icon: "🧪",
+            description: "Sample routine urine examination."
+        },
+
+        {
+            id: 111,
+            name: "PCOD Screening Panel",
+            category: "PCOD",
+            price: 1199,
+            icon: "🌸",
+            description: "Prototype screening package for PCOD-related evaluation."
+        },
+
+        {
+            id: 112,
+            name: "Men's Health Profile",
+            category: "Men's Health",
+            price: 1399,
+            icon: "👨",
+            description: "Sample multi-parameter men's health package."
+        }
+
+    ];
+
+    let selectedCategory = "All";
+    let selectedBooking = null;
+    let selectedSlot = "";
+
+    function renderCategories() {
+
+        const container =
+            document.getElementById("categoryGrid");
+
+        container.innerHTML = `
+            <div
+                class="category ${selectedCategory === "All" ? "active" : ""}"
+                onclick="selectCategory('All')">
+
+                <div class="category-icon">✨</div>
+                <h4>All Tests</h4>
+
+            </div>
+        `;
+
+        categories.forEach(item => {
+
+            container.innerHTML += `
+
+                <div
+                    class="category ${selectedCategory === item[1] ? "active" : ""}"
+                    onclick="selectCategory('${item[1]}')">
+
+                    <div class="category-icon">
+                        ${item[0]}
+                    </div>
+
+                    <h4>
+                        ${item[1]}
+                    </h4>
+
+                </div>
+
+            `;
+
+        });
+    }
+
+    function renderPackages() {
+
+        const container =
+            document.getElementById("packageGrid");
+
+        container.innerHTML =
+            packages.map(pkg => {
+
+                return `
+
+                    <article class="package">
+
+                        <div class="package-badge">
+                            SAMPLE PACKAGE
+                        </div>
+
+                        <h3>
+                            ${pkg.name}
+                        </h3>
+
+                        <div class="package-subtitle">
+                            Comprehensive preventive health screening
+                        </div>
+
+                        <div class="package-stats">
+
+                            <div class="stat">
+                                <strong>${pkg.tests}</strong>
+                                <span>Tests</span>
+                            </div>
+
+                            <div class="stat">
+                                <strong>${pkg.profiles}</strong>
+                                <span>Profiles</span>
+                            </div>
+
+                            <div class="stat">
+                                <strong>★ ${pkg.rating}</strong>
+                                <span>Rating</span>
+                            </div>
+
+                            <div class="stat">
+                                <strong>${pkg.booked}</strong>
+                                <span>Booked</span>
+                            </div>
+
+                        </div>
+
+                        <div class="included">
+
+                            <strong style="color:white;">
+                                Includes:
+                            </strong>
+
+                            ${pkg.included}
+
+                            <br><br>
+
+                            🏠 Free home collection ·
+                            ⏱ ${pkg.report} report estimate
+
+                        </div>
+
+                        <div class="package-bottom">
+
+                            <div class="price">
+
+                                <strong>
+                                    ₹${pkg.price}
+                                </strong>
+
+                                <del>
+                                    ₹${pkg.mrp}
+                                </del>
+
+                                <span class="save">
+                                    Save ₹${pkg.mrp - pkg.price}
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="primary"
+                                onclick="openBooking({
+                                    id: '${pkg.id}',
+                                    name: '${pkg.name}',
+                                    price: ${pkg.price}
+                                })">
+
+                                Book Package
+
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            }).join("");
+
+    }
+
+    function renderTests() {
+
+        const search =
+            document.getElementById("searchInput")
+                .value
+                .toLowerCase()
+                .trim();
+
+        let filtered =
+            tests.filter(test => {
+
+                const categoryMatch =
+                    selectedCategory === "All" ||
+                    test.category === selectedCategory;
+
+                const searchMatch =
+                    !search ||
+                    test.name.toLowerCase().includes(search) ||
+                    test.category.toLowerCase().includes(search) ||
+                    test.description.toLowerCase().includes(search);
+
+                return categoryMatch && searchMatch;
+
+            });
+
+        const sort =
+            document.getElementById("sortSelect").value;
+
+        if (sort === "low") {
+            filtered.sort((a,b) => a.price - b.price);
+        }
+
+        if (sort === "high") {
+            filtered.sort((a,b) => b.price - a.price);
+        }
+
+        if (sort === "name") {
+            filtered.sort((a,b) =>
+                a.name.localeCompare(b.name)
+            );
+        }
+
+        document.getElementById("resultCount").textContent =
+            `${filtered.length} individual tests`;
+
+        const grid =
+            document.getElementById("testGrid");
+
+        if (!filtered.length) {
+
+            grid.innerHTML = `
+                <div class="empty" style="grid-column:1/-1;">
+                    <div style="font-size:45px;">🔎</div>
+                    <h3>No tests found</h3>
+                    <p>Try another search or category.</p>
+                </div>
+            `;
+
+            return;
+        }
+
+        grid.innerHTML =
+            filtered.map(test => `
+
+                <article class="test-card">
+
+                    <div class="test-icon">
+                        ${test.icon}
+                    </div>
+
+                    <h3>
+                        ${test.name}
+                    </h3>
+
+                    <p>
+                        ${test.description}
+                    </p>
+
+                    <div class="test-price">
+                        ₹${test.price}
+                    </div>
+
+                    <button
+                        class="primary"
+                        onclick="openBooking({
+                            id: ${test.id},
+                            name: '${test.name}',
+                            price: ${test.price}
+                        })">
+
+                        Book Test
+
+                    </button>
+
+                </article>
+
+            `).join("");
+
+    }
+
+    function selectCategory(category) {
+
+        selectedCategory = category;
+
+        renderCategories();
+        renderTests();
+
+    }
+
+    function openBooking(test) {
+
+        selectedBooking = test;
+        selectedSlot = "";
+
+        document.getElementById("selectedTestInfo").innerHTML = `
+
+            <div style="
+                padding:15px;
+                margin-bottom:17px;
+                border:1px solid var(--border);
+                background:var(--card);
+                border-radius:13px;">
+
+                <strong>
+                    ${test.name}
+                </strong>
+
+                <br>
+
+                <span style="color:var(--primary);">
+                    ₹${test.price}
+                </span>
+
+            </div>
+
+        `;
+
+        const date =
+            document.getElementById("collectionDate");
+
+        const tomorrow =
+            new Date();
+
+        tomorrow.setDate(
+            tomorrow.getDate() + 1
+        );
+
+        date.min =
+            tomorrow.toISOString().split("T")[0];
+
+        date.value =
+            tomorrow.toISOString().split("T")[0];
+
+        renderSlots();
+
+        document
+            .getElementById("bookingModal")
+            .classList.add("show");
+
+    }
+
+    function renderSlots() {
+
+        const slots = [
+            "07:00 AM – 08:00 AM",
+            "08:00 AM – 09:00 AM",
+            "09:00 AM – 10:00 AM",
+            "10:00 AM – 11:00 AM",
+            "11:00 AM – 12:00 PM",
+            "12:00 PM – 01:00 PM"
+        ];
+
+        document.getElementById("slotGrid").innerHTML =
+            slots.map(slot => `
+
+                <button
+                    class="slot ${selectedSlot === slot ? "active" : ""}"
+                    onclick="selectSlot('${slot}')">
+
+                    ${slot}
+
+                </button>
+
+            `).join("");
+
+    }
+
+    function selectSlot(slot) {
+
+        selectedSlot = slot;
+
+        renderSlots();
+
+    }
+
+    function confirmBooking() {
+
+        if (!selectedBooking) {
+            alert("Please select a test.");
+            return;
+        }
+
+        const patient =
+            document.getElementById("patient").value;
+
+        const patientName =
+            document.getElementById("patientName").value.trim();
+
+        const address =
+            document.getElementById("address").value.trim();
+
+        const pincode =
+            document.getElementById("pincode").value.trim();
+
+        const date =
+            document.getElementById("collectionDate").value;
+
+        if (!patientName) {
+            alert("Please enter the patient name.");
+            return;
+        }
+
+        if (!address) {
+            alert("Please enter the collection address.");
+            return;
+        }
+
+        if (!/^\d{6}$/.test(pincode)) {
+            alert("Please enter a valid 6-digit pincode.");
+            return;
+        }
+
+        if (!date) {
+            alert("Please select a collection date.");
+            return;
+        }
+
+        if (!selectedSlot) {
+            alert("Please select a collection slot.");
+            return;
+        }
+
+        const booking = {
+
+            id:
+                "LAB" +
+                Date.now(),
+
+            test:
+                selectedBooking.name,
+
+            price:
+                selectedBooking.price,
+
+            patient,
+            patientName,
+            address,
+            pincode,
+            date,
+            slot:
+                selectedSlot,
+
+            status:
+                "Prototype Booking Created",
+
+            createdAt:
+                new Date().toLocaleString()
+
+        };
+
+        const bookings =
+            JSON.parse(
+                localStorage.getItem("swasthya_lab_bookings") || "[]"
+            );
+
+        bookings.unshift(booking);
+
+        localStorage.setItem(
+            "swasthya_lab_bookings",
+            JSON.stringify(bookings)
+        );
+
+        closeModal("bookingModal");
+
+        alert(
+            `Booking ${booking.id} created.\n\n` +
+            `This is a frontend prototype. ` +
+            `No real laboratory booking was placed.`
+        );
+
+    }
+
+    function showBookings() {
+
+        const bookings =
+            JSON.parse(
+                localStorage.getItem("swasthya_lab_bookings") || "[]"
+            );
+
+        const container =
+            document.getElementById("bookingHistory");
+
+        if (!bookings.length) {
+
+            container.innerHTML = `
+
+                <div class="empty">
+
+                    <div style="font-size:45px;">
+                        🧪
+                    </div>
+
+                    <h3>
+                        No bookings yet
+                    </h3>
+
+                    <p>
+                        Your future lab bookings will appear here.
+                    </p>
+
+                </div>
+
+            `;
+
+        } else {
+
+            container.innerHTML =
+                bookings.map(booking => `
+
+                    <div class="booking-card">
+
+                        <strong>
+                            ${booking.test}
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Booking ID: ${booking.id}
+                        </small>
+
+                        <br><br>
+
+                        <small>
+                            Patient: ${booking.patientName}
+                        </small>
+
+                        <br>
+
+                        <small>
+                            Date: ${booking.date}
+                        </small>
+
+                        <br>
+
+                        <small>
+                            Slot: ${booking.slot}
+                        </small>
+
+                        <br>
+
+                        <small>
+                            Address: ${booking.address}
+                        </small>
+
+                        <br><br>
+
+                        <span style="color:var(--primary);font-size:11px;">
+                            ${booking.status}
+                        </span>
+
+                        <br><br>
+
+                        <button
+                            class="nav-btn"
+                            onclick="viewReport('${booking.id}')">
+
+                            Reports
+
+                        </button>
+
+                    </div>
+
+                `).join("");
+
+        }
+
+        document
+            .getElementById("bookingsModal")
+            .classList.add("show");
+
+    }
+
+    function viewReport(id) {
+
+        alert(
+            `Report section for ${id} is ready for future provider integration.\n\n` +
+            `When an authorized laboratory API is connected, ` +
+            `the report PDF/result can be displayed here.`
+        );
+
+    }
+
+    function closeModal(id) {
+
+        document
+            .getElementById(id)
+            .classList.remove("show");
+
+    }
+
+    window.addEventListener("click", event => {
+
+        document
+            .querySelectorAll(".modal")
+            .forEach(modal => {
+
+                if (event.target === modal) {
+                    modal.classList.remove("show");
+                }
+
+            });
+
+    });
+
+    renderCategories();
+    renderPackages();
+    renderTests();
+
+</script>
+
+</body>
+</html>
